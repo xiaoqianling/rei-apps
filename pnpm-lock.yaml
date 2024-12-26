@@ -17,12 +17,12 @@ importers:
       '@commitlint/types':
         specifier: 19.5.0
         version: 19.5.0
+      '@types/node':
+        specifier: 22.10.2
+        version: 22.10.2
       commitizen:
         specifier: 4.3.1
         version: 4.3.1(@types/node@22.10.2)(typescript@5.7.2)
-      cz-conventional-changelog:
-        specifier: 3.3.0
-        version: 3.3.0(@types/node@22.10.2)(typescript@5.7.2)
       doctoc:
         specifier: 2.2.1
         version: 2.2.1
