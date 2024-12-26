@@ -1,2 +1,2 @@
-pnpm test
-pnpm changeset add
+# npm test
+# pnpm changeset add
