@@ -1,0 +1,31 @@
+{
+  "name": "ts-monorepo",
+  "description": "Template for setting up a TypeScript monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "docs": "doctoc --title '**Table of content**' README.md",
+    "clean": "pnpm run -r clean",
+    "build": "pnpm run -r build",
+    "test": "pnpm run -r test",
+    "lint": "eslint --ext js,ts,tsx .",
+    "reset": "pnpm remove -g && pnpm install",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.27.11",
+    "@commitlint/cli": "19.6.1",
+    "@commitlint/config-conventional": "19.6.0",
+    "@commitlint/types": "19.5.0",
+    "commitizen": "4.3.1",
+    "doctoc": "2.2.1",
+    "eslint": "9.17.0",
+    "eslint-plugin-import": "2.31.0",
+    "husky": "9.1.7",
+    "prettier": "3.4.2",
+    "typescript": "5.7.2"
+  }
+}
