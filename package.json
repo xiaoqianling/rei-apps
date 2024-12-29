@@ -1,6 +1,6 @@
 {
-  "name": "ts-monorepo",
-  "description": "Template for setting up a TypeScript monorepo",
+  "name": "rei-apps",
+  "description": "A monorepo repository includes app & util & components",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -31,11 +31,5 @@
     "prettier": "3.4.2",
     "typescript": "5.7.2",
     "@types/node": "22.10.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz"
-    },
-    "husky": {}
   }
 }
