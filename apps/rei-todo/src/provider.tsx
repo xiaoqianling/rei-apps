@@ -2,17 +2,18 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { Provider } from "react-redux";
 import { reiRouter } from "./lib/router";
 import { RouterProvider } from "react-router-dom";
+import Layout from "./components/layout";
+import { reduxStore } from "./lib/redux";
 
 interface ReiProviderProps {
-  children: ReactNode;
 }
 
-const ReiProvider: FunctionComponent<ReiProviderProps> = ({ children }) => {
+const ReiProvider: FunctionComponent<ReiProviderProps> = () => {
   return (
-    <>
-      <RouterProvider router={reiRouter}>
-        <Provider store={undefined}>{children}</Provider>
-      </RouterProvider>
+    <> 
+      <Provider store={reduxStore}>
+          <RouterProvider router={reiRouter}/>
+      </Provider>
     </>
   );
 };
