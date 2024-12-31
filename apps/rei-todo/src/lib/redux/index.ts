@@ -1,7 +1,6 @@
 import {configureStore, UnknownAction} from "@reduxjs/toolkit";
+import { reducer } from "./reducer";
 
 export const reduxStore = configureStore({
-    reducer: function (state: any, action: UnknownAction) {
-        // throw new Error("Function not implemented.");
-    }
+    reducer
 })

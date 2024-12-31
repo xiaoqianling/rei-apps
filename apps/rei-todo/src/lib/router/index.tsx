@@ -1,9 +1,10 @@
-import React, { lazy, Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router";
 import { testLoader } from "./loader";
 import Layout from "../../components/layout";
 import ReiNotFound from "../../pages/not-found/not-fount";
 import ReiError from "../../pages/error/error";
+import HomePage from "../../pages/home/ index";
 
 // 测试懒加载路由
 const TestLazy = lazy(() => import("../../components/layout"));
@@ -24,11 +25,11 @@ export const reiRouter = createBrowserRouter([
     errorElement: <ReiError />, // 路由错误显示
     // Component: Layout,  // 路由组件替代 早期方式
     // lazy: ()=>import('../../components/layout'),
-    element: <Layout />,
+    element: <Layout />,  // 子元素自动嵌套在layout中
     children: [
       {
         path: "/",
-        element: <div>home</div>,
+        element: <HomePage/>,
       },
       {
         path: "page1",

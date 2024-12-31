@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "types": [],
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noEmit": false
   },
   "exclude": [
