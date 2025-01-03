@@ -44,12 +44,24 @@ importers:
 
   apps/rei-algorithm:
     dependencies:
+      '@reduxjs/toolkit':
+        specifier: 2.5.0
+        version: 2.5.0(react-redux@9.2.0(@types/react@19.0.2)(react@19.0.0)(redux@5.0.1))(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
       react-dom:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
+      react-redux:
+        specifier: 9.2.0
+        version: 9.2.0(@types/react@19.0.2)(react@19.0.0)(redux@5.0.1)
+      react-router:
+        specifier: 7.1.1
+        version: 7.1.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      react-router-dom:
+        specifier: 7.1.1
+        version: 7.1.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       rei-design:
         specifier: workspace:*
         version: link:../../packages/rei-design

@@ -18,7 +18,8 @@
     "changeset:version": "npx changeset version",
     "changeset:public": "npx changeset publish",
     "release": "pnpm run build && pnpm run changeset:add && pnpm run changeset:version && pnpm run changeset:publish",
-    "todo": "pnpm --filter rei-todo dev"
+    "todo": "pnpm --filter rei-todo dev",
+    "algo": "pnpm --filter rei-algorithm dev"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.11",

@@ -12,6 +12,7 @@ const ReiProvider: FunctionComponent<ReiProviderProps> = () => {
   return (
     <> 
       <Provider store={reduxStore}>
+          {/* 布局在router内组织 */}
           <RouterProvider router={reiRouter}/>
       </Provider>
     </>
