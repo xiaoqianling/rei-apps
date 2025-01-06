@@ -10,8 +10,8 @@ const commitMsg = fs.readFileSync(commitMsgFile, "utf-8").trim();
 // 在这里添加您需要的逻辑
 console.log("执行 commit-msg 钩子，提交信息为：", commitMsg);
 
-// 例如，您可以检查提交信息是否符合某些规则
-if (!commitMsg.includes("fix")) {
-  console.error('提交信息不符合规则，请包含 "fix"。');
-  process.exit(1);
-}
+// // 例如，您可以检查提交信息是否符合某些规则
+// if (!commitMsg.includes("fix")) {
+//   console.error('提交信息不符合规则，请包含 "fix"。');
+//   process.exit(1);
+// }
