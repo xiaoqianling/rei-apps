@@ -1,5 +1,4 @@
 const { execSync } = require("child_process");
-const { log } = require("console");
 const fs = require("fs");
 const path = require("path");
 
@@ -17,10 +16,9 @@ function getCommitMessage() {
 // 获取变更的包（基于 pnpm）
 function getChangedPackages() {
   try {
-    const output = execSync(
-      "pnpm --filter ./packages... list --depth=-1 --json",
-      { encoding: "utf8" },
-    );
+    const output = execSync("pnpm --filter ./packages list --depth=-1 --json", {
+      encoding: "utf8",
+    });
     const allPackages = JSON.parse(output);
 
     const changedPackages = [];
