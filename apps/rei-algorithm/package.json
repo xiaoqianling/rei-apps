@@ -1,6 +1,6 @@
 {
   "name": "rei-algorithm",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite"
@@ -22,7 +22,8 @@
     "react-router-dom": "7.1.1",
     "react-redux": "9.2.0",
     "@reduxjs/toolkit": "2.5.0",
-    "rei-design": "workspace:*"
+    "rei-design": "workspace:*",
+    "antd": "5.22.7"
   },
   "devDependencies": {
     "@types/react": "19.0.2",
