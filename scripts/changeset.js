@@ -18,8 +18,10 @@ function getCommitMessage() {
 function getChangedPackages() {
   try {
     const output = execSync(
-      "pnpm --filter ./packages... list --depth=-1 --json",
-      { encoding: "utf8" },
+      "pnpm --filter rei-algorithm list --depth=-1 --json",
+      {
+        encoding: "utf8",
+      },
     );
     const allPackages = JSON.parse(output);
 
