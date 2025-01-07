@@ -74,4 +74,6 @@ function main() {
   }
 }
 
-main();
+// main();
+const output = execSync("git diff --name-only HEAD~1 HEAD");
+console.log("res:", output.toString());
