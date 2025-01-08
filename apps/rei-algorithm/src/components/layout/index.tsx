@@ -9,7 +9,7 @@ interface LayoutProps {
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
   return (
     <div className="root-container">
-      <h1>Hello</h1>
+      <header></header>
       {/* ReiTODO 外部布局 */}
       {children}
       {/* 主页面路由相关 */}
