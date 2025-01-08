@@ -15,7 +15,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react",
+    "types": ["node"],
+    "paths": {
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

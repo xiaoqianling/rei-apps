@@ -1,6 +1,6 @@
 {
   "name": "rei-design",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "scripts": {
     "build": "pnpm run clean && pnpm run compile",
     "clean": "rimraf ./dist",

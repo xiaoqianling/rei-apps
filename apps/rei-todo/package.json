@@ -2,7 +2,7 @@
   "name": "rei-todo",
   "description": "Example of using Vite in a TS monorepo",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "react-router": "7.1.1",
     "react-router-dom": "7.1.1",
     "react-redux": "9.2.0",
+    "@reduxjs/toolkit": "2.5.0",
     "rei-design": "workspace:*"
   },
   "devDependencies": {

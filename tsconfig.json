@@ -3,6 +3,7 @@
 
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["node"],
     "paths": {
       "rei-design/*": ["packages/rei-design/src/*"]
     },

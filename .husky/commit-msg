@@ -1,0 +1,4 @@
+# 校验提交信息 并根据信息生成changeset(patch)
+# 如果要生成minor major的changeset 手动打命令
+# node scripts/changeset.js "$1"
+# 提交时lint检验

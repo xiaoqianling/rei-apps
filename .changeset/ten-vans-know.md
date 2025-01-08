@@ -2,4 +2,4 @@
 "rei-todo": patch
 ---
 
-feat: 添加基础路由
+chore: 调整路由

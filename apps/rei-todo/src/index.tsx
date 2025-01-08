@@ -1,12 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ReiButton } from "rei-design/button";
-import ReiProvider from "./provide";
+import ReiProvider from "./provider";
+import './index.css'
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ReiProvider>
-      <div>Rei</div>
-    </ReiProvider>
+    <ReiProvider/>
   </React.StrictMode>,
 );
