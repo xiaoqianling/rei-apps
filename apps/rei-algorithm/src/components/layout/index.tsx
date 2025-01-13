@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import { Outlet } from "react-router-dom";
 import "./index.scss";
+import LayoutHeader from "./header";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -8,9 +9,10 @@ interface LayoutProps {
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
   return (
-    <div className="root-container">
-      <header></header>
-      {/* ReiTODO 外部布局 */}
+    <div className="rei-router-layout">
+      <header className="rei-router-layout__header">
+        <LayoutHeader />
+      </header>
       {children}
       {/* 主页面路由相关 */}
       <Outlet />

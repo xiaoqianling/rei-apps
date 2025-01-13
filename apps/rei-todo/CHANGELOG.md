@@ -1,5 +1,11 @@
 # rei-todo
 
+## 1.1.1
+
+### Patch Changes
+
+- d0186a0: chore: 调整路由
+
 ## 1.1.0
 
 ### Minor Changes
