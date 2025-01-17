@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import "./index.scss";
 import HeaderLink from "../header-link";
 
@@ -9,6 +8,8 @@ function LayoutHeader() {
       <span>
         一组路由
         <HeaderLink to="/">首页</HeaderLink>
+        <HeaderLink to="/docs">文档</HeaderLink>
+        <HeaderLink to="/learn">开始使用</HeaderLink>
       </span>
     </div>
   );

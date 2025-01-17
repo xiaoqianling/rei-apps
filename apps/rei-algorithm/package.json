@@ -16,8 +16,8 @@
   "license": "ISC",
   "description": "algorithm visible platform",
   "dependencies": {
-    "@reduxjs/toolkit": "2.5.0",
     "@babel/parser": "7.26.3",
+    "@reduxjs/toolkit": "2.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "9.2.0",
@@ -31,6 +31,7 @@
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "4.3.4",
     "rimraf": "6.0.1",
+    "rspress": "^1.39.4",
     "typescript": "5.7.2",
     "vite": "6.0.5",
     "vite-tsconfig-paths": "5.1.4"

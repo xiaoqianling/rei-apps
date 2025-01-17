@@ -8,6 +8,9 @@
   &:hover {
     animation: rei-router-layout-link-color-change 0.2s ease-in-out;
   }
+  &.active {
+    color: rgb(81, 222, 83);
+  }
 }
 
 @keyframes rei-router-layout-link-color-change {

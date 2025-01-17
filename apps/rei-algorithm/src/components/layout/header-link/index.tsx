@@ -1,6 +1,6 @@
 import "./index.scss";
 import { FunctionComponent } from "react";
-import { Link, To } from "react-router";
+import { NavLink, To } from "react-router";
 
 interface LinkProps {
   to: To;
@@ -13,9 +13,9 @@ interface LinkProps {
  */
 const HeaderLink: FunctionComponent<LinkProps> = ({ to, children }) => {
   return (
-    <Link to={to} className="rei-router-layout-header-link">
+    <NavLink to={to} className="rei-router-layout-header-link">
       {children}
-    </Link>
+    </NavLink>
   );
 };
 

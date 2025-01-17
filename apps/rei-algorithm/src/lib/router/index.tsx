@@ -17,6 +17,11 @@ export const reiRouter = createBrowserRouter([
       {
         path: "/",
         element: <MainPage />,
+        index: true,
+      },
+      {
+        path: "learn",
+        element: <div>learn page</div>,
       },
     ],
   },

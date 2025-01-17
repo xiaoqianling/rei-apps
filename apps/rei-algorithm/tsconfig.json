@@ -19,6 +19,9 @@
     "paths": {
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["docs", "theme", "rspress.config.ts", "src"],
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "mdx": {
+    "checkMdx": true
+  }
 }
