@@ -16,6 +16,7 @@
   "license": "ISC",
   "description": "algorithm visible platform",
   "dependencies": {
+    "@arco-design/web-react": "^2.65.0",
     "@babel/parser": "7.26.3",
     "@reduxjs/toolkit": "2.5.0",
     "react": "^18.0.0",
@@ -33,6 +34,7 @@
     "rimraf": "6.0.1",
     "rspress": "^1.39.4",
     "typescript": "5.7.2",
+    "babel-plugin-import": "^1.13.8",
     "vite": "6.0.5",
     "vite-tsconfig-paths": "5.1.4"
   }

@@ -2,6 +2,7 @@
   "extends": "./tsconfig.build.json",
 
   "compilerOptions": {
+    "target": "es2020",
     "baseUrl": ".",
     "types": ["node"],
     "paths": {

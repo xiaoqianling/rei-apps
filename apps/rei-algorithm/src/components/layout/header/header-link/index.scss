@@ -1,0 +1,26 @@
+$header-link-active: #cf95ff;
+$header-link-hover: #d9acff;
+.rei-router-layout-header-link {
+  // TODO:: 移动端适配
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+
+  &:not(.active):hover {
+    color: $header-link-hover;
+    animation: rei-router-layout-link-color-change 0.2s ease-in-out;
+  }
+  &.active {
+    color: $header-link-active;
+  }
+}
+
+@keyframes rei-router-layout-link-color-change {
+  0% {
+    color: black;
+  }
+  100% {
+    color: $header-link-hover;
+  }
+}

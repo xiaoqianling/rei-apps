@@ -9,3 +9,5 @@ async function getMdFilePaths() {
     console.log("fs.readdir", err?.message, files);
   });
 }
+
+console.log("hi");

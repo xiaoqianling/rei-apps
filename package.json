@@ -23,6 +23,7 @@
     "algo": "pnpm --filter rei-algorithm dev"
   },
   "devDependencies": {
+    "@changesets/parse": "0.4.0",
     "@changesets/cli": "2.27.11",
     "@commitlint/cli": "19.6.1",
     "@commitlint/types": "19.5.0",

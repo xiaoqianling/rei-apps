@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router";
-import Error from "../../pages/error";
-import MainPage from "../../pages";
-import NotFound from "../../pages/not-found";
+import Error from "../../pages/static/error";
+import MainPage from "../../pages/static/home";
+import NotFound from "../../pages/static/not-found";
 import Layout from "../../components/layout";
+import AboutPage from "../../pages/static/about";
 // 感觉把路由平行开来更好，比如/login与/同级 而非在/下
 // 或者考虑嵌套层次，在需要layout的页面级下嵌套
 export const reiRouter = createBrowserRouter([
@@ -23,6 +24,10 @@ export const reiRouter = createBrowserRouter([
         path: "learn",
         element: <div>learn page</div>,
       },
+      {
+        path: "about",
+        element: <AboutPage />,
+      },
     ],
   },
   {
@@ -32,10 +37,6 @@ export const reiRouter = createBrowserRouter([
   {
     path: "/docs",
     element: <div>docs page</div>,
-  },
-  {
-    path: "/about",
-    element: <div>about page</div>,
   },
   {
     path: "/layout",

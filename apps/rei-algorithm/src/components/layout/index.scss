@@ -3,10 +3,10 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  gap: 20px;
+  background-image: url("/img/bg.png");
 
   &__header {
-    background-color: rgb(255, 250, 244);
+    // background-color: rgb(255, 250, 244);
     height: 4rem;
     width: 100%;
     margin: 0;
