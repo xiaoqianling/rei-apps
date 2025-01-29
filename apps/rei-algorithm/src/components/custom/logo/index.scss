@@ -7,4 +7,12 @@
   font-weight: bold;
   font-size: 1.25rem;
   font-family: "lxgw", sans-serif;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  text-decoration: none;
+
+  &:active {
+    text-decoration: none;
+  }
 }

@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @extend *;
+  box-sizing: border-box;
+}
+
+#root {
+  @extend body;
+  // background-color: rgb(255, 250, 244);
+  box-sizing: border-box;
+}

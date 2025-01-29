@@ -17,6 +17,7 @@
     "noEmit": true,
     "types": ["node"],
     "paths": {
+      "@/*": ["apps/rei-algorithm/*"]
     }
   },
   "include": ["docs", "theme", "rspress.config.ts", "src"],

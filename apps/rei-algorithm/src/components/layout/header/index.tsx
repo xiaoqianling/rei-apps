@@ -11,6 +11,12 @@ function LayoutHeader() {
         <HeaderLink to="/docs">文档</HeaderLink>
         <HeaderLink to="/learn">开始使用</HeaderLink>
         <HeaderLink to="/about">关于</HeaderLink>
+        <HeaderLink
+          to="https://github.com/xiaoqianling/rei-apps/tree/master/apps/rei-algorithm"
+          target="blank"
+        >
+          开源地址
+        </HeaderLink>
       </span>
     </div>
   );

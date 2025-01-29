@@ -1,7 +1,19 @@
+import { useNavigate } from "react-router";
 import "./index.scss";
 
 function ReiLOGO() {
-  return <div className="rei-logo">Rei.ALGO platform</div>;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // 使用 navigate 函数来跳转到指定的路由
+    navigate("/");
+  };
+
+  return (
+    <div className="rei-logo" onClick={handleClick}>
+      Rei.ALGO platform
+    </div>
+  );
 }
 
 export default ReiLOGO;
