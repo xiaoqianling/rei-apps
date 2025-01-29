@@ -1,23 +1,51 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { Outlet } from "react-router-dom";
-import "./index.scss";
+import styles from "./index.module.scss";
 import LayoutHeader from "./header";
+import { throttle } from "@/src/util/frequency";
+import { rem2px } from "@/src/util/css";
 
 interface LayoutProps {
   children?: React.ReactNode;
 }
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
+  const [scroll, setScroll] = useState(false);
+  const scrollPX = useMemo(() => {
+    return rem2px(3);
+  }, []);
+
+  useEffect(() => {
+    // 节流滚动
+    const handleScroll = throttle(() => {
+      console.log(window.scrollY, scrollPX);
+      const scrollY = window.scrollY;
+      if (scrollY > scrollPX) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    }, 50);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="rei-router-layout">
-      <div className="rei-router-layout__bg" />
-      <header className="rei-router-layout__header">
+    <div className={styles.layout}>
+      <header
+        className={`${styles.header} ${scroll ? styles.header_linear : ""}`}
+      >
         <LayoutHeader />
       </header>
-      <h1>welcome to Rei Algorithm</h1>
-      {children}
+      {/* {children} */}
       {/* 主页面路由相关 */}
-      <Outlet />
+      <div className={styles.main}>
+        <Outlet />
+      </div>
     </div>
   );
 };

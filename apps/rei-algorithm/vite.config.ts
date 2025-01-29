@@ -23,6 +23,9 @@ const userConfig: UserConfig = {
         @use '@scss/_mixins.scss' as *;`,
       },
     },
+    modules: {
+      generateScopedName: "rei-algo_[local]_[hash:5]",
+    },
   },
 };
 

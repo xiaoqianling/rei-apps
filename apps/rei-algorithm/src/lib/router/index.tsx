@@ -21,6 +21,10 @@ export const reiRouter = createBrowserRouter([
         index: true,
       },
       {
+        path: "docs",
+        element: <div>docs page</div>,
+      },
+      {
         path: "learn",
         element: <div>learn page</div>,
       },
@@ -33,10 +37,6 @@ export const reiRouter = createBrowserRouter([
   {
     path: "/login",
     element: <div>login page2</div>,
-  },
-  {
-    path: "/docs",
-    element: <div>docs page</div>,
   },
   {
     path: "/layout",

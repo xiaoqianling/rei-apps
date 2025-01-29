@@ -20,6 +20,7 @@
       "@/*": ["apps/rei-algorithm/*"]
     }
   },
+  // TODO: 添加global.d.ts消除编辑器报错
   "include": ["docs", "theme", "rspress.config.ts", "src"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "mdx": {

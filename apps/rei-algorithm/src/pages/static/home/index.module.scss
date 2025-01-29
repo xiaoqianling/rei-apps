@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  // background-image: url("/img/bg.png");
+  // background-position: center;
+  position: relative;
+}
+
+.bg {
+  z-index: -1;
+  height: 1000px;
+  object-fit: cover;
+  width: 100%;
+  background-image: url("/img/bg2.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  // header透明 很酷
+  margin-top: -4rem;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  top: 5rem;
+}

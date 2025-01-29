@@ -1,6 +1,6 @@
-import "./index.scss";
-import { FunctionComponent, HTMLAttributeAnchorTarget } from "react";
-import { NavLink, To } from "react-router";
+import styles from "./index.module.scss";
+import { FunctionComponent, HTMLAttributeAnchorTarget, useState } from "react";
+import { NavLink, NavLinkRenderProps, To } from "react-router";
 
 interface LinkProps {
   to: To;
@@ -13,8 +13,11 @@ interface LinkProps {
  * @returns
  */
 const HeaderLink: FunctionComponent<LinkProps> = ({ to, children, target }) => {
+  const getLinkClassnames = ({ isActive }: NavLinkRenderProps) => {
+    return isActive ? styles.active_link : styles.link;
+  };
   return (
-    <NavLink to={to} className="rei-router-layout-header-link" target={target}>
+    <NavLink to={to} className={getLinkClassnames} target={target}>
       {children}
     </NavLink>
   );
