@@ -1,4 +1,7 @@
 import { RouteObject } from "react-router";
+// MDX
+import StartPage from "@/src/docs/getting-start.mdx";
+import About from "@/src/docs/about.mdx";
 
 export const docsRouter: RouteObject[] = [
   {
@@ -8,6 +11,11 @@ export const docsRouter: RouteObject[] = [
   },
   {
     path: "getting-start",
-    element: <div>开始!!!！</div>,
+    element: <StartPage />,
+  },
+  ,
+  {
+    path: "about",
+    element: <About />,
   },
 ];

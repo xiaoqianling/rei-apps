@@ -6,6 +6,7 @@ import Layout from "../../components/layout";
 import AboutPage from "../../pages/static/about";
 import DocsPage from "@/src/pages/docs";
 import { docsRouter } from "@/src/pages/docs/type";
+
 // 感觉把路由平行开来更好，比如/login与/同级 而非在/下
 // 或者考虑嵌套层次，在需要layout的页面级下嵌套
 export const reiRouter = createBrowserRouter([

@@ -9,6 +9,7 @@
     "tsjest",
     "rollup",
     "vite",
-    "lxgw"
+    "lxgw",
+    "rspack"
   ]
 }

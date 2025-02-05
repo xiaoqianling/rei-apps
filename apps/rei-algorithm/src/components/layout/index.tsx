@@ -30,13 +30,13 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
         setScroll(false);
       }
     }, 50);
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-    // BUG: 从非透明变为透明时，更新不会触发
   }, [location]);
 
   return (

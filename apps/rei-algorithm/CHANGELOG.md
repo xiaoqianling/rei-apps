@@ -1,5 +1,19 @@
 # rei-algorithm
 
+## 1.2.0
+
+### Minor Changes
+
+- 2899f03: feat: 引入scss module，主页响应式
+- feat: 构建文档站、导航和mdx
+
+### Patch Changes
+
+- 862d24c: fix
+- 46bafb0: chore: 添加scss定义
+- Updated dependencies
+  - rei-design@1.0.3
+
 ## 1.1.0
 
 ### Minor Changes
