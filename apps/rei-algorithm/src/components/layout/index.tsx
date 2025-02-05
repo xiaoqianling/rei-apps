@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import styles from "./index.module.scss";
 import LayoutHeader from "./header";
 import { throttle } from "@/src/util/frequency";
@@ -11,14 +11,18 @@ interface LayoutProps {
 
 const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
   const [scroll, setScroll] = useState(false);
+  const location = useLocation();
   const scrollPX = useMemo(() => {
-    return rem2px(3);
-  }, []);
+    return rem2px(2);
+  }, [location]);
 
   useEffect(() => {
+    if (location.pathname !== "/") {
+      setScroll(true);
+      return;
+    }
     // 节流滚动
     const handleScroll = throttle(() => {
-      console.log(window.scrollY, scrollPX);
       const scrollY = window.scrollY;
       if (scrollY > scrollPX) {
         setScroll(true);
@@ -32,7 +36,8 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+    // BUG: 从非透明变为透明时，更新不会触发
+  }, [location]);
 
   return (
     <div className={styles.layout}>

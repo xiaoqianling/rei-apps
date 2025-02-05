@@ -2,9 +2,10 @@ import { defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
+import mdx from "@mdx-js/rollup";
 
 const userConfig: UserConfig = {
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react(), tsconfigPaths(), mdx()],
   resolve: {
     alias: {
       "@scss": path.resolve(__dirname, "src/scss"),

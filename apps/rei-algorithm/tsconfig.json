@@ -20,8 +20,8 @@
       "@/*": ["apps/rei-algorithm/*"]
     }
   },
-  // TODO: 添加global.d.ts消除编辑器报错
-  "include": ["docs", "theme", "rspress.config.ts", "src"],
+  // TODO: 添加global.d.ts消除编辑器报错,但是会导致跳定义更麻烦，建议开发时别加(能跑)
+  "include": ["docs", "theme", "src"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "mdx": {
     "checkMdx": true

@@ -3,3 +3,8 @@ declare module "*.module.scss" {
   const styles: { [className: string]: string };
   export default styles;
 }
+
+declare module "*.mdx" {
+  const content: React.ComponentType<any>;
+  export default content;
+}
