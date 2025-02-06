@@ -4,17 +4,26 @@ import styles from "./index.module.less";
 
 export interface ReiMenuProps {
   menuItems: MenuItem[];
+  onClick?: (path: string) => void;
 }
 
-export const ReiMenu: FunctionComponent<ReiMenuProps> = ({ menuItems }) => {
+export const ReiMenu: FunctionComponent<ReiMenuProps> = ({
+  menuItems,
+  onClick,
+}) => {
   // 用来跟踪每个菜单项的展开或折叠状态
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(() => {
+    const initialExpanded: Record<string, boolean> = {};
+    menuItems.forEach((item) => {
+      initialExpanded[item.label] = true; // 默认展开所有路由
+    });
+    return initialExpanded;
+  });
 
   const toggleSubItems = (label: string) => {
-    console.log(expanded, label);
     setExpanded((prevState) => ({
       ...prevState,
-      [label]: !prevState[label], // 切换该菜单项的展开状态
+      [label]: !prevState[label],
     }));
   };
 
@@ -37,11 +46,11 @@ export const ReiMenu: FunctionComponent<ReiMenuProps> = ({ menuItems }) => {
         key={label}
         className={styles.menuItem}
         onClick={() => {
-          item.onClick && item.onClick(item.path);
+          endPoint && onClick && onClick(item.path);
         }}
       >
         <div
-          className={styles.menuItemLabel}
+          className={`${item.active ? styles.activeLabel : styles.menuItemLabel}`}
           onClick={() => toggleSubItems(label)}
         >
           <span className={styles.menuItemText}>{label}</span>
