@@ -1,13 +1,13 @@
 import { RouteObject } from "react-router";
 // MDX
-import StartPage from "@/src/docs/getting-start.mdx";
-import About from "@/src/docs/about.mdx";
 import { MenuItem } from "rei-design/menu/type";
+import VisualCode from "@/src/components/visual-code";
+import { AboutPage, AllInOnePage, DesignPage, StartPage } from "@/src/docs";
 
 export const docsRouter: RouteObject[] = [
   {
     path: "",
-    element: <div>开始！</div>,
+    element: <StartPage components={{ VisualCode }} />,
     index: true,
   },
   {
@@ -16,7 +16,15 @@ export const docsRouter: RouteObject[] = [
   },
   {
     path: "about",
-    element: <About />,
+    element: <AboutPage />,
+  },
+  {
+    path: "design",
+    element: <DesignPage />,
+  },
+  {
+    path: "all-in-one",
+    element: <AllInOnePage />,
   },
 ];
 
@@ -67,7 +75,17 @@ export const docsMenuData: MenuItem[] = [
     ],
   },
   {
-    path: "extend",
-    label: "拓展能力",
+    path: "dev",
+    label: "开发进展",
+    subItems: [
+      {
+        path: "all-in-one",
+        label: "All In One",
+      },
+      {
+        path: "design",
+        label: "设计",
+      },
+    ],
   },
 ];

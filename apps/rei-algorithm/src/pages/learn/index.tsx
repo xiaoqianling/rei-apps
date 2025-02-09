@@ -1,4 +1,4 @@
-import VisualCode from "@/src/components/visual-code/VisualCode";
+import VisualCode from "@/src/components/visual-code";
 
 function LearnPage() {
   return (

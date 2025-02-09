@@ -1,5 +1,7 @@
 import { FunctionComponent } from "react";
 import styles from "./index.module.scss";
+import VisualItem from "./visualItem";
+import { VisualItemType } from "./visualItem/type";
 
 interface VisualCodeProps {}
 
@@ -47,12 +49,14 @@ let result = detectCycle(head)`;
               <pre className={styles.code}>{code}</pre>
             </div>
           </div>
-          <div className={styles.visual_container}></div>
+          <div className={styles.visual_container}>
+            <VisualItem
+              type={VisualItemType.Rectangle}
+              label={"123"}
+              color={""}
+            />
+          </div>
         </div>
-      </div>
-      <div className={styles.test}>
-        <div className={styles.div1}></div>
-        <div className={styles.div2}></div>
       </div>
     </div>
   );

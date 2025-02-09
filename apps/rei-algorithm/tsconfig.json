@@ -19,7 +19,8 @@
     "types": ["node"],
     "paths": {
       "rei-design/*": ["packages/rei-design/src/*"],
-      "@/*": ["apps/rei-algorithm/*"]
+      "@/*": ["apps/rei-algorithm/*"],
+      "@components/*": ["apps/rei-algorithm/src/components/*"]
     }
   },
   // TODO: 添加global.d.ts消除编辑器报错,但是会导致跳定义更麻烦，建议开发时别加(能跑)

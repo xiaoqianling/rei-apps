@@ -1,62 +1,59 @@
-.wrapper {
-  margin: 4rem;
+.container {
   width: 900px;
   height: 400px;
-  .container {
-    background-color: blueviolet;
-    border-radius: 10px;
+  background-color: blueviolet;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  .header {
+    height: 2rem;
+    flex-shrink: 0;
+    font-weight: bold;
+
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    align-items: center;
+    padding-left: 1rem;
+  }
 
-    .header {
-      height: 2rem;
-      font-weight: bold;
+  .operations {
+    height: 2rem;
+    flex-shrink: 0;
+    background-color: aquamarine;
+  }
 
+  .main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: row;
+    .left_container {
+      width: 50%;
+      position: relative;
       display: flex;
-      align-items: center;
-      padding-left: 1rem;
-    }
+      flex-direction: column;
 
-    .operations {
-      height: 2rem;
-      background-color: aquamarine;
-    }
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      .left_container {
-        width: 50%;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-
-        .left_header {
-          height: 2rem;
-          position: sticky;
-          background-color: yellow;
-          top: 0;
-        }
-
-        .code_container {
-          max-height: 100%;
-          background-color: aqua;
-          overflow: auto;
-          padding: 0.5rem;
-
-          .code {
-            width: 100%;
-            // 为什么这里的height大的时候会影响整个flex的布局，包括header都会变低。预期是这里的高度就是剩余高度限制好了，多余部分滚动不应该影响整体布局的
-            //   height: 100000px;
-          }
-        }
+      .left_header {
+        height: 2rem;
+        position: sticky;
+        background-color: yellow;
+        top: 0;
       }
-      .visual_container {
+
+      .code_container {
         flex: 1;
-        background-color: antiquewhite;
+        background-color: aqua;
+        overflow: auto;
+        padding: 0.5rem;
+
+        .code {
+        }
       }
+    }
+    .visual_container {
+      flex: 1;
+      background-color: antiquewhite;
     }
   }
 }
