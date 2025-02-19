@@ -5,6 +5,7 @@ import path from "path";
 import mdx from "@mdx-js/rollup";
 
 const userConfig: UserConfig = {
+  assetsInclude: ["**/*.lottie", "**/*.json"],
   plugins: [react(), tsconfigPaths(), mdx()],
   resolve: {
     alias: {

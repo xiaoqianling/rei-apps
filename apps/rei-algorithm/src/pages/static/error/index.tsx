@@ -5,7 +5,6 @@ function Error() {
     <div>
       <h1>error occurs...</h1>
       <p>怎么会这样😭</p>
-      <img id="img" alt="girl" />
     </div>
   );
 }

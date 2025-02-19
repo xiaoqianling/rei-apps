@@ -3,7 +3,8 @@
   "version": "1.2.0",
   "type": "module",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "test": "vitest"
   },
   "keywords": [
     "algorithm",
@@ -20,9 +21,11 @@
     "@chakra-ui/react": "^3.7.0",
     "@emotion/react": "^11.14.0",
     "@icon-park/react": "^1.4.2",
+    "@lottiefiles/dotlottie-react": "^0.13.0",
     "@mdx-js/rollup": "^3.1.0",
     "@reduxjs/toolkit": "2.5.0",
     "@types/mdx": "^2.0.13",
+    "lottie-react": "^2.4.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "9.2.0",
@@ -31,14 +34,21 @@
     "rei-design": "workspace:*"
   },
   "devDependencies": {
+    "@testing-library/react": "^16.2.0",
     "@types/node": "22.10.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "4.3.4",
+    "@vitest/browser": "^3.0.5",
     "babel-plugin-import": "^1.13.8",
+    "glob": "^11.0.1",
+    "jsdom": "^26.0.0",
+    "playwright": "^1.50.1",
     "rimraf": "6.0.1",
     "typescript": "5.7.2",
     "vite": "6.0.5",
-    "vite-tsconfig-paths": "5.1.4"
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "^3.0.5",
+    "vitest-browser-react": "^0.0.4"
   }
 }

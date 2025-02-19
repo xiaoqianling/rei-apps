@@ -4,7 +4,12 @@ function MainPage() {
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.bg} />
+        <div className={styles.bg}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={styles["svg-background"]}
+          ></svg>
+        </div>
         <div className={styles.overlay}>
           <h1>welcome to Rei Algorithm</h1>
           <p>
@@ -13,7 +18,9 @@ function MainPage() {
         </div>
       </div>
       <div>
-        <span>这是另一段文本</span>
+        <div>这是另一段文本</div>
+        <div>这是另一段文本</div>
+        <div>这是另一段文本</div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": ["node", "@vitest/browser/providers/playwright"],
     "paths": {
       "rei-design/*": ["packages/rei-design/src/*"],
       "@/*": ["apps/rei-algorithm/*"],

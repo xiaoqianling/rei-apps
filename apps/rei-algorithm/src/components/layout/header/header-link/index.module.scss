@@ -9,6 +9,9 @@ $header-link-active: #ffd9d9;
   color: black;
   padding: 0.25rem 0.75rem;
   border-radius: 1.5em;
+  &:hover {
+    box-shadow: 0 0px 1px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .link {

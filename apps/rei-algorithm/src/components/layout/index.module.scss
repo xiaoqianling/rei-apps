@@ -21,15 +21,3 @@
 .main {
   height: calc(100vh - 4rem);
 }
-
-.bg {
-  z-index: -1;
-  // position: absolute;
-  height: 900px;
-  object-fit: cover;
-  width: 100%;
-  background-image: url("/img/bg2.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}

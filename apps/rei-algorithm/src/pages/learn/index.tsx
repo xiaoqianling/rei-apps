@@ -1,3 +1,4 @@
+import "./index.scss";
 import VisualCode from "@/src/components/visual-code";
 
 function LearnPage() {
