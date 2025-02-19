@@ -7,7 +7,7 @@ function MainPage() {
         <div className={styles.bg}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className={styles["svg-background"]}
+            className={styles.svg_background}
           ></svg>
         </div>
         <div className={styles.overlay}>

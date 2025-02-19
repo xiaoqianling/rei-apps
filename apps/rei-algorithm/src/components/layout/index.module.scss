@@ -14,8 +14,7 @@
 }
 
 .header_linear {
-  // background: linear-gradient(to right, $theme-primary-color, #ccffdd);
-  background-color: $header-background-color;
+  background-color: rgba($color: $header-background-color, $alpha: 0.99);
 }
 
 .main {

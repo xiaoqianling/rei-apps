@@ -1,22 +1,7 @@
 .container {
   width: 100%;
-  // background-image: url("/img/bg.png");
-  // background-position: center;
   position: relative;
 }
-
-// .bg {
-//   z-index: -1;
-//   height: 1000px;
-//   object-fit: cover;
-//   width: 100%;
-//   background-image: url("/img/bg2.jpg");
-//   background-repeat: no-repeat;
-//   background-position: center center;
-//   background-size: cover;
-//   // header透明 很酷
-//   margin-top: -4rem;
-// }
 
 .bg {
   position: relative;
@@ -25,21 +10,21 @@
   overflow: hidden;
   margin-top: -4rem;
 
-  .svg-background {
+  .svg_background {
     background: radial-gradient(
-        circle at 80% 40%,
-        rgba(179, 229, 252, 0.3) 0%,
+        circle at 80% 50%,
+        rgba(179, 229, 252, 0.5) 0%,
         transparent 50%
       ),
       radial-gradient(
         circle at 20% 10%,
-        rgba(240, 244, 195, 0.3) 0%,
+        rgba(240, 244, 195, 0.6) 0%,
         transparent 60%
       ),
       radial-gradient(
         circle at 50% 80%,
-        rgba(240, 244, 195, 0.1) 0%,
-        rgba(255, 203, 246, 0.1) 40%
+        rgba(240, 244, 195, 0.4) 0%,
+        transparent 60%
       ),
       linear-gradient(
         45deg,

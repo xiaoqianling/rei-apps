@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import styles from "./index.module.scss";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import ReiButton from "@/src/components/custom/button";
 
 function ReiNotFound() {
   return (
@@ -11,7 +12,9 @@ function ReiNotFound() {
       <h1>找不到该页面!</h1>
       <p>请检查url或联系管理员</p>
       <div>
-        <Link to="/">返回上一页</Link> {"  "}
+        <ReiButton type="primary">
+          <Link to="/">返回上一页</Link>
+        </ReiButton>
         <Link to="/">返回首页</Link>
       </div>
     </div>
