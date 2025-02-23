@@ -12,9 +12,7 @@ function ReiNotFound() {
       <h1>找不到该页面!</h1>
       <p>请检查url或联系管理员</p>
       <div>
-        <ReiButton type="primary">
-          <Link to="/">返回上一页</Link>
-        </ReiButton>
+        <ReiButton type="primary">返回上一页</ReiButton>
         <Link to="/">返回首页</Link>
       </div>
     </div>

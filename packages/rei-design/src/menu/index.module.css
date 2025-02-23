@@ -7,27 +7,14 @@
 .menuItem {
   margin: 5px 0;
 }
-.label {
-  justify-content: space-between;
-  cursor: pointer;
-  padding: 10px;
-  padding-left: 30px;
-  background-color: transparent;
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: gray;
-  border-radius: 0 1rem 1rem 0;
-  border-left: 1px solid transparent;
-}
 .menuItemLabel {
+  background-color: red;
   justify-content: space-between;
   cursor: pointer;
   padding: 10px;
   padding-left: 30px;
   background-color: transparent;
+  transition: background-color 0.3s ease, padding-left 0.3s ease, color 0.3s ease;
   position: relative;
   display: flex;
   align-items: center;
@@ -35,30 +22,10 @@
   font-weight: bold;
   color: gray;
   border-radius: 0 1rem 1rem 0;
-  border-left: 1px solid transparent;
-  transition: background-color 0.3s ease, padding-left 0.3s ease, color 0.3s ease;
 }
 .menuItemLabel:hover {
   background-color: rgba(0, 0, 0, 0.1);
   color: black;
-}
-.activeLabel {
-  justify-content: space-between;
-  cursor: pointer;
-  padding: 10px;
-  padding-left: 30px;
-  background-color: transparent;
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: gray;
-  border-radius: 0 1rem 1rem 0;
-  border-left: 1px solid transparent;
-  color: black;
-  background-color: #ff9a9a;
-  border-left: 2px solid red;
 }
 .menuItemText {
   flex: 1;

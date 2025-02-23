@@ -5,6 +5,12 @@ import styles from "./index.module.less";
 export interface ReiMenuProps {
   menuItems: MenuItem[];
   onClick?: (path: string) => void;
+  customStyle?: ReiMenuCustomStyle;
+}
+
+export interface ReiMenuCustomStyle {
+  // 菜单项的背景颜色
+  itemActiveBackgroundColor?: string;
 }
 
 export const ReiMenu: FunctionComponent<ReiMenuProps> = ({

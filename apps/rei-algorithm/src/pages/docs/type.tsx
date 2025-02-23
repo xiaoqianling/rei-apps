@@ -4,6 +4,7 @@ import { MenuItem } from "rei-design/menu/type";
 import VisualCode from "@/src/components/visual-code";
 import { AboutPage, AllInOnePage, DesignPage, StartPage } from "@/src/docs";
 
+// 附加到/docs/下的所有路由
 export const docsRouter: RouteObject[] = [
   {
     path: "",
@@ -12,7 +13,7 @@ export const docsRouter: RouteObject[] = [
   },
   {
     path: "getting-start",
-    element: <StartPage />,
+    element: <StartPage components={{ VisualCode }} />,
   },
   {
     path: "about",
@@ -54,20 +55,6 @@ export const docsMenuData: MenuItem[] = [
     path: "use",
     label: "使用",
     subItems: [
-      {
-        path: "test",
-        label: "Web Development 3123123123123123123",
-        subItems: [
-          {
-            path: "test2",
-            label: "Web Development2",
-          },
-        ],
-      },
-      {
-        path: "app",
-        label: "App Development",
-      },
       {
         path: "getting-start",
         label: "起步",
