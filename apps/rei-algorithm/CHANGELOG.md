@@ -1,5 +1,14 @@
 # rei-algorithm
 
+## 1.2.1
+
+### Patch Changes
+
+- 19bfe30: feat: 添加单元测试模板&搭建数据结构解析框架&构建社区路由
+- 0ecd768: feat: 引入Slate富文本编辑器
+- 2794e52: feat: 添加lottie支持
+- feat: 自动生成changeset
+
 ## 1.2.0
 
 ### Minor Changes

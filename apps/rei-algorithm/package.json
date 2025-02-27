@@ -1,6 +1,6 @@
 {
   "name": "rei-algorithm",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,7 @@
   ],
   "author": "rei <xiaoxiaoqianling@qq.com>",
   "license": "ISC",
-  "description": "algorithm visible platform",
+  "description": "algorithm visible platform test",
   "dependencies": {
     "@babel/parser": "7.26.3",
     "@emotion/css": "^11.13.5",
