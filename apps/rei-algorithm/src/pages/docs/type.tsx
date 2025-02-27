@@ -1,33 +1,4 @@
-import { RouteObject } from "react-router";
-// MDX
 import { MenuItem } from "rei-design/menu/type";
-import VisualCode from "@/src/components/visual-code";
-import { AboutPage, AllInOnePage, DesignPage, StartPage } from "@/src/docs";
-
-// 附加到/docs/下的所有路由
-export const docsRouter: RouteObject[] = [
-  {
-    path: "",
-    element: <StartPage components={{ VisualCode }} />,
-    index: true,
-  },
-  {
-    path: "getting-start",
-    element: <StartPage components={{ VisualCode }} />,
-  },
-  {
-    path: "about",
-    element: <AboutPage />,
-  },
-  {
-    path: "design",
-    element: <DesignPage />,
-  },
-  {
-    path: "all-in-one",
-    element: <AllInOnePage />,
-  },
-];
 
 // 此处定义路由文档路由层次
 // TODO: 路由改成可以嵌套/docs/attribute/about 现状：/docs/about

@@ -1,10 +1,11 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import SlateMarkdown from "./md";
 import SaveEditor from "./saveEditor";
 
 interface SlatePageProps {}
 
 const SlatePage: FunctionComponent<SlatePageProps> = () => {
+  useEffect(() => {});
   return (
     <div>
       <h2>Slate Page</h2>

@@ -9,9 +9,10 @@ function LayoutHeader() {
       <ReiLOGO />
       <div className={styles.links}>
         <HeaderLink to="/">首页</HeaderLink>
-        <HeaderLink to="/docs">文档</HeaderLink>
         <HeaderLink to="/learn">开始使用</HeaderLink>
+        <HeaderLink to="/docs">文档</HeaderLink>
         <HeaderLink to="/slate">Slate编辑器</HeaderLink>
+        <HeaderLink to="/community">社区</HeaderLink>
         <HeaderLink to="/about">关于</HeaderLink>
         <HeaderLink
           to="https://github.com/xiaoqianling/rei-apps/tree/master/apps/rei-algorithm"

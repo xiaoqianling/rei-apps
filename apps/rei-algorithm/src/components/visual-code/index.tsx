@@ -5,6 +5,13 @@ import { VisualItemType } from "./visualItem/type";
 
 interface VisualCodeProps {}
 
+/**
+ *界面交互模块需要整合代码编辑器和可视化面板，可能使用类似CodeMirror或Monaco的编辑器库，
+ 以及D3.js或React Flow等可视化库。
+ 用户应该能够编辑代码，点击运行后，解析器处理代码，数据追踪器记录步骤，
+ 然后用户可以通过步进按钮逐步查看可视化变化
+ */
+
 const VisualCode: FunctionComponent<VisualCodeProps> = () => {
   const code = `var detectCycle = function(head) {
     let fast, slow;

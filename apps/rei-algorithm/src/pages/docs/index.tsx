@@ -1,7 +1,5 @@
 import DocsSidebar from "@/src/components/sidebar";
 import styles from "./index.module.scss";
-// import { TestMDX } from "@/src/docs/test.mdx";
-import TestMDX from "@/src/docs/getting-start.mdx";
 import { Outlet } from "react-router";
 
 interface Props {
