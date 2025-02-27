@@ -9,11 +9,22 @@ function ReiNotFound() {
       <div className={styles.lottieContainer}>
         <DotLottieReact src="/lotties/not-found.lottie" loop autoplay />
       </div>
-      <h1>找不到该页面!</h1>
-      <p>请检查url或联系管理员</p>
-      <div>
-        <ReiButton type="primary">返回上一页</ReiButton>
-        <Link to="/">返回首页</Link>
+      <div className={styles.content}>
+        <h1 className={styles.title}>404 - 页面未找到</h1>
+        <p className={styles.description}>
+          您访问的页面可能已被移动、删除或暂时不可用
+        </p>
+        <div className={styles.actions}>
+          <button
+            className={styles.button}
+            onClick={() => window.history.back()}
+          >
+            回到上一页
+          </button>
+          <Link to="/" className={styles.homeLink}>
+            返回首页
+          </Link>
+        </div>
       </div>
     </div>
   );

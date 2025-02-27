@@ -2,14 +2,17 @@
   "version": "0.2",
   "language": "en",
   "words": [
-    "rei",
-    "qianling",
-    "nextjs",
-    "nestjs",
-    "tsjest",
-    "rollup",
-    "vite",
+    "dotlottie",
+    "lottiefiles",
+    "lotties",
     "lxgw",
-    "rspack"
+    "nestjs",
+    "nextjs",
+    "qianling",
+    "rei",
+    "rollup",
+    "rspack",
+    "tsjest",
+    "vite"
   ]
 }

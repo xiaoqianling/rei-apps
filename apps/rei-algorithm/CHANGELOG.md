@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.2
+
+### Patch Changes
+
+- chore: 完善404页 添加响应式
+
 ## 1.2.1
 
 ### Patch Changes
