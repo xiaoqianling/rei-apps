@@ -3,17 +3,27 @@ import styles from "./index.module.scss";
 import { ReiMenu } from "rei-design/menu";
 import { useLocation, useNavigate, useRoutes } from "react-router";
 import { useEffect, useState } from "react";
-import { docsMenuData } from "@/src/pages/docs/type";
 
-function DocsSidebar() {
+export interface SidebarProps {
+  menuData: MenuItem[];
+  prefix: string;
+}
+
+function DocsSidebar({ menuData, prefix }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [menuData, setMenuData] = useState<MenuItem[]>(docsMenuData);
+  // 添加 props 到 state 的同步
+  const [internalMenuData, setInternalMenuData] =
+    useState<MenuItem[]>(menuData);
+
+  // 当 props.menuData 变化时同步更新 state
+  useEffect(() => {
+    setInternalMenuData(menuData);
+  }, [menuData]);
 
   // 高亮当前路由
   useEffect(() => {
     const pathname = location.pathname;
-    const prefix = "/docs";
 
     // 递归变更路由active状态
     const processSub = (sub: MenuItem, path: string) => {
@@ -33,7 +43,8 @@ function DocsSidebar() {
 
     if (pathname.startsWith(prefix)) {
       const path = pathname.replace(prefix, "").replace("/", "");
-      setMenuData((data) => {
+      setInternalMenuData((data) => {
+        // 修改为更新 internalMenuData
         const ret = data.map((item) => {
           return processSub(item, path);
         });
@@ -51,7 +62,7 @@ function DocsSidebar() {
 
   return (
     <div className={styles.container}>
-      <ReiMenu menuItems={menuData} onClick={handleClick} />
+      <ReiMenu menuItems={internalMenuData} onClick={handleClick} />
     </div>
   );
 }
