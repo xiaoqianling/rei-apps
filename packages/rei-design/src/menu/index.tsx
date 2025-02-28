@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { MenuItem } from "./type";
 import styles from "./index.module.less";
+import { getCombinedPath } from "./util";
 
 export interface ReiMenuProps {
   menuItems: MenuItem[];
@@ -46,13 +47,14 @@ export const ReiMenu: FunctionComponent<ReiMenuProps> = ({
     const { label, subItems } = item;
     const endPoint = isEndPoint(item);
     const isExpanded = expanded[label];
+    const targetPath = getCombinedPath(menuItems, item.label);
 
     return (
       <div
         key={label}
         className={styles.menuItem}
         onClick={() => {
-          endPoint && onClick && onClick(item.path);
+          endPoint && onClick && onClick(targetPath ?? "");
         }}
       >
         <div

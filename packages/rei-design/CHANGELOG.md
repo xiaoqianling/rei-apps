@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.4
+
+### Patch Changes
+
+- chore: 文档导航嵌套路由
+
 ## 1.0.3
 
 ### Patch Changes

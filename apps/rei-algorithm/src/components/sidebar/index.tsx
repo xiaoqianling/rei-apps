@@ -1,7 +1,7 @@
 import { MenuItem } from "rei-design/menu/type";
 import styles from "./index.module.scss";
 import { ReiMenu } from "rei-design/menu";
-import { useLocation, useNavigate, useRoutes } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
 export interface SidebarProps {

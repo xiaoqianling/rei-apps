@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.3
+
+### Patch Changes
+
+- chore: 文档导航嵌套路由
+- Updated dependencies
+  - rei-design@1.0.4
+
 ## 1.2.2
 
 ### Patch Changes

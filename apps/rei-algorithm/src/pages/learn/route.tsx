@@ -11,20 +11,27 @@ export const learnRouter: RouteObject[] = [
     index: true,
   },
   {
-    path: "getting-start",
-    element: <StartPage components={{ VisualCode }} />,
+    path: "dataStructure",
+    children: [
+      {
+        path: "linear",
+        element: <AllInOnePage />,
+        children: [
+          {
+            path: "array",
+            element: <AllInOnePage />,
+          },
+          {
+            path: "linked-list",
+            element: <AllInOnePage />,
+          },
+        ],
+      },
+    ],
   },
   {
-    path: "about",
-    element: <AboutPage />,
-  },
-  {
-    path: "design",
-    element: <DesignPage />,
-  },
-  {
-    path: "all-in-one",
-    element: <AllInOnePage />,
+    path: "*",
+    element: "404",
   },
 ];
 
@@ -36,41 +43,63 @@ export const learnMenuData: MenuItem[] = [
     endPoint: true,
   },
   {
-    path: "attribute",
-    label: "特性",
+    path: "dataStructure",
+    label: "数据结构基础",
     subItems: [
       {
-        path: "about",
-        label: "关于",
+        path: "linear",
+        label: "线性表",
+        subItems: [
+          {
+            path: "array",
+            label: "数组",
+          },
+          {
+            path: "linked-list",
+            label: "链表",
+          },
+        ],
       },
       {
-        path: "donate",
-        label: "捐助",
+        path: "tree",
+        label: "树",
+        subItems: [
+          {
+            path: "binary-tree",
+            label: "二叉树",
+          },
+          {
+            path: "binary-search-tree",
+            label: "二叉搜索树",
+          },
+          {
+            path: "avl-tree",
+            label: "AVL树",
+          },
+        ],
       },
     ],
   },
   {
-    path: "use",
-    label: "使用",
+    path: "algorithm",
+    label: "算法基础",
     subItems: [
       {
-        path: "getting-start",
-        label: "起步",
+        path: "sort",
+        label: "排序",
+      },
+      {
+        path: "search",
+        label: "搜索",
+      },
+      {
+        path: "greedy",
+        label: "贪心",
       },
     ],
   },
   {
-    path: "dev",
-    label: "开发进展",
-    subItems: [
-      {
-        path: "all-in-one",
-        label: "All In One",
-      },
-      {
-        path: "design",
-        label: "设计",
-      },
-    ],
+    path: "practice",
+    label: "算法实战",
   },
 ];
