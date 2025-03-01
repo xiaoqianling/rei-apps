@@ -1,3 +1,4 @@
+import styles from "./index.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { basicSetup, EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
@@ -72,10 +73,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 
   return (
     <div>
-      <div
-        ref={editorRef}
-        style={{ height: "400px", marginBottom: "16px", overflow: "scroll" }}
-      />
+      <div className={styles.editor} ref={editorRef} />
       <button
         onClick={() => executeCode(viewRef.current?.state.doc.toString() || "")}
       >

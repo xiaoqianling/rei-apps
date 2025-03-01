@@ -1,7 +1,9 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import SlateMarkdown from "./md";
 import SaveEditor from "./saveEditor";
 import CodeEditor from "@/src/components/codeEditor";
+import TreeVisualizer, { tree } from "@/src/components/visual";
+import VisualPanel from "@/src/components/visual/panel";
 
 interface SlatePageProps {}
 
@@ -17,11 +19,7 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <hr />
       <SaveEditor />
       <hr />
-      <CodeEditor
-        initialValue={`console.log("123");
-const A = 5;
-console.log(A ** 6);`}
-      />
+      <VisualPanel />
     </div>
   );
 };
