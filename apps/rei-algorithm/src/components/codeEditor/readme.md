@@ -16,3 +16,6 @@
 - @comment 注释
 
 ## 辅助相关
+
+- @tag [content(string), value(变量)]
+  - 用于console.log前 打印复制信息

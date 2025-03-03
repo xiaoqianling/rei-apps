@@ -34,11 +34,7 @@ function MainPage() {
           </div>
         </div>
       </div>
-      <div>
-        <div>这是另一段文本</div>
-        <div>这是另一段文本</div>
-        <div>这是另一段文本</div>
-      </div>
+      <div>{/* TODO: */}</div>
     </div>
   );
 }

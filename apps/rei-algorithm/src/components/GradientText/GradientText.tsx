@@ -5,7 +5,7 @@
 */
 
 import "./GradientText.css";
-import React, { ReactNode } from "react";
+import React, { CSSProperties, ReactNode } from "react";
 
 interface GradientTextProps {
   children: ReactNode;
@@ -22,7 +22,7 @@ export default function GradientText({
   animationSpeed = 8, // Default animation speed in seconds
   showBorder = false, // Default overlay visibility
 }: GradientTextProps) {
-  const gradientStyle = {
+  const gradientStyle: CSSProperties = {
     backgroundImage: `linear-gradient(to right, ${colors.join(", ")})`,
     animationDuration: `${animationSpeed}s`,
   };

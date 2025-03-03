@@ -13,14 +13,13 @@
     "test": "pnpm run -r test",
     "lint": "eslint --ext js,ts,tsx .",
     "reset": "pnpm remove -g && pnpm install",
-    "prepare": "husky",
-    "changeset:add": "npx changeset add",
-    "c": "npx changeset add",
     "changeset:version": "npx changeset version",
     "changeset:public": "npx changeset publish",
     "release": "pnpm run build && pnpm run changeset:add && pnpm run changeset:version && pnpm run changeset:publish",
     "todo": "pnpm --filter rei-todo dev",
-    "algo": "pnpm --filter rei-algorithm dev"
+    "algo": "pnpm --filter rei-algorithm dev",
+    "build:algo": "pnpm --filter rei-algorithm build",
+    "serve:algo": "pnpm --filter rei-algorithm serve"
   },
   "devDependencies": {
     "@changesets/parse": "0.4.0",

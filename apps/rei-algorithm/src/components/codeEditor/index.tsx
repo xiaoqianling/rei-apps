@@ -4,6 +4,7 @@ import { basicSetup, EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { transform } from "@babel/standalone";
 import { CodeEditorProps } from "./type";
+import FlexBlock from "./flexBlock";
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
   initialValue = "",
@@ -75,7 +76,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       >
         执行代码
       </button>
-      <pre className={styles.output}>{output}</pre>
+      <FlexBlock open={true} text={output} />
     </div>
   );
 };
