@@ -1,8 +1,5 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import SlateMarkdown from "./md";
+import { FunctionComponent, useEffect } from "react";
 import SaveEditor from "./saveEditor";
-import CodeEditor from "@/src/components/codeEditor";
-import TreeVisualizer, { tree } from "@/src/components/visual";
 import VisualPanel from "@/src/components/visual/panel";
 
 interface SlatePageProps {}

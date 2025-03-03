@@ -3,11 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { basicSetup, EditorView } from "codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { transform } from "@babel/standalone";
-
-interface CodeEditorProps {
-  initialValue?: string;
-  onChange?: (value: string) => void;
-}
+import { CodeEditorProps } from "./type";
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
   initialValue = "",
@@ -35,7 +31,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       };
 
       // 执行编译后的代码
-      const result = new Function(compiled)();
+      const result = new Function(compiled!)();
       console.log("result", result);
       setOutput(consoleOutput + (result ? `\nResult: ${result}` : ""));
 
@@ -79,17 +75,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       >
         执行代码
       </button>
-      <pre
-        style={{
-          marginTop: "16px",
-          padding: "8px",
-          background: "#f5f5f5",
-          border: "1px solid #ddd",
-          minHeight: "100px",
-        }}
-      >
-        {output}
-      </pre>
+      <pre className={styles.output}>{output}</pre>
     </div>
   );
 };

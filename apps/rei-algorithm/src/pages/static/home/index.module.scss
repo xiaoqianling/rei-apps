@@ -40,4 +40,19 @@
   position: absolute;
   top: 0;
   top: 5rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
+  .desc {
+    .gradient {
+      display: inline;
+    }
+  }
+
+  .lottie {
+    width: 60%;
+  }
 }
