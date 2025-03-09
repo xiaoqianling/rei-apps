@@ -28,13 +28,13 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       const originalConsole = console.log;
       console.log = (...args) => {
         consoleOutput += args.join(" ") + "\n";
-        originalConsole(...args);
+        // originalConsole(...args);
       };
 
-      // 执行编译后的代码
+      // 执行编译后的代码 result 为 undefined
       const result = new Function(compiled!)();
-      console.log("result", result);
-      setOutput(consoleOutput + (result ? `\nResult: ${result}` : ""));
+      // console.log("result:", result);
+      setOutput(consoleOutput);
 
       // 恢复原始 console
       console.log = originalConsole;
@@ -69,14 +69,15 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   }, [initialValue, onChange]);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.editor} ref={editorRef} />
       <button
+        className={styles.executeButton}
         onClick={() => executeCode(viewRef.current?.state.doc.toString() || "")}
       >
         执行代码
       </button>
-      <FlexBlock open={true} text={output} />
+      <FlexBlock open={true} text={output} show />
     </div>
   );
 };

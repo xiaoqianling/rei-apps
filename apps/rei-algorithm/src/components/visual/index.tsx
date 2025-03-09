@@ -73,16 +73,15 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
         // 阻止在节点和连线上触发拖动
         allowContextMenu: true,
         trigger: svgRef.current,
-        // BUG: 拖动节点时还是有小的偏移
         onDrag: function (e) {
+          this.disable();
           // 如果点击的是节点或连线，阻止拖动
           const target = e.target as HTMLElement;
           if (
-            target.classList.contains("tree-node") ||
-            target.classList.contains("tree-link")
+            !target.classList.contains("tree-node") &&
+            !target.classList.contains("tree-link")
           ) {
-            this.disable();
-            setTimeout(() => this.enable(), 0);
+            this.enable();
           }
         },
       });
@@ -269,10 +268,13 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
   return (
     <svg
       ref={svgRef}
-      width={width}
-      height={height}
       viewBox={`0 0 ${width} ${height}`}
-      style={{ border: "1px solid #ddd", overflow: "hidden" }}
+      style={{
+        border: "1px solid #ddd",
+        overflow: "hidden",
+        width: "100%",
+        height: "100%",
+      }}
     >
       <g ref={zoomRef}>{renderTree(tree, width / 2, 50, 0, 0)}</g>
     </svg>

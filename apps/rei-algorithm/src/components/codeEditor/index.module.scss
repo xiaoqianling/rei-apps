@@ -1,14 +1,24 @@
-.editor {
-  background-color: beige;
-  height: 400px;
-  margin-bottom: 16px;
-  overflow: auto;
-}
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  background-color: $color1;
+  .editor {
+    background-color: beige;
+    height: 400px;
+    overflow: auto;
+    flex-grow: 1;
+  }
 
-.output {
-  margin-top: 16px;
-  padding: 8px;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  min-height: 100px;
+  .executeButton {
+    height: 30px;
+  }
+
+  .output {
+    margin-top: 16px;
+    padding: 8px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    min-height: 100px;
+  }
 }

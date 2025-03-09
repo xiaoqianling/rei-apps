@@ -25,10 +25,11 @@ const FlexBlock: FunctionComponent<FlexBlockProps> = ({
   onFoldClick,
   onClose,
 }) => {
-  const [isOpen, setIsOpen] = useState(open ?? true);
-  if (!open) {
+  if (!show) {
     return null;
   }
+
+  const [isOpen, setIsOpen] = useState(open ?? true);
 
   const handleFoldClick = () => {
     setIsOpen((prev) => !prev);
@@ -42,7 +43,7 @@ const FlexBlock: FunctionComponent<FlexBlockProps> = ({
         <span>控制台输出</span>
         <IoClose size={22} onClick={onClose} />
       </header>
-      <main className={styles.main}>{text}</main>
+      <main className={isOpen ? styles.main : styles.hidden_main}>{text}</main>
     </div>
   );
   return block;

@@ -12,7 +12,7 @@ function VisualPanel() {
         <CodeEditor initialValue={initialCode} />
       </div>
       <div className={styles.half}>
-        <TreeVisualizer tree={treeData} height={580} />
+        <TreeVisualizer tree={treeData} />
       </div>
     </div>
   );
