@@ -1,6 +1,8 @@
 import { FunctionComponent, useEffect } from "react";
 import SaveEditor from "./saveEditor";
-import VisualPanel from "@/src/components/visual/panel";
+import { VisualPanel } from "@/src/components/visual";
+import FreeMoveContainer from "@/src/components/container/freeMove";
+import ResizeContainer from "@/src/components/container/resize";
 
 interface SlatePageProps {}
 
@@ -17,6 +19,14 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <SaveEditor />
       <hr />
       <VisualPanel />
+      <ResizeContainer initWidth={100} initHeight={100} ratio={4 / 3}>
+        nihao
+      </ResizeContainer>
+      <FreeMoveContainer width={100} height={100}>
+        <ResizeContainer initWidth={100} initHeight={100} ratio={4 / 3}>
+          nihao
+        </ResizeContainer>
+      </FreeMoveContainer>
     </div>
   );
 };

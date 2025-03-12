@@ -3,7 +3,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Draggable } from "gsap/Draggable";
 import styles from "./index.module.scss";
-import Node from "./node";
+import Node from "../node";
 
 gsap.registerPlugin(Draggable);
 

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.5
+
+### Patch Changes
+
+- feat: 添加自由移动容器&弹性容器
+
 ## 1.2.4
 
 ### Patch Changes

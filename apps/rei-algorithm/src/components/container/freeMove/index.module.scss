@@ -1,0 +1,14 @@
+.container {
+  z-index: 1;
+  background-color: aqua;
+  position: fixed;
+  top: 10px;
+  left: 30px;
+  border-radius: 0.5rem;
+  .header {
+    cursor: grabbing;
+    border-bottom: 1px rgb(128, 128, 128, 0.5) solid;
+  }
+  .main {
+  }
+}
