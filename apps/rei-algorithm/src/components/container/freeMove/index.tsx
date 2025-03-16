@@ -11,13 +11,17 @@ interface FreeMoveContainerProps {
   // @default 1
   zIndex?: number;
   onClose?: () => void;
+  visible: boolean;
 }
 
 const FreeMoveContainer: FunctionComponent<FreeMoveContainerProps> = ({
   children,
   zIndex,
   onClose,
+  visible,
 }) => {
+  if (!visible) return null;
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 30, y: 10 });

@@ -1,12 +1,6 @@
 import { css } from "@emotion/css";
 import styles from "./index.module.scss";
-import {
-  FunctionComponent,
-  ReactNode,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
+import { FunctionComponent, useState, useRef, useEffect } from "react";
 import classNames from "classnames";
 import { ResizeContainerProps } from "./type";
 import { isInRange } from "@/src/util/math";

@@ -3,11 +3,13 @@ import SaveEditor from "./saveEditor";
 import { VisualPanel } from "@/src/components/visual";
 import FreeMoveContainer from "@/src/components/container/freeMove";
 import ResizeContainer from "@/src/components/container/resize";
+import { useOpenState } from "@/src/hooks";
 
 interface SlatePageProps {}
 
 const SlatePage: FunctionComponent<SlatePageProps> = () => {
-  useEffect(() => {});
+  const { visible, open, close } = useOpenState(true);
+
   return (
     <div>
       <h2>Slate Page</h2>
@@ -22,7 +24,7 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <ResizeContainer initWidth={100} initHeight={100} ratio={4 / 3}>
         nihao
       </ResizeContainer>
-      <FreeMoveContainer>
+      <FreeMoveContainer visible={visible} onClose={close}>
         <ResizeContainer initWidth={800} initHeight={600}>
           <VisualPanel />
         </ResizeContainer>

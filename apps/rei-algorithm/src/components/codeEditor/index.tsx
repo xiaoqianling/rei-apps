@@ -1,3 +1,4 @@
+import { TbFreezeRow } from "react-icons/tb";
 import {
   LuClipboardCopy,
   LuPanelLeftOpen,
@@ -106,6 +107,11 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           <div>
             <ReiTooltip content="关闭面板">
               <LuPanelLeftOpen />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="悬浮面板">
+              <TbFreezeRow />
             </ReiTooltip>
           </div>
         </div>
