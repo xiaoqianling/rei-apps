@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.6
+
+### Patch Changes
+
+- chore: 添加节点拖动反馈
+
 ## 1.2.5
 
 ### Patch Changes

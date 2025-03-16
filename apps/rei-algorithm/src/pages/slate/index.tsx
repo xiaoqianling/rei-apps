@@ -22,9 +22,9 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <ResizeContainer initWidth={100} initHeight={100} ratio={4 / 3}>
         nihao
       </ResizeContainer>
-      <FreeMoveContainer width={100} height={100}>
-        <ResizeContainer initWidth={100} initHeight={100} ratio={4 / 3}>
-          nihao
+      <FreeMoveContainer>
+        <ResizeContainer initWidth={800} initHeight={600}>
+          <VisualPanel />
         </ResizeContainer>
       </FreeMoveContainer>
     </div>

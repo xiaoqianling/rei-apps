@@ -17,6 +17,9 @@ interface FlexBlockProps {
   onFoldClick?: (open: boolean) => void;
 }
 
+/**
+ * 可折叠容器
+ */
 const FlexBlock: FunctionComponent<FlexBlockProps> = ({
   open,
   text,

@@ -2,16 +2,28 @@
   display: flex;
   height: 100%;
   flex-direction: column;
-  background-color: $color1;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    .executeButton {
+      height: 30px;
+    }
+
+    .operation {
+      @include flex-center;
+      gap: 0.5rem;
+      div {
+        cursor: pointer;
+      }
+    }
+  }
+
   .editor {
     background-color: beige;
     height: 400px;
     overflow: auto;
     flex-grow: 1;
-  }
-
-  .executeButton {
-    height: 30px;
   }
 
   .output {

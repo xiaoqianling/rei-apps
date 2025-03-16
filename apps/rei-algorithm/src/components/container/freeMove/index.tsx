@@ -1,3 +1,5 @@
+import { IoClose } from "react-icons/io5";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { css } from "@emotion/css";
 import styles from "./index.module.scss";
 import { FunctionComponent, useRef, useState } from "react";
@@ -8,15 +10,13 @@ interface FreeMoveContainerProps {
   children: React.ReactNode;
   // @default 1
   zIndex?: number;
-  width: number;
-  height: number;
+  onClose?: () => void;
 }
 
 const FreeMoveContainer: FunctionComponent<FreeMoveContainerProps> = ({
   children,
   zIndex,
-  width,
-  height,
+  onClose,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -50,6 +50,10 @@ const FreeMoveContainer: FunctionComponent<FreeMoveContainerProps> = ({
     setIsDragging(false);
   };
 
+  const handleClose = () => {
+    onClose && onClose();
+  };
+
   React.useEffect(() => {
     if (isDragging) {
       window.addEventListener("mousemove", handleMouseMove);
@@ -76,8 +80,14 @@ const FreeMoveContainer: FunctionComponent<FreeMoveContainerProps> = ({
       ref={containerRef}
       className={classNames([styles.container, containerClassname])}
     >
-      <header className={styles.header} onMouseDown={handleMouseDown}>
-        ---------
+      <header className={styles.header}>
+        <div className={styles.dot} onMouseDown={handleMouseDown}>
+          <HiDotsHorizontal />
+        </div>
+        <div className={styles.operation}>
+          {/* TODO：悬浮反馈 */}
+          <IoClose color="red" onClick={handleClose} />
+        </div>
       </header>
       <div className={styles.main}>{children}</div>
     </div>

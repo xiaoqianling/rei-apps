@@ -70,13 +70,22 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 
   return (
     <div className={styles.container}>
+      <header>
+        <button
+          className={styles.executeButton}
+          onClick={() =>
+            executeCode(viewRef.current?.state.doc.toString() || "")
+          }
+        >
+          执行代码
+        </button>
+        {/* 一组操作 */}
+        <div className={styles.operation}>
+          <div>控制台</div>
+          <div>控制台</div>
+        </div>
+      </header>
       <div className={styles.editor} ref={editorRef} />
-      <button
-        className={styles.executeButton}
-        onClick={() => executeCode(viewRef.current?.state.doc.toString() || "")}
-      >
-        执行代码
-      </button>
       <FlexBlock open={true} text={output} show />
     </div>
   );

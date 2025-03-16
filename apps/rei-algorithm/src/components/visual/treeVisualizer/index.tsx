@@ -61,28 +61,34 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
       // 初始化缩放
       let currentScale = 1;
 
-      //   初始化拖动
-      Draggable.create(zoomRef.current, {
+      // 背景拖动处理
+      Draggable.create(svgRef.current, {
         type: "x,y",
         edgeResistance: 0.65,
         bounds: svgRef.current,
         inertia: true,
-        // 添加点击区域限制
         allowEventDefault: true,
         allowNativeTouchScrolling: false,
-        // 阻止在节点和连线上触发拖动
-        allowContextMenu: true,
-        trigger: svgRef.current,
         onDrag: function (e) {
-          this.disable();
           // 如果点击的是节点或连线，阻止拖动
+          // BUG: 实际效果是拖动“碰到”节点就会停止，而非判定点击位置
           const target = e.target as HTMLElement;
           if (
-            !target.classList.contains("tree-node") &&
-            !target.classList.contains("tree-link")
+            target.classList.contains("tree-node") ||
+            target.classList.contains("tree-link")
           ) {
-            this.enable();
+            console.log("阻止拖动");
+            this.disable();
+            setTimeout(() => {
+              this.enable();
+            }, 0);
+            return;
           }
+          // 更新zoomRef的位置
+          gsap.set(zoomRef.current, {
+            x: this.x,
+            y: this.y,
+          });
         },
       });
 
@@ -112,7 +118,7 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
     { scope: svgRef },
   );
 
-  // 计算节点位置 TODO:
+  // 计算节点位置 TODO:优化树生成逻辑 防止交叉分支
   const calculatePositions = (
     node: TreeNode,
     x: number,
@@ -270,7 +276,6 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
       ref={svgRef}
       viewBox={`0 0 ${width} ${height}`}
       style={{
-        border: "1px solid #ddd",
         overflow: "hidden",
         width: "100%",
         height: "100%",

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import CodeEditor from "../../codeEditor";
 import styles from "./index.module.scss";
 import { initialCode } from "./mock";
@@ -9,6 +9,15 @@ function VisualPanel() {
   const [splitPosition, setSplitPosition] = useState(50); // 初始分割位置百分比
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
+
+  // 缓存树可视化组件，在拖动时也不会重绘
+  const treeVisualizer = useMemo(() => {
+    return (
+      <div className={styles.treeWrapper}>
+        <TreeVisualizer tree={treeData} />
+      </div>
+    );
+  }, [treeData]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     isDragging.current = true;
@@ -38,9 +47,7 @@ function VisualPanel() {
       </div>
       <div className={styles.divider} onMouseDown={handleMouseDown} />
       <div className={styles.half} style={{ width: `${100 - splitPosition}%` }}>
-        <div className={styles.treeWrapper}>
-          <TreeVisualizer tree={treeData} />
-        </div>
+        {treeVisualizer}
       </div>
     </div>
   );

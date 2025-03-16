@@ -33,6 +33,7 @@ const Node: React.FC<TreeNodeComponentProps> = ({
       y: y,
       scale: 1,
       opacity: 1,
+      cursor: "pointer",
     });
 
     // 节点入场动画
@@ -49,6 +50,21 @@ const Node: React.FC<TreeNodeComponentProps> = ({
       onDrag: function () {
         onDrag?.(this.x, this.y);
       },
+      onDragStart: function () {
+        gsap.to(nodeRef.current, {
+          fill: "#777777",
+          scale: 1.2,
+          duration: 0.1,
+          ease: "power1.out",
+        });
+      },
+      onDragEnd: function () {
+        gsap.to(nodeRef.current, {
+          fill: "#61dafb",
+          scale: 1,
+          duration: 0.1,
+        });
+      },
     });
 
     // 点击事件
@@ -62,8 +78,12 @@ const Node: React.FC<TreeNodeComponentProps> = ({
   }, [onDrag, onClick, x, y]);
 
   return (
-    <g ref={nodeRef} className={`${styles["tree-node"]} tree-node`}>
-      <circle r={20} fill="#4CAF50" className="tree-node" />
+    <g
+      ref={nodeRef}
+      fill="#61dafb"
+      className={`${styles["tree-node"]} tree-node`}
+    >
+      <circle r={20} className="tree-node" />
       <text textAnchor="middle" dy=".3em" fill="white">
         {value}
       </text>
