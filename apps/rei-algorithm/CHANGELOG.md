@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.7
+
+### Patch Changes
+
+- feat: 添加tooltip组件
+- Updated dependencies
+  - rei-design@1.0.5
+
 ## 1.2.6
 
 ### Patch Changes

@@ -1,3 +1,10 @@
+import {
+  LuClipboardCopy,
+  LuPanelLeftOpen,
+  LuPanelLeftClose,
+} from "react-icons/lu";
+import { MdCode, MdCodeOff } from "react-icons/md";
+import ReiTooltip from "rei-design/tooltip";
 import styles from "./index.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { basicSetup, EditorView } from "codemirror";
@@ -81,8 +88,26 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
         </button>
         {/* 一组操作 */}
         <div className={styles.operation}>
-          <div>控制台</div>
-          <div>控制台</div>
+          <div>
+            <ReiTooltip content="打开控制台">
+              <MdCode />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="关闭控制台">
+              <MdCodeOff />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="复制">
+              <LuClipboardCopy />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="关闭面板">
+              <LuPanelLeftOpen />
+            </ReiTooltip>
+          </div>
         </div>
       </header>
       <div className={styles.editor} ref={editorRef} />

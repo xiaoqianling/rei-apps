@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.5
+
+### Patch Changes
+
+- feat: 添加tooltip组件
+
 ## 1.0.4
 
 ### Patch Changes

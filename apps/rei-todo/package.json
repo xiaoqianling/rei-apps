@@ -2,7 +2,7 @@
   "name": "rei-todo",
   "description": "Example of using Vite in a TS monorepo",
   "private": true,
-  "version": "1.1.3",
+  "version": "1.1.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
