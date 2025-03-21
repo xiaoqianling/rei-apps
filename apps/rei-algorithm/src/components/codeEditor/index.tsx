@@ -9,10 +9,17 @@ import ReiTooltip from "rei-design/tooltip";
 import styles from "./index.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { basicSetup, EditorView } from "codemirror";
-import { javascript } from "@codemirror/lang-javascript";
+import { javascript, javascriptLanguage } from "@codemirror/lang-javascript";
 import { transform } from "@babel/standalone";
 import { CodeEditorProps } from "./type";
 import FlexBlock from "./flexBlock";
+import { copyToClipboard } from "@/src/util/dom";
+// 编辑器配置
+import { autocompletion } from "@codemirror/autocomplete";
+import { foldGutter, foldKeymap } from "@codemirror/fold";
+import { keymap } from "@codemirror/view";
+import { defaultKeymap } from "@codemirror/commands";
+import { CustomAutoCompletion } from "@/src/core/engine/editor/autocompletion";
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
   initialValue = "",
@@ -53,6 +60,10 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
     }
   };
 
+  const handleCopy = () => {
+    copyToClipboard(editorRef.current?.innerText || "");
+  };
+
   // 初始化
   useEffect(() => {
     if (!editorRef.current) return;
@@ -61,6 +72,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       doc: initialValue,
       extensions: [
         basicSetup,
+        javascriptLanguage.data.of({ autocomplete: CustomAutoCompletion }),
         javascript({ typescript: true }),
         EditorView.updateListener.of((update) => {
           if (update.docChanged && onChange) {
@@ -101,7 +113,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           </div>
           <div>
             <ReiTooltip content="复制">
-              <LuClipboardCopy />
+              <LuClipboardCopy onClick={handleCopy} />
             </ReiTooltip>
           </div>
           <div>

@@ -25,7 +25,6 @@ const ReiTooltip: FunctionComponent<ReiTooltipProps> = ({
     const spaceBelow = viewportHeight - rect.bottom;
     // 计算上方可用空间
     const spaceAbove = rect.top;
-    console.log("spaceAbove:", spaceAbove, "spaceBelow:", spaceBelow);
 
     // 优先下方，如果下方空间不足则显示在上方
     return spaceBelow > 100 || spaceBelow > spaceAbove ? "bottom" : "top";

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.9
+
+### Patch Changes
+
+- feat: 初始化自定义文档
+
 ## 1.2.8
 
 ### Patch Changes

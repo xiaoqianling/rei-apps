@@ -41,7 +41,6 @@ const FreeMoveContainer: FunctionComponent<FreeMoveContainerProps> = ({
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    console.log("handleMouseMove");
     if (isDragging && containerRef.current) {
       setPosition({
         x: e.clientX - offset.x,
