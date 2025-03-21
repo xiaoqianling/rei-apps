@@ -8,7 +8,7 @@ import { useOpenState } from "@/src/hooks";
 interface SlatePageProps {}
 
 const SlatePage: FunctionComponent<SlatePageProps> = () => {
-  const { visible, open, close } = useOpenState(true);
+  const [visible, open, close] = useOpenState(true);
 
   return (
     <div>

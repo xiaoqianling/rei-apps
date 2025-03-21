@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.12
+
+### Patch Changes
+
+- chore: 编辑器热键处理
+
 ## 1.2.11
 
 ### Patch Changes

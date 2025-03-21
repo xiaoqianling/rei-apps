@@ -1,3 +1,4 @@
+import { VscRunAll } from "react-icons/vsc";
 import { TbFreezeRow } from "react-icons/tb";
 import {
   LuClipboardCopy,
@@ -16,6 +17,8 @@ import FlexBlock from "./flexBlock";
 import { copyToClipboard } from "@/src/util/dom";
 // 编辑器配置
 import { CustomAutoCompletion } from "@/src/core/engine/editor/autocompletion";
+import isHotkey from "is-hotkey";
+import { useOpenState } from "@/src/hooks";
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
   initialValue = "",
@@ -24,6 +27,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView>();
   const [output, setOutput] = useState<string>("");
+  const [consoleVisible, openConsole, closeConsole] = useOpenState(false);
 
   // 执行代码 输出
   const executeCode = (code: string) => {
@@ -57,7 +61,15 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   };
 
   const handleCopy = () => {
-    copyToClipboard(editorRef.current?.innerText || "");
+    copyToClipboard(viewRef.current?.state.doc.toString() || "");
+  };
+
+  // 处理快捷键
+  const handleKeyDown = (event: KeyboardEvent, view: EditorView) => {
+    if (isHotkey("mod+s", event)) {
+      event.preventDefault();
+      console.log("mod+s");
+    }
   };
 
   // 初始化
@@ -70,10 +82,15 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
         basicSetup,
         javascriptLanguage.data.of({ autocomplete: CustomAutoCompletion }),
         javascript({ typescript: true }),
+        // 编辑器变化监听
         EditorView.updateListener.of((update) => {
           if (update.docChanged && onChange) {
             onChange(update.state.doc.toString());
           }
+        }),
+        // hotkey
+        EditorView.domEventHandlers({
+          keydown: handleKeyDown,
         }),
       ],
       parent: editorRef.current,
@@ -87,26 +104,27 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   return (
     <div className={styles.container}>
       <header>
-        <button
-          className={styles.executeButton}
-          onClick={() =>
-            executeCode(viewRef.current?.state.doc.toString() || "")
-          }
+        <span
+          className={styles.title}
+          data-title="示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码"
         >
-          执行代码
-        </button>
+          示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码
+        </span>
         {/* 一组操作 */}
         <div className={styles.operation}>
-          <div>
-            <ReiTooltip content="打开控制台">
-              <MdCode />
-            </ReiTooltip>
-          </div>
-          <div>
-            <ReiTooltip content="关闭控制台">
-              <MdCodeOff />
-            </ReiTooltip>
-          </div>
+          {consoleVisible ? (
+            <div>
+              <ReiTooltip content="关闭控制台">
+                <MdCodeOff onClick={closeConsole} />
+              </ReiTooltip>
+            </div>
+          ) : (
+            <div>
+              <ReiTooltip content="打开控制台">
+                <MdCode onClick={openConsole} />
+              </ReiTooltip>
+            </div>
+          )}
           <div>
             <ReiTooltip content="复制">
               <LuClipboardCopy onClick={handleCopy} />
@@ -122,10 +140,21 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
               <TbFreezeRow />
             </ReiTooltip>
           </div>
+          <div>
+            <ReiTooltip content="运行代码">
+              <VscRunAll
+                onClick={() =>
+                  executeCode(viewRef.current?.state.doc.toString() || "")
+                }
+              />
+            </ReiTooltip>
+          </div>
         </div>
       </header>
-      <div className={styles.editor} ref={editorRef} />
-      <FlexBlock open={true} text={output} show />
+      <div className={styles.editor} />
+      {consoleVisible && (
+        <FlexBlock open={true} text={output} show onClose={closeConsole} />
+      )}
     </div>
   );
 };
