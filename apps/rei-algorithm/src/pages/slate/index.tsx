@@ -21,9 +21,6 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <SaveEditor />
       <hr />
       <VisualPanel />
-      <ResizeContainer initWidth={100} initHeight={100} ratio={4 / 3}>
-        nihao
-      </ResizeContainer>
       <FreeMoveContainer visible={visible} onClose={close}>
         <ResizeContainer initWidth={800} initHeight={600}>
           <VisualPanel />

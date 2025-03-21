@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo } from "react";
-import CodeEditor from "../../codeEditor";
+import CodeEditor from "../codeEditor";
 import styles from "./index.module.scss";
 import { initialCode } from "./mock";
 import TreeVisualizer, { tree } from "../treeVisualizer";

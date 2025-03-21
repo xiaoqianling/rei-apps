@@ -15,10 +15,6 @@ import { CodeEditorProps } from "./type";
 import FlexBlock from "./flexBlock";
 import { copyToClipboard } from "@/src/util/dom";
 // 编辑器配置
-import { autocompletion } from "@codemirror/autocomplete";
-import { foldGutter, foldKeymap } from "@codemirror/fold";
-import { keymap } from "@codemirror/view";
-import { defaultKeymap } from "@codemirror/commands";
 import { CustomAutoCompletion } from "@/src/core/engine/editor/autocompletion";
 
 const CodeEditor: React.FC<CodeEditorProps> = ({
