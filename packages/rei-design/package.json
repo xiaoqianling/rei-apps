@@ -1,6 +1,6 @@
 {
   "name": "rei-design",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "scripts": {
     "dev": "rspack serve",
     "build": "rspack build",

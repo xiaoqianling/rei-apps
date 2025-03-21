@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.13
+
+### Patch Changes
+
+- feat: 添加Split分隔组件
+- Updated dependencies
+  - rei-design@1.0.6
+
 ## 1.2.12
 
 ### Patch Changes

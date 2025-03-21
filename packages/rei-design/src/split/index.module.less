@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .half {
+    height: 100%;
+  }
+
+  .horizontal_divider {
+    width: 8px;
+    background-color: #ddd;
+    cursor: col-resize;
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+
+  .vertical_divider {
+    height: 8px;
+    background-color: #ddd;
+    cursor: row-resize;
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+}
+.vertical {
+  flex-direction: column;
+}

@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.6
+
+### Patch Changes
+
+- feat: 添加Split分隔组件
+
 ## 1.0.5
 
 ### Patch Changes
