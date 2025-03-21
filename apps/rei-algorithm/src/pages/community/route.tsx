@@ -1,11 +1,11 @@
-import { MockPost } from "@/src/community/mock";
-import { renderPostContent } from "@/src/community/render";
+import { Post } from "@/src/components/community";
+import { MockPost } from "@/src/components/community/type/mock";
 import { RouteObject } from "react-router";
 
 export const communityRouter: RouteObject[] = [
   {
     path: "",
-    element: renderPostContent(MockPost.contents),
+    element: <Post post={MockPost} />,
     index: true,
   },
   {

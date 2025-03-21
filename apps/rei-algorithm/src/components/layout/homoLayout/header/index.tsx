@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import HeaderLink from "./header-link";
-import ReiLOGO from "../../custom/logo";
 import Github from "@icon-park/react/lib/icons/Github";
+import ReiLOGO from "@/src/components/custom/logo";
 
 function LayoutHeader() {
   return (

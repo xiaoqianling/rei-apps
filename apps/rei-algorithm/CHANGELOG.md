@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.10
+
+### Patch Changes
+
+- chore: 重构community目录
+
 ## 1.2.9
 
 ### Patch Changes

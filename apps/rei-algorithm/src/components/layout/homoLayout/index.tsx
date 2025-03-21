@@ -1,9 +1,9 @@
 import { FunctionComponent, useEffect, useMemo, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import styles from "./index.module.scss";
-import LayoutHeader from "./header";
 import { throttle } from "@/src/util/frequency";
 import { rem2px } from "@/src/util/css";
+import LayoutHeader from "./header";
 
 interface LayoutProps {
   children?: React.ReactNode;

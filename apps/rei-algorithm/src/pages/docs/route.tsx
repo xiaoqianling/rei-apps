@@ -1,4 +1,3 @@
-import VisualCode from "@/src/components/visual-code-deprecated";
 import { AboutPage, AllInOnePage, DesignPage, StartPage } from "@/src/docs";
 import { RouteObject } from "react-router-dom";
 
@@ -6,12 +5,12 @@ import { RouteObject } from "react-router-dom";
 export const docsRouter: RouteObject[] = [
   {
     path: "",
-    element: <StartPage components={{ VisualCode }} />,
+    element: <StartPage />,
     index: true,
   },
   {
     path: "getting-start",
-    element: <StartPage components={{ VisualCode }} />,
+    element: <StartPage />,
   },
   {
     path: "about",

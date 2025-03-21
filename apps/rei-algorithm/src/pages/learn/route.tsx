@@ -1,4 +1,3 @@
-import VisualCode from "@/src/components/visual-code-deprecated";
 import { AboutPage, AllInOnePage, DesignPage, StartPage } from "@/src/docs";
 import { RouteObject } from "react-router-dom";
 import { MenuItem } from "rei-design/menu/type";
@@ -7,7 +6,7 @@ import { MenuItem } from "rei-design/menu/type";
 export const learnRouter: RouteObject[] = [
   {
     path: "",
-    element: <StartPage components={{ VisualCode }} />,
+    element: <StartPage />,
     index: true,
   },
   {

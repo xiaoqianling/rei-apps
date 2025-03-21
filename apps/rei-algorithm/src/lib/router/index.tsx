@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router";
 import Error from "../../pages/static/error";
 import MainPage from "../../pages/static/home";
 import NotFound from "../../pages/static/not-found";
-import Layout from "../../components/layout";
+import Layout from "../../components/layout/homoLayout";
 import AboutPage from "../../pages/static/about";
 import DocsPage from "@/src/pages/docs";
 import LearnPage from "@/src/pages/learn";
 import SlatePage from "@/src/pages/slate";
 import { docsRouter } from "@/src/pages/docs/route";
-import CommunityLayout from "@/src/components/communityLayout";
+import CommunityLayout from "@/src/components/layout/communityLayout";
 import { communityRouter } from "@/src/pages/community/route";
 import { learnRouter } from "@/src/pages/learn/route";
 

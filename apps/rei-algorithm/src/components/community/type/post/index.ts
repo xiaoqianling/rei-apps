@@ -1,5 +1,5 @@
-import { BlogContent } from "../type/content";
-import { TagTypes } from "../type/tag";
+import { BlogContent } from "../content";
+import { TagTypes } from "../tag";
 
 export interface BlogPost {
   // 唯一id

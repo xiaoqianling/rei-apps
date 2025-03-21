@@ -1,5 +1,5 @@
 import { BlogPost } from "../post";
-import { TagTypes } from "../type/tag";
+import { TagTypes } from "../tag";
 
 export const MockPost: BlogPost = {
   id: "mock-id",
