@@ -57,6 +57,9 @@ const PostMarkdown: FunctionComponent<PostMarkdownProps> = ({ markdown }) => {
             className={`${props.className} ${styles.title}`}
           />
         ),
+        p: ({ node, ...props }) => (
+          <p {...props} className={`${props.className} ${styles.p}`} />
+        ),
       }}
     >
       {markdown.content}

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.16
+
+### Patch Changes
+
+- feat: 添加引用组件
+
 ## 1.2.15
 
 ### Patch Changes

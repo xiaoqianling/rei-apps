@@ -1,0 +1,52 @@
+.container {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  .icon {
+    @include flex-center;
+    &::after {
+      content: "";
+      width: 0.2rem;
+      height: 150%;
+      background-color: rgb(40, 173, 129);
+      margin-left: 0.75rem;
+    }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.tip {
+  background-color: aquamarine;
+  border: 2px solid rgb(72, 243, 186);
+  .icon {
+    &::after {
+      background-color: rgb(72, 243, 186);
+    }
+  }
+}
+
+.warning {
+  background-color: rgb(255, 204, 102);
+  border: 2px solid rgb(255, 179, 0);
+  .icon {
+    &::after {
+      background-color: rgb(255, 179, 0);
+    }
+  }
+}
+
+.error {
+  background-color: rgb(255, 102, 102);
+  border: 2px solid rgb(255, 0, 0);
+  .icon {
+    &::after {
+      background-color: rgb(255, 0, 0);
+    }
+  }
+}

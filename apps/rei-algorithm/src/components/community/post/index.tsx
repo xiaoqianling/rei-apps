@@ -8,8 +8,9 @@ import { FaUser } from "react-icons/fa";
 import { MdOutlineDateRange } from "react-icons/md";
 import { LuTag } from "react-icons/lu";
 import Tag from "./tag";
-import { useEffect, useState, useRef } from "react";
-import { Link, NavLink } from "react-router";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router";
+import PostTip from "../tip";
 
 interface PostProps {
   post: BlogPost;
@@ -40,6 +41,8 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
         return <PostMarkdown markdown={item} key={index} />;
       case "code":
         return <PostCode code={item} key={index} />;
+      case "tip":
+        return <PostTip tip={item} key={index} />;
       default:
         return null;
     }
