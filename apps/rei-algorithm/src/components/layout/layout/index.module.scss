@@ -19,4 +19,23 @@
 
 .main {
   height: calc(100vh - 4rem);
+  overflow: auto;
+
+  // 自定义滚动条
+  &::-webkit-scrollbar {
+    width: 8px; // 滚动条宽度
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; // 滚动条轨道背景透明
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #97edcf; // 滚动条滑块颜色
+    border-radius: 4px; // 滑块圆角
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #74c6a9; // 滑块悬停颜色
+  }
 }

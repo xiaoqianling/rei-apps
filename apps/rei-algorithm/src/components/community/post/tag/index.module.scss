@@ -1,0 +1,16 @@
+.container {
+  @include flex-center;
+  justify-content: center;
+  width: 40px;
+  height: 20px;
+  background-color: rgb(137, 243, 188, 0.8); // rgb(137, 243, 188)
+  position: relative;
+  clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  padding-left: 8px;
+  transition: background-color 0.1s ease;
+  color: #e1ffef;
+
+  &:hover {
+    background-color: #9cffc4;
+  }
+}

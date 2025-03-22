@@ -1,5 +1,5 @@
-$header-link-hover: #d9acff;
-$header-link-active: #ffd9d9;
+$header-link-hover: #bd6cff;
+$header-link-active: #ff5050;
 
 @mixin link {
   @include flex-center;
@@ -21,23 +21,12 @@ $header-link-active: #ffd9d9;
     background-color 0.2s ease;
   &:hover {
     color: $header-link-hover;
-    // animation: link-color-change 0.2s ease-in-out;
-    background-color: rgb(255, 247, 247);
+    background-color: rgb(255, 252, 252);
   }
 }
 
 .active_link {
   @include link;
   color: $header-link-active;
-  background-color: $theme-primary-color;
+  background-color: rgb(200, 255, 250);
 }
-
-// deprecated 避免对颜色使用keyframe 使用transition代替
-// @keyframes link-color-change {
-//   0% {
-//     color: black;
-//   }
-//   100% {
-//     color: $header-link-hover;
-//   }
-// }

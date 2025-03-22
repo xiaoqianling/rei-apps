@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.7
+
+### Patch Changes
+
+- feat: markdown基础支持
+
 ## 1.0.6
 
 ### Patch Changes

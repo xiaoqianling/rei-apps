@@ -6,6 +6,9 @@ export interface BlogPost {
   id: string;
   // 标题
   title: string;
+  username: string;
+  // 用户主页链接
+  userLink?: string;
   // 内容
   contents: BlogContent[];
   // 创建时间

@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.15
+
+### Patch Changes
+
+- feat: markdown基础支持
+- Updated dependencies
+  - rei-design@1.0.7
+
 ## 1.2.14
 
 ### Patch Changes

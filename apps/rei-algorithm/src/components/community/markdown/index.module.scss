@@ -1,0 +1,22 @@
+.title {
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    &::before {
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
+      content: "#";
+      font-size: inherit;
+      position: absolute;
+      top: 0;
+      left: -2rem;
+      color: #7ccbec;
+      text-decoration: underline;
+    }
+  }
+
+  &::before {
+    content: "";
+    opacity: 0;
+  }
+}

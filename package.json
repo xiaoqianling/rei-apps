@@ -19,7 +19,7 @@
     "todo": "pnpm --filter rei-todo dev",
     "algo": "pnpm --filter rei-algorithm dev",
     "build:algo": "pnpm --filter rei-algorithm build",
-    "serve:algo": "pnpm --filter rei-algorithm serve"
+    "server:algo": "pnpm --filter rei-algorithm serve"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.11",

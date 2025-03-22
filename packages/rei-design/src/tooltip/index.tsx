@@ -5,12 +5,14 @@ interface ReiTooltipProps {
   children: ReactNode;
   content: string;
   position?: "top" | "bottom" | "left" | "right";
+  className?: string;
 }
 
 const ReiTooltip: FunctionComponent<ReiTooltipProps> = ({
   children,
   content,
   position,
+  className,
 }) => {
   const [visible, setVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,7 +37,7 @@ const ReiTooltip: FunctionComponent<ReiTooltipProps> = ({
   return (
     <div
       ref={containerRef}
-      className={styles.tooltipContainer}
+      className={`${styles.tooltipContainer} ${className}`}
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >

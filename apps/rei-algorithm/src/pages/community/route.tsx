@@ -9,6 +9,10 @@ export const communityRouter: RouteObject[] = [
     index: true,
   },
   {
+    path: "i",
+    element: <> </>,
+  },
+  {
     path: "list",
     element: <></>,
   },
