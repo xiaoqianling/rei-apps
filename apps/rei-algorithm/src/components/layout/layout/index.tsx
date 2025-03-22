@@ -1,15 +1,26 @@
-import { FunctionComponent, useEffect, useMemo, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
 import styles from "./index.module.scss";
-import { throttle } from "@/src/util/frequency";
 import { rem2px } from "@/src/util/css";
+import { throttle } from "@/src/util/frequency";
+import {
+  FunctionComponent,
+  ReactElement,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { useLocation, Outlet } from "react-router";
 import LayoutHeader from "./header";
+import HeaderLink from "./header/header-link";
 
 interface LayoutProps {
-  children?: React.ReactNode;
+  header: ReactElement<typeof HeaderLink> | ReactElement<typeof HeaderLink>[];
 }
 
-const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
+/**
+ * layout模板 包含顶部栏
+ * 已包含outlet子路由渲染
+ */
+const Layout: FunctionComponent<LayoutProps> = ({ header }) => {
   const [scroll, setScroll] = useState(false);
   const location = useLocation();
   const scrollPX = useMemo(() => {
@@ -44,7 +55,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ children }) => {
       <header
         className={`${styles.header} ${scroll ? styles.header_linear : ""}`}
       >
-        <LayoutHeader />
+        <LayoutHeader children={header} />
       </header>
       {/* {children} */}
       {/* 主页面路由相关 */}

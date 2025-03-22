@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.14
+
+### Patch Changes
+
+- feat: 优化layout组件&添加社区布局
+
 ## 1.2.13
 
 ### Patch Changes

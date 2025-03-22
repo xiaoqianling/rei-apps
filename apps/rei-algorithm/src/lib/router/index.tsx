@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import Error from "../../pages/static/error";
 import MainPage from "../../pages/static/home";
 import NotFound from "../../pages/static/not-found";
-import Layout from "../../components/layout/homoLayout";
+import HomeLayout from "../../components/layout/homeLayout";
 import AboutPage from "../../pages/static/about";
 import DocsPage from "@/src/pages/docs";
 import LearnPage from "@/src/pages/learn";
@@ -21,7 +21,7 @@ export const reiRouter = createBrowserRouter([
     hasErrorBoundary: true,
     handle: { rei: "rei handle info" }, // 传递额外信息的属性，在loader action element中使用
     errorElement: <Error />, // 路由错误显示
-    element: <Layout />, // 子元素自动嵌套在layout中
+    element: <HomeLayout />, // 子元素自动嵌套在layout中
     /**
      * 顶部导航栏 {@link LayoutHeader}
      */

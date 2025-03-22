@@ -1,13 +1,18 @@
-import { FC } from "react";
-import { Outlet } from "react-router";
+import { FC, useMemo } from "react";
+import Layout from "../layout";
+import HeaderLink from "../layout/header/header-link";
 
 const CommunityLayout: FC = () => {
-  return (
-    <div>
-      <h1>CommunityLayout</h1>
-      <Outlet />
-    </div>
-  );
+  const header = useMemo(() => {
+    return (
+      <>
+        <HeaderLink to="/">首页</HeaderLink>
+        <HeaderLink to="/community">社区</HeaderLink>
+        <HeaderLink to="/community/i">我的</HeaderLink>
+      </>
+    );
+  }, []);
+  return <Layout header={header} />;
 };
 
 export default CommunityLayout;
