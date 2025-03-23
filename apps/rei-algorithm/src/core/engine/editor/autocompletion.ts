@@ -39,7 +39,6 @@ function getCodeCompletions(
 function getCompletionsForVariable(
   varName: string,
 ): { label: string; type: string }[] {
-  console.log(varName);
   // 这里可以根据实际上下文推断变量类型
   // 示例实现：
   if (varName === "a") {

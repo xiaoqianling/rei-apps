@@ -6,10 +6,7 @@ import { Editable, Slate, withReact } from "slate-react";
 function SaveEditor() {
   const [editor] = useState(() => withReact(createEditor()));
 
-  const handleChange = (value: React.ChangeEvent<HTMLDivElement>) => {
-    console.log("CHANGE", value);
-    console.log(editor);
-  };
+  const handleChange = (value: React.ChangeEvent<HTMLDivElement>) => {};
   return (
     <div>
       <Slate editor={editor} initialValue={initialValue}>

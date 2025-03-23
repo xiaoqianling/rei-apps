@@ -77,7 +77,6 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
             target.classList.contains("tree-node") ||
             target.classList.contains("tree-link")
           ) {
-            console.log("阻止拖动");
             this.disable();
             setTimeout(() => {
               this.enable();
@@ -109,7 +108,6 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
         const delta = (e.deltaY / 5) * -0.01;
         const newScale = Math.max(0.1, Math.min(5, currentScale + delta));
         currentScale = newScale;
-        console.log(delta);
         gsap.to(zoomRef.current, {
           scale: newScale,
         });

@@ -64,7 +64,6 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
 
         // 执行编译后的代码 result 为 undefined
         const result = new Function(compiled!)();
-        // console.log("result:", result);
         setOutput(consoleOutput);
 
         // 恢复原始 console
@@ -84,7 +83,6 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
     const handleKeyDown = (event: KeyboardEvent, view: EditorView) => {
       if (isHotkey("mod+s", event)) {
         event.preventDefault();
-        console.log("mod+s");
       }
     };
 

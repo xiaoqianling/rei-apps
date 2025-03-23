@@ -24,7 +24,6 @@ const SlateMarkdown: FunctionComponent<SlateMarkdownProps> = () => {
 
   // 编辑器渲染元素
   const renderElement = useCallback((props: RenderElementProps) => {
-    console.log("REI renderElement", props);
     switch (props.element.type) {
       case "paragraph":
         return <p {...props.attributes}>{props.children}</p>;
@@ -39,7 +38,6 @@ const SlateMarkdown: FunctionComponent<SlateMarkdownProps> = () => {
 
   // addMark时分割内容，用leaf感知分割后添加的标签
   const renderLeaf = useCallback((props: any) => {
-    console.log("REI renderLeaf", props);
     return <Leaf {...props} />;
   }, []);
 

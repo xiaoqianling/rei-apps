@@ -48,7 +48,6 @@ function DocsSidebar({ menuData, prefix }: SidebarProps) {
         const ret = data.map((item) => {
           return processSub(item, path);
         });
-        console.log(ret);
         return ret;
       });
     }
@@ -56,7 +55,6 @@ function DocsSidebar({ menuData, prefix }: SidebarProps) {
 
   // 导航到文档id
   const handleClick = (path: string) => {
-    console.log("rei-algo DocsSidebar handleClick", path);
     navigate(path);
   };
 

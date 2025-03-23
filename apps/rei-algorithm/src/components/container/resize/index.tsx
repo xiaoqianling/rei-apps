@@ -23,7 +23,6 @@ const ResizeContainer: FunctionComponent<ResizeContainerProps> = ({
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log("handleMouseDown");
     setIsResizing(true);
   };
 
@@ -59,7 +58,6 @@ const ResizeContainer: FunctionComponent<ResizeContainerProps> = ({
   };
 
   const handleMouseUp = () => {
-    console.log("handleMouseUP");
     setIsResizing(false);
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
