@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.20
+
+### Patch Changes
+
+- chore: 优化markdown视觉效果
+
 ## 1.2.19
 
 ### Patch Changes

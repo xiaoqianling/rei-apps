@@ -77,7 +77,7 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
             <span>{post.createdAt.toLocaleString()}</span>
           </Tooltip>
           <Tooltip content="标签" className={styles.tag}>
-            <LuTag />
+            <LuTag size={24} />
             {post.tags.map((tag, index) => (
               <Tag key={index} tag={tag}></Tag>
             ))}
