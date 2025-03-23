@@ -13,16 +13,14 @@ export interface MarkdownContent {
   content: string;
 }
 
-// 代码片段
+// 多语言代码组件(区别于markdown的code)
 export interface CodeContent {
   type: "code";
-  content: string;
-  metadata: {
-    language: string;
-  };
+  // tuple: [language, content]
+  metadata: Array<[language: string, content: string]>;
 }
 
-// 提示片段
+// 提示组件
 export interface TipContent {
   type: "tip";
   // 类型：提示、警告、错误

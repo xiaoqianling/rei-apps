@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import rehypeSlug from "rehype-slug";
 import { MarkdownContent } from "../type/content";
 import styles from "./index.module.scss";
+import MarkdownCode from "./code";
 
 interface PostMarkdownProps {
   markdown: MarkdownContent;
@@ -60,6 +61,15 @@ const PostMarkdown: FunctionComponent<PostMarkdownProps> = ({ markdown }) => {
         p: ({ node, ...props }) => (
           <p {...props} className={`${props.className} ${styles.p}`} />
         ),
+        code: ({ node, className, children, ...props }) => {
+          // classname为language-xxx(markdown标记里写的)
+          console.assert(
+            Object.keys(props).length === 0,
+            `[PostMarkDown] props should be empty ${props}`,
+          );
+
+          return <MarkdownCode className={className}>{children}</MarkdownCode>;
+        },
       }}
     >
       {markdown.content}

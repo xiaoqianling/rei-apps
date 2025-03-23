@@ -17,7 +17,7 @@ const HeaderLink: FunctionComponent<LinkProps> = ({ to, children, target }) => {
     return isActive ? styles.active_link : styles.link;
   };
   return (
-    <NavLink to={to} className={getLinkClassnames} target={target}>
+    <NavLink to={to} className={getLinkClassnames} target={target} end>
       {children}
     </NavLink>
   );

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.19
+
+### Patch Changes
+
+- feat: 添加代码高亮&多语言代码块
+
 ## 1.2.18
 
 ### Patch Changes

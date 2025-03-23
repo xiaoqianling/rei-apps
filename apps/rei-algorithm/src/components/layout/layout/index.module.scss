@@ -23,7 +23,8 @@
 }
 
 .main_linear {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   // 自定义滚动条
   &::-webkit-scrollbar {

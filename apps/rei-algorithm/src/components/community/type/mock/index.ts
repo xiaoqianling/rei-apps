@@ -29,7 +29,7 @@ export const MockPost: BlogPost = {
   - 这是第二个项目。
   - 这是第三个项目。
     - 这是一个嵌套的项目。
-  \`\`\` java
+  \`\`\` javascript
   public class HelloWorld {
     public static void main(String[] args) {
       System.out.println("Hello, World!");
@@ -55,10 +55,12 @@ export const MockPost: BlogPost = {
     },
     {
       type: "code",
-      content: "mock-code",
-      metadata: {
-        language: "mock-language",
-      },
+      metadata: [
+        ["javascript", "console.log('Hello, World!');"],
+        ["python", "print('Hello, World!')"],
+        ["java", "System.out.println('Hello, World!');"],
+        ["csharp", "Console.WriteLine('Hello, World!');"],
+      ],
     },
   ],
   createdAt: new Date("2022-01-01"),
