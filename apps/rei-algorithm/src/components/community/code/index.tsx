@@ -3,18 +3,9 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { CodeContent } from "../type/content";
 import styles from "./index.module.scss";
 import { materialLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { materialDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 interface PostCodeProps {
   code: CodeContent;
-  /**
-export interface CodeContent {
-  type: "code";
-  // tuple: [language, content]
-  metadata: Array<[language: string, content: string]>;
-}
-
-   */
 }
 
 // 多语言代码块
@@ -40,8 +31,9 @@ const PostCode: FunctionComponent<PostCodeProps> = ({ code }) => {
       {/* TODO: 优化几个语言的高亮效果 */}
       <SyntaxHighlighter
         language={activeCode[0]}
-        style={materialDark}
-        customStyle={{ margin: 0 }}
+        style={materialLight}
+        customStyle={{ margin: 0, fontSize: "18px" }}
+        PreTag={"div"}
       >
         {activeCode[1]}
       </SyntaxHighlighter>

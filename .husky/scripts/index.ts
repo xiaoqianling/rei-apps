@@ -7,7 +7,7 @@ export function getCommitMsg(): string {
   return execSync("git log -1 --pretty=%B").toString().trim();
 }
 
-// 获取受影响的包（假设你使用 pnpm）
+// 获取受影响的包
 const getChangedPackages = (): string[] => {
   const isWindows = process.platform === "win32";
 

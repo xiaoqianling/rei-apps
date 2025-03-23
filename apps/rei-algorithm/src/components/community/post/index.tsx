@@ -11,6 +11,7 @@ import Tag from "./tag";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import PostTip from "../tip";
+import { getMockPost } from "@/src/api/post";
 
 interface PostProps {
   post: BlogPost;
@@ -21,9 +22,24 @@ interface Heading {
   offsetTop: number;
 }
 
-const Post: FunctionComponent<PostProps> = ({ post }) => {
+const Post: FunctionComponent<PostProps> = ({}) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [post, setPost] = useState<BlogPost | null>(null);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const data = await getMockPost();
+        console.log(data);
+        setPost(data);
+      } catch (err) {
+      } finally {
+      }
+    };
+
+    fetchPost();
+  }, []);
 
   // 获取所有h1标题元素及其位置
   useEffect(() => {
@@ -35,12 +51,13 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
     setHeadings(headingData);
   }, [post]);
 
-  const content = post.contents.map((item, index) => {
+  const content = post?.contents.map((item, index) => {
     switch (item.type) {
       case "markdown":
         return <PostMarkdown markdown={item} key={index} />;
       case "code":
-        return <PostCode code={item} key={index} />;
+        // return <PostCode code={item} key={index} />;
+        break;
       case "tip":
         return <PostTip tip={item} key={index} />;
       default:
@@ -65,22 +82,20 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
         ))}
       </div>
       <div className={styles.main}>
-        <header>{post.title}</header>
+        <header>{post?.title}</header>
         <hr />
         <div className={styles.info}>
           <Tooltip content="作者" className={styles.author}>
             <FaUser />
-            <span>{post.username}</span>
+            <span>{post?.username}</span>
           </Tooltip>
           <Tooltip content="创建时间" className={styles.createAt}>
             <MdOutlineDateRange size={22} />
-            <span>{post.createdAt.toLocaleString()}</span>
+            <span>{post?.createdAt.toLocaleString()}</span>
           </Tooltip>
           <Tooltip content="标签" className={styles.tag}>
             <LuTag size={24} />
-            {post.tags.map((tag, index) => (
-              <Tag key={index} tag={tag}></Tag>
-            ))}
+            {post?.tags.map((tag, index) => <Tag key={index} tag={tag}></Tag>)}
           </Tooltip>
         </div>
         <hr />

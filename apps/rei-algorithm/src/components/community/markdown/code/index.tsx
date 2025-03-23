@@ -18,7 +18,12 @@ const MarkdownCode: FunctionComponent<MarkdownCodeProps> = ({
 }) => {
   const match = /language-(\w+)/.exec(className || "");
   const code = match ? (
-    <SyntaxHighlighter style={materialLight} language={match[1]} PreTag="div">
+    <SyntaxHighlighter
+      style={materialLight}
+      customStyle={{ fontSize: "18px" }}
+      language={match[1]}
+      PreTag="div"
+    >
       {String(children).replace(/\n$/, "")}
     </SyntaxHighlighter>
   ) : (
