@@ -13,12 +13,16 @@
   transition: background-color 0.1s ease-in-out;
 }
 
+// 透明背景->渐变背景
 .header_linear {
   background-color: rgba($color: $header-background-color, $alpha: 0.99);
 }
 
 .main {
   height: calc(100vh - 4rem);
+}
+
+.main_linear {
   overflow: auto;
 
   // 自定义滚动条

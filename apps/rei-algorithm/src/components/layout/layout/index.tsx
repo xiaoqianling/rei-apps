@@ -59,7 +59,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ header }) => {
       </header>
       {/* {children} */}
       {/* 主页面路由相关 */}
-      <div className={styles.main}>
+      <div className={`${styles.main} ${scroll ? styles.main_linear : ""}`}>
         <Outlet />
       </div>
     </div>

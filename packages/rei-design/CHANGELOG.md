@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.8
+
+### Patch Changes
+
+- feat: 添加Toast组件&美化markdown
+
 ## 1.0.7
 
 ### Patch Changes

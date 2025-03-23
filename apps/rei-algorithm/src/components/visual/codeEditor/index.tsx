@@ -1,3 +1,4 @@
+import { useToast } from "rei-design/toast";
 import { VscRunAll } from "react-icons/vsc";
 import { TbFreezeRow } from "react-icons/tb";
 import {
@@ -36,6 +37,7 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
     const viewRef = useRef<EditorView>();
     const [output, setOutput] = useState<string>("");
     const [consoleVisible, openConsole, closeConsole] = useOpenState(false);
+    const [showToast, ToastComponent] = useToast();
 
     useImperativeHandle(ref, () => ({
       blur: () => {
@@ -76,7 +78,13 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
     };
 
     const handleCopy = () => {
-      copyToClipboard(viewRef.current?.state.doc.toString() || "");
+      copyToClipboard(viewRef.current?.state.doc.toString() || "")
+        .then(() => {
+          showToast({ message: "复制成功", position: "top" });
+        })
+        .catch(() => {
+          showToast({ message: "复制失败" });
+        });
     };
 
     // 处理快捷键
@@ -117,12 +125,13 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
 
     return (
       <div className={styles.container}>
+        <ToastComponent />
         <header>
           <span
             className={styles.title}
             data-title="示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码"
           >
-            示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码
+            示例代码: 展示代码执行、特定注解、可视化联动能力
           </span>
           {/* 一组操作 */}
           <div className={styles.operation}>

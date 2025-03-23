@@ -1,0 +1,118 @@
+.toast {
+  position: fixed;
+  padding: 16px;
+  border-radius: 4px;
+  color: #fff;
+  z-index: 1000;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.toast_content {
+  display: flex;
+  align-items: center;
+}
+
+/* 动画 */
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/* 动画优化 */
+@keyframes slideInTop {
+  from {
+    top: -100px;
+    opacity: 0; /* 添加透明度变化 */
+  }
+  to {
+    top: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 20px;
+    opacity: 1;
+  }
+}
+
+.top,
+.top-left,
+.top-right {
+  animation: slideInTop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 调整时间和缓动函数 */
+}
+
+.bottom,
+.bottom-left,
+.bottom-right {
+  animation: slideInBottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* 调整时间和缓动函数 */
+}
+
+/* 位置样式 */
+.top {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%); /* 只保留水平居中 */
+}
+
+.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.top,
+.top-left,
+.top-right {
+  animation-name: slideInTop;
+}
+
+.bottom {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.bottom,
+.bottom-left,
+.bottom-right {
+  animation-name: slideInBottom;
+}
+
+/* 类型样式 */
+.success {
+  background-color: #4caf50;
+  border: #29942c 2px solid;
+}
+
+.warn {
+  background-color: #ff9800;
+  border: #d48600 2px solid;
+}
+
+.error {
+  background-color: #f44336;
+  border: #d43226 2px solid;
+}

@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.18
+
+### Patch Changes
+
+- feat: 添加Toast组件&美化markdown
+- Updated dependencies
+  - rei-design@1.0.8
+
 ## 1.2.17
 
 ### Patch Changes
