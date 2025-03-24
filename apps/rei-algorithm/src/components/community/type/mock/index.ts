@@ -1,3 +1,5 @@
+import { ContentTypes } from "../content/content";
+import { TipLevelsTypes } from "../content/tipContent";
 import { BlogPost } from "../post";
 import { TagTypes } from "../tag";
 
@@ -75,7 +77,7 @@ export const post1: BlogPost = {
   userLink: "/user/react-expert",
   contents: [
     {
-      type: "markdown",
+      type: ContentTypes.MARKDOWN,
       content: `
 # React Hooks 全面指南
 
@@ -168,33 +170,31 @@ function ParentComponent() {
       `,
     },
     {
-      type: "tip",
+      type: ContentTypes.TIP,
       content: "使用Hooks时，请确保遵守Hooks的规则，特别是在条件语句和循环中。",
-      level: "tip",
+      level: TipLevelsTypes.TIP,
     },
     {
-      type: "tip",
+      type: ContentTypes.TIP,
       content: "过度使用useEffect可能导致性能问题，请谨慎使用。",
-      level: "warning",
+      level: TipLevelsTypes.WARNING,
     },
     {
-      type: "tip",
+      type: ContentTypes.TIP,
       content: "在类组件中不能直接使用Hooks，请考虑重构为函数组件。",
-      level: "error",
+      level: TipLevelsTypes.ERROR,
     },
     {
-      type: "code",
+      type: ContentTypes.CODE,
       metadata: [
-        ["javascript", "const [state, setState] = useState(initialState);"],
-        [
-          "typescript",
-          "const [state, setState] = useState<Type>(initialState);",
-        ],
-        [
-          "react",
-          "function MyComponent() {\n  const [count, setCount] = useState(0);\n  return <div>{count}</div>;\n}",
-        ],
-        ["react-native", "const [isLoading, setIsLoading] = useState(false);"],
+        {
+          language: "javascript",
+          code: "console.log('Hello, World!');",
+        },
+        {
+          language: "python",
+          code: "print('Hello, World!')",
+        },
       ],
     },
   ],

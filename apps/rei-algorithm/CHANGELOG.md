@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.22
+
+### Patch Changes
+
+- feat: 优化markdown&添加折叠文本块
+
 ## 1.2.21
 
 ### Patch Changes

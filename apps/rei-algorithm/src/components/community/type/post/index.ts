@@ -1,4 +1,4 @@
-import { BlogContent } from "../content";
+import { BlogContent } from "../content/content";
 import { TagTypes } from "../tag";
 
 export interface BlogPost {

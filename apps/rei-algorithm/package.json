@@ -1,6 +1,6 @@
 {
   "name": "rei-algorithm",
-  "version": "1.2.21",
+  "version": "1.2.22",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -40,6 +40,7 @@
     "is-hotkey": "^0.2.0",
     "lodash": "~4.17.21",
     "lottie-react": "^2.4.1",
+    "prism-react-renderer": "^2.4.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^5.5.0",
@@ -47,7 +48,6 @@
     "react-redux": "9.2.0",
     "react-router": "7.1.1",
     "react-router-dom": "7.1.1",
-    "react-syntax-highlighter": "^15.6.1",
     "rehype-slug": "^6.0.0",
     "rei-design": "workspace:*",
     "slate": "^0.112.0",
@@ -61,7 +61,6 @@
     "@types/node": "22.10.2",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@types/react-syntax-highlighter": "^15.5.13",
     "@vitejs/plugin-react": "4.3.4",
     "@vitest/browser": "^3.0.5",
     "babel-plugin-import": "^1.13.8",
