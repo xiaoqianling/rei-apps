@@ -1,6 +1,6 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import styles from "./index.module.scss";
-import GradientText from "@/src/components/GradientText/GradientText";
+import GradientText from "@/src/components/common/GradientText/GradientText";
 
 function MainPage() {
   return (

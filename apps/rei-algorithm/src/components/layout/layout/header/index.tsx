@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import HeaderLink from "./header-link";
 import Github from "@icon-park/react/lib/icons/Github";
-import ReiLOGO from "@/src/components/custom/logo";
+import ReiLOGO from "@/src/components/common/logo";
 import { ReactElement, ReactNode } from "react";
 
 interface Props {

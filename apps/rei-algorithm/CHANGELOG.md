@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.23
+
+### Patch Changes
+
+- chore: 调整目录&联调后端
+
 ## 1.2.22
 
 ### Patch Changes

@@ -67,7 +67,6 @@ const PostMarkdown: FunctionComponent<PostMarkdownProps> = ({ markdown }) => {
             Object.keys(props).length === 0,
             `[PostMarkDown] props should be empty ${props}`,
           );
-
           return <MarkdownCode className={className}>{children}</MarkdownCode>;
         },
       }}

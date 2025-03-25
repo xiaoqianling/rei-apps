@@ -1,19 +1,10 @@
 import styles from "./index.module.scss";
 import { FunctionComponent } from "react";
 import { BlogPost } from "../../type/post";
-import PostCode from "../code";
-import PostMarkdown from "../markdown";
-import Tooltip from "rei-design/tooltip";
-import { FaUser } from "react-icons/fa";
-import { MdOutlineDateRange } from "react-icons/md";
-import { LuTag } from "react-icons/lu";
-import Tag from "./tag";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
-import PostTip from "../tip";
 import { getMockPost } from "@/src/api/post";
-import PostFoldBlock from "../foldBlock";
-import { renderContents } from "../../util/render";
+import PostContent from "./postContent";
 
 interface PostProps {
   post: BlogPost;
@@ -53,8 +44,6 @@ const Post: FunctionComponent<PostProps> = ({}) => {
     setHeadings(headingData);
   }, [post]);
 
-  const content = renderContents(post?.contents ?? []);
-
   return (
     <div className={styles.container}>
       <div className={styles.anchor}>
@@ -71,26 +60,7 @@ const Post: FunctionComponent<PostProps> = ({}) => {
           </NavLink>
         ))}
       </div>
-      <div className={styles.main}>
-        <header>{post?.title}</header>
-        <hr />
-        <div className={styles.info}>
-          <Tooltip content="作者" className={styles.author}>
-            <FaUser />
-            <span>{post?.username}</span>
-          </Tooltip>
-          <Tooltip content="创建时间" className={styles.createAt}>
-            <MdOutlineDateRange size={22} />
-            <span>{post?.createdAt.toLocaleString()}</span>
-          </Tooltip>
-          <Tooltip content="标签" className={styles.tag}>
-            <LuTag size={24} />
-            {post?.tags.map((tag, index) => <Tag key={index} tag={tag}></Tag>)}
-          </Tooltip>
-        </div>
-        <hr />
-        <div className={styles.content}>{content}</div>
-      </div>
+      {post && <PostContent post={post} />}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import styles from "./index.module.scss";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import ReiButton from "@/src/components/custom/button";
+import ReiButton from "@/src/components/common/button";
 
 function ReiNotFound() {
   return (

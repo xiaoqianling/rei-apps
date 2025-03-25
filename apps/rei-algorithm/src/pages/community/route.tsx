@@ -1,5 +1,5 @@
 import { Post } from "@/src/components/community";
-import { MockPost, post1 } from "@/src/components/community/type/mock";
+import { post1 } from "@/src/components/community/type/mock";
 import { RouteObject } from "react-router";
 
 export const communityRouter: RouteObject[] = [

@@ -3,73 +3,6 @@ import { TipLevelsTypes } from "../content/tipContent";
 import { BlogPost } from "../post";
 import { TagTypes } from "../tag";
 
-export const MockPost: BlogPost = {
-  id: "mock-id",
-  title: "没有Manus邀请码？试试免邀请码的MGX或者开源的OpenManus吧",
-  username: "mock-username",
-  userLink: "mock-userLink",
-  contents: [
-    {
-      type: "markdown",
-      content: `
-  # 一级标题
-  # 一级标题
-  这是一个段落。
-  > 这是一个引用。
-  - 这是一个无序列表。
-  - 这是第二个项目。
-  - 这是第三个项目。
-    - 这是一个嵌套的项目。
-    
-  这是一个段落。
-  ## 二级标题
-  ### 三级标题
-  #### 四级标题
-  这是一个段落。
-  > 这是一个引用。
-  - 这是一个无序列表。
-  - 这是第二个项目。
-  - 这是第三个项目。
-    - 这是一个嵌套的项目。
-  \`\`\` javascript
-  public class HelloWorld {
-    public static void main(String[] args) {
-      System.out.println("Hello, World!");
-    } 
-  }
-  \`\`\`
-      `,
-    },
-    {
-      type: "tip",
-      content: "这是一个提示。",
-      level: "tip",
-    },
-    {
-      type: "tip",
-      content: "这是一个警告。",
-      level: "warning",
-    },
-    {
-      type: "tip",
-      content: "这是一个禁止。",
-      level: "error",
-    },
-    {
-      type: "code",
-      metadata: [
-        ["javascript", "console.log('Hello, World!');"],
-        ["python", "print('Hello, World!')"],
-        ["java", "System.out.println('Hello, World!');"],
-        ["csharp", "Console.WriteLine('Hello, World!');"],
-      ],
-    },
-  ],
-  createdAt: new Date("2022-01-01"),
-  updatedAt: new Date(),
-  tags: [TagTypes.TECH, TagTypes.BUG],
-};
-
 export const post1: BlogPost = {
   id: "mock-id-2",
   title: "深入理解React Hooks：从基础到高级用法",
@@ -195,10 +128,110 @@ function ParentComponent() {
           language: "python",
           code: "print('Hello, World!')",
         },
+        {
+          language: "java",
+          code: "System.out.println('Hello, World!');",
+        },
       ],
     },
   ],
   createdAt: new Date("2023-01-01"),
+  updatedAt: new Date(),
+  tags: [TagTypes.TECH],
+};
+
+export const AlgorithmStationIntro: BlogPost = {
+  id: "algorithm-station-intro",
+  title: "欢迎来到算法站：你的算法学习与实践平台",
+  username: "admin",
+  userLink: "/user/admin",
+  contents: [
+    {
+      type: ContentTypes.MARKDOWN,
+      content: `
+# 欢迎来到算法站
+
+## 关于我们
+算法站是一个专注于算法学习与实践的在线平台。我们致力于为开发者、学生和算法爱好者提供一个交流、学习和提升的社区。
+
+## 主要功能
+
+### 1. 算法学习
+- 提供从基础到高级的算法教程
+- 涵盖数据结构、算法设计、复杂度分析等内容
+- 丰富的代码示例和实践练习
+
+### 2. 在线编程
+- 支持多种编程语言（JavaScript, Python, Java, C++等）
+- 实时代码运行和调试
+- 自动测试用例验证
+
+### 3. 社区交流
+- 分享算法学习心得
+- 讨论算法问题与解决方案
+- 参与算法挑战和竞赛
+
+### 4. 资源中心
+- 精选算法书籍推荐
+- 实用工具和插件
+- 面试题库和技巧分享
+      `,
+    },
+    {
+      type: ContentTypes.TIP,
+      content: "建议初学者从基础算法开始学习，逐步提升难度。",
+      level: TipLevelsTypes.TIP,
+    },
+    {
+      type: ContentTypes.TIP,
+      content: "在提交代码前，请确保已经充分测试，避免不必要的错误。",
+      level: TipLevelsTypes.WARNING,
+    },
+    {
+      type: ContentTypes.TIP,
+      content: "请勿在社区发布与算法无关的内容或广告，违者将被封禁。",
+      level: TipLevelsTypes.ERROR,
+    },
+    {
+      type: ContentTypes.CODE,
+      metadata: [
+        {
+          language: "python",
+          code: "def hello_world():\n    print('Hello, Algorithm Station!')",
+        },
+        {
+          language: "javascript",
+          code: "console.log('Welcome to Algorithm Station!')",
+        },
+        {
+          language: "java",
+          code: "public class HelloWorld {\n    public static void main(String[] args) {\n        System.out.println('Hello, Algorithm Station!');\n    }\n}",
+        },
+        {
+          language: "csharp",
+          code: "using System;\n\npublic class HelloWorld {\n    public static void Main() {\n        Console.WriteLine('Hello, Algorithm Station!');\n    }\n}",
+        },
+      ],
+    },
+    {
+      type: ContentTypes.MARKDOWN,
+      content: `
+## 如何开始？
+
+1. 注册账号并完善个人信息
+2. 选择适合你的学习路径
+3. 参与社区讨论和算法挑战
+4. 持续学习和提升你的算法能力
+
+## 联系我们
+如有任何问题或建议，请通过以下方式联系我们：
+- 邮箱：support@algorithmstation.com
+- 官方论坛：[https://forum.algorithmstation.com](https://forum.algorithmstation.com "外链")
+- 社交媒体：@AlgorithmStation
+      `,
+    },
+  ],
+  createdAt: new Date("2023-10-01"),
   updatedAt: new Date(),
   tags: [TagTypes.TECH],
 };

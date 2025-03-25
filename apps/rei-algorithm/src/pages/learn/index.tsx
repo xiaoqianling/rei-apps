@@ -1,5 +1,5 @@
 import styles from "./index.module.scss";
-import DocsSidebar from "@/src/components/sidebar";
+import DocsSidebar from "@/src/components/common/sidebar";
 import { Outlet } from "react-router-dom";
 import { learnMenuData } from "./route";
 
@@ -10,11 +10,6 @@ function LearnPage() {
         <DocsSidebar menuData={learnMenuData} prefix="/learn" />
       </div>
       <div className={styles.right}>
-        {/* <TestMDX
-          components={{
-            MyComponent: <div>MyComponent</div>,
-          }}
-        /> */}
         <Outlet />
       </div>
     </div>
