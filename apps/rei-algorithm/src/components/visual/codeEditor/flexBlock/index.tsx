@@ -2,8 +2,10 @@ import { IoClose } from "react-icons/io5";
 import { FaChevronRight } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { FunctionComponent, useState } from "react";
+import classNames from "classnames";
 
 interface FlexBlockProps {
+  className?: string;
   // 是否展示
   show?: boolean;
   // 打开或收起
@@ -21,6 +23,7 @@ interface FlexBlockProps {
  * 可折叠容器
  */
 const FlexBlock: FunctionComponent<FlexBlockProps> = ({
+  className,
   open,
   text,
   show,
@@ -40,9 +43,12 @@ const FlexBlock: FunctionComponent<FlexBlockProps> = ({
   };
 
   const block = (
-    <div className={styles.container}>
+    <div className={classNames(className, styles.container)}>
       <header className={styles.header}>
-        <FaChevronRight onClick={handleFoldClick} />
+        <FaChevronRight
+          onClick={handleFoldClick}
+          className={classNames(styles.arrow, isOpen ? styles.openArrow : "")}
+        />
         <span>控制台输出</span>
         <IoClose size={22} onClick={onClose} />
       </header>

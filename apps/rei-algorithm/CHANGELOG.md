@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.26
+
+### Patch Changes
+
+- chore: 微调编辑器样式
+- Updated dependencies
+  - rei-design@1.0.10
+
 ## 1.2.25
 
 ### Patch Changes

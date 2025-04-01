@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.10
+
+### Patch Changes
+
+- chore: 微调编辑器样式
+
 ## 1.0.9
 
 ### Patch Changes

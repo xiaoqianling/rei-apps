@@ -1,11 +1,7 @@
 import { useToast } from "rei-design/toast";
 import { VscRunAll } from "react-icons/vsc";
 import { TbFreezeRow } from "react-icons/tb";
-import {
-  LuClipboardCopy,
-  LuPanelLeftOpen,
-  LuPanelLeftClose,
-} from "react-icons/lu";
+import { LuClipboardCopy, LuPanelLeftOpen } from "react-icons/lu";
 import { MdCode, MdCodeOff } from "react-icons/md";
 import ReiTooltip from "rei-design/tooltip";
 import styles from "./index.module.scss";
@@ -127,10 +123,7 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
       <div className={styles.container}>
         <ToastComponent />
         <header>
-          <span
-            className={styles.title}
-            data-title="示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码示例代码"
-          >
+          <span className={styles.title}>
             示例代码: 展示代码执行、特定注解、可视化联动能力
           </span>
           {/* 一组操作 */}

@@ -40,20 +40,30 @@
     overflow: auto;
     flex-grow: 1;
 
-    // 编辑器样式
-    .cm-content {
-      font-size: 14px;
-      color: #333;
-      background-color: #f5f5f5;
-    }
+    // 编辑器样式 保留原始类名
+    :global {
+      .cm-content {
+        // background-color: #f5f5f5;
+      }
 
-    .cm-gutters {
-      background-color: #f0f0f0;
-      color: #999;
-    }
+      // 行号
+      .cm-gutters {
+        background-color: #f0f0f0;
+        -webkit-user-select: none;
+        user-select: none;
+      }
 
-    .cm-activeLine {
-      background-color: #e8f2ff;
+      .cm-activeLine {
+        background-color: #e8f2ff;
+      }
+
+      .cm-editor {
+        border-bottom: 1px solid black;
+      }
+
+      .cm-focused {
+        outline: none;
+      }
     }
   }
 
