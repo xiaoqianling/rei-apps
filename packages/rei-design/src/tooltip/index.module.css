@@ -11,6 +11,8 @@
   font-size: 14px;
   white-space: nowrap;
   z-index: 1000;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .tooltip.top {
   bottom: 100%;

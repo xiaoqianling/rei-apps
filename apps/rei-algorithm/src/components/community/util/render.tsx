@@ -5,6 +5,7 @@ import PostMarkdown from "../components/markdown";
 import PostTip from "../components/tip";
 import { BlogContent } from "../type/content";
 import PostMermaid from "../components/mermaid";
+import { TreeVisualizer, VisualPanel } from "../../visual";
 
 export function renderContents(contents: BlogContent[]): ReactNode {
   return contents.map((item, index) => {
@@ -26,6 +27,8 @@ export function renderContents(contents: BlogContent[]): ReactNode {
         );
       case "mermaid":
         return <PostMermaid content={item.content} />;
+      case "visual":
+        return <VisualPanel />;
       default:
         return null;
     }

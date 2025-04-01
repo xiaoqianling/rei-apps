@@ -1,5 +1,12 @@
 # rei-todo
 
+## 1.1.8
+
+### Patch Changes
+
+- Updated dependencies
+  - rei-design@1.0.9
+
 ## 1.1.7
 
 ### Patch Changes

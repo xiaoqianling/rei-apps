@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.25
+
+### Patch Changes
+
+- feat: 支持文档嵌入可视化组件
+- Updated dependencies
+  - rei-design@1.0.9
+
 ## 1.2.24
 
 ### Patch Changes

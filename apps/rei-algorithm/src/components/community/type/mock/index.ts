@@ -181,6 +181,10 @@ C -->|One| D[Result 1]
 C -->|Two| E[Result 2]
       `,
     },
+    {
+      type: ContentTypes.VISUAL,
+      content: "",
+    },
   ],
   createdAt: new Date("2023-01-01"),
   updatedAt: new Date(),

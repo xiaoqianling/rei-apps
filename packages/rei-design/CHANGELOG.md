@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.9
+
+### Patch Changes
+
+- feat: 支持文档嵌入可视化组件
+
 ## 1.0.8
 
 ### Patch Changes

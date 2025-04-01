@@ -1,3 +1,4 @@
+import { VisualPanelContent } from "../../visual/type";
 import { CodeContent } from "../components/codeBlock/type";
 import { FoldBlockContent } from "../components/foldBlock/type";
 import { MarkdownContent } from "../components/markdown/type";
@@ -10,7 +11,8 @@ export type BlogContent =
   | CodeContent
   | TipContent
   | FoldBlockContent
-  | MermaidContent;
+  | MermaidContent
+  | VisualPanelContent;
 
 export enum ContentTypes {
   // 已实现
@@ -19,7 +21,7 @@ export enum ContentTypes {
   TIP = "tip",
   FOLD = "fold",
   MERMAID = "mermaid",
+  VISUAL = "visual", // 可视化内容
 
   // TODO:
-  VISUAL = "visual", // 可视化内容
 }
