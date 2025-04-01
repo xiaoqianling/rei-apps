@@ -3,7 +3,7 @@ import styles from "./index.module.scss";
 import { FunctionComponent } from "react";
 import { IoWarning } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
-import { TipContent } from "../../type/content/tipContent";
+import { TipContent } from "./type";
 
 interface PostTipProps {
   tip: TipContent;

@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import { FunctionComponent } from "react";
-import { BlogPost } from "../../type/post";
+import { BlogPost } from "../../type";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { getMockPost } from "@/src/api/post";
@@ -15,23 +15,23 @@ interface Heading {
   offsetTop: number;
 }
 
-const Post: FunctionComponent<PostProps> = ({}) => {
+const Post: FunctionComponent<PostProps> = ({ post }) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [post, setPost] = useState<BlogPost | null>(null);
+  // const [post, setPost] = useState<BlogPost | null>(null);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const data = await getMockPost();
         console.log("data", data);
-        setPost(data);
+        // setPost(data);
       } catch (err) {
       } finally {
       }
     };
 
-    fetchPost();
+    // fetchPost();
   }, []);
 
   // 获取所有h1标题元素及其位置

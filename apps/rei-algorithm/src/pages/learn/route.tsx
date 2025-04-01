@@ -1,6 +1,6 @@
 import PostContent from "@/src/components/community/components/post/postContent";
 import { AlgorithmStationIntro } from "@/src/components/community/type/mock";
-import { AboutPage, AllInOnePage, DesignPage, StartPage } from "@/src/docs";
+import { AllInOnePage } from "@/src/docs";
 import { RouteObject } from "react-router-dom";
 import { MenuItem } from "rei-design/menu/type";
 

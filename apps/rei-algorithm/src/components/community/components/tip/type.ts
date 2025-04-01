@@ -1,4 +1,4 @@
-import { ContentTypes } from "./content";
+import { ContentTypes } from "../../type/content";
 
 // 提示组件
 export enum TipLevelsTypes {

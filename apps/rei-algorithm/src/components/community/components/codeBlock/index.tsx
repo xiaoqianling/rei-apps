@@ -2,7 +2,7 @@ import { FunctionComponent, useState } from "react";
 import styles from "./index.module.scss";
 import { Highlight, themes } from "prism-react-renderer";
 import classNames from "classnames";
-import { CodeContent } from "../../type/content/codeBlockContent";
+import { CodeContent } from "./type";
 interface PostCodeProps {
   code: CodeContent;
 }

@@ -1,7 +1,7 @@
-import { ContentTypes } from "../content/content";
-import { TipLevelsTypes } from "../content/tipContent";
-import { BlogPost } from "../post";
-import { TagTypes } from "../tag";
+import { ContentTypes } from "../content";
+import { TipLevelsTypes } from "../../components/tip/type";
+import { BlogPost } from "..";
+import { TagTypes } from "../../components/post/tag/type";
 
 export const post1: BlogPost = {
   id: "mock-id-2",
@@ -12,6 +12,18 @@ export const post1: BlogPost = {
     {
       type: ContentTypes.MARKDOWN,
       content: `
+
+# React Hooks 全面指南
+
+
+graph TD
+    A[可视化核心] --> B[自由构建模式]
+    A --> C[算法演示模式]
+    B --> D[节点交互系统]
+    B --> E[动态渲染引擎]
+    C --> F[算法执行器]
+    C --> G[动画控制器]
+
 # React Hooks 全面指南
 
 ## 什么是React Hooks？
@@ -133,6 +145,41 @@ function ParentComponent() {
           code: "System.out.println('Hello, World!');",
         },
       ],
+    },
+    {
+      type: ContentTypes.FOLD,
+      content: "测试文本",
+      title: "折叠标题",
+    },
+    {
+      type: ContentTypes.MARKDOWN,
+      content: "### Mermaid支持！\n #### graph TD",
+    },
+    {
+      type: ContentTypes.MERMAID,
+      content: `
+graph TD
+  A[可视化核心] --> B[自由构建模式]
+  A --> C[算法演示模式]
+  B --> D[节点交互系统]
+  B --> E[动态渲染引擎]
+  C --> F[算法执行器]
+  C --> G[动画控制器]
+  `,
+    },
+    {
+      type: ContentTypes.MARKDOWN,
+      content: "#### flowchart LR",
+    },
+    {
+      type: ContentTypes.MERMAID,
+      content: `
+flowchart LR
+A[Hard] -->|Text| B(Round)
+B --> C{Decision}
+C -->|One| D[Result 1]
+C -->|Two| E[Result 2]
+      `,
     },
   ],
   createdAt: new Date("2023-01-01"),

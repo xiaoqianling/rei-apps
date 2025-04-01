@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
-import PostCode from "../components/code";
+import PostCode from "../components/codeBlock";
 import PostFoldBlock from "../components/foldBlock";
 import PostMarkdown from "../components/markdown";
 import PostTip from "../components/tip";
-import { BlogContent } from "../type/content/content";
+import { BlogContent } from "../type/content";
+import PostMermaid from "../components/mermaid";
 
 export function renderContents(contents: BlogContent[]): ReactNode {
   return contents.map((item, index) => {
@@ -23,6 +24,8 @@ export function renderContents(contents: BlogContent[]): ReactNode {
             open={false}
           />
         );
+      case "mermaid":
+        return <PostMermaid content={item.content} />;
       default:
         return null;
     }

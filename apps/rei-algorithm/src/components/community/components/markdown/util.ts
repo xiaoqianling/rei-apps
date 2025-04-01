@@ -1,4 +1,4 @@
-import { BlogPost } from "../../type/post";
+import { BlogPost } from "../../type";
 
 export interface Heading {
   level: number; // 标题级别 (1, 2, 3)

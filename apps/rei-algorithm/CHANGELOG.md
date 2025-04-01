@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.24
+
+### Patch Changes
+
+- feat: 支持mermaid
+
 ## 1.2.23
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import { ContentTypes } from "./content";
+import { ContentTypes } from "../../type/content";
 
 // 多语言代码组件(区别于markdown的code)
 export interface CodeContent {

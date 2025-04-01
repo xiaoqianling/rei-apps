@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import { FunctionComponent } from "react";
-import { TagTypes } from "../../../type/tag";
+import { TagTypes } from "./type";
 
 interface TagProps {
   tag: TagTypes;

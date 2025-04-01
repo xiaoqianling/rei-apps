@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect } from "react";
 import Markdown from "react-markdown";
 import { useLocation, useNavigate } from "react-router-dom";
 import rehypeSlug from "rehype-slug";
-import { MarkdownContent } from "../../type/content/content";
+import { MarkdownContent } from "../../type/content";
 import styles from "./index.module.scss";
 import MarkdownCode from "./code";
 

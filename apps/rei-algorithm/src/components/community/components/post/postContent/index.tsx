@@ -2,7 +2,7 @@ import { FaUser } from "react-icons/fa";
 import { LuTag } from "react-icons/lu";
 import { MdOutlineDateRange } from "react-icons/md";
 import Tooltip from "rei-design/tooltip";
-import { BlogPost } from "../../../type/post";
+import { BlogPost } from "../../../type";
 import Tag from "../tag";
 import styles from "./index.module.scss";
 import { FunctionComponent } from "react";
@@ -14,6 +14,7 @@ interface PostContentProps {
   showInfo?: boolean;
 }
 
+// 渲染博客标题+主体内容
 const PostContent: FunctionComponent<PostContentProps> = ({
   post,
   showInfo,
