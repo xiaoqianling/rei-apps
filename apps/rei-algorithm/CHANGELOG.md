@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.27
+
+### Patch Changes
+
+- feat: 社区布局完成&路由解析
+
 ## 1.2.26
 
 ### Patch Changes

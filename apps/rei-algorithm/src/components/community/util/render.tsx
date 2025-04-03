@@ -26,9 +26,9 @@ export function renderContents(contents: BlogContent[]): ReactNode {
           />
         );
       case "mermaid":
-        return <PostMermaid content={item.content} />;
+        return <PostMermaid content={item.content} key={index} />;
       case "visual":
-        return <VisualPanel />;
+        return <VisualPanel key={index} />;
       default:
         return null;
     }

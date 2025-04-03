@@ -9,6 +9,7 @@ import {
   forwardRef,
   useEffect,
   useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -22,6 +23,7 @@ import { copyToClipboard } from "@/src/util/dom";
 import { CustomAutoCompletion } from "@/src/core/engine/editor/autocompletion";
 import isHotkey from "is-hotkey";
 import { useOpenState } from "@/src/hooks";
+import ReiSplit from "rei-design/split";
 
 export interface CodeEditorRef {
   blur: () => void;
@@ -119,9 +121,8 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
       };
     }, [initialValue, onChange]);
 
-    return (
-      <div className={styles.container}>
-        <ToastComponent />
+    const topElement = (
+      <>
         <header>
           <span className={styles.title}>
             示例代码: 展示代码执行、特定注解、可视化联动能力
@@ -168,9 +169,27 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
           </div>
         </header>
         <div className={styles.editor} ref={editorRef} />
-        {consoleVisible && (
-          <FlexBlock open={true} text={output} show onClose={closeConsole} />
-        )}
+      </>
+    );
+
+    return (
+      <div className={styles.container}>
+        <ToastComponent />
+        <ReiSplit
+          range={[50, 90]}
+          firstElement={topElement}
+          secondElement={
+            consoleVisible && (
+              <FlexBlock
+                open={true}
+                text={output}
+                show
+                onClose={closeConsole}
+              />
+            )
+          }
+          direction="vertical"
+        />
       </div>
     );
   },

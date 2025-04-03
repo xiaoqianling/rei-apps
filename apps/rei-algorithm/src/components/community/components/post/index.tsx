@@ -15,24 +15,11 @@ interface Heading {
   offsetTop: number;
 }
 
+// 把post渲染为一个页面 不负责数据获取
+// TODO: 锚点
 const Post: FunctionComponent<PostProps> = ({ post }) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
-  // const [post, setPost] = useState<BlogPost | null>(null);
-
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const data = await getMockPost();
-        console.log("data", data);
-        // setPost(data);
-      } catch (err) {
-      } finally {
-      }
-    };
-
-    // fetchPost();
-  }, []);
 
   // 获取所有h1标题元素及其位置
   useEffect(() => {
