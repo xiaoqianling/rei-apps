@@ -1,13 +1,12 @@
 import styles from "./index.module.scss";
 import { FunctionComponent } from "react";
-import { BlogPost } from "../../type";
+import { BlogDetail } from "../../type";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
-import { getMockPost } from "@/src/api/post";
-import PostContent from "./postContent";
+import BlogContent from "./blogContent";
 
-interface PostProps {
-  post: BlogPost;
+interface BlogProps {
+  blog: BlogDetail;
 }
 
 interface Heading {
@@ -17,7 +16,7 @@ interface Heading {
 
 // 把post渲染为一个页面 不负责数据获取
 // TODO: 锚点
-const Post: FunctionComponent<PostProps> = ({ post }) => {
+const Blog: FunctionComponent<BlogProps> = ({ blog }) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
 
@@ -29,7 +28,7 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
       offsetTop: heading.offsetTop,
     }));
     setHeadings(headingData);
-  }, [post]);
+  }, [blog]);
 
   return (
     <div className={styles.container}>
@@ -47,9 +46,9 @@ const Post: FunctionComponent<PostProps> = ({ post }) => {
           </NavLink>
         ))}
       </div>
-      {post && <PostContent post={post} />}
+      {blog && <BlogContent blog={blog} />}
     </div>
   );
 };
 
-export default Post;
+export default Blog;

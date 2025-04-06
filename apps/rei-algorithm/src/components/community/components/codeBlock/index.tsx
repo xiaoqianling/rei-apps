@@ -3,12 +3,12 @@ import styles from "./index.module.scss";
 import { Highlight, themes } from "prism-react-renderer";
 import classNames from "classnames";
 import { CodeContent } from "./type";
-interface PostCodeProps {
+interface BlogCodeProps {
   code: CodeContent;
 }
 
 // 多语言代码块
-const PostCode: FunctionComponent<PostCodeProps> = ({ code }) => {
+const BlogCode: FunctionComponent<BlogCodeProps> = ({ code }) => {
   const [activeLangIndex, setActiveLangIndex] = useState(0);
   const activeCode = code.metadata[activeLangIndex].code;
   const language = code.metadata[activeLangIndex].language;
@@ -46,4 +46,4 @@ const PostCode: FunctionComponent<PostCodeProps> = ({ code }) => {
   );
 };
 
-export default PostCode;
+export default BlogCode;

@@ -1,10 +1,10 @@
 import { ContentTypes } from "../content";
 import { TipLevelsTypes } from "../../components/tip/type";
-import { BlogPost } from "..";
-import { TagTypes } from "../../components/post/tag/type";
+import { BlogDetail } from "..";
+import { TagTypes } from "../../components/blog/tag/type";
 
-export const post1: BlogPost = {
-  id: "mock-id-2",
+export const post1: BlogDetail = {
+  pid: "mock-id-2",
   title: "深入理解React Hooks：从基础到高级用法",
   username: "react-expert",
   userLink: "/user/react-expert",
@@ -191,8 +191,8 @@ C -->|Two| E[Result 2]
   tags: [TagTypes.TECH],
 };
 
-export const AlgorithmStationIntro: BlogPost = {
-  id: "algorithm-station-intro",
+export const AlgorithmStationIntro: BlogDetail = {
+  pid: "algorithm-station-intro",
   title: "欢迎来到算法站：你的算法学习与实践平台",
   username: "admin",
   userLink: "/user/admin",

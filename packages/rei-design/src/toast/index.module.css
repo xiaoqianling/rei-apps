@@ -21,24 +21,31 @@
 }
 /* 动画优化 */
 @keyframes slideInTop {
-  from {
+  0% {
     top: -100px;
     opacity: 0;
     /* 添加透明度变化 */
   }
-  to {
-    top: 20px;
+  80% {
+    top: 25px;
     opacity: 1;
+    /* 增加透明度 */
+  }
+  100% {
+    top: 20px;
   }
 }
 @keyframes slideInBottom {
-  from {
+  0% {
     bottom: -100px;
     opacity: 0;
   }
-  to {
-    bottom: 20px;
+  80% {
+    bottom: 25px;
     opacity: 1;
+  }
+  100% {
+    bottom: 20px;
   }
 }
 .top,

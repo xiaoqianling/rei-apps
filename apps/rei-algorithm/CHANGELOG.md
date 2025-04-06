@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.28
+
+### Patch Changes
+
+- feat: 后端联调打通&重定义一系列DTO
+- Updated dependencies
+  - rei-design@1.0.11
+
 ## 1.2.27
 
 ### Patch Changes

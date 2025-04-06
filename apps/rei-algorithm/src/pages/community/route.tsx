@@ -1,8 +1,8 @@
-import { Post } from "@/src/components/community";
 import { post1 } from "@/src/components/community/type/mock";
 import { RouteObject } from "react-router";
 import CommunityPage from ".";
-import PostPage from "./post";
+import BlogPage from "./article";
+import { Blog } from "@/src/components/community";
 
 export const communityRouter: RouteObject[] = [
   {
@@ -16,7 +16,7 @@ export const communityRouter: RouteObject[] = [
   },
   {
     path: "mock",
-    element: <Post post={post1} />,
+    element: <Blog blog={post1} />,
   },
   {
     path: "i",
@@ -29,6 +29,6 @@ export const communityRouter: RouteObject[] = [
   {
     // post/:id 如何获取参数？
     path: "post/:id",
-    element: <PostPage />,
+    element: <BlogPage />,
   },
 ];

@@ -6,11 +6,11 @@ import { MarkdownContent } from "../../type/content";
 import styles from "./index.module.scss";
 import MarkdownCode from "./code";
 
-interface PostMarkdownProps {
+interface BlogMarkdownProps {
   markdown: MarkdownContent;
 }
 
-const PostMarkdown: FunctionComponent<PostMarkdownProps> = ({ markdown }) => {
+const BlogMarkdown: FunctionComponent<BlogMarkdownProps> = ({ markdown }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -76,4 +76,4 @@ const PostMarkdown: FunctionComponent<PostMarkdownProps> = ({ markdown }) => {
   );
 };
 
-export default PostMarkdown;
+export default BlogMarkdown;

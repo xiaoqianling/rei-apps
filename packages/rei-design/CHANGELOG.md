@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.11
+
+### Patch Changes
+
+- feat: 后端联调打通&重定义一系列DTO
+
 ## 1.0.10
 
 ### Patch Changes

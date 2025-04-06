@@ -178,6 +178,7 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
         <ReiSplit
           range={[50, 90]}
           firstElement={topElement}
+          enable={consoleVisible}
           secondElement={
             consoleVisible && (
               <FlexBlock

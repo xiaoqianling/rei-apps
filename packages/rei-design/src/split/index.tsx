@@ -8,6 +8,8 @@ interface ReiSplitProps {
   // firstElement所占空间范围，两个值都取0-100
   range: [number, number];
   onMove?: (position: number) => void;
+  // 是否启用分割器
+  enable?: boolean;
 }
 
 /**
@@ -21,6 +23,7 @@ const ReiSplit: FunctionComponent<ReiSplitProps> = ({
   direction,
   range,
   onMove,
+  enable = true,
 }) => {
   const [splitPosition, setSplitPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -86,20 +89,25 @@ const ReiSplit: FunctionComponent<ReiSplitProps> = ({
       >
         {firstElement}
       </div>
-      <div
-        className={
-          isVertical ? styles.vertical_divider : styles.horizontal_divider
-        }
-        onMouseDown={handleMouseDown}
-      />
-      <div
-        className={styles.half}
-        style={{
-          [isVertical ? "height" : "width"]: `${100 - splitPosition}%`,
-        }}
-      >
-        {secondElement}
-      </div>
+      {enable && (
+        <>
+          {/* 拖动条 */}
+          <div
+            className={
+              isVertical ? styles.vertical_divider : styles.horizontal_divider
+            }
+            onMouseDown={handleMouseDown}
+          />
+          <div
+            className={styles.half}
+            style={{
+              [isVertical ? "height" : "width"]: `${100 - splitPosition}%`,
+            }}
+          >
+            {secondElement}
+          </div>
+        </>
+      )}
     </div>
   );
 };

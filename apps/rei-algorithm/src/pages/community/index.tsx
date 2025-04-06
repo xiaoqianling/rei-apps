@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
-import { BlogPost } from "@/src/components/community/type";
-import { post1 } from "@/src/components/community/type/mock";
-import PostCard from "@/src/components/community/components/post/card";
+import BlogCard from "@/src/components/community/components/blog/card";
+import { getAllBlogs } from "@/src/api/blog";
+import { BlogCardInfo } from "@/src/components/community/type";
 
 function CommunityPage() {
   const navigate = useNavigate();
-  const [posts, setPosts] = useState<BlogPost[]>([post1]);
+  const [blogs, setBlogs] = useState<BlogCardInfo[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   // 获取推荐帖子
   useEffect(() => {
-    // TODO: 调用API获取帖子数据
-    // fetch('/api/posts')
-    //   .then(res => res.json())
-    //   .then(data => setPosts(data));
+    getAllBlogs().then((data) => {
+      setBlogs(data);
+    });
   }, []);
 
   // 处理搜索
@@ -56,8 +55,8 @@ function CommunityPage() {
         <section className={styles.postSection}>
           <h2>推荐帖子</h2>
           <div className={styles.postList}>
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post} />
+            {blogs.map((post) => (
+              <BlogCard key={post.pid} blog={post} />
             ))}
           </div>
         </section>

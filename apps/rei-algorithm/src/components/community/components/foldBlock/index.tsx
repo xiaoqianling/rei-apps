@@ -3,14 +3,14 @@ import styles from "./index.module.scss";
 import { FunctionComponent, useState } from "react";
 import classNames from "classnames";
 
-interface PostFoldBlockProps {
+interface BlogFoldBlockProps {
   title: string;
   // TODO: 内容支持md
   content: string;
   open: boolean;
 }
 
-const PostFoldBlock: FunctionComponent<PostFoldBlockProps> = ({
+const BlogFoldBlock: FunctionComponent<BlogFoldBlockProps> = ({
   title,
   content,
   open: initialOpen,
@@ -42,4 +42,4 @@ const PostFoldBlock: FunctionComponent<PostFoldBlockProps> = ({
   );
 };
 
-export default PostFoldBlock;
+export default BlogFoldBlock;

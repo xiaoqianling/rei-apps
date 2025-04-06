@@ -5,11 +5,11 @@ import { IoWarning } from "react-icons/io5";
 import { VscError } from "react-icons/vsc";
 import { TipContent } from "./type";
 
-interface PostTipProps {
+interface BlogTipProps {
   tip: TipContent;
 }
 
-const PostTip: FunctionComponent<PostTipProps> = ({ tip }) => {
+const BlogTip: FunctionComponent<BlogTipProps> = ({ tip }) => {
   const getIcon = () => {
     switch (tip.level) {
       case "warning":
@@ -44,4 +44,4 @@ const PostTip: FunctionComponent<PostTipProps> = ({ tip }) => {
   );
 };
 
-export default PostTip;
+export default BlogTip;

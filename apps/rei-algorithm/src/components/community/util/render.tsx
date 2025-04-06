@@ -1,24 +1,24 @@
 import { ReactNode } from "react";
-import PostCode from "../components/codeBlock";
-import PostFoldBlock from "../components/foldBlock";
-import PostMarkdown from "../components/markdown";
-import PostTip from "../components/tip";
+import BlogCode from "../components/codeBlock";
+import BlogFoldBlock from "../components/foldBlock";
+import BlogMarkdown from "../components/markdown";
+import BlogTip from "../components/tip";
 import { BlogContent } from "../type/content";
-import PostMermaid from "../components/mermaid";
+import BlogMermaid from "../components/mermaid";
 import { TreeVisualizer, VisualPanel } from "../../visual";
 
 export function renderContents(contents: BlogContent[]): ReactNode {
   return contents.map((item, index) => {
     switch (item.type) {
       case "markdown":
-        return <PostMarkdown markdown={item} key={index} />;
+        return <BlogMarkdown markdown={item} key={index} />;
       case "code":
-        return <PostCode code={item} key={index} />;
+        return <BlogCode code={item} key={index} />;
       case "tip":
-        return <PostTip tip={item} key={index} />;
+        return <BlogTip tip={item} key={index} />;
       case "fold":
         return (
-          <PostFoldBlock
+          <BlogFoldBlock
             title={item.title}
             content={item.content}
             key={index}
@@ -26,7 +26,7 @@ export function renderContents(contents: BlogContent[]): ReactNode {
           />
         );
       case "mermaid":
-        return <PostMermaid content={item.content} key={index} />;
+        return <BlogMermaid content={item.content} key={index} />;
       case "visual":
         return <VisualPanel key={index} />;
       default:

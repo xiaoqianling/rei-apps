@@ -1,4 +1,4 @@
-import { BlogPost } from "../../type";
+import { BlogDetail } from "../../type";
 
 export interface Heading {
   level: number; // 标题级别 (1, 2, 3)
@@ -32,7 +32,7 @@ export const parseMarkdownHeadings = (markdown: string): Heading[] => {
 };
 
 // 新增函数：解析 BlogPost 对象中的所有 Markdown 内容
-export const parseBlogPostHeadings = (post: BlogPost): Heading[] => {
+export const parseBlogPostHeadings = (post: BlogDetail): Heading[] => {
   const headings: Heading[] = [];
 
   post.contents.forEach((content) => {

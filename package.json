@@ -18,6 +18,7 @@
     "release": "pnpm run build && pnpm run changeset:add && pnpm run changeset:version && pnpm run changeset:publish",
     "todo": "pnpm --filter rei-todo dev",
     "algo": "pnpm --filter rei-algorithm dev",
+    "algo:pro": "set NODE_ENV=production && pnpm --filter rei-algorithm dev",
     "build:algo": "pnpm --filter rei-algorithm build",
     "server:algo": "pnpm --filter rei-algorithm serve"
   },

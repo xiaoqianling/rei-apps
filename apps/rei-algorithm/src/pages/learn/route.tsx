@@ -1,4 +1,4 @@
-import PostContent from "@/src/components/community/components/post/postContent";
+import BlogContent from "@/src/components/community/components/blog/blogContent";
 import { AlgorithmStationIntro } from "@/src/components/community/type/mock";
 import { AllInOnePage } from "@/src/docs";
 import { RouteObject } from "react-router-dom";
@@ -8,7 +8,7 @@ import { MenuItem } from "rei-design/menu/type";
 export const learnRouter: RouteObject[] = [
   {
     path: "",
-    element: <PostContent post={AlgorithmStationIntro} showInfo={false} />,
+    element: <BlogContent blog={AlgorithmStationIntro} showInfo={false} />,
     index: true,
   },
   {
