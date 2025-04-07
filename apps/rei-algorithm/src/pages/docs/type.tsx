@@ -15,6 +15,20 @@ export const docsMenuData: MenuItem[] = [
       {
         path: "about",
         label: "关于",
+        subItems: [
+          {
+            path: "about",
+            label: "关于",
+          },
+          {
+            path: "team",
+            label: "团队",
+          },
+          {
+            path: "contributors",
+            label: "贡献者",
+          },
+        ],
       },
       {
         path: "donate",

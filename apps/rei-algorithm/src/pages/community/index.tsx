@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import BlogCard from "@/src/components/community/components/blog/card";
 import { getAllBlogs } from "@/src/api/blog";
 import { BlogCardInfo } from "@/src/components/community/type";
+import UserCard from "./userCard";
 
 function CommunityPage() {
   const navigate = useNavigate();
@@ -63,10 +64,7 @@ function CommunityPage() {
       </div>
 
       {/* 用户卡片 */}
-      <div className={styles.userCard}>
-        <h3>用户信息</h3>
-        <button onClick={goToCreatePost}>发帖</button>
-      </div>
+      <UserCard />
     </div>
   );
 }

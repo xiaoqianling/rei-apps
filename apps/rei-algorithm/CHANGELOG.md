@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.30
+
+### Patch Changes
+
+- feat: 丰富文档站路由
+
 ## 1.2.29
 
 ### Patch Changes

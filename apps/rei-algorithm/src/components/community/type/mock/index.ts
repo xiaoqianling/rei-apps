@@ -274,10 +274,12 @@ export const AlgorithmStationIntro: BlogDetail = {
 3. 参与社区讨论和算法挑战
 4. 持续学习和提升你的算法能力
 
+> 还有一些markdown支持
+
 ## 联系我们
 如有任何问题或建议，请通过以下方式联系我们：
 - 邮箱：support@algorithmstation.com
-- 官方论坛：[https://forum.algorithmstation.com](https://forum.algorithmstation.com "外链")
+- 官方论坛：[https://forum.algorithmstation.com](https://forum.algorithmstation.com)
 - 社交媒体：@AlgorithmStation
       `,
     },
