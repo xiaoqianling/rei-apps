@@ -27,7 +27,6 @@ export const communityRouter: RouteObject[] = [
     element: <></>,
   },
   {
-    // post/:id 如何获取参数？
     path: "post/:id",
     element: <BlogPage />,
   },

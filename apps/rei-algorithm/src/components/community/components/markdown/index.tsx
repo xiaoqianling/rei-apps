@@ -28,6 +28,7 @@ const BlogMarkdown: FunctionComponent<BlogMarkdownProps> = ({ markdown }) => {
       const id = decodeURI(hash.replace("#", ""));
       const element = document.getElementById(id);
       if (element) {
+        console.log("跳转到Hash: ", id);
         element.scrollIntoView({ behavior: "smooth" });
       }
     }

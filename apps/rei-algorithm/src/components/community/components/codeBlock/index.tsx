@@ -12,7 +12,6 @@ const BlogCode: FunctionComponent<BlogCodeProps> = ({ code }) => {
   const [activeLangIndex, setActiveLangIndex] = useState(0);
   const activeCode = code.metadata[activeLangIndex].code;
   const language = code.metadata[activeLangIndex].language;
-  console.log(language);
   return (
     <div className={styles.container}>
       <div className={styles.languageTabs}>

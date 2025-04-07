@@ -22,7 +22,6 @@ function BlogPage() {
   useEffect(() => {
     if (typeof id !== "number") return;
     getBlogDetailByID(id).then((res) => {
-      console.log("id: ", id, " ", res);
       setBlog(res);
     });
   }, [id]);

@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.12
+
+### Patch Changes
+
+- feat: 锚点组件&博客锚点解析
+
 ## 1.0.11
 
 ### Patch Changes

@@ -1,46 +1,46 @@
-import { BlogDetail } from "../../type";
+import { AnchorItem } from "rei-design/anchor";
 
-export interface Heading {
-  level: number; // 标题级别 (1, 2, 3)
-  text: string; // 标题文本
-  anchor: string; // 锚点 ID
-}
-
-// 新增函数：解析 Markdown 的前三级标题
-export const parseMarkdownHeadings = (markdown: string): Heading[] => {
-  const headingRegex = /^#{1,3}\s+(.+)$/gm; // 匹配 1-3 级标题
-  const headings: Heading[] = [];
-  let match;
-
-  // 去除每行前面的空格
-  const cleanedMarkdown = markdown.replace(/^\s+/gm, "");
-
-  while ((match = headingRegex.exec(cleanedMarkdown)) !== null) {
-    const level = match[0].match(/#/g)?.length || 0; // 标题级别
-    const text = match[1].trim(); // 标题文本
-    const anchor = text
-      .toLowerCase()
-      .replace(/[^\w\u4e00-\u9fa5]+/g, "-") // 生成锚点 ID, 只保留中文和英文
-      .replace(/^-|-$/g, "");
-
-    if (level <= 3) {
-      headings.push({ level, text, anchor });
-    }
+// 按层级解析h1-h3
+export const parseBlogAnchors = (dom: HTMLDivElement | null): AnchorItem[] => {
+  if (!dom) {
+    return [];
   }
 
-  return headings;
-};
+  const anchors: AnchorItem[] = [];
+  // 获取所有h1-h3标题元素，保持DOM顺序
+  const headings = dom.querySelectorAll("h1, h2, h3");
 
-// 新增函数：解析 BlogPost 对象中的所有 Markdown 内容
-export const parseBlogPostHeadings = (post: BlogDetail): Heading[] => {
-  const headings: Heading[] = [];
+  // 使用栈结构维护层级关系
+  const stack: { level: number; children?: AnchorItem[] }[] = [
+    { level: 0, children: anchors }, // 根节点
+  ];
 
-  post.contents.forEach((content) => {
-    if (content.type === "markdown") {
-      const markdownHeadings = parseMarkdownHeadings(content.content);
-      headings.push(...markdownHeadings);
+  headings.forEach((heading) => {
+    const level = parseInt(heading.tagName[1], 10);
+    const item: AnchorItem = {
+      id: heading.id,
+      title: heading.textContent || "",
+      children: [],
+    };
+
+    // 弹出不匹配的层级直到找到父级
+    while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+      stack.pop();
+    }
+
+    // 将当前项添加到父级children
+    const currentLevel = stack[stack.length - 1];
+    currentLevel.children?.push(item);
+
+    // 推入栈作为新的父级
+    if (level > currentLevel.level) {
+      stack.push({ level, children: item.children });
     }
   });
 
-  return headings;
+  // 过滤空children属性
+  return anchors.map((anchor) => ({
+    ...anchor,
+    children: anchor.children?.length ? anchor.children : undefined,
+  }));
 };

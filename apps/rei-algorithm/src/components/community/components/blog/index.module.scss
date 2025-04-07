@@ -1,46 +1,28 @@
 .container {
   display: flex;
   flex-direction: row;
-  padding: 2rem 10rem 0 10rem;
+  padding: 2rem 10rem 0 4rem;
   .anchor {
-    @include flex-center;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: 1rem;
     position: sticky;
-    top: 40%;
+    top: 50%;
+    transform: translateY(-50%);
     height: fit-content;
-    width: 150px;
-    white-space: nowrap;
     margin-right: 5rem;
 
-    span {
+    & > span {
+      display: block;
       font-weight: bold;
       font-size: 1.25rem;
       margin-bottom: 0.5rem;
     }
 
-    .anchorLink {
-      display: block;
-      padding: 0.5rem 0.5rem;
-      border-radius: 4px;
-      color: inherit;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      &:hover {
-        background-color: #f0f0f0;
-      }
-
-      &.active_link {
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
-      }
+    .anchor_list {
+      height: 500px;
+      width: 300px;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     @media screen and (max-width: 1000px) {

@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.29
+
+### Patch Changes
+
+- feat: 锚点组件&博客锚点解析
+- Updated dependencies
+  - rei-design@1.0.12
+
 ## 1.2.28
 
 ### Patch Changes
