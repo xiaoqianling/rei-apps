@@ -71,7 +71,6 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
         allowNativeTouchScrolling: false,
         onDrag: function (e) {
           // 如果点击的是节点或连线，阻止拖动
-          // BUG: 实际效果是拖动“碰到”节点就会停止，而非判定点击位置
           const target = e.target as HTMLElement;
           if (
             target.classList.contains("tree-node") ||
@@ -116,29 +115,30 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
     { scope: svgRef },
   );
 
-  // 计算节点位置 TODO:优化树生成逻辑 防止交叉分支
+  // 计算节点位置
   const calculatePositions = (
     node: TreeNode,
     x: number,
     y: number,
     level: number,
   ) => {
-    // ... 实现位置计算逻辑 ...
-    // 定义水平和垂直间距
-    const horizontalSpacing = 120;
-    const verticalSpacing = 80;
-
-    // 计算子节点的x偏移量
-    const offset = (Math.pow(2, level) * horizontalSpacing) / 2;
-
+    // 动态计算水平间距（根据子树宽度）
+    const getSubtreeWidth = (node?: TreeNode): number => {
+      if (!node) return 0;
+      const leftWidth = getSubtreeWidth(node.left);
+      const rightWidth = getSubtreeWidth(node.right);
+      return 1 + Math.max(leftWidth, rightWidth);
+    };
+    const leftWidth = getSubtreeWidth(node.left) * 100; // 每个层级基础间距
+    const rightWidth = getSubtreeWidth(node.right) * 100;
     return {
       left: {
-        x: x - offset,
-        y: y + verticalSpacing,
+        x: x - (rightWidth > 0 ? rightWidth : 60), // 动态调整左侧位置
+        y: y + 100, // 固定垂直间距
       },
       right: {
-        x: x + offset,
-        y: y + verticalSpacing,
+        x: x + (leftWidth > 0 ? leftWidth : 60), // 动态调整右侧位置
+        y: y + 100,
       },
     };
   };
@@ -269,18 +269,16 @@ const TreeVisualizer: React.FC<TreeVisualizerProps> = ({
     );
   };
 
+  useEffect(() => {
+    console.log("zoom:", zoomRef.current, " svg:", svgRef.current);
+  });
+
   return (
-    <svg
-      ref={svgRef}
-      viewBox={`0 0 ${width} ${height}`}
-      style={{
-        overflow: "hidden",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <g ref={zoomRef}>{renderTree(tree, width / 2, 50, 0, 0)}</g>
-    </svg>
+    <div className={styles.svgContainer}>
+      <svg ref={svgRef} viewBox={`0 0 ${width} ${height}`}>
+        <g ref={zoomRef}>{renderTree(tree, width / 2, 50, 0, 0)}</g>
+      </svg>
+    </div>
   );
 };
 

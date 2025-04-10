@@ -3,6 +3,8 @@
   font-weight: 600;
   color: #000;
   position: relative;
+  -webkit-user-select: none;
+  user-select: none;
 
   &:hover {
     cursor: pointer;
