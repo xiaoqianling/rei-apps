@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.32
+
+### Patch Changes
+
+- feat: 更优秀的canvas可视化
+
 ## 1.2.31
 
 ### Patch Changes

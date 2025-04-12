@@ -11,6 +11,7 @@ import { docsRouter } from "@/src/pages/docs/route";
 import CommunityLayout from "@/src/components/layout/communityLayout";
 import { communityRouter } from "@/src/pages/community/route";
 import { learnRouter } from "@/src/pages/learn/route";
+import DemoPage from "@/src/pages/demo";
 
 // 感觉把路由平行开来更好，比如/login与/同级 而非在/下
 // 或者考虑嵌套层次，在需要layout的页面级下嵌套
@@ -48,6 +49,10 @@ export const reiRouter = createBrowserRouter([
       {
         path: "about",
         element: <AboutPage />,
+      },
+      {
+        path: "demo",
+        element: <DemoPage />,
       },
     ],
   },
