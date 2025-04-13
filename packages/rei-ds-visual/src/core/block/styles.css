@@ -1,0 +1,34 @@
+/* Basic styles for the Block component */
+.rei-ds-visual-block {
+  cursor: grab;
+  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
+}
+
+.rei-ds-visual-block.dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));
+}
+
+.rei-ds-visual-block-border {
+  fill: #fff;
+  stroke: #ccc;
+  stroke-width: 1px;
+  rx: 4px; /* Rounded corners */
+  ry: 4px;
+}
+
+.rei-ds-visual-block:hover .rei-ds-visual-block-border {
+  stroke: #aaa;
+}
+
+.rei-ds-visual-block-title {
+  font-family: sans-serif;
+  font-size: 14px;
+  fill: #333;
+  user-select: none; /* Prevent text selection during drag */
+  pointer-events: none; /* Prevent title text from interfering with drag */
+}
+
+.rei-ds-visual-block-content {
+  /* Placeholder for content area styling */
+} 

@@ -312,6 +312,19 @@ importers:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.10.2)(typescript@5.7.2)
 
+  packages/rei-ds-visual:
+    dependencies:
+      d3:
+        specifier: ^7.9.0
+        version: 7.9.0
+    devDependencies:
+      '@types/d3':
+        specifier: ^7.4.3
+        version: 7.4.3
+      typescript:
+        specifier: ^5.2.2
+        version: 5.7.2
+
   packages/rei-utils: {}
 
   packages/rei-visualization:
