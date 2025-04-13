@@ -1,33 +1,33 @@
-import { CanvasEngine } from './core/CanvasEngine';
+import { CanvasEngine } from "./core/CanvasEngine";
 
 /**
  * Options for creating a visualization canvas.
  */
 export interface VisualizationCanvasOptions {
-    /**
-     * The initial logical width of the internal scene canvas.
-     * This defines the coordinate system space for placing elements.
-     * Defaults to 2000.
-     */
-    logicalWidth?: number;
+  /**
+   * The initial logical width of the internal scene canvas.
+   * This defines the coordinate system space for placing elements.
+   * Defaults to 2000.
+   */
+  logicalWidth?: number;
 
-    /**
-     * The initial logical height of the internal scene canvas.
-     * Defaults to 1500.
-     */
-    logicalHeight?: number;
+  /**
+   * The initial logical height of the internal scene canvas.
+   * Defaults to 1500.
+   */
+  logicalHeight?: number;
 
-    /**
-     * The background color of the PixiJS stage (renderer).
-     * Defaults to 0x1a1a1a (dark gray).
-     */
-    backgroundColor?: number;
+  /**
+   * The background color of the PixiJS stage (renderer).
+   * Defaults to 0x1a1a1a (dark gray).
+   */
+  backgroundColor?: number;
 
-    /**
-     * Whether to use antialiasing for smoother graphics.
-     * Defaults to true.
-     */
-    antialias?: boolean;
+  /**
+   * Whether to use antialiasing for smoother graphics.
+   * Defaults to true.
+   */
+  antialias?: boolean;
 }
 
 /**
@@ -52,16 +52,25 @@ export interface VisualizationCanvasOptions {
  * }
  */
 export function createVisualizationCanvas(
-    container: HTMLElement,
-    options?: VisualizationCanvasOptions
+  container: HTMLElement,
+  options?: VisualizationCanvasOptions,
 ): CanvasEngine {
-    if (!container) {
-        throw new Error("Container element is required to create a visualization canvas.");
-    }
-    return new CanvasEngine(container, options);
+  if (!container) {
+    throw new Error(
+      "Container element is required to create a visualization canvas.",
+    );
+  }
+  return new CanvasEngine(container, options);
 }
 
 // Re-export core classes/types if needed for more advanced usage
-export { CanvasEngine } from './core/CanvasEngine';
-export { Scene } from './core/Scene';
-// Add other exports as needed (e.g., specific structure types, animator) 
+export { CanvasEngine } from "./core/CanvasEngine";
+export { Scene } from "./core/Scene";
+// Export base structure components
+export { Block } from "./structures/base/Block";
+export { Node } from "./structures/base/Node";
+export { Edge } from "./structures/base/Edge";
+// Export specific visualization components
+export { ArrayVisualization } from "./structures/visualizations/ArrayVisualization";
+export { LinkedListVisualization } from "./structures/visualizations/LinkedListVisualization";
+// Add other exports as needed (e.g., specific structure types, animator)

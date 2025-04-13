@@ -4,6 +4,7 @@ import { VisualPanel } from "@/src/components/visual";
 import FreeMoveContainer from "@/src/components/container/freeMove";
 import ResizeContainer from "@/src/components/container/resize";
 import { useOpenState } from "@/src/hooks";
+import VisualPanelV2 from "@/src/components/visualV2/panel";
 
 interface SlatePageProps {}
 
@@ -20,12 +21,12 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <hr />
       <SaveEditor />
       <hr />
-      <VisualPanel />
-      <FreeMoveContainer visible={visible} onClose={close}>
+      <VisualPanelV2 />
+      {/* <FreeMoveContainer visible={visible} onClose={close}>
         <ResizeContainer initWidth={800} initHeight={600}>
           <VisualPanel />
         </ResizeContainer>
-      </FreeMoveContainer>
+      </FreeMoveContainer> */}
     </div>
   );
 };

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.33
+
+### Patch Changes
+
+- feat: 嵌入canvas面板
+
 ## 1.2.32
 
 ### Patch Changes

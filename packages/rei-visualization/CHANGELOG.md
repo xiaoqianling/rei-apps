@@ -1,5 +1,11 @@
 # rei-visualization
 
+## 0.0.2
+
+### Patch Changes
+
+- feat: 嵌入canvas面板
+
 ## 0.0.1
 
 ### Patch Changes
