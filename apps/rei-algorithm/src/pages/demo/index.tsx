@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import VisualEngineDemo from "./demo";
-import { Canvas } from "rei-ds-visual/index";
-import "rei-ds-visual/core/block/styles.css"
+import { ArrayVisual, Canvas, LinkedListVisual } from "rei-ds-visual/index";
+import "rei-ds-visual/core/block/styles.css";
 
 function DemoPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,13 +13,55 @@ function DemoPage() {
     });
 
     const block1 = canvas.addBlock({
-      id: 'array-var',
-      title: 'myArray',
+      id: "array-var",
+      title: "数组测试",
       x: 50,
       y: 50,
       width: 200,
-      height: 150
+      height: 50,
+      paddingY: 15,
     });
+
+    const arrayVis = new ArrayVisual({
+      block: block1,
+      initialData: [10, 20, 30, 40],
+      // 可以添加其他配置项，如 nodeShape: 'circle'
+    });
+
+    const linkBlock = canvas.addBlock({
+      id: "link",
+      title: "链表",
+      x: 300,
+      y: 50,
+      width: 200,
+      height: 150,
+    });
+
+    const linkVis = new LinkedListVisual({
+      block: linkBlock,
+      initialData: [
+        {
+          id: "1",
+          value: 1,
+          next: "2",
+        },
+        {
+          id: "2",
+          value: 2,
+          next: "3",
+        },
+        {
+          id: "3",
+          value: "结点3",
+          next: null,
+        },
+      ],
+      spacing: 35,
+    });
+
+    setTimeout(() => {
+      // arrayVis.update([10, 20, 30, 40, 50]);
+    }, 2000);
 
     return () => {
       canvas?.destroy();

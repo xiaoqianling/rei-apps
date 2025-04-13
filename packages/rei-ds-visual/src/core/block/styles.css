@@ -1,12 +1,12 @@
 /* Basic styles for the Block component */
 .rei-ds-visual-block {
   cursor: grab;
-  filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .rei-ds-visual-block.dragging {
   cursor: grabbing;
-  filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.2));
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .rei-ds-visual-block-border {
@@ -21,14 +21,39 @@
   stroke: #aaa;
 }
 
+.rei-ds-visual-block-title-bg {
+}
+
+.rei-ds-visual-block-divider {
+  stroke: #ffcbcb;
+  stroke-width: 1px;
+}
+
 .rei-ds-visual-block-title {
   font-family: sans-serif;
   font-size: 14px;
   fill: #333;
+  -webkit-user-select: none;
   user-select: none; /* Prevent text selection during drag */
   pointer-events: none; /* Prevent title text from interfering with drag */
+  border-bottom: 1px solid #ccc;
+  background-color: #c22828;
 }
 
 .rei-ds-visual-block-content {
   /* Placeholder for content area styling */
-} 
+}
+
+/* Node hover effect */
+.rei-ds-visual-node:hover > circle,
+.rei-ds-visual-node:hover > rect {
+  filter: brightness(95%);
+  stroke-width: 2px;
+}
+
+/* Optional: slightly larger text on hover? */
+/*
+.rei-ds-visual-node:hover > text {
+  font-size: 1.1em; 
+}
+*/

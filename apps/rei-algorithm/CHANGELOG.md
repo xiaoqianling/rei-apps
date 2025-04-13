@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.36
+
+### Patch Changes
+
+- feat: 添加数组&链表组件;清晰化渲染流
+
 ## 1.2.35
 
 ### Patch Changes

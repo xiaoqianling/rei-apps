@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import { Block, BlockOptions } from '../block';
+import { defineArrowMarker } from '../../structures/common/Edge'; // 引入箭头定义函数
 
 export interface CanvasOptions {
   container: HTMLElement;
@@ -11,6 +12,8 @@ export class Canvas {
   private readonly svg: d3.Selection<SVGSVGElement, unknown, null, undefined>;
   private readonly rootGroup: d3.Selection<SVGGElement, unknown, null, undefined>;
   private readonly zoomBehavior: d3.ZoomBehavior<Element, unknown>;
+  private readonly defs: d3.Selection<SVGDefsElement, unknown, null, undefined>;
+  public readonly defaultArrowMarkerId = 'rei-ds-arrow-marker'; // 导出一个常量 ID
 
   private currentTransform: d3.ZoomTransform = d3.zoomIdentity;
   private readonly blocks: Map<string, Block> = new Map();
@@ -30,8 +33,8 @@ export class Canvas {
 
     // 获取容器的初始尺寸
     const { width, height } = this.container.getBoundingClientRect();
-    this.initialWidth = width;
-    this.initialHeight = height;
+    this.initialWidth = width*2;
+    this.initialHeight = height*2;
 
     // 创建 SVG 元素
     this.svg = d3.select(this.container)
@@ -39,6 +42,11 @@ export class Canvas {
       .attr('width', '100%')
       .attr('height', '100%')
       .style('display', 'block'); // 避免 SVG 底部产生额外空白
+
+    // ** 在 rootGroup 之前创建 <defs> **
+    this.defs = this.svg.append('defs');
+    // 定义默认箭头
+    defineArrowMarker(this.defs, this.defaultArrowMarkerId);
 
     // 创建根 <g> 元素，所有内容将绘制在此元素内
     this.rootGroup = this.svg.append('g');
@@ -59,7 +67,7 @@ export class Canvas {
 
     // 初始化 D3 Zoom
     this.zoomBehavior = d3.zoom()
-      .scaleExtent([1, 4]) // 限制缩放范围
+      .scaleExtent([0.5, 4]) // 限制缩放范围
       .translateExtent([[-Infinity, -Infinity], [Infinity, Infinity]]) // 允许无限平移
       .on('zoom', this.zoomed.bind(this));
 
@@ -209,6 +217,13 @@ export class Canvas {
    */
   public getRootGroup(): d3.Selection<SVGGElement, unknown, null, undefined> {
     return this.rootGroup;
+  }
+
+  /**
+   * 获取 <defs> 元素 (如果需要添加其他定义)
+   */
+  public getDefs(): d3.Selection<SVGDefsElement, unknown, null, undefined> {
+    return this.defs;
   }
 
   /**
