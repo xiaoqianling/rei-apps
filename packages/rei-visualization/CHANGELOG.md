@@ -1,5 +1,11 @@
 # rei-visualization
 
+## 0.0.4
+
+### Patch Changes
+
+- chore
+
 ## 0.0.3
 
 ### Patch Changes
