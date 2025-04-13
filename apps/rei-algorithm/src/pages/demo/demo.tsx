@@ -34,7 +34,6 @@ function VisualEngineDemo() {
         // 将数组可视化内容设置到块中
         arrayBlock.setContent(arrayVis);
 
-        // Add a block for a tree variable
         const treeBlock = scene.addBlock({
           title: "链表",
           x: 400,
@@ -45,6 +44,7 @@ function VisualEngineDemo() {
         });
 
         const listVis = new LinkedListVisualization({
+          nodeSpacing: 30,
           data: [5, 13, 8, 2],
           nodeOptions: { radius: 20, backgroundColor: 0x5f9ea0 }, // Cadet Blue
           edgeOptions: { color: 0xaaaaaa, thickness: 1 },

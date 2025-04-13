@@ -80,12 +80,11 @@ export class Node extends PIXI.Container {
     this.x = this.options.x;
     this.y = this.options.y;
     // 设置 Container 的 hitArea 为一个覆盖节点的圆形区域，以便精确交互
-    // 半径可以稍微大一点点，方便用户交互
-    this.hitArea = new PIXI.Circle(
-      0,
-      0,
-      this.options.radius + this.options.borderWidth,
-    );
+    // this.hitArea = new PIXI.Circle(
+    //   0,
+    //   0,
+    //   this.options.radius + this.options.borderWidth,
+    // );
 
     // --- 创建子元素 ---
     this.circleGraphics = new PIXI.Graphics();
@@ -93,6 +92,7 @@ export class Node extends PIXI.Container {
       text: String(this.options.value), // 确保转为字符串
       style: this.options.valueStyle,
     });
+    this.valueText.resolution = 5;
 
     this.addChild(this.circleGraphics);
     this.addChild(this.valueText);

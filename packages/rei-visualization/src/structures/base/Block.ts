@@ -84,6 +84,7 @@ export class Block extends PIXI.Container {
       text: this.options.title,
       style: this.options.titleStyle,
     });
+    this.titleText.resolution = 5;
     this.contentContainer = new PIXI.Container();
 
     // 添加子元素

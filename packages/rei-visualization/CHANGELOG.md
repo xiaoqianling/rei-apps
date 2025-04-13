@@ -1,5 +1,11 @@
 # rei-visualization
 
+## 0.0.3
+
+### Patch Changes
+
+- chore: 修复一个文本模糊
+
 ## 0.0.2
 
 ### Patch Changes

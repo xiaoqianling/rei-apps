@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.34
+
+### Patch Changes
+
+- chore: 修复一个文本模糊
+
 ## 1.2.33
 
 ### Patch Changes

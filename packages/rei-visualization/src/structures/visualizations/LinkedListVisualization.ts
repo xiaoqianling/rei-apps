@@ -7,11 +7,16 @@ export interface LinkedListVisualizationOptions {
   // 数据可以是简单值数组，也可以是包含 next 指针的对象数组 (更灵活)
   // 这里先用简单值数组，假设是单向链表
   data: (string | number)[];
-  nodeSpacing?: number; // 节点之间的水平间距
-  showNullPointer?: boolean; // 是否在末尾显示指向 null 的标记
-  nullPointerText?: string; // null 指针的文本表示
-  nodeOptions?: Partial<NodeOptions>; // 应用于所有节点的基础选项
-  edgeOptions?: Partial<EdgeOptions>; // 应用于所有边的基础选项
+  // 节点之间的水平间距，默认为 60
+  nodeSpacing?: number;
+  // 是否在末尾显示指向 null 的标记，默认为 true
+  showNullPointer?: boolean;
+  // null 指针的文本表示，默认为 "null"
+  nullPointerText?: string;
+  // 应用于所有节点的基础选项
+  nodeOptions?: Partial<NodeOptions>;
+  // 应用于所有边的基础选项
+  edgeOptions?: Partial<EdgeOptions>;
 }
 
 // --- 默认选项 ---
@@ -105,9 +110,10 @@ export class LinkedListVisualization extends PIXI.Container {
         text: this.options.nullPointerText,
         style: nullTextStyle,
       });
-      this.nullPointerTextElement.anchor.set(0, 0.5); // 左侧垂直居中对齐
+      this.nullPointerTextElement.anchor.set(0.3, 0.5); // 左侧垂直居中对齐
       this.nullPointerTextElement.x = currentX; // 放在最后一个节点之后
       this.nullPointerTextElement.y = nodeY;
+      this.nullPointerTextElement.resolution = 5;
       this.addChild(this.nullPointerTextElement);
 
       // 2. 创建从最后一个节点指向 null 文本的边
