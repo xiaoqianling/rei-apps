@@ -1,5 +1,11 @@
 import { useEffect, useRef } from "react";
-import { ArrayVisual, Canvas, LinkedListVisual } from "rei-ds-visual/index";
+import {
+  ArrayVisual,
+  Canvas,
+  LinkedListVisual,
+  QueueVisual,
+  StackVisual,
+} from "rei-ds-visual/index";
 import "rei-ds-visual/core/block/styles.css";
 
 function DemoPage() {
@@ -58,6 +64,28 @@ function DemoPage() {
       ],
       spacing: 35,
     });
+
+    const queueBlock = canvas.addBlock({
+      id: "queue",
+      title: "队列",
+      x: 500,
+      y: 50,
+      width: 200,
+      height: 150,
+    });
+
+    const queueVis = new QueueVisual(queueBlock, [1, 2, 3, 4, 5], {});
+
+    const stackBlock = canvas.addBlock({
+      id: "stack",
+      title: "栈",
+      x: 700,
+      y: 50,
+      width: 200,
+      height: 150,
+    });
+
+    const stackVis = new StackVisual(stackBlock, [1, 2, 3, 4, 5], {});
 
     setTimeout(() => {
       // arrayVis.update([10, 20, 30, 40, 50]);

@@ -11,4 +11,7 @@ export interface BaseElementOptions {
   initialPosition?: Position;
   data?: any; // 关联的原始数据 (可选)
   tooltip?: string; // 悬浮提示 (可选)
-} 
+}
+
+// 数据结构的基本值类型
+export type DataStructureValueType = number | string;

@@ -1,5 +1,11 @@
 # rei-ds-visual
 
+## 0.0.4
+
+### Patch Changes
+
+- feat: 支持栈&队列可视化
+
 ## 0.0.3
 
 ### Patch Changes

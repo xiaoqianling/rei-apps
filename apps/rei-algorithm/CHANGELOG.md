@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.37
+
+### Patch Changes
+
+- feat: 支持栈&队列可视化
+
 ## 1.2.36
 
 ### Patch Changes

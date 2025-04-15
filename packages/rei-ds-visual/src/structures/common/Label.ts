@@ -95,8 +95,18 @@ export class Label {
     this.position = { x, y };
     const targetX = this.position.x + this.options.offsetX;
     const targetY = this.position.y + this.options.offsetY;
-    const transition = this.textElement.transition().duration(duration);
+    const transition = this.textElement.interrupt().transition().duration(duration);
     transition.attr("x", targetX).attr("y", targetY);
+  }
+
+  /** 获取标签的逻辑位置 (不含偏移) */
+  public getPosition(): Position {
+    return this.position;
+  }
+
+  /** 获取标签渲染后的实际位置 (包含偏移) */
+  public getRenderedPosition(): Position {
+    return { x: this.position.x + this.options.offsetX, y: this.position.y + this.options.offsetY };
   }
 
   /** 更新标签文本 */
