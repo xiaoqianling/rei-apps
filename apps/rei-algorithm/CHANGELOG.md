@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.38
+
+### Patch Changes
+
+- feat: 支持二叉树&K叉树可视化
+
 ## 1.2.37
 
 ### Patch Changes

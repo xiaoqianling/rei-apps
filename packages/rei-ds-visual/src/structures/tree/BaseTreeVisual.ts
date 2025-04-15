@@ -121,7 +121,7 @@ export abstract class BaseTreeVisual<
       this.options.maxDepth,
     ) as TreeNodeWithLayout<TData>;
 
-    // Compute the tree layout
+    // 计算树布局，现成的算法
     this.treeLayout(this.hierarchyData);
 
     // Store nodes in a map for easy access
@@ -129,9 +129,10 @@ export abstract class BaseTreeVisual<
     this.hierarchyData.each((node) => {
       // D3 layout uses x for horizontal, y for vertical. We might want to swap for typical tree view.
       // Swap x and y for a top-down tree layout
-      const tempX = node.x;
-      node.x = node.y; // Use d3's y (depth) as our x
-      node.y = tempX; // Use d3's x (horizontal spread) as our y
+      // 交换x和y以实现从上到下的树布局 (实际上交换之后是从左到右布局)
+      //   const tempX = node.x;
+      //   node.x = node.y; // Use d3's y (depth) as our x
+      //   node.y = tempX; // Use d3's x (horizontal spread) as our y
       this.nodesMap.set(
         this.getNodeId(node.data),
         node as TreeNodeWithLayout<TData>,
@@ -175,7 +176,7 @@ export abstract class BaseTreeVisual<
   public update(newData: any[], rootId: string): void {
     this.calculateLayout(newData, rootId);
     if (!this.hierarchyData) {
-      // Clear visualization if hierarchy fails
+      // 清除可视化如果层次结构失败
       this.clearVisualization();
       this.updateBlockSize(); // Update block size for empty state
       return;
@@ -189,132 +190,28 @@ export abstract class BaseTreeVisual<
     const linkKeyFn = (d: d3.HierarchyLink<TData>) =>
       `${this.getNodeId(d.source.data)}-${this.getNodeId(d.target.data)}`;
 
-    // Define callback functions (parameter types might be ignored due to 'any' cast later)
-    const destroyNodeVisualsCallback = (d: unknown) => {
-      this.destroyNodeVisuals(d as TreeNodeWithLayout<TData>);
-    };
-    const enterNodeCallback = (
-      d: unknown,
-      i: number,
-      groupNodes: SVGGElement[] | ArrayLike<SVGGElement>,
-    ) => {
-      const nodeData = d as TreeNodeWithLayout<TData>;
-      const currentGroup = d3.select(groupNodes[i]);
-      nodeData._visualInfo = nodeData._visualInfo ?? {};
-      const nodeHeight = this.options.nodeHeight ?? 30;
-      const nodeOpts: NodeOptions = {
-        id: this.getNodeId(nodeData.data),
-        parentSelection: currentGroup,
-        shape: this.options.nodeShape,
-        fill: this.options.nodeFill,
-        stroke: this.options.nodeStroke,
-        text: String(this.getNodeValue(nodeData.data) ?? ""),
-      };
-      if (this.options.nodeShape === "circle")
-        nodeOpts.radius = this.options.nodeRadius;
-      else {
-        nodeOpts.width = this.options.nodeWidth;
-        nodeOpts.height = nodeHeight;
-      }
-      nodeData._visualInfo.nodeInstance = new Node(nodeOpts);
-      if (
-        nodeData._originalChildren &&
-        (!nodeData.children ||
-          nodeData.children.length < nodeData._originalChildren.length)
-      ) {
-        const labelOpts: LabelOptions = {
-          id: `ellipsis-${this.getNodeId(nodeData.data)}`,
-          parentSelection: currentGroup,
-          text: "...",
-          fontSize: 10,
-          fill: "#999",
-          offsetY: nodeHeight / 2 + 10,
-        };
-        nodeData._visualInfo.ellipsisInstance = new Label(labelOpts);
-      }
-    };
-    const updateNodeCallback = (
-      d: unknown,
-      i: number,
-      groupNodes: SVGGElement[] | ArrayLike<SVGGElement>,
-    ) => {
-      const nodeData = d as TreeNodeWithLayout<TData>;
-      const currentGroup = d3.select(groupNodes[i]);
-      if (nodeData._visualInfo?.nodeInstance) {
-        nodeData._visualInfo.nodeInstance.setText(
-          String(this.getNodeValue(nodeData.data) ?? ""),
-        );
-      }
-      const nodeHeight = this.options.nodeHeight ?? 30;
-      if (
-        nodeData._originalChildren &&
-        (!nodeData.children ||
-          nodeData.children.length < nodeData._originalChildren.length)
-      ) {
-        if (!nodeData._visualInfo?.ellipsisInstance) {
-          const labelOpts: LabelOptions = {
-            id: `ellipsis-${this.getNodeId(nodeData.data)}`,
-            parentSelection: currentGroup,
-            text: "...",
-            fontSize: 10,
-            fill: "#999",
-            offsetY: nodeHeight / 2 + 10,
-          };
-          nodeData._visualInfo = nodeData._visualInfo ?? {};
-          nodeData._visualInfo.ellipsisInstance = new Label(labelOpts);
-          nodeData._visualInfo
-            .ellipsisInstance!.getElement()
-            .style("opacity", 0)
-            .transition()
-            .duration(duration)
-            .style("opacity", 1);
-        } else {
-          nodeData._visualInfo.ellipsisInstance
-            .getElement()
-            .interrupt()
-            .transition()
-            .duration(duration)
-            .style("opacity", 1);
-        }
-      } else if (nodeData._visualInfo?.ellipsisInstance) {
-        nodeData._visualInfo.ellipsisInstance
-          .getElement()
-          .interrupt()
-          .transition()
-          .duration(duration)
-          .style("opacity", 0)
-          .remove();
-        const instanceToDestroy = nodeData._visualInfo.ellipsisInstance;
-        setTimeout(() => instanceToDestroy?.destroy(), duration);
-        nodeData._visualInfo.ellipsisInstance = undefined;
-      }
-    };
-
     // --- Update Nodes ---
     const nodeSelection = this.contentGroup
       .selectAll<SVGGElement, TreeNodeWithLayout<TData>>(".tree-node-group")
       .data(nodes, nodeKeyFn);
 
     // Exit nodes
-    nodeSelection
-      .exit()
-      .transition()
-      .duration(duration)
-      .attr(
-        "transform",
-        (d) =>
-          `translate(${d.parent ? d.parent.x : d.x},${d.parent ? d.parent.y : d.y})`,
-      )
-      .style("opacity", 0)
-      .remove()
-      .each((d) => {
-        //   NOTE: d类型
-        const nodeData = d as TreeNodeWithLayout<TData>;
-        this.destroyNodeVisuals(nodeData);
-      });
-
-    const options = this.options;
-    const getNodeId = this.getNodeId;
+    // nodeSelection
+    //   .exit()
+    //   .transition()
+    //   .duration(duration)
+    //   .attr(
+    //     "transform",
+    //     (d) =>
+    //       `translate(${d.parent ? d.parent.x : d.x},${d.parent ? d.parent.y : d.y})`,
+    //   )
+    //   .style("opacity", 0)
+    //   .remove()
+    //   .each((d) => {
+    //     //   NOTE: d类型
+    //     const nodeData = d as TreeNodeWithLayout<TData>;
+    //     this.destroyNodeVisuals(nodeData);
+    //   });
 
     // Enter nodes
     const nodeEnter = nodeSelection
@@ -322,11 +219,6 @@ export abstract class BaseTreeVisual<
       .append("g")
       .attr("class", "tree-node-group")
       .attr("id", (d) => `tree-node-${this.getNodeId(d.data)}`)
-      .attr(
-        "transform",
-        (d) =>
-          `translate(${d.parent ? d.parent.x : d.x},${d.parent ? d.parent.y : d.y})`,
-      )
       .style("opacity", 0)
       .each((d, i, groupNodes) => {
         const nodeData = d as TreeNodeWithLayout<TData>;
@@ -434,33 +326,26 @@ export abstract class BaseTreeVisual<
       .selectAll<SVGPathElement, d3.HierarchyLink<TData>>(".tree-link")
       .data(links, linkKeyFn);
 
-    linkSelection
-      .exit()
-      .interrupt()
-      .transition()
-      .duration(duration)
-      .attr("d", (d) => {
-        const sourceNode = this.nodesMap.get(this.getNodeId(d.source.data));
-        const startPos = sourceNode
-          ? { x: sourceNode.x, y: sourceNode.y }
-          : { x: 0, y: 0 };
-        return this.generateLinkPath(startPos, startPos);
-      })
-      .style("opacity", 0)
-      .remove();
+    // linkSelection
+    //   .exit()
+    //   .interrupt()
+    //   .transition()
+    //   .duration(duration)
+    //   .attr("d", (d) => {
+    //     const sourceNode = this.nodesMap.get(this.getNodeId(d.source.data));
+    //     const startPos = sourceNode
+    //       ? { x: sourceNode.x, y: sourceNode.y }
+    //       : { x: 0, y: 0 };
+    //     return this.generateLinkPath(startPos, startPos);
+    //   })
+    //   .style("opacity", 0)
+    //   .remove();
 
     const linkEnter = linkSelection
       .enter()
       .insert("path", ".tree-node-group")
       .attr("class", "tree-link")
       .attr("id", (d) => `link-${linkKeyFn(d)}`)
-      .attr("d", (d) => {
-        const sourceNode = this.nodesMap.get(this.getNodeId(d.source.data));
-        const startPos = sourceNode
-          ? { x: sourceNode.x, y: sourceNode.y }
-          : { x: 0, y: 0 };
-        return this.generateLinkPath(startPos, startPos);
-      })
       .style("fill", "none")
       .style("stroke", this.options.edgeStroke)
       .style("stroke-width", this.options.edgeStrokeWidth)
@@ -472,9 +357,12 @@ export abstract class BaseTreeVisual<
       .interrupt()
       .transition()
       .duration(duration)
-      .attr("d", (d) =>
-        this.generateLinkPath(d.source as Position, d.target as Position),
-      )
+      .attr("d", (d) => {
+        return this.generateLinkPath(
+          d.source as Position,
+          d.target as Position,
+        );
+      })
       .style("opacity", 1);
 
     // --- Update Block Size ---
@@ -486,8 +374,8 @@ export abstract class BaseTreeVisual<
       .linkVertical<any, { x: number; y: number }>()
       .x((d) => d.x)
       .y((d) => d.y);
-    const sourceCorrected = { x: source.y, y: source.x };
-    const targetCorrected = { x: target.y, y: target.x };
+    const sourceCorrected = { x: source.x, y: source.y };
+    const targetCorrected = { x: target.x, y: target.y };
     // Handle potential null return from link generator
     return (
       linkGenerator({ source: sourceCorrected, target: targetCorrected }) ?? ""
@@ -505,6 +393,8 @@ export abstract class BaseTreeVisual<
             bbox.width + contentPadding * 2,
             bbox.height + contentPadding * 2,
             this.options.animationDuration,
+            bbox.width / 1.5,
+            this.options.nodeRadius,
           );
         } else {
           // Handle empty tree
@@ -514,7 +404,8 @@ export abstract class BaseTreeVisual<
         console.error("Error calculating bounding box for Tree:", e);
         this.block.updateSize(100, 50, this.options.animationDuration);
       }
-    }, 50);
+      // 保证一个较长时间使得能稳定获取到bbox尺寸
+    }, 400);
   }
 
   protected clearVisualization(): void {
@@ -539,3 +430,8 @@ export abstract class BaseTreeVisual<
     // Any other cleanup specific to the base class
   }
 }
+
+/**
+ * 二叉树陷阱：
+ * 1. content容器位置，头节点的中心与block左上角一致，需要Block提供API自己设置偏移
+ */

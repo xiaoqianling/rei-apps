@@ -1,8 +1,12 @@
 import { useEffect, useRef } from "react";
 import {
   ArrayVisual,
+  BinaryTreeNodeData,
+  BinaryTreeVisual,
   Canvas,
   LinkedListVisual,
+  MTreeNodeData,
+  MTreeVisual,
   QueueVisual,
   StackVisual,
 } from "rei-ds-visual/index";
@@ -18,18 +22,18 @@ function DemoPage() {
       container: containerRef.current,
     });
 
-    const block1 = canvas.addBlock({
+    const arrayBlock = canvas.addBlock({
       id: "array-var",
       title: "数组测试",
-      x: 50,
-      y: 50,
+      x: 20,
+      y: 20,
       width: 200,
       height: 50,
       paddingY: 15,
     });
 
     const arrayVis = new ArrayVisual({
-      block: block1,
+      block: arrayBlock,
       initialData: [10, 20, 30, 40],
       // 可以添加其他配置项，如 nodeShape: 'circle'
     });
@@ -38,7 +42,7 @@ function DemoPage() {
       id: "link",
       title: "链表",
       x: 300,
-      y: 50,
+      y: 20,
       width: 200,
       height: 150,
     });
@@ -68,8 +72,8 @@ function DemoPage() {
     const queueBlock = canvas.addBlock({
       id: "queue",
       title: "队列",
-      x: 500,
-      y: 50,
+      x: 20,
+      y: 120,
       width: 200,
       height: 150,
     });
@@ -79,8 +83,8 @@ function DemoPage() {
     const stackBlock = canvas.addBlock({
       id: "stack",
       title: "栈",
-      x: 700,
-      y: 50,
+      x: 350,
+      y: 120,
       width: 200,
       height: 150,
     });
@@ -90,6 +94,59 @@ function DemoPage() {
     setTimeout(() => {
       // arrayVis.update([10, 20, 30, 40, 50]);
     }, 2000);
+
+    const binaryTreeBlock = canvas.addBlock({
+      id: "binary-tree",
+      title: "二叉树",
+      x: 20,
+      y: 260,
+      width: 200,
+      height: 150,
+    });
+
+    const binaryData: BinaryTreeNodeData[] = [
+      {
+        id: "1",
+        value: "1",
+        left: "2",
+        right: "3",
+      },
+      { id: "2", value: "22" },
+      { id: "3", value: "33", left: "4" },
+      { id: "4", value: "44" },
+    ];
+
+    const binaryTreeVis = new BinaryTreeVisual({
+      rootId: "1",
+      block: binaryTreeBlock,
+      initialData: binaryData,
+    });
+
+    const _4treeBlock = canvas.addBlock({
+      id: "4-tree",
+      title: "4叉树",
+      x: 550,
+      y: 120,
+      width: 200,
+      height: 150,
+    });
+
+    const _4treeData: MTreeNodeData[] = [
+      {
+        id: "1",
+        value: "1",
+        children: ["2", "3", "4", "5"],
+      },
+      { id: "2", value: "2" },
+      { id: "3", value: "3" },
+      { id: "4", value: "4" },
+    ];
+
+    const _4treeVis = new MTreeVisual({
+      rootId: "1",
+      initialData: _4treeData,
+      block: _4treeBlock,
+    });
 
     return () => {
       canvas?.destroy();

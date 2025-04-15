@@ -1,5 +1,11 @@
 # rei-ds-visual
 
+## 0.0.6
+
+### Patch Changes
+
+- feat: 支持二叉树&K叉树可视化
+
 ## 0.0.5
 
 ### Patch Changes

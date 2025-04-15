@@ -245,6 +245,8 @@ export class Block {
     contentWidth: number,
     contentHeight: number,
     duration: number = 300,
+    translateX: number = 0,
+    translateY: number = 0,
   ): void {
     const newWidth = contentWidth + 2 * this.paddingX;
     const height = contentHeight + this.paddingY * 2 + Block.titleHeight;
@@ -290,6 +292,11 @@ export class Block {
           .interrupt()
           .transition(transition)
           .attr("x", this.currentWidth / 2);
+
+        this.contentGroup.attr(
+          "transform",
+          `translate(${this.paddingX + translateX}, ${Block.titleHeight + this.paddingY + translateY})`,
+        );
       }
     }
   }
