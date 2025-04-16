@@ -40,6 +40,27 @@
     overflow: auto;
     flex-grow: 1;
 
+    // 添加只读状态提示
+    &[data-readonly="true"] {
+      position: relative;
+
+      &:hover::after {
+        content: "只读模式";
+        position: absolute;
+        top: 5%;
+        // bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        z-index: 100;
+      }
+    }
+
     // 编辑器样式 保留原始类名
     :global {
       .cm-content {
@@ -53,6 +74,7 @@
         user-select: none;
       }
 
+      // NOTE: 选中文本时，这个行的背景色会盖过被选择的文本，造成误导。但是如何感知用户选择的行和文本还未知。
       .cm-activeLine {
         background-color: #e8f2ff;
       }
@@ -63,6 +85,12 @@
 
       .cm-focused {
         outline: none;
+      }
+
+      .cm-highlight {
+        background-color: rgba(48, 239, 54, 0.3);
+        border-radius: 2px;
+        padding: 2px;
       }
     }
   }

@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.39
+
+### Patch Changes
+
+- feat: 代码解析器引擎初步支持&编辑器高亮支持
+- Updated dependencies
+  - rei-design@1.0.13
+
 ## 1.2.38
 
 ### Patch Changes

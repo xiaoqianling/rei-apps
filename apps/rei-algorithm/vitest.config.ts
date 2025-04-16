@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     // environment: "jsdom",
     browser: {
-      enabled: true,
+      enabled: false,
       provider: "playwright",
       instances: [{ browser: "chromium" }],
     },

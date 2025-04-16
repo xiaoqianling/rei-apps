@@ -25,7 +25,7 @@ const ReiSplit: FunctionComponent<ReiSplitProps> = ({
   onMove,
   enable = true,
 }) => {
-  const [splitPosition, setSplitPosition] = useState(50);
+  const [splitPosition, setSplitPosition] = useState(enable ? 50 : 100);
   const containerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const animationFrame = useRef<number | null>(null); // 用于存储requestAnimationFrame的ID

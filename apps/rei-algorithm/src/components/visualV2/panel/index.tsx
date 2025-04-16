@@ -1,9 +1,9 @@
 import ReiSplit from "rei-design/split";
 import { useMemo } from "react";
 import styles from "./index.module.scss";
-import { initialCode } from "./mock";
 import CodeEditor from "../../visual/codeEditor";
 import VisualEngineDemo from "@/src/pages/demo/demo";
+import { initialCode } from "../../visual/panel/mock";
 
 function VisualPanelV2() {
   // 缓存树可视化组件，在拖动时也不会重绘

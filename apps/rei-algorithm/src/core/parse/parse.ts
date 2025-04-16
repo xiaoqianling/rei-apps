@@ -33,7 +33,7 @@ let head = LinkedList.createCyclicHead([1,3,5,7,2,4], 2)
 let result = detectCycle(head)`;
 
 // 核心解析器类
-export class CodeParser {
+class CodeParser {
   private trackedObjects = new Map<string, any>();
 
   // 解析带有标记的代码

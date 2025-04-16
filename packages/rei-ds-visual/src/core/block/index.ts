@@ -4,6 +4,7 @@ import { Canvas } from "../canvas"; // 需要访问 Canvas 的变换信息
 // 引入样式，假设你的构建工具能处理 CSS 导入
 // import './styles.css'; // 如果构建设置支持，否则需要手动加载
 
+// BUG: 现在右侧和底部会超出画布边界
 export interface BlockOptions {
   id: string;
   title: string;
@@ -270,7 +271,7 @@ export class Block {
         const transition = d3.transition().duration(duration);
 
         // Interrupt existing transition before starting a new one
-        // BUG:
+        // BUG: 动画报错
         this.borderRect
           .interrupt()
           .transition(transition)

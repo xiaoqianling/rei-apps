@@ -23,18 +23,29 @@ import { CustomAutoCompletion } from "@/src/core/engine/editor/autocompletion";
 import isHotkey from "is-hotkey";
 import { useOpenState } from "@/src/hooks";
 import ReiSplit from "rei-design/split";
+import { parse } from "@babel/parser";
+import { transformAST } from "@/src/core/parse/ast";
+import { highlightEffect, highlightField } from "./extension";
 
 export interface CodeEditorRef {
   blur: () => void;
 }
 
+// https://codemirror.net/examples/styling/
 const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
   ({ initialValue = "", onChange }, ref) => {
+    const [showToast, ToastComponent] = useToast();
     const editorRef = useRef<HTMLDivElement>(null);
     const viewRef = useRef<EditorView>();
+    // STATE
     const [output, setOutput] = useState<string>("");
+    // 展示控制台
     const [consoleVisible, openConsole, closeConsole] = useOpenState(false);
-    const [showToast, ToastComponent] = useToast();
+    // 高亮代码区间
+    const [highlightPos, setHighlightPos] = useState<[number, number] | null>(
+      null,
+    );
+    const [isReadonly, setIsReadonly] = useState(false);
 
     useImperativeHandle(ref, () => ({
       blur: () => {
@@ -52,6 +63,10 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
           presets: ["typescript"],
           filename: "code.ts",
         }).code;
+        console.log("compiled", compiled);
+        // console.log("AST:", parse(code));
+        console.log("STEPS:", transformAST(parse(code)));
+        setHighlightPos([0, 19]);
 
         // 捕获 console.log 输出
         let consoleOutput = "";
@@ -99,18 +114,24 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
         doc: initialValue,
         extensions: [
           basicSetup,
+          // 高亮拓展
+          highlightField,
           javascriptLanguage.data.of({ autocomplete: CustomAutoCompletion }),
           javascript({ typescript: true }),
           // 编辑器变化监听
           EditorView.updateListener.of((update) => {
-            if (update.docChanged && onChange) {
-              onChange(update.state.doc.toString());
+            if (update.docChanged) {
+              console.log("DOC CHANGE", highlightPos);
+              setHighlightPos(null);
+              onChange && onChange(update.state.doc.toString());
             }
           }),
           // hotkey
           EditorView.domEventHandlers({
             keydown: handleKeyDown,
           }),
+          // 编辑器只读状态
+          EditorView.editable.of(!isReadonly),
         ],
         parent: editorRef.current,
       });
@@ -119,6 +140,25 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
         viewRef.current?.destroy();
       };
     }, [initialValue, onChange]);
+
+    // 更新高亮位置
+    useEffect(() => {
+      if (!viewRef.current) return;
+
+      if (!highlightPos) {
+        // 消除高亮
+        console.log("消除高亮");
+        viewRef.current.dispatch({
+          effects: highlightEffect.of({ from: 0, to: 0 }),
+        });
+        return;
+      }
+      console.log("添加高亮");
+      const [from, to] = highlightPos;
+      viewRef.current.dispatch({
+        effects: highlightEffect.of({ from, to }),
+      });
+    }, [highlightPos]);
 
     const topElement = (
       <>
@@ -167,7 +207,11 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
             </div>
           </div>
         </header>
-        <div className={styles.editor} ref={editorRef} />
+        <div
+          className={styles.editor}
+          ref={editorRef}
+          data-readonly={isReadonly}
+        />
       </>
     );
 

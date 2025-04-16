@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.13
+
+### Patch Changes
+
+- feat: 代码解析器引擎初步支持&编辑器高亮支持
+
 ## 1.0.12
 
 ### Patch Changes

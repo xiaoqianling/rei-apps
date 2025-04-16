@@ -1,5 +1,11 @@
 # rei-ds-visual
 
+## 0.0.7
+
+### Patch Changes
+
+- feat: 代码解析器引擎初步支持&编辑器高亮支持
+
 ## 0.0.6
 
 ### Patch Changes
