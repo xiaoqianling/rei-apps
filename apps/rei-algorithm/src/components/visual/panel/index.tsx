@@ -3,19 +3,17 @@ import { useState, useMemo } from "react";
 import CodeEditor from "../codeEditor";
 import styles from "./index.module.scss";
 import { initialCode } from "./mock";
-import TreeVisualizer, { tree } from "../treeVisualizer";
+import VisualEngineDemo from "@/src/pages/demo/demo";
 
 function VisualPanel() {
-  const [treeData, setTreeData] = useState(tree);
-
   // 缓存树可视化组件，在拖动时也不会重绘
   const treeVisualizer = useMemo(() => {
     return (
       <div className={styles.treeWrapper}>
-        <TreeVisualizer tree={treeData} />
+        <VisualEngineDemo />
       </div>
     );
-  }, [treeData]);
+  }, []);
 
   return (
     <div style={{ height: "500px" }}>

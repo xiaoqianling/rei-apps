@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 import BlogCard from "@/src/components/community/components/blog/card";
 import { getAllBlogs } from "@/src/api/blog";
 import { BlogCardInfo } from "@/src/components/community/type";
-import UserCard from "./userCard";
+import UserCard from "@/src/components/community/components/userCard";
 
 function CommunityPage() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [blogs, setBlogs] = useState<BlogCardInfo[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -25,7 +26,7 @@ function CommunityPage() {
 
   // 跳转到发帖页面
   const goToCreatePost = () => {
-    navigate("/community/create-post");
+    navigate(`${location.pathname}/create-post`);
   };
 
   return (
@@ -64,7 +65,7 @@ function CommunityPage() {
       </div>
 
       {/* 用户卡片 */}
-      <UserCard />
+      <UserCard onClickCreate={goToCreatePost} />
     </div>
   );
 }

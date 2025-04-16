@@ -3,6 +3,7 @@ import { RouteObject } from "react-router";
 import CommunityPage from ".";
 import BlogPage from "./article";
 import { Blog } from "@/src/components/community";
+import CreatePage from "./create";
 
 export const communityRouter: RouteObject[] = [
   {
@@ -12,7 +13,7 @@ export const communityRouter: RouteObject[] = [
   },
   {
     path: "create-post",
-    element: <></>,
+    element: <CreatePage />,
   },
   {
     path: "mock",

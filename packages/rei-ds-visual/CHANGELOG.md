@@ -1,5 +1,11 @@
 # rei-ds-visual
 
+## 0.0.8
+
+### Patch Changes
+
+- chore: 清理小部分代码
+
 ## 0.0.7
 
 ### Patch Changes

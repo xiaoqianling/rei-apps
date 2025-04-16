@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.40
+
+### Patch Changes
+
+- chore: 清理小部分代码
+
 ## 1.2.39
 
 ### Patch Changes

@@ -1,10 +1,7 @@
-import { FunctionComponent, useEffect } from "react";
-import SaveEditor from "./saveEditor";
+import { FunctionComponent } from "react";
 import { VisualPanel } from "@/src/components/visual";
-import FreeMoveContainer from "@/src/components/container/freeMove";
-import ResizeContainer from "@/src/components/container/resize";
 import { useOpenState } from "@/src/hooks";
-import VisualPanelV2 from "@/src/components/visualV2/panel";
+import QuillEditor from "./quill";
 
 interface SlatePageProps {}
 
@@ -13,15 +10,10 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
 
   return (
     <div>
-      <h2>Slate Page</h2>
+      <h2>TEST Page</h2>
       <hr />
-      {/* <SlateMarkdown /> */}
-      <hr />
-      <h2>可保存的编辑器</h2>
-      <hr />
-      <SaveEditor />
-      <hr />
-      <VisualPanelV2 />
+      <QuillEditor />
+      <VisualPanel />
       {/* <FreeMoveContainer visible={visible} onClose={close}>
         <ResizeContainer initWidth={800} initHeight={600}>
           <VisualPanel />

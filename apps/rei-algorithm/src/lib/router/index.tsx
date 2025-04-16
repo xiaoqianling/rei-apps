@@ -8,7 +8,6 @@ import DocsPage from "@/src/pages/docs";
 import LearnPage from "@/src/pages/learn";
 import SlatePage from "@/src/pages/slate";
 import { docsRouter } from "@/src/pages/docs/route";
-import CommunityLayout from "@/src/components/layout/communityLayout";
 import { communityRouter } from "@/src/pages/community/route";
 import { learnRouter } from "@/src/pages/learn/route";
 import DemoPage from "@/src/pages/demo";
@@ -54,12 +53,11 @@ export const reiRouter = createBrowserRouter([
         path: "demo",
         element: <DemoPage />,
       },
+      {
+        path: "community",
+        children: communityRouter,
+      },
     ],
-  },
-  {
-    path: "/community",
-    element: <CommunityLayout />,
-    children: communityRouter,
   },
   {
     path: "*",

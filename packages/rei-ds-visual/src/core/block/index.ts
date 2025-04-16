@@ -269,30 +269,22 @@ export class Block {
         this.titleText.attr("x", this.currentWidth / 2);
       } else {
         const transition = d3.transition().duration(duration);
-
-        // Interrupt existing transition before starting a new one
         // BUG: 动画报错
         this.borderRect
-          .interrupt()
           .transition(transition)
           .attr("width", this.currentWidth)
           .attr("height", this.currentHeight);
 
         this.titleBgRect
-          .interrupt()
           .transition(transition)
           .attr("width", this.currentWidth - 1);
         // height remains titleHeight - 1
 
         this.dividerLine
-          .interrupt()
           .transition(transition)
           .attr("x2", this.currentWidth - 2);
 
-        this.titleText
-          .interrupt()
-          .transition(transition)
-          .attr("x", this.currentWidth / 2);
+        this.titleText.transition(transition).attr("x", this.currentWidth / 2);
 
         this.contentGroup.attr(
           "transform",

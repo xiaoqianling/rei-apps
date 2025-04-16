@@ -3,9 +3,10 @@ import { FunctionComponent } from "react";
 
 interface UserCardProps {
   // 可后续添加 props
+  onClickCreate?: () => void;
 }
 
-const UserCard: FunctionComponent<UserCardProps> = () => {
+const UserCard: FunctionComponent<UserCardProps> = ({ onClickCreate }) => {
   return (
     <div className={styles.container}>
       <div className={styles.profile}>
@@ -27,7 +28,9 @@ const UserCard: FunctionComponent<UserCardProps> = () => {
 
       <div className={styles.actions}>
         <button className={styles.profileBtn}>个人主页</button>
-        <button className={styles.postBtn}>发帖</button>
+        <button className={styles.postBtn} onClick={onClickCreate}>
+          发帖
+        </button>
         <button className={styles.logoutBtn}>退出登录</button>
       </div>
     </div>
