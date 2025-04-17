@@ -3,7 +3,7 @@ import styles from "./index.module.less";
 
 interface ReiTooltipProps {
   children: ReactNode;
-  content: string;
+  content?: string;
   position?: "top" | "bottom" | "left" | "right";
   className?: string;
 }
@@ -14,6 +14,9 @@ const ReiTooltip: FunctionComponent<ReiTooltipProps> = ({
   position,
   className,
 }) => {
+  if (!content) {
+    return <div className={className}>{children}</div>;
+  }
   const [visible, setVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 

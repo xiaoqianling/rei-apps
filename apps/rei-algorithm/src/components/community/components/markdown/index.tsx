@@ -2,9 +2,9 @@ import { FunctionComponent, useEffect } from "react";
 import Markdown from "react-markdown";
 import { useLocation, useNavigate } from "react-router-dom";
 import rehypeSlug from "rehype-slug";
-import { MarkdownContent } from "../../type/content";
-import styles from "./index.module.scss";
-import MarkdownCode from "./code";
+import MarkdownCode from "./common/code";
+import { MarkdownContent } from "./type";
+import { MarkdownH1, MarkdownH2, MarkdownH3, MarkdownP } from "./common";
 
 interface BlogMarkdownProps {
   markdown: MarkdownContent;
@@ -38,36 +38,29 @@ const BlogMarkdown: FunctionComponent<BlogMarkdownProps> = ({ markdown }) => {
     <Markdown
       rehypePlugins={[rehypeSlug]}
       components={{
-        h1: ({ node, ...props }) => (
-          <h1
-            {...props}
+        h1: (props) => (
+          <MarkdownH1
+            props={props}
+            children={props.children}
             onClick={handleClick}
-            className={`${props.className} ${styles.title}`}
           />
         ),
-        h2: ({ node, ...props }) => (
-          <h2
-            {...props}
+        h2: (props) => (
+          <MarkdownH2
+            props={props}
+            children={props.children}
             onClick={handleClick}
-            className={`${props.className} ${styles.title}`}
           />
         ),
-        h3: ({ node, ...props }) => (
-          <h3
-            {...props}
+        h3: (props) => (
+          <MarkdownH3
+            props={props}
+            children={props.children}
             onClick={handleClick}
-            className={`${props.className} ${styles.title}`}
           />
         ),
-        p: ({ node, ...props }) => (
-          <p {...props} className={`${props.className} ${styles.p}`} />
-        ),
+        p: (props) => <MarkdownP props={props} children={props.children} />,
         code: ({ node, className, children, ...props }) => {
-          // classname为language-xxx(markdown标记里写的)
-          console.assert(
-            Object.keys(props).length === 0,
-            `[PostMarkDown] props should be empty ${props}`,
-          );
           return <MarkdownCode className={className}>{children}</MarkdownCode>;
         },
       }}

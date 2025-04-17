@@ -10,6 +10,7 @@ interface MarkdownCodeProps {
 
 /**
  * 渲染markdown的code组件
+ * TODO:这里的高亮不可修改，用codemirror替代
  * @returns
  */
 const MarkdownCode: FunctionComponent<MarkdownCodeProps> = ({
@@ -25,7 +26,7 @@ const MarkdownCode: FunctionComponent<MarkdownCodeProps> = ({
     >
       {({ className, style, tokens, getLineProps, getTokenProps }) => {
         return (
-          <pre style={style} className={classNames(className, styles.pre)}>
+          <div className={classNames(className, styles.pre)}>
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line })}>
                 {line.map((token, key) => (
@@ -33,7 +34,7 @@ const MarkdownCode: FunctionComponent<MarkdownCodeProps> = ({
                 ))}
               </div>
             ))}
-          </pre>
+          </div>
         );
       }}
     </Highlight>

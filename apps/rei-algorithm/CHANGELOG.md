@@ -1,5 +1,13 @@
 # rei-algorithm
 
+## 1.2.41
+
+### Patch Changes
+
+- feat: slate编辑器初稿
+- Updated dependencies
+  - rei-design@1.0.14
+
 ## 1.2.40
 
 ### Patch Changes

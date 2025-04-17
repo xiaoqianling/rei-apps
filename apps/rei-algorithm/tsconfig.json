@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "@vitest/browser/providers/playwright"],
+    "types": ["node"],
     "paths": {
       "rei-design/*": ["packages/rei-design/src/*"],
       "rei-visual/*": ["packages/rei-visualization/src/*"],

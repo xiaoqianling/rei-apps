@@ -44,7 +44,6 @@ h3.title {
 }
 
 // 添加代码块样式
-// 优化代码块样式
 pre {
   border-radius: 8px;
   overflow-x: auto;
@@ -53,7 +52,7 @@ pre {
   font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.6rem;
-
+  background-color: rgb(246, 248, 250);
   ::selection {
     background: rgba(100, 149, 237, 0.2); // 柔和的蓝色
   }

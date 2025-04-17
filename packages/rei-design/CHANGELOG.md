@@ -1,5 +1,11 @@
 # rei-design
 
+## 1.0.14
+
+### Patch Changes
+
+- feat: slate编辑器初稿
+
 ## 1.0.13
 
 ### Patch Changes

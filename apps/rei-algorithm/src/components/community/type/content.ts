@@ -23,5 +23,8 @@ export enum ContentTypes {
   MERMAID = "mermaid",
   VISUAL = "visual", // 可视化内容
 
+  // 新增富文本编辑器类型
+  RICH_TEXT = "rich_text",
+
   // TODO:
 }

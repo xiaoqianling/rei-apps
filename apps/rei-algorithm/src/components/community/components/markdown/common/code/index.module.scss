@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  margin: 1rem 0;
   .languageTag {
     position: absolute;
     display: flex;
@@ -12,5 +13,7 @@
 
   .pre {
     padding: 1rem;
+    color: rgb(57, 58, 52);
+    background-color: rgb(246, 248, 250);
   }
 }
