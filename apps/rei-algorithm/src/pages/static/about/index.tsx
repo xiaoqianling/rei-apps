@@ -1,4 +1,6 @@
+import EditorV2 from "@/src/components/senki/visualEditor/editorV2";
 import "./index.scss";
+import VisualEditor from "@/src/components/senki/visualEditor";
 
 function AboutPage() {
   return (
@@ -22,6 +24,8 @@ function AboutPage() {
         </a>
       </p>
       <strong>TODO 施工中...</strong>
+      <EditorV2 />
+      <VisualEditor />
     </div>
   );
 }

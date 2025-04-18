@@ -1,6 +1,6 @@
 {
   "name": "rei-algorithm",
-  "version": "1.2.42",
+  "version": "1.2.43",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -34,6 +34,9 @@
     "@mdx-js/rollup": "^3.1.0",
     "@reduxjs/toolkit": "2.5.0",
     "@types/mdx": "^2.0.13",
+    "@uiw/codemirror-extensions-langs": "^4.23.10",
+    "@uiw/codemirror-theme-noctis-lilac": "^4.23.10",
+    "@uiw/react-codemirror": "^4.23.10",
     "axios": "^1.8.4",
     "classnames": "^2.5.1",
     "codemirror": "^6.0.1",

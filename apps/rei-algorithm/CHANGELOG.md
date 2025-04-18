@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.43
+
+### Patch Changes
+
+- feat: 步进器方案
+
 ## 1.2.42
 
 ### Patch Changes
