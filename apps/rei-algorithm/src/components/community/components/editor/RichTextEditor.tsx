@@ -48,7 +48,7 @@ const HOTKEYS: Record<string, InlineElementFormat> = {
 const ICON_SIZE = 20;
 
 // 主组件 - 富文本编辑器
-const RichTextExample = () => {
+const RichTextEditor = () => {
   // 渲染元素和叶节点的回调函数
   const renderElement = useCallback(
     (props: RenderElementProps) => <Element {...props} />,
@@ -213,4 +213,4 @@ const initialValue: Descendant[] = [
   },
 ];
 
-export default RichTextExample;
+export default RichTextEditor;

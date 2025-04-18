@@ -14,7 +14,7 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
       <hr />
       <RichTextEditor />
       <hr />
-      {/* <VisualPanel /> */}
+      <VisualPanel />
       {/* <FreeMoveContainer visible={visible} onClose={close}>
         <ResizeContainer initWidth={800} initHeight={600}>
           <VisualPanel />

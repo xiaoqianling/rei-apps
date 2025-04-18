@@ -63,8 +63,8 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
           presets: ["typescript"],
           filename: "code.ts",
         }).code;
-        console.log("compiled", compiled);
-        // console.log("AST:", parse(code));
+        // console.log("compiled", compiled);
+        console.log("AST:", parse(code));
         console.log("STEPS:", transformAST(parse(code)));
         setHighlightPos([0, 19]);
 

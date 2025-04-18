@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.42
+
+### Patch Changes
+
+- chore
+
 ## 1.2.41
 
 ### Patch Changes
