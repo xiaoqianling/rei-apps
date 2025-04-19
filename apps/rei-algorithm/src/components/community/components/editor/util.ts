@@ -10,6 +10,8 @@ import {
   CustomElementFormat,
 } from "./custom-types";
 import { CustomElementWithAlign, SlateElement } from "./markdown/type";
+import { TipLevelsTypes } from "../tip/type";
+import { getCustomElementExample } from "./custom/const";
 
 export const isAlignElement = (
   element: SlateElement,
@@ -147,16 +149,10 @@ export const toggleCustomMark = (
 
   console.log("ToggleCustomMark", " Format", format);
   // 在当前段落后插入新行
-  Transforms.insertNodes(
-    editor,
-    {
-      type: "insert",
-      content: "console.log('hello world')",
-      children: [{ text: "text" }],
-    },
-    {
-      at: Editor.after(editor, selection, { unit: "block" }), // 在下一行插入
-      select: true, // 聚焦到新插入的节点
-    },
-  );
+  const element = getCustomElementExample(format);
+  if (!element) return;
+  Transforms.insertNodes(editor, [element], {
+    at: Editor.after(editor, selection, { unit: "block" }), // 在下一行插入
+    select: true, // 聚焦到新插入的节点
+  });
 };

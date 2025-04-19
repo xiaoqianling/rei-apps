@@ -1,9 +1,12 @@
 import React from "react";
-import { RenderElementProps } from "slate-react";
+import { RenderElementProps, RenderLeafProps } from "slate-react";
 import { AlignType } from "./custom-types";
 import { isAlignElement } from "./util";
 import { MarkdownH1, MarkdownH2 } from "../markdown/common";
 import MarkdownCode from "../markdown/common/code";
+import BlogTip from "../tip";
+import { TipContent, TipLevelsTypes } from "../tip/type";
+import { ContentTypes } from "../../type/content";
 
 // 自定义元素
 export const Element = ({
@@ -42,6 +45,13 @@ export const Element = ({
       return (
         <MarkdownCode className="language-jsx">{element.content}</MarkdownCode>
       );
+    case "note":
+      const tip: TipContent = {
+        type: ContentTypes.TIP,
+        level: element.level,
+        content: element.content,
+      };
+      return <BlogTip tip={tip} />;
     default:
       return (
         <p style={style} {...attributes}>
@@ -49,4 +59,24 @@ export const Element = ({
         </p>
       );
   }
+};
+
+export const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
+  if (leaf.bold) {
+    children = <strong>{children}</strong>;
+  }
+
+  if (leaf.code) {
+    children = <code>{children}</code>;
+  }
+
+  if (leaf.italic) {
+    children = <em>{children}</em>;
+  }
+
+  if (leaf.underline) {
+    children = <u>{children}</u>;
+  }
+
+  return <span {...attributes}>{children}</span>;
 };

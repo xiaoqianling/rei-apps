@@ -6,7 +6,8 @@ import { BlogDetail } from "../../../type";
 import Tag from "../tag";
 import styles from "./index.module.scss";
 import { forwardRef, FunctionComponent } from "react";
-import { renderContents } from "../../../util/render";
+import { renderContents, renderSlate } from "../../../util/render";
+import { SlateMock } from "../../editor/mock";
 
 interface BlogContentProps {
   blog: BlogDetail;
@@ -18,7 +19,8 @@ interface BlogContentProps {
 const BlogContent = forwardRef<HTMLDivElement, BlogContentProps>(
   (props, ref) => {
     const { blog, showInfo } = props;
-    const content = renderContents(blog.contents ?? []);
+    // const content = renderContents(blog.contents ?? []);
+    const content = renderSlate(SlateMock);
 
     return (
       <div className={styles.main} ref={ref}>

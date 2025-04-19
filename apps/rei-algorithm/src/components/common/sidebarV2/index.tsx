@@ -105,7 +105,6 @@ const Menu: FunctionComponent<Props> = ({ menu, onClick }): ReactNode => {
   return menu.map((item) => {
     if (item.subItems?.length) {
       const isExpanded = expandedPaths.has(item.path);
-      isExpanded && console.log("expandedPaths", item.path);
 
       return (
         <Fragment key={item.path}>

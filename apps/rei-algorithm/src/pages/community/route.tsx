@@ -4,6 +4,7 @@ import CommunityPage from ".";
 import BlogPage from "./article";
 import { Blog } from "@/src/components/community";
 import CreatePage from "./create";
+import SlateRenderer from "@/src/components/community/components/blog/slateRenderer";
 
 export const communityRouter: RouteObject[] = [
   {
@@ -18,6 +19,7 @@ export const communityRouter: RouteObject[] = [
   {
     path: "mock",
     element: <Blog blog={post1} />,
+    // element: <SlateRenderer />,
   },
   {
     path: "i",

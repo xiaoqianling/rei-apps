@@ -1,5 +1,6 @@
 import { Descendant } from "slate";
 import { CustomText } from "../custom-types";
+import { TipLevelsTypes } from "../../tip/type";
 
 // 引用块
 export type BlockQuoteElement = {
@@ -127,10 +128,17 @@ export type MarkdownElement =
   | CodeLineElement;
 
 // 模拟的自定义特色组件
-type CustomElement = {
+export type CustomElement = InsertElement | NoteElement;
+type InsertElement = {
   type: "insert";
   content: string;
   children: Descendant[];
+};
+type NoteElement = {
+  type: "note";
+  content: string;
+  level: TipLevelsTypes;
+  children?: Descendant[];
 };
 
 // 所有编辑器支持的组件

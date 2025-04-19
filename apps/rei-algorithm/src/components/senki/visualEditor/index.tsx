@@ -1,70 +1,79 @@
+import styles from "./index.module.scss";
 import CodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror";
-// import "codemirror/keymap/sublime";
-// import "codemirror/theme/eclipse.css";
-// import "codemirror/theme/neo.css";
-import React, { useLayoutEffect, useRef, useState } from "react";
-import { ControlTrack } from "../components";
-import { CodeContext, CodeControl } from "../lib/algo_desc";
-import pulgin from "../lib/babel/plugin-senki-wait";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { CodeControl } from "../lib/algo_desc";
 import { Scene, SenkiArray, SenkiLinkedNode } from "../lib/senki";
-import { transform } from "@babel/standalone";
 import { noctisLilac } from "@uiw/codemirror-theme-noctis-lilac";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import ReiSplit from "rei-design/split";
+import { makeCodeSource, createNewCodeControl } from "../util";
+import {
+  highlightEffect,
+  highlightField,
+} from "../../visual/codeEditor/extension";
+import { LuClipboardCopy, LuPanelLeftOpen } from "react-icons/lu";
+import { MdCodeOff, MdCode } from "react-icons/md";
+import { TbFreezeRow } from "react-icons/tb";
+import { VscRunAll } from "react-icons/vsc";
+import ReiTooltip from "rei-design/tooltip";
+import { copyToClipboard } from "@/src/util/dom";
+import { useToast } from "rei-design/toast";
 
-let scene: Scene;
-let codeControl: CodeControl;
-let tempTask: undefined | (() => void); // 保存断点继续的执行函数
+let historyCodeStr = localStorage.getItem("code");
 
-const Mode = [
-  {
-    title: "数组",
-    className: "SenkiArray",
-    header: 'import { SenkiArray } from "senki"\n\n',
-  },
-  {
-    title: "树节点",
-    className: "SenkiLinkedNode",
-    header: 'import { SenkiLinkedNode } from "senki"\n\n',
-  },
-];
+const historyCode: string = historyCodeStr
+  ? JSON.parse(historyCodeStr)
+  : 'import { SenkiArray } from "senki"\n\n';
 
-let histroyCodeStr = localStorage.getItem("code");
-
-const histroyCode: string[] = histroyCodeStr
-  ? JSON.parse(histroyCodeStr)
-  : Mode.map((m) => m.header);
+const editorHeight = 400;
 
 function VisualEditor() {
-  const [codeInfo, setCodeInfo] = useState([-1, -1]);
-  const [mode, setMode] = useState(0);
+  let scene: Scene;
+  let codeControl: CodeControl = new CodeControl("");
+  let tempTask: undefined | (() => void); // 保存断点继续的执行函数
+
+  // 高亮行
+  const [highlightLine, setCodeInfo] = useState<[number, number]>([-1, -1]);
   const [format, setFormat] = useState(true);
-  const [code, setCode] = useState(histroyCode);
+  const [code, setCode] = useState(historyCode);
   const [status, setStatus] = useState<"stop" | "play" | "finish">("stop");
+  const [showToast, ToastComponent] = useToast();
 
   const editorRef = useRef<ReactCodeMirrorRef>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const statusRef = useRef(status);
   statusRef.current = status; // 没办法，为了在函数里引用，只能干这种愚蠢操作。
-  const codeInfoRef = useRef<number[]>();
-  codeInfoRef.current = codeInfo;
+
+  // 触发高亮
+  useEffect(() => {
+    // editorRef.current?.view?.dispatch({
+    //   effects: highlightEffect.of(highlightLine),
+    // });
+  }, [highlightLine]);
 
   const handleSaveCode = () => {
-    code[mode] = editorRef.current?.view?.state.doc.toString() || "";
+    setCode(editorRef.current?.view?.state.doc.toString() || "");
     localStorage.setItem("code", JSON.stringify(code));
   };
 
   const handleRunCode = () => {
-    code[mode] = editorRef.current?.view?.state.doc.toString() || "";
+    setCode(editorRef.current?.view?.state.doc.toString() || "");
     localStorage.setItem("code", JSON.stringify(code));
 
-    let { fakeCode, error, realCode } = makeCodeSource(code[mode], format);
-    console.log({ fakeCode, error, realCode });
+    let { fakeCode, error, realCode } = makeCodeSource(code, format);
 
-    createNewCodeControl(realCode, statusRef, setStatus, () => {}, setCodeInfo);
+    createNewCodeControl(
+      realCode,
+      statusRef,
+      setStatus,
+      () => {},
+      setCodeInfo,
+      scene,
+      tempTask,
+    );
 
     if (format) {
-      code[mode] = Mode[mode].header + fakeCode;
+      setCode('import { SenkiArray } from "senki"\n\n' + fakeCode);
       // editor.current?.editor.setValue(code[mode]);
       localStorage.setItem("code", JSON.stringify(code));
     }
@@ -81,9 +90,17 @@ function VisualEditor() {
   const handleRestart = () => {
     codeControl.destroy(); // 一定要记得销毁
 
-    let { error, realCode } = makeCodeSource(code[mode], format);
+    let { error, realCode } = makeCodeSource(code, format);
 
-    createNewCodeControl(realCode, statusRef, setStatus, () => {}, setCodeInfo);
+    createNewCodeControl(
+      realCode,
+      statusRef,
+      setStatus,
+      () => {},
+      setCodeInfo,
+      scene,
+      tempTask,
+    );
 
     setStatus("play");
   };
@@ -98,8 +115,9 @@ function VisualEditor() {
 
   const handleChangeSpeed = () => {};
 
+  // 初始化canvas
   useLayoutEffect(() => {
-    scene = new Scene(canvas.current!);
+    scene = new Scene(canvasRef.current!);
     SenkiArray.config.scene = scene;
     SenkiArray.config.width = scene.width;
     SenkiArray.config.height = scene.height;
@@ -108,20 +126,30 @@ function VisualEditor() {
       height: scene.height,
     });
     scene.add(SenkiLinkedNode.senkiForest);
-  }, [canvas]);
+  }, [canvasRef]);
+
+  const handleCopy = () => {
+    copyToClipboard(editorRef.current?.state?.doc.toString() || "")
+      .then(() => {
+        showToast({ message: "复制成功", position: "top" });
+      })
+      .catch(() => {
+        showToast({ message: "复制失败" });
+      });
+  };
 
   const editor = (
     <CodeMirror
       ref={editorRef}
-      value={code[mode]}
-      height="200px"
+      value={code}
+      height={`${editorHeight}px`}
       basicSetup={{
         foldGutter: false,
         dropCursor: false,
         allowMultipleSelections: false,
         indentOnInput: false,
       }}
-      extensions={[langs.tsx()]}
+      extensions={[langs.tsx(), highlightField]}
       theme={noctisLilac}
       style={{ fontSize: "16px" }}
       // 高亮方案
@@ -129,35 +157,46 @@ function VisualEditor() {
   );
 
   return (
-    <div>
+    <div className={styles.container}>
       {/* 操作栏 */}
-      <div>
-        <div>
-          <button>发布代码</button>
-          <button onClick={handleSaveCode}>保存代码</button>
-          <button onClick={handleRunCode}>执行代码</button>
+      <ToastComponent />
+      <header>
+        <span className={styles.title}>
+          示例代码: 展示代码执行、特定注解、可视化联动能力
+        </span>
+        {/* 一组操作 */}
+        <div className={styles.operation}>
+          <div>
+            <ReiTooltip content="复制">
+              <LuClipboardCopy onClick={handleCopy} />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="关闭面板">
+              <LuPanelLeftOpen />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="悬浮面板">
+              <TbFreezeRow />
+            </ReiTooltip>
+          </div>
+          <div>
+            <ReiTooltip content="运行代码">
+              <VscRunAll onClick={handleRunCode} />
+            </ReiTooltip>
+          </div>
         </div>
-        <div>
-          <ControlTrack
-            status={status}
-            speed={400}
-            light
-            onPlay={handlePlay}
-            onStop={handleStop}
-            onRestart={handleRestart}
-            onChangeSpeed={handleChangeSpeed}
-            onNext={handleNext}
-          />
-        </div>
-      </div>
+      </header>
       <div>
         <ReiSplit
           firstElement={editor}
-          secondElement={<canvas ref={canvas}></canvas>}
+          secondElement={
+            <canvas ref={canvasRef} height={editorHeight}></canvas>
+          }
           direction={"horizontal"}
           range={[25, 75]}
         />
-
         <div>
           <span>
             {status === "stop"
@@ -173,71 +212,3 @@ function VisualEditor() {
 }
 
 export default VisualEditor;
-
-function makeCodeSource(code: string, format: boolean) {
-  code = code.split("\n").slice(2).join("\n").trim();
-  let error = "",
-    fakeCode = code,
-    realCode = "";
-
-  try {
-    if (format) fakeCode = transform(code, {}).code!;
-
-    realCode = transform(fakeCode, {
-      plugins: [pulgin],
-    }).code!;
-  } catch (err) {
-    // error = err;
-    console.error(err);
-  }
-
-  return { fakeCode, error, realCode };
-}
-
-const createNewCodeControl = (
-  realCode: string,
-  statusRef: React.MutableRefObject<"stop" | "play" | "finish">,
-  setStatus: (bool: "stop" | "play" | "finish") => void,
-  setError: React.Dispatch<React.SetStateAction<string | undefined>>,
-  setCodeInfo: React.Dispatch<React.SetStateAction<number[]>>,
-) => {
-  if (codeControl) codeControl.destroy();
-
-  codeControl = new CodeControl(realCode);
-
-  const handleWait = ({ info, resolve }: CodeContext) => {
-    setCodeInfo(info.line);
-    // 确定动画结束了再进行下一步
-    const tryToNext = () => {
-      if (statusRef.current === "play") {
-        if (scene.isAnimAllOver()) resolve();
-        else setTimeout(tryToNext, 100);
-      } else tempTask = resolve;
-    };
-
-    setTimeout(tryToNext, 500);
-  };
-
-  const handleEnd = () => {
-    setStatus("finish");
-    setCodeInfo([-1, -1]);
-  };
-
-  const handleDestroy = () => {
-    scene.removeAllChild();
-    SenkiLinkedNode.senkiForest.destroyTree();
-    SenkiLinkedNode.resetSenkiForest();
-    scene.add(SenkiLinkedNode.senkiForest);
-  };
-
-  const handleError = (err: string) => {
-    setError(err);
-  };
-
-  codeControl.on("wait", handleWait);
-  codeControl.on("end", handleEnd);
-  codeControl.on("destroy", handleDestroy);
-  codeControl.on("error", handleError);
-
-  codeControl.start();
-};

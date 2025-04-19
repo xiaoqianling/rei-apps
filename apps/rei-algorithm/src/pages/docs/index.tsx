@@ -12,7 +12,7 @@ function DocsPage({ children }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <DocsSidebarV2 menuData={docsMenuData} prefix="/docs" />
+        <DocsSidebar menuData={docsMenuData} prefix="/docs" />
       </div>
       <div className={styles.right}>
         <Outlet />

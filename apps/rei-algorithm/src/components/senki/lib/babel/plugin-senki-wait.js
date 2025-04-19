@@ -1,3 +1,4 @@
+// PluginItem
 export default function ({ types: t }) {
   const findLine = (path, node) => {
     if (node && node.loc) return [node.loc.start.line, node.loc.end.line];
@@ -18,11 +19,11 @@ export default function ({ types: t }) {
             t.arrayExpression([
               t.numericLiteral(lineStart),
               t.numericLiteral(lineEnd),
-            ])
+            ]),
           ),
           t.objectProperty(t.identifier("desc"), t.numericLiteral(descNum)),
         ]),
-      ])
+      ]),
     );
   };
 
@@ -35,7 +36,7 @@ export default function ({ types: t }) {
           path.node.body.splice(
             i * 2 + 1,
             0,
-            createWaitNode(findLine(path, path.node.body[i * 2]))
+            createWaitNode(findLine(path, path.node.body[i * 2])),
           );
         }
       },
@@ -87,14 +88,14 @@ export default function ({ types: t }) {
           path.node.body.splice(
             i * 2,
             0,
-            createWaitNode(findLine(path, path.node.body[i * 2 - 1]))
+            createWaitNode(findLine(path, path.node.body[i * 2 - 1])),
           );
         }
         if (!t.isReturnStatement(path.node.body[len * 2 - 1]))
           path.node.body.splice(
             len * 2,
             0,
-            createWaitNode(findLine(path, path.node.body[len * 2 - 1]))
+            createWaitNode(findLine(path, path.node.body[len * 2 - 1])),
           );
       },
       Function(path) {
@@ -108,8 +109,8 @@ export default function ({ types: t }) {
           parent = parent.parentPath;
         }
         if (!t.isAwaitExpression(path.parentPath.node))
-          path.replaceWith(t.awaitExpression(path.node))
-      }
+          path.replaceWith(t.awaitExpression(path.node));
+      },
     },
   };
-};
+}

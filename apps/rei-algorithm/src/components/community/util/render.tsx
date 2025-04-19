@@ -5,7 +5,9 @@ import BlogMarkdown from "../components/markdown";
 import BlogTip from "../components/tip";
 import { BlogContent } from "../type/content";
 import BlogMermaid from "../components/mermaid";
-import { TreeVisualizer, VisualPanel } from "../../visual";
+import { VisualPanel } from "../../visual";
+import { Descendant } from "slate";
+import SlateRenderer from "../components/blog/slateRenderer";
 
 export function renderContents(contents: BlogContent[]): ReactNode {
   return contents.map((item, index) => {
@@ -33,4 +35,8 @@ export function renderContents(contents: BlogContent[]): ReactNode {
         return null;
     }
   });
+}
+
+export function renderSlate(contents: Descendant[]): ReactNode {
+  return <SlateRenderer data={contents} />;
 }

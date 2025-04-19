@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.44
+
+### Patch Changes
+
+- feat: 统一编辑器
+
 ## 1.2.43
 
 ### Patch Changes

@@ -12,8 +12,6 @@ const SlatePage: FunctionComponent<SlatePageProps> = () => {
     <div style={{ padding: "0 5rem" }}>
       <h2>Create Blog</h2>
       <hr />
-      <RichTextEditor />
-      <hr />
       <VisualPanel />
       {/* <FreeMoveContainer visible={visible} onClose={close}>
         <ResizeContainer initWidth={800} initHeight={600}>

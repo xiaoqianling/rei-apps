@@ -1,5 +1,6 @@
 // 导入必要的库和类型
 import {
+  BsInfoSquareFill,
   BsTypeBold,
   BsTypeH1,
   BsTypeH2,
@@ -8,7 +9,7 @@ import {
 } from "react-icons/bs";
 import isHotkey from "is-hotkey";
 import { KeyboardEvent, useCallback, useMemo } from "react";
-import { Descendant, createEditor } from "slate";
+import { Descendant, Editor, Transforms, createEditor } from "slate";
 import { withHistory } from "slate-history";
 import {
   Editable,
@@ -33,9 +34,10 @@ import {
   FaQuoteRight,
 } from "react-icons/fa";
 import styles from "./index.module.scss";
-import { Element } from "./element";
+import { Element, Leaf } from "./element";
 import { toggleInlineMark } from "./util";
 import { MdOutlineNoteAlt } from "react-icons/md";
+import { TipLevelsTypes } from "../tip/type";
 
 // 定义快捷键映射
 const HOTKEYS: Record<string, InlineElementFormat> = {
@@ -64,6 +66,42 @@ const RichTextEditor = () => {
 
   const handleChange = (value: Descendant[]) => {
     console.log(value);
+  };
+
+  // 处理快捷键
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    for (const hotkey in HOTKEYS) {
+      if (isHotkey(hotkey, event)) {
+        event.preventDefault();
+        const mark = HOTKEYS[hotkey];
+        toggleInlineMark(editor, mark);
+        return;
+      }
+    }
+
+    // 处理引用块
+    const [match] = Editor.nodes(editor, {
+      match: (n) => n.type === "md-quote",
+    });
+    if (match && isHotkey("shift+enter", event)) {
+      event.preventDefault();
+      editor.insertText("\n");
+      return;
+    } else if (match && isHotkey("enter", event)) {
+      // 行尾换行，新建段落
+      if (Editor.isEnd(editor, editor.selection?.focus, match[1])) {
+        event.preventDefault();
+        Transforms.insertNodes(editor, {
+          type: "paragraph",
+          children: [{ text: "" }],
+        });
+        return;
+      } else {
+        // 行内换行，插入换行符
+        event.preventDefault();
+        Transforms.insertText(editor, "\n");
+      }
+    }
   };
 
   return (
@@ -132,6 +170,11 @@ const RichTextEditor = () => {
           icon={<MdOutlineNoteAlt size={24} />}
           tip="测试"
         />
+        <CustomButton
+          format="note"
+          icon={<BsInfoSquareFill size={22} />}
+          tip="提示块"
+        />
       </Toolbar>
 
       {/* 可编辑区域 */}
@@ -142,39 +185,17 @@ const RichTextEditor = () => {
         placeholder="Enter some rich text…"
         spellCheck
         autoFocus
-        onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
-          // 处理快捷键
-          for (const hotkey in HOTKEYS) {
-            if (isHotkey(hotkey, event as any)) {
-              event.preventDefault();
-              const mark = HOTKEYS[hotkey];
-              toggleInlineMark(editor, mark);
-            }
-          }
+        onCopy={(event) => {
+          // 获取选中的纯文本
+          const text = window.getSelection()?.toString();
+          event.clipboardData?.setData("text/plain", text || "");
+          // 阻止默认的JSON复制行为
+          event.preventDefault();
         }}
+        onKeyDown={handleKeyDown}
       />
     </Slate>
   );
-};
-
-const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
-  if (leaf.bold) {
-    children = <strong>{children}</strong>;
-  }
-
-  if (leaf.code) {
-    children = <code>{children}</code>;
-  }
-
-  if (leaf.italic) {
-    children = <em>{children}</em>;
-  }
-
-  if (leaf.underline) {
-    children = <u>{children}</u>;
-  }
-
-  return <span {...attributes}>{children}</span>;
 };
 
 const initialValue: Descendant[] = [
@@ -205,6 +226,24 @@ const initialValue: Descendant[] = [
   {
     type: "md-quote",
     children: [{ text: "A wise quote." }],
+  },
+  {
+    type: "note",
+    level: TipLevelsTypes.TIP,
+    content: "This\n is\n a\n tip",
+    children: [{ text: "Tip" }],
+  },
+  {
+    type: "note",
+    level: TipLevelsTypes.WARNING,
+    content: "This is a warn",
+    children: [{ text: "Tip" }],
+  },
+  {
+    type: "note",
+    level: TipLevelsTypes.ERROR,
+    content: "This is a ERROR",
+    children: [{ text: "Tip" }],
   },
   {
     type: "paragraph",

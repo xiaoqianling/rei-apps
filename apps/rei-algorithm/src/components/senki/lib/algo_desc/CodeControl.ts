@@ -35,7 +35,7 @@ const CodeControlPool: CodeControl[] = [];
 
 type CodeControlEvent = "end" | "begin" | "wait" | "error" | "destroy";
 
-type CodeInfo = { line: number[]; desc: number };
+type CodeInfo = { line: [number, number]; desc: number };
 
 export type CodeContext = {
   info: CodeInfo;
@@ -43,10 +43,12 @@ export type CodeContext = {
   reject: (reason?: any) => void;
 };
 
+// 代码执行控制器
 export default class CodeControl extends MicroEvent<CodeControlEvent> {
   static count = 0;
   executableFunction: () => Promise<void>;
 
+  // 注入断点调用
   static saveContext(count: number, context: CodeContext) {
     const instance = CodeControlPool[count];
     if (instance) instance.saveCodeContext(context);
@@ -62,11 +64,11 @@ export default class CodeControl extends MicroEvent<CodeControlEvent> {
 
   status: "running" | "idle" | "error" = "idle";
 
-  // 注入断点函数
+  // 注入断点wait函数
   _breakpointFunctionDeclaration = `
   function wait(info) {
     return new Promise((resolve, reject) => {
-      // console.log(${this.count})
+      // console.log("count:", ${this.count})
       CodeControl.saveContext(${this.count}, { info, resolve, reject });
     });
   };
@@ -74,7 +76,6 @@ export default class CodeControl extends MicroEvent<CodeControlEvent> {
 
   constructor(source: string) {
     super();
-
     CodeControlPool.push(this);
 
     this.executableFunction = Function(`
@@ -86,7 +87,7 @@ export default class CodeControl extends MicroEvent<CodeControlEvent> {
   }
 
   start() {
-    this.emit("begin");
+    // this.emit("begin");
     this.status = "running";
     this.executableFunction()
       .catch((err: any) => {
@@ -105,6 +106,7 @@ export default class CodeControl extends MicroEvent<CodeControlEvent> {
     this.emit("wait", context);
   }
 
+  // 移除所有监听函数，销毁实例
   destroy() {
     delete CodeControlPool[this.count];
     this.offAll("end");

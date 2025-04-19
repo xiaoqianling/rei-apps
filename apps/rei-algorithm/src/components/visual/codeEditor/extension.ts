@@ -2,10 +2,7 @@ import { Decoration, DecorationSet, EditorView } from "@codemirror/view";
 import { StateField, StateEffect } from "@codemirror/state";
 
 // 创建高亮效果
-export const highlightEffect = StateEffect.define<{
-  from: number;
-  to: number;
-}>();
+export const highlightEffect = StateEffect.define<[number, number]>();
 
 // 创建高亮装饰器
 const highlightMark = Decoration.mark({
@@ -21,9 +18,9 @@ export const highlightField = StateField.define<DecorationSet>({
     // 只处理手动触发的高亮效果
     for (const effect of tr.effects) {
       if (effect.is(highlightEffect)) {
-        if (effect.value.from < effect.value.to) {
+        if (effect.value[0] <= effect.value[1]) {
           return Decoration.none.update({
-            add: [highlightMark.range(effect.value.from, effect.value.to)],
+            add: [highlightMark.range(effect.value[0], effect.value[1])],
           });
         }
         return Decoration.none;
