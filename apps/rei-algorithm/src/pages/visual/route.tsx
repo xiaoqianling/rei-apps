@@ -10,7 +10,15 @@ export const docsRouter: RouteObject[] = [
     index: true,
   },
   {
-    path: "id/:id",
+    path: "detail/:id",
     element: <SimulateSort />,
+  },
+  {
+    path: "tree/:id",
+    element: <SimulateSort algoType="tree" />,
+  },
+  {
+    path: "linear/:id",
+    element: <SimulateSort algoType="linear" />,
   },
 ];

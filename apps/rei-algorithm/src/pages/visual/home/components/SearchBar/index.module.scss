@@ -1,0 +1,42 @@
+.searchBarContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; // 限制最大宽度
+  margin: 0 auto; // 居中显示
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 20px; // 增加内边距
+  padding-right: 40px; // 为可能的图标留出空间
+  border: 1px solid #cce0d5; // 浅绿蓝色边框
+  border-radius: 25px; // 圆角
+  font-size: 1rem;
+  background-color: #fff; // 白色背景
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  &:focus {
+    border-color: #457b9d; // 焦点时边框颜色加深
+    box-shadow: 0 0 8px rgba(69, 123, 157, 0.2); // 添加柔和的阴影
+  }
+}
+
+/*
+.searchIcon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none; // 使图标不干扰输入框点击
+}
+*/ 

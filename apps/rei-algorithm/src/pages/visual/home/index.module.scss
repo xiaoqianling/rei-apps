@@ -1,0 +1,125 @@
+/* --- Global Page Styles --- */
+.plazaContainer {
+  background-color: #f8fff3; // 主背景色
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+  overflow: auto;
+}
+
+/* --- Header Styles --- */
+.header {
+  background: linear-gradient(135deg, #e0f7fa, #f0fff0); // 浅蓝绿渐变背景
+  padding: 40px 20px;
+  text-align: center;
+  border-bottom: 1px solid #d0e0d8;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mainTitle {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1d3557; // 深蓝
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #457b9d; // 强调色
+  margin: 0 0 30px 0;
+}
+
+/* --- Main Content Area --- */
+.mainContent {
+  flex-grow: 1;
+  padding: 30px 20px;
+  margin: 0 auto; // 居中
+}
+
+/* --- Category Section --- */
+.categorySection {
+  margin-bottom: 40px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.categoryTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2c5d77;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #a8dadc; // 强调色下划线
+  display: inline-block; // 让下划线只跟随文字长度
+}
+
+/* --- Card Grid --- */
+.cardGrid {
+  display: grid;
+  // Responsive grid: 1 column on small, 2 on medium, 3 on large screens
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* --- No Results --- */
+.noResults {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  padding: 50px 0;
+}
+
+/* --- Footer Styles --- */
+.footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  background-color: #e8f5e9; // 页脚背景色
+  border-top: 1px solid #d0e0d8;
+  margin-top: 40px; // 与主要内容分隔
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .header {
+    padding: 30px 15px;
+  }
+  .mainTitle {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  .mainContent {
+    padding: 20px 15px;
+  }
+  .categoryTitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  .cardGrid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(280px, 1fr)
+    ); // 调整最小宽度
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainTitle {
+    font-size: 1.8rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .cardGrid {
+    // On very small screens, force 1 column
+    grid-template-columns: 1fr;
+  }
+}

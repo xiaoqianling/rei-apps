@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import CodeDesc from "../common/codeDesc/CodeDesc";
-import { Scene, SenkiArray } from "../../lib/senki";
+import { Scene, SenkiArray, SenkiLinkedNode } from "../../lib/senki";
 import { Link, useLocation, useParams } from "react-router-dom";
 import BreadcrumbNav from "../common/breadcrumb/BreadcrumbNav";
 import { AlgoSource } from "../../lib/algo_desc/makeAlgoSource";
@@ -16,7 +16,9 @@ import { getAlgo } from "@/src/api/algo/sort";
 
 const EMPTY_ALGO_SOURCE: AlgoSource = { shower: "", desc: [], realcode: "" };
 
-const SimulateSort = () => {
+type AlgoType = "tree" | "linear";
+
+const SimulateSort = ({ algoType = "linear" }: { algoType?: AlgoType }) => {
   const { id } = useParams();
   // ---状态变量---
   // 用户输入的数组
@@ -132,7 +134,7 @@ const SimulateSort = () => {
     }
   }, [algoSource]);
 
-  // 监听 codeControl 的状态变化
+  // [核心逻辑] 监听 codeControl 的状态变化
   useEffect(() => {
     if (!codeControl) return;
     const handleWait = ({ info, resolve }: CodeContext) => {
@@ -175,9 +177,19 @@ const SimulateSort = () => {
   // 初始化 senki
   useEffect(() => {
     if (!scene) return;
-    SenkiArray.config.scene = scene;
-    SenkiArray.config.width = scene.width;
-    SenkiArray.config.height = scene.height;
+    switch (algoType) {
+      case "linear":
+        SenkiArray.config.scene = scene;
+        SenkiArray.config.width = scene.width;
+        SenkiArray.config.height = scene.height;
+        break;
+      case "tree":
+        scene.add(SenkiLinkedNode.senkiForest);
+        SenkiLinkedNode.setCanvasDimensions({
+          width: scene.width,
+          height: scene.height,
+        });
+    }
   }, [scene]);
 
   return (

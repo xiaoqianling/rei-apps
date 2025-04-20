@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.51
+
+### Patch Changes
+
+- feat: 美化主页
+
 ## 1.2.50
 
 ### Patch Changes

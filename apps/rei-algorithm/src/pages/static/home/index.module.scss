@@ -1,58 +1,167 @@
-.container {
-  width: 100%;
-  position: relative;
+@use "sass:color";
+
+.homeContainer {
+  background-color: $bg-base;
+  color: $text-medium;
+  font-family: $font-primary;
+  overflow-x: hidden; // 防止水平滚动条
+  overflow-y: auto; // 允许垂直滚动;
+  height: 100%;
 }
 
-.bg {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  margin-top: -4rem;
+// 通用 Section 容器样式 (如果需要复用)
+.sectionContainer {
+  padding: $section-padding-y 5%;
+  max-width: $container-max-width;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  .svg_background {
-    background: radial-gradient(
-        circle at 80% 50%,
-        rgba(179, 229, 252, 0.5) 0%,
-        transparent 50%
-      ),
-      radial-gradient(
-        circle at 20% 10%,
-        rgba(240, 244, 195, 0.6) 0%,
-        transparent 60%
-      ),
-      radial-gradient(
-        circle at 50% 80%,
-        rgba(240, 244, 195, 0.4) 0%,
-        transparent 60%
-      ),
-      linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0.9) 100%
-      );
-    width: 100%;
-    height: 100%;
+// 通用 Section 标题样式
+.sectionHeading {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: $text-dark;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+
+  // Optional: Add an underline/accent element
+  &::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: $secondary-accent;
+    border-radius: 2px;
+    margin: 10px auto 0;
   }
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  top: 5rem;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+// --- Features Section --- //
+.featuresSection {
+  @extend .sectionContainer; // 继承通用容器样式
+  // background-color: color.adjust($bg-base, 1%); // 稍微不同的背景
+  background-color: color.adjust($bg-base, $lightness: 2%); // 稍微不同的背景
+}
 
-  .desc {
-    .gradient {
-      display: inline;
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+// --- Community Section --- //
+.communitySection {
+  @extend .sectionContainer;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    color.adjust($primary-light, $lightness: 5%),
+    $bg-color-light
+  );
+  padding-top: 80px; // 增加上部内边距
+  padding-bottom: 80px;
+}
+
+.communityText {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  color: $text-medium;
+}
+
+.communityButton {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: $transition-base;
+  background-color: $primary-accent;
+  color: white;
+  box-shadow: 0 4px 15px rgba($primary-accent, 0.3);
+
+  &:hover {
+    background-color: color.adjust($primary-accent, $lightness: -10%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba($primary-accent, 0.4);
+  }
+}
+
+// --- Open Source Section --- //
+.openSourceSection {
+  @extend .sectionContainer;
+  text-align: center;
+  background-color: $text-dark; // 深色背景形成对比
+  color: color.adjust($text-light, $lightness: 20%);
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+  .sectionHeading {
+    color: white;
+    &::after {
+      background-color: $secondary-accent;
     }
   }
+}
 
-  .lottie {
-    width: 60%;
+.openSourceText {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.githubLink {
+  display: inline-flex; // Use inline-flex for alignment
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 20px;
+  border: 1px solid $secondary-accent;
+  background-color: transparent;
+  color: $secondary-accent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    background-color: rgba($secondary-accent, 0.15);
+    color: color.adjust($secondary-accent, $lightness: 5%);
+  }
+}
+
+.githubIcon {
+  // Style your GitHub icon placeholder
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+// --- Footer --- //
+.footer {
+  padding: 25px 5%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: $text-light;
+  background-color: color.adjust(
+    $bg-base,
+    $lightness: -3%
+  ); // Slightly darker footer bg
+  border-top: 1px solid $border-color;
+}
+
+// --- Responsive Adjustments for Grids/Sections --- //
+@media (max-width: 768px) {
+  .featuresGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .sectionHeading {
+    margin-bottom: 30px;
   }
 }

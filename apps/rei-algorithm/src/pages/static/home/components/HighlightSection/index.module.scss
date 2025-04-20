@@ -1,0 +1,116 @@
+.highlightContainer {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 5%;
+  background-color: white; // 与基础背景形成对比
+  border-radius: 15px;
+  margin: 40px 0; // 上下间距
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+  // Default: Text on left, Image on right
+  &.imageRight {
+    flex-direction: row;
+  }
+  // Image on left, Text on right
+  &.imageLeft {
+    flex-direction: row-reverse;
+  }
+}
+
+.textContent {
+  flex: 1;
+  max-width: 50%;
+}
+
+.imageContent {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 600;
+  color: $primary-dark;
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
+
+.sectionDescription {
+  font-size: 1rem;
+  color: $text-medium;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  max-width: 500px;
+  height: 350px; // Or aspect-ratio: 16 / 9;
+  background-color: $bg-color-light; // Use a light bg for placeholders
+  border: 1px dashed $border-color;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $text-light; // Lighter text for placeholder
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.4s ease-out;
+
+  .highlightContainer:hover & {
+    transform: scale(1.03); // Slight zoom on container hover
+  }
+}
+
+// Optional Button Styling
+/*
+.learnMoreButton {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 20px;
+  border: 1px solid $primary-accent;
+  background-color: transparent;
+  color: $primary-accent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $primary-light;
+    border-color: $primary-accent;
+    color: darken($primary-accent, 5%);
+  }
+}
+*/
+
+// Responsive
+@media (max-width: 992px) {
+  .highlightContainer {
+    flex-direction: column !important; // Override row/row-reverse
+    gap: 30px;
+    padding: 40px 5%;
+  }
+  .textContent,
+  .imageContent {
+    max-width: 100%;
+    text-align: center;
+  }
+  .imageContent {
+    order: -1; // Move image above text on mobile
+  }
+  .imagePlaceholder {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .imagePlaceholder {
+    height: 250px;
+  }
+}

@@ -4,3 +4,28 @@ $mobile-size: 600px;
 // 可配置主题
 $theme-primary-color: #ffffbb;
 $header-background-color: #f8fff3;
+
+// --- Color Palette ---
+$bg-base: #f8fff3; // Base background
+$bg-color-light: #e0f7fa; // Light cyan/blue accent bg
+$primary-light: #cce0d5; // Light green-grey
+$primary-accent: #457b9d; // Medium blue accent
+$primary-dark: #1d3557; // Dark blue (for text or strong accents)
+$secondary-accent: #a8dadc; // Pale turquoise
+
+$text-dark: #1d3557; // Dark text
+$text-medium: #5a6872; // Medium grey text
+$text-light: #8fa4af; // Lighter grey text
+
+$border-color: #d0e0d8; // Light border color
+$border-light: #e0f0e8; // Very light border
+
+// --- Typography ---
+$font-primary: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+
+// --- Spacing & Layout ---
+$section-padding-y: 60px;
+$container-max-width: 1200px;
+
+// --- Transitions ---
+$transition-base: all 0.3s ease;
