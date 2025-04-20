@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.47
+
+### Patch Changes
+
+- chore: remove codemirror
+
 ## 1.2.46
 
 ### Patch Changes

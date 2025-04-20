@@ -1,5 +1,10 @@
-import { Decoration, DecorationSet, EditorView } from "@codemirror/view";
-import { StateField, StateEffect } from "@codemirror/state";
+import {
+  StateEffect,
+  Decoration,
+  StateField,
+  DecorationSet,
+  EditorView,
+} from "@uiw/react-codemirror";
 
 // 创建高亮效果
 export const highlightEffect = StateEffect.define<[number, number]>();

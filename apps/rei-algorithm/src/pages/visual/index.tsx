@@ -1,7 +1,5 @@
-import DocsSidebar from "@/src/components/common/sidebar";
 import styles from "./index.module.scss";
 import { Outlet } from "react-router";
-import { docsMenuData } from "./type";
 
 interface Props {
   children?: React.ReactNode;

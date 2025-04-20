@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import CodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror";
-import { EditorView, Decoration, DecorationSet } from "@codemirror/view";
-import { StateField, StateEffect } from "@codemirror/state";
-import { basicSetup } from "codemirror"; // Or a different setup
-import { javascript } from "@codemirror/lang-javascript"; // Assuming JS code
+import { useEffect, useRef } from "react";
+import {
+  Decoration,
+  DecorationSet,
+  EditorView,
+  ReactCodeMirrorRef,
+  StateEffect,
+  StateField,
+} from "@uiw/react-codemirror";
 import styles from "./CodeDesc.module.scss"; // Import the styles
+import ReactCodeMirror from "@uiw/react-codemirror";
+import { langs } from "@uiw/codemirror-extensions-langs";
+import { githubDark } from "@uiw/codemirror-theme-github";
 
 type Props = {
   code: string;
@@ -36,25 +42,24 @@ const highlightField = StateField.define<DecorationSet>({
         // Only highlight if valid range (CodeMirror lines are 1-indexed in API, but 0 internally sometimes)
         if (startLine >= 1 && endLine >= startLine) {
           // Iterate through lines in the document within the range
-           try {
-              for (let i = startLine; i <= endLine; i++) {
-                // Ensure line exists in the document
-                if (i <= tr.state.doc.lines) {
-                  const line = tr.state.doc.line(i);
-                   // Add decoration for the entire line
-                  linesToHighlight.push(
-                    Decoration.line({
-                      attributes: { class: 'cm-highlightedLine' } // Use class from SCSS
-                    }).range(line.from, line.from) // Apply to the start of the line
-                  );
-                }
+          try {
+            for (let i = startLine; i <= endLine; i++) {
+              // Ensure line exists in the document
+              if (i <= tr.state.doc.lines) {
+                const line = tr.state.doc.line(i);
+                // Add decoration for the entire line
+                linesToHighlight.push(
+                  Decoration.line({
+                    attributes: { class: "cm-highlightedLine" }, // Use class from SCSS
+                  }).range(line.from, line.from), // Apply to the start of the line
+                );
               }
-           } catch (e) {
-               console.error("Error getting line for highlighting:", e);
-               // Handle cases where line number might be out of bounds temporarily
-           }
+            }
+          } catch (e) {
+            console.error("Error getting line for highlighting:", e);
+          }
         }
-         // Replace all previous decorations with the new set
+        // Replace all previous decorations with the new set
         decorations = Decoration.set(linesToHighlight);
       }
     }
@@ -77,29 +82,30 @@ function CodeDesc({ code, desc, info }: Props) {
     if (view) {
       // Dispatch the effect to update highlights when info.line changes
       // Make sure line numbers are valid before dispatching
-       const [start, end] = info.line;
-        if (start !== -1 && end !== -1) { // Use -1 check from original code
-            view.dispatch({
-                effects: highlightEffect.of([start, end]),
-            });
-        } else {
-             // Clear highlights if line numbers are invalid (-1)
-             view.dispatch({
-                effects: highlightEffect.of([0, 0]), // Dispatch with invalid range to clear
-             });
-        }
+      const [start, end] = info.line;
+      if (start !== -1 && end !== -1) {
+        // Use -1 check from original code
+        view.dispatch({
+          effects: highlightEffect.of([start, end]),
+        });
+      } else {
+        // Clear highlights if line numbers are invalid (-1)
+        view.dispatch({
+          effects: highlightEffect.of([0, 0]), // Dispatch with invalid range to clear
+        });
+      }
 
-       // Optionally scroll the highlighted area into view
-        try {
-          if (start > 0 && start <= view.state.doc.lines) {
-              const line = view.state.doc.line(start);
-              view.dispatch({
-                  effects: EditorView.scrollIntoView(line.from, { y: "center" })
-              });
-          }
-        } catch(e) {
-            console.error("Error scrolling into view:", e);
+      // Optionally scroll the highlighted area into view
+      try {
+        if (start > 0 && start <= view.state.doc.lines) {
+          const line = view.state.doc.line(start);
+          view.dispatch({
+            effects: EditorView.scrollIntoView(line.from, { y: "center" }),
+          });
         }
+      } catch (e) {
+        console.error("Error scrolling into view:", e);
+      }
     }
   }, [info.line]); // Depend on info.line
 
@@ -115,28 +121,28 @@ function CodeDesc({ code, desc, info }: Props) {
         </p>
       </div>
       <div className={styles.codeMirrorWrapper}>
-        <CodeMirror
+        <ReactCodeMirror
           ref={editorRef}
           value={code}
           // theme="dark" // Example: Use a predefined dark theme or customize fully
-           height="100%" // Make CodeMirror fill the wrapper
-           style={{ height: '100%' }} // Ensure wrapper and CM have height
+          height="100%" // Make CodeMirror fill the wrapper
+          style={{ height: "100%" }} // Ensure wrapper and CM have height
           readOnly={true} // Make editor non-editable
-          basicSetup={{ // Customize basic setup if needed
+          basicSetup={{
+            // Customize basic setup if needed
             lineNumbers: true,
             foldGutter: true,
             highlightActiveLine: true,
-             highlightActiveLineGutter: true,
-             // remove other defaults if not needed
-             autocompletion: false,
-             lintKeymap: false,
+            highlightActiveLineGutter: true,
+            // remove other defaults if not needed
+            autocompletion: false,
+            lintKeymap: false,
           }}
           extensions={[
-            // basicSetup(), // Use basicSetup prop instead or customize extensions manually
-            javascript(), // Add JS language support
+            langs.tsx(),
             lineHighlightExtension(), // Add our custom highlight extension
-            EditorView.lineWrapping // Enable line wrapping
           ]}
+          theme={githubDark}
         />
       </div>
     </div>

@@ -62,21 +62,6 @@ importers:
       '@babel/standalone':
         specifier: ^7.26.9
         version: 7.26.10
-      '@codemirror/autocomplete':
-        specifier: ^6.18.6
-        version: 6.18.6
-      '@codemirror/lang-javascript':
-        specifier: ^6.2.3
-        version: 6.2.3
-      '@codemirror/language':
-        specifier: ^6.11.0
-        version: 6.11.0
-      '@codemirror/state':
-        specifier: ^6.5.2
-        version: 6.5.2
-      '@codemirror/view':
-        specifier: ^6.36.5
-        version: 6.36.5
       '@emotion/css':
         specifier: ^11.13.5
         version: 11.13.5
@@ -101,6 +86,9 @@ importers:
       '@uiw/codemirror-extensions-langs':
         specifier: ^4.23.10
         version: 4.23.10(@codemirror/autocomplete@6.18.6)(@codemirror/language-data@6.5.1)(@codemirror/language@6.11.0)(@codemirror/legacy-modes@6.5.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5)(@lezer/common@1.2.3)(@lezer/highlight@1.2.1)(@lezer/javascript@1.4.21)(@lezer/lr@1.4.2)
+      '@uiw/codemirror-theme-github':
+        specifier: ^4.23.10
+        version: 4.23.10(@codemirror/language@6.11.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5)
       '@uiw/codemirror-theme-noctis-lilac':
         specifier: ^4.23.10
         version: 4.23.10(@codemirror/language@6.11.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5)
@@ -113,9 +101,6 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
-      codemirror:
-        specifier: ^6.0.1
-        version: 6.0.1
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -1998,6 +1983,9 @@ packages:
     peerDependencies:
       '@codemirror/language-data': '>=6.0.0'
       '@codemirror/legacy-modes': '>=6.0.0'
+
+  '@uiw/codemirror-theme-github@4.23.10':
+    resolution: {integrity: sha512-jTg2sHAcU1d+8x0O+EBDI71rtJ8PWKIW8gzy+SW4wShQTAdsqGHk5y1ynt3KIeoaUkqngLqAK4SkhPaUKlqZqg==}
 
   '@uiw/codemirror-theme-noctis-lilac@4.23.10':
     resolution: {integrity: sha512-YWi51uw8VqgU8x21b277HJuvjHh9G2qHueatpd7a/h7LdW0elxT3VqkAos8ludjMxWAC3lypUFht76wDWVXXtQ==}
@@ -8165,6 +8153,14 @@ snapshots:
       - '@lezer/highlight'
       - '@lezer/javascript'
       - '@lezer/lr'
+
+  '@uiw/codemirror-theme-github@4.23.10(@codemirror/language@6.11.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5)':
+    dependencies:
+      '@uiw/codemirror-themes': 4.23.10(@codemirror/language@6.11.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5)
+    transitivePeerDependencies:
+      - '@codemirror/language'
+      - '@codemirror/state'
+      - '@codemirror/view'
 
   '@uiw/codemirror-theme-noctis-lilac@4.23.10(@codemirror/language@6.11.0)(@codemirror/state@6.5.2)(@codemirror/view@6.36.5)':
     dependencies:

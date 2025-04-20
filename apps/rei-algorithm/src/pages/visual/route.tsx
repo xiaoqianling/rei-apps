@@ -8,4 +8,9 @@ export const docsRouter: RouteObject[] = [
     element: <SimulateSort />,
     index: true,
   },
+  {
+    path: "id/:id",
+    element: <SimulateSort />,
+    index: true,
+  },
 ];
