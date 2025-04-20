@@ -1,0 +1,58 @@
+.codeDescContainer {
+  height: 100%; // Ensure it fills the parent (.codeArea)
+  display: flex;
+  flex-direction: column;
+  background-color: #24243e; // Match pre background from index.module.scss
+  border-radius: 8px; // Match parent rounding
+  overflow: hidden; // Clip child corners
+}
+
+.descriptionArea {
+  background-color: #3a3a5a;
+  color: #c0c0e0;
+  padding: 10px 15px;
+  font-size: 0.85em;
+  border-bottom: 1px solid #4a4a6a;
+  min-height: 40px; // Slightly smaller min-height
+  flex-shrink: 0; // Prevent shrinking
+  display: flex;
+  align-items: center;
+}
+
+.codeMirrorWrapper {
+  flex-grow: 1;
+  overflow: hidden; // Important for CodeMirror's own scrollbars
+  position: relative; // Needed for potential absolute elements inside editor later
+
+  // Style the CodeMirror editor itself
+  // Targeting with :global might be needed depending on how CodeMirror renders
+  :global(.cm-editor) {
+      height: 100%; // Make editor fill the wrapper
+  }
+
+  :global(.cm-gutters) { // Style line number gutter
+    background-color: #2a2a40 !important; // Use important if needed to override defaults
+    border-right: 1px solid #4a4a6a;
+    color: #888; // Gutter text color
+  }
+
+  :global(.cm-content) {
+      font-family: 'Fira Code', 'Consolas', monospace;
+      color: #d0d0ff; // Default code text color
+  }
+
+  :global(.cm-scroller) {
+      font-family: inherit; // Ensure scrollable area inherits font
+      line-height: 1.6;
+  }
+
+  :global(.cm-activeLine) {
+      background-color: rgba(74, 74, 122, 0.3); // Subtle highlight for the active cursor line
+  }
+
+  // Specific class for our background highlight decoration
+  :global(.cm-highlightedLine) {
+      background-color: rgba(106, 106, 175, 0.5) !important; // Highlight color, use important if needed
+      box-shadow: inset 3px 0 0 0 #a0a0e0; // Left border highlight
+  }
+} 

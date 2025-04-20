@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.46
+
+### Patch Changes
+
+- feat: 算法模拟布局
+
 ## 1.2.45
 
 ### Patch Changes
