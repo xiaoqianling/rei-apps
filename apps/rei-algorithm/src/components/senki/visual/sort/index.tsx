@@ -1,11 +1,17 @@
 import styles from "./index.module.scss";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import CodeDesc from "../common/codeDesc/CodeDesc";
 import { Scene, SenkiArray } from "../../lib/senki";
 import { Link, useLocation, useParams } from "react-router-dom";
 import BreadcrumbNav from "../common/breadcrumb/BreadcrumbNav";
 import { AlgoSource } from "../../lib/algo_desc/makeAlgoSource";
-import { CodeControl } from "../../lib/algo_desc";
+import { CodeContext, CodeControl } from "../../lib/algo_desc";
 import { getAlgo } from "@/src/api/algo/sort";
 
 const EMPTY_ALGO_SOURCE: AlgoSource = { shower: "", desc: [], realcode: "" };
@@ -22,10 +28,49 @@ const SimulateSort = () => {
   const location = useLocation();
   const [status, setStatus] = useState<"stop" | "play" | "finish">("stop");
   const [codeInfo, setCodeInfo] = useState({ line: [-1, -1], desc: -1 });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const statusRef = useRef(status);
   statusRef.current = status; // 没办法，为了在闭包函数里引用，只能干这种愚蠢操作。
   const canvas = useRef<HTMLCanvasElement>(null);
 
+  // --- 数据获取逻辑 ---
+  const fetchAlgoData = useCallback(() => {
+    if (id) {
+      setIsLoading(true);
+      setError(null);
+      // 清理旧的 CodeControl 和 Senki 对象
+      codeControl?.destroy();
+      setCodeControl(undefined); // 重置 codeControl 状态
+      setAlgoSource(EMPTY_ALGO_SOURCE); // 重置算法源
+
+      getAlgo(id)
+        .then((res) => {
+          if (res) {
+            setAlgoSource(res);
+            // 注意：CodeControl 的创建现在依赖 algoSource 的 useEffect
+          } else {
+            setError("获取算法数据失败，未找到资源。");
+          }
+        })
+        .catch((err) => {
+          console.error("获取算法数据时出错:", err);
+          setError(`获取算法数据失败: ${err.message || "未知错误"}`);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      // 如果没有 id，也进行状态重置
+      setAlgoSource(EMPTY_ALGO_SOURCE);
+      codeControl?.destroy();
+      setCodeControl(undefined);
+      setError(null);
+      setIsLoading(false);
+    }
+  }, [id]);
+
+  // --- 事件处理函数 ---
   const createNewCodeControl = () => {
     setCodeControl(new CodeControl(algoSource.realcode));
   };
@@ -75,16 +120,12 @@ const SimulateSort = () => {
     };
   }, [canvas, location.pathname]);
 
-  // API 获取算法
+  // API 获取算法 - 初始加载和 ID 变化时触发
   useEffect(() => {
-    if (id) {
-      getAlgo(id).then((res) => {
-        if (res) setAlgoSource(res);
-      });
-    }
-  }, [id]);
+    fetchAlgoData(); // 调用提取出的函数
+  }, [id, fetchAlgoData]); // 依赖 fetchAlgoData
 
-  // 创建 codeControl
+  // 创建 codeControl - 当 algoSource 更新且非空时触发
   useEffect(() => {
     if (algoSource !== EMPTY_ALGO_SOURCE && !codeControl) {
       createNewCodeControl();
@@ -189,25 +230,51 @@ const SimulateSort = () => {
           </div>
         </div>
         <div className={styles.actionButtons}>
-          <button onClick={handlePlay} disabled={status === "play"}>
+          <button
+            onClick={handlePlay}
+            disabled={status === "play" || isLoading || !!error}
+          >
             play
           </button>
           <button
             onClick={handleStop}
-            disabled={status === "stop" || status === "finish"}
+            disabled={
+              status === "stop" || status === "finish" || isLoading || !!error
+            }
           >
             stop
           </button>
           <button
             onClick={handleNext}
-            disabled={status === "play" || status === "finish"}
+            disabled={
+              status === "play" || status === "finish" || isLoading || !!error
+            }
           >
             next
           </button>
-          <button onClick={handleChangeSpeed}>speed</button>
-          <button onClick={handleRestart}>restart</button>
+          <button onClick={handleChangeSpeed} disabled={isLoading || !!error}>
+            speed
+          </button>
+          <button onClick={handleRestart} disabled={isLoading || !!error}>
+            restart
+          </button>
         </div>
       </div>
+      {isLoading && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingSpinner}></div>
+          <span>正在加载算法数据...</span>
+        </div>
+      )}
+      {error && (
+        <div className={styles.errorOverlay}>
+          <div className={styles.errorIcon}>!</div>
+          <span>{error}</span>
+          <button onClick={fetchAlgoData} className={styles.retryButton}>
+            重试
+          </button>
+        </div>
+      )}
     </div>
   );
 };

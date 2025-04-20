@@ -6,6 +6,7 @@
   background-color: #1a1a2e; // Dark background
   color: #e0e0e0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative; // 确保父容器有相对定位
 }
 
 .mainContent {
@@ -238,5 +239,113 @@
   }
   .actionButtons {
       flex-wrap: wrap; // Allow buttons to wrap on small screens
+  }
+}
+
+// Loading Overlay Styles
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // 半透明背景
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; // 确保在最上层
+  color: white;
+  font-size: 1.2em;
+
+  .loadingSpinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #fff; // 旋转部分的颜色
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; // 应用旋转动画
+    margin-bottom: 15px;
+  }
+
+  span {
+    text-shadow: 1px 1px 2px black;
+  }
+}
+
+// Error Overlay Styles
+.errorOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.7); // 红色半透明背景
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 0.5s ease-in-out; // 应用淡入动画
+
+  .errorIcon {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    background-color: white;
+    color: red;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  span {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  }
+
+  .retryButton { // 重命名此类
+    padding: 8px 15px;
+    background-color: white;
+    color: red;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, transform 0.1s ease;
+
+    &:hover {
+      background-color: #eee;
+      color: darkred;
+    }
+
+    &:active {
+      transform: scale(0.97); // 添加点击效果
+    }
+  }
+}
+
+// Keyframes for animations
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.50
+
+### Patch Changes
+
+- chora: 算法组件网络反馈
+
 ## 1.2.49
 
 ### Patch Changes
