@@ -1,7 +1,7 @@
 import { ContentTypes } from "../content";
-import { TipLevelsTypes } from "../../components/tip/type";
 import { BlogDetail } from "..";
 import { TagTypes } from "../../components/blog/tag/type";
+import { TipLevelsTypes } from "../../components/tip";
 
 export const post1: BlogDetail = {
   pid: "mock-id-2",

@@ -13,20 +13,17 @@ const BlogCard: FunctionComponent<BlogCardProps> = ({ blog }) => {
   const navigate = useNavigate();
 
   const handleClickPost = () => {
-    // TODO: 跳转到帖子详情页
     console.log(`Navigate to post ${blog.pid}`);
     navigate(`/community/post/${blog.pid}`);
   };
 
   const handleClickAuthor = (event: React.MouseEvent) => {
-    // TODO: 跳转到用户详情页
     event.stopPropagation();
     console.log(`Navigate to user ${blog.username}`);
     // navigate(`/community/user/${post.username}`);
   };
 
   const handleClickTag = (event: React.MouseEvent) => {
-    // TODO: 跳转到标签页
     event.stopPropagation();
     console.log(`Navigate to tag ${blog.tags[0]}`);
   };

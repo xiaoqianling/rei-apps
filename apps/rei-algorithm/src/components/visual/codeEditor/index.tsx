@@ -102,20 +102,6 @@ const CodeEditor = forwardRef<CodeEditorRef, CodeEditorProps>(
     // 更新高亮位置
     useEffect(() => {
       if (!editorRef.current) return;
-
-      // if (!highlightPos) {
-      //   // 消除高亮
-      //   console.log("消除高亮");
-      //   viewRef.current.dispatch({
-      //     effects: highlightEffect.of({ from: 0, to: 0 }),
-      //   });
-      //   return;
-      // }
-      // console.log("添加高亮");
-      // const [from, to] = highlightPos;
-      // viewRef.current.dispatch({
-      //   effects: highlightEffect.of({ from, to }),
-      // });
     }, [highlightPos]);
 
     const topElement = (

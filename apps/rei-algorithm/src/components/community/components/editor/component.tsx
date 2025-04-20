@@ -1,13 +1,13 @@
 import { MouseEvent } from "react";
 import styles from "./index.module.scss";
 import { css, cx } from "@emotion/css";
-import React, { PropsWithChildren, ReactNode, Ref } from "react";
+import React, { ReactNode, Ref } from "react";
 import { useSlate } from "slate-react";
 import {
   BlockElementFormat,
   InlineElementFormat,
   CustomElementFormat,
-} from "./custom-types";
+} from "./types";
 import {
   isBlockMarkActive,
   isAlignType,
@@ -19,28 +19,20 @@ import {
 } from "./util";
 import ReiTooltip from "rei-design/tooltip";
 
-interface BaseProps {
-  className: string;
-  [key: string]: unknown;
+interface Props {
+  className?: string;
+  active: boolean;
+  reversed?: boolean;
+  children?: ReactNode;
+  onMouseDown?: (event: MouseEvent<HTMLSpanElement>) => void;
 }
 
 export const Button = React.forwardRef(
   (
-    {
-      className,
-      active,
-      reversed,
-      ...props
-    }: PropsWithChildren<
-      {
-        active: boolean;
-        reversed: boolean;
-      } & BaseProps
-    >,
+    { className, active, reversed, children, onMouseDown }: Props,
     ref: Ref<HTMLSpanElement>,
   ) => (
     <span
-      {...props}
       ref={ref}
       className={cx(
         className,
@@ -55,73 +47,8 @@ export const Button = React.forwardRef(
               : "#ccc"};
         `,
       )}
-    />
-  ),
-);
-
-export const Icon = React.forwardRef(
-  (
-    { className, ...props }: PropsWithChildren<BaseProps>,
-    ref: Ref<HTMLSpanElement>,
-  ) => (
-    <span
-      {...props}
-      ref={ref}
-      className={cx(
-        "material-icons",
-        className,
-        css`
-          font-size: 18px;
-          vertical-align: text-bottom;
-        `,
-      )}
-    />
-  ),
-);
-
-export const Instruction = React.forwardRef(
-  (
-    { className, ...props }: PropsWithChildren<BaseProps>,
-    ref: Ref<HTMLDivElement>,
-  ) => (
-    <div
-      {...props}
-      ref={ref}
-      className={cx(
-        className,
-        css`
-          white-space: pre-wrap;
-          margin: 0 -20px 10px;
-          padding: 10px 20px;
-          font-size: 14px;
-          background: #f8f8e8;
-        `,
-      )}
-    />
-  ),
-);
-
-export const Menu = React.forwardRef(
-  (
-    { className, ...props }: PropsWithChildren<BaseProps>,
-    ref: Ref<HTMLDivElement>,
-  ) => (
-    <div
-      {...props}
-      data-test-id="menu"
-      ref={ref}
-      className={cx(
-        className,
-        css`
-          & > * {
-            display: inline-block;
-          }
-
-          & > * + * {
-            margin-left: 15px;
-          }
-        `,
-      )}
+      children={children}
+      onMouseDown={onMouseDown}
     />
   ),
 );

@@ -2,13 +2,12 @@ import DocsSidebar from "@/src/components/common/sidebar";
 import styles from "./index.module.scss";
 import { Outlet } from "react-router";
 import { docsMenuData } from "./type";
-import DocsSidebarV2 from "@/src/components/common/sidebarV2";
 
 interface Props {
   children?: React.ReactNode;
 }
 
-function DocsPage({ children }: Props) {
+function VisualPage({ children }: Props) {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -21,4 +20,4 @@ function DocsPage({ children }: Props) {
   );
 }
 
-export default DocsPage;
+export default VisualPage;

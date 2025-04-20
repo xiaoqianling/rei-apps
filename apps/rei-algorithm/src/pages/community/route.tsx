@@ -19,7 +19,6 @@ export const communityRouter: RouteObject[] = [
   {
     path: "mock",
     element: <Blog blog={post1} />,
-    // element: <SlateRenderer />,
   },
   {
     path: "i",

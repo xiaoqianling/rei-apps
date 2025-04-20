@@ -1,53 +1,91 @@
 import styles from "./index.module.scss";
-import { FunctionComponent, ReactNode } from "react";
-import { Highlight, themes } from "prism-react-renderer";
-import classNames from "classnames";
+import {
+  forwardRef,
+  FunctionComponent,
+  ReactNode,
+  useCallback,
+  useMemo,
+} from "react";
+import { SlateAttributes } from "../../../editor/element";
+import ReactCodeMirror from "@uiw/react-codemirror";
+import { Transforms, Node, Editor } from "slate";
+import {
+  useSlateStatic,
+  useSelected,
+  useFocused,
+  ReactEditor,
+} from "slate-react";
+import { langs } from "@uiw/codemirror-extensions-langs";
+import { noctisLilac } from "@uiw/codemirror-theme-noctis-lilac";
+import { CodeBlockElement } from "../../../editor/custom/type";
+
+type SupportedLanguage = "ts" | "js" | "cpp" | "html" | "java" | "python";
 
 interface MarkdownCodeProps {
-  children?: ReactNode;
   className?: string;
+  language: SupportedLanguage;
+  code: string;
+  attributes?: SlateAttributes;
+  element: CodeBlockElement;
 }
 
 /**
  * 渲染markdown的code组件
- * TODO:这里的高亮不可修改，用codemirror替代
+ * TODO: 多语言高亮
  * @returns
  */
-const MarkdownCode: FunctionComponent<MarkdownCodeProps> = ({
-  children,
-  className,
-}) => {
-  const match = /language-(\w+)/.exec(className || "");
-  const code = match ? (
-    <Highlight
-      theme={themes.github}
-      code={String(children).replace(/\n$/, "")}
-      language={match[1]}
-    >
-      {({ className, style, tokens, getLineProps, getTokenProps }) => {
-        return (
-          <div className={classNames(className, styles.pre)}>
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </div>
-        );
-      }}
-    </Highlight>
-  ) : (
-    <code className={className}>{children}</code>
-  );
+const MarkdownCode: FunctionComponent<MarkdownCodeProps> = forwardRef(
+  ({ className, attributes, language, element }, ref) => {
+    const editor = useSlateStatic();
+    const selected = useSelected();
+    const focused = useFocused();
 
-  return (
-    <div className={styles.container}>
-      {code}
-      <div className={styles.languageTag}>language:{match && match[1]}</div>
-    </div>
-  );
-};
+    const getCodeText = useCallback(() => {
+      return element.code;
+    }, [editor]);
+
+    const handleChange = useCallback(
+      (value: string) => {
+        const path = ReactEditor.findPath(editor, element);
+        if (!path) return;
+        Transforms.setNodes(
+          editor,
+          {
+            type: "code-block",
+            language: "hello",
+            code: value,
+          },
+          { at: path },
+        );
+      },
+      [editor, element],
+    );
+
+    return (
+      <div
+        {...attributes}
+        className={`${styles.container} ${selected && focused ? styles.selected : ""} ${className}`}
+        contentEditable={false}
+        data-slate-void={true}
+        data-slate-editor={false}
+      >
+        <ReactCodeMirror
+          value={getCodeText()}
+          onChange={handleChange}
+          basicSetup={{
+            foldGutter: false,
+            dropCursor: false,
+            allowMultipleSelections: false,
+            indentOnInput: false,
+          }}
+          width="700px"
+          extensions={[langs.tsx()]}
+          theme={noctisLilac}
+          style={{ fontSize: "16px" }}
+        />
+      </div>
+    );
+  },
+);
 
 export default MarkdownCode;

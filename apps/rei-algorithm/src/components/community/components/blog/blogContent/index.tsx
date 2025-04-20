@@ -5,8 +5,8 @@ import Tooltip from "rei-design/tooltip";
 import { BlogDetail } from "../../../type";
 import Tag from "../tag";
 import styles from "./index.module.scss";
-import { forwardRef, FunctionComponent } from "react";
-import { renderContents, renderSlate } from "../../../util/render";
+import { forwardRef } from "react";
+import { renderSlate } from "../../../util/render";
 import { SlateMock } from "../../editor/mock";
 
 interface BlogContentProps {
@@ -19,7 +19,6 @@ interface BlogContentProps {
 const BlogContent = forwardRef<HTMLDivElement, BlogContentProps>(
   (props, ref) => {
     const { blog, showInfo } = props;
-    // const content = renderContents(blog.contents ?? []);
     const content = renderSlate(SlateMock);
 
     return (

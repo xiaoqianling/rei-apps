@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import { VisualPanel } from "@/src/components/visual";
 import { useOpenState } from "@/src/hooks";
-import RichTextEditor from "@/src/components/community/components/editor/RichTextEditor";
 
 interface SlatePageProps {}
 

@@ -8,9 +8,9 @@ import {
   TEXT_ALIGN_TYPES,
   BlockElementFormat,
   CustomElementFormat,
-} from "./custom-types";
-import { CustomElementWithAlign, SlateElement } from "./markdown/type";
-import { TipLevelsTypes } from "../tip/type";
+  SlateElement,
+} from "./types";
+import { CustomElementWithAlign } from "./markdown/type";
 import { getCustomElementExample } from "./custom/const";
 
 export const isAlignElement = (
@@ -82,7 +82,7 @@ export const toggleInlineMark = (
 ) => {
   // 指示当前的状态，点击之后应该切换为相反的状态
   const isActive = isInlineMarkActive(editor, format);
-  console.log("editor", editor, "format", format, "isActive", isActive);
+  console.log("切换行内标记", format, "isActive", isActive);
   if (isActive) {
     Editor.removeMark(editor, format);
   } else {
@@ -127,7 +127,7 @@ export const toggleBlockMark = (
     };
   } else {
     newProperties = {
-      type: isActive ? "paragraph" : isList ? "list-item" : format,
+      type: isActive ? "paragraph" : format,
     };
   }
   Transforms.setNodes<Element>(editor, newProperties);

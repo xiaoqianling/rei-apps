@@ -1,18 +1,8 @@
-import { VisualPanelContent } from "../../visual/type";
-import { CodeContent } from "../components/codeBlock/type";
 import { FoldBlockContent } from "../components/foldBlock/type";
-import { MarkdownContent } from "../components/markdown/type";
 import { MermaidContent } from "../components/mermaid/type";
-import { TipContent } from "../components/tip/type";
 
 // 一个内容片段
-export type BlogContent =
-  | MarkdownContent
-  | CodeContent
-  | TipContent
-  | FoldBlockContent
-  | MermaidContent
-  | VisualPanelContent;
+export type BlogContent = FoldBlockContent | MermaidContent;
 
 export enum ContentTypes {
   // 已实现

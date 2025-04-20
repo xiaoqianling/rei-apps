@@ -1,14 +1,21 @@
 import React from "react";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
-import { AlignType } from "./custom-types";
+import { AlignType } from "./types";
 import { isAlignElement } from "./util";
-import { MarkdownH1, MarkdownH2 } from "../markdown/common";
+import { MarkdownH1, MarkdownH2, MarkdownP } from "../markdown/common";
 import MarkdownCode from "../markdown/common/code";
 import BlogTip from "../tip";
-import { TipContent, TipLevelsTypes } from "../tip/type";
-import { ContentTypes } from "../../type/content";
+import BlogMultiCodeBlock from "../codeBlock";
+import BlogFoldBlock from "../foldBlock";
 
-// 自定义元素
+export type SlateAttributes = {
+  "data-slate-node": "element";
+  "data-slate-inline"?: true;
+  "data-slate-void"?: true;
+  dir?: "rtl";
+  ref: any;
+};
+// 块元素
 export const Element = ({
   attributes,
   children,
@@ -18,6 +25,7 @@ export const Element = ({
   if (isAlignElement(element)) {
     style.textAlign = element.align as AlignType;
   }
+
   switch (element.type) {
     case "md-quote":
       return (
@@ -41,26 +49,40 @@ export const Element = ({
           {children}
         </ol>
       );
-    case "insert":
+    case "code-block":
       return (
-        <MarkdownCode className="language-jsx">{element.content}</MarkdownCode>
+        <MarkdownCode
+          attributes={attributes}
+          language="js"
+          element={element}
+          code={element.code}
+        ></MarkdownCode>
       );
+    case "multi-code-block":
+      return <BlogMultiCodeBlock element={element} attributes={attributes} />;
     case "note":
-      const tip: TipContent = {
-        type: ContentTypes.TIP,
-        level: element.level,
-        content: element.content,
-      };
-      return <BlogTip tip={tip} />;
-    default:
       return (
-        <p style={style} {...attributes}>
-          {children}
-        </p>
+        <BlogTip
+          initLevel={element.level}
+          {...attributes}
+          children={children}
+        />
       );
+    case "fold":
+      return (
+        <BlogFoldBlock
+          attributes={attributes}
+          open
+          children={children}
+          element={element}
+        />
+      );
+    default:
+      return <MarkdownP style={style}>{children}</MarkdownP>;
   }
 };
 
+// 行内元素
 export const Leaf = ({ attributes, children, leaf }: RenderLeafProps) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;

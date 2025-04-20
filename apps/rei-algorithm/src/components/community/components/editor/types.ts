@@ -1,11 +1,8 @@
 import { BaseEditor, BaseRange, Range, Element } from "slate";
 import { ReactEditor, RenderElementProps } from "slate-react";
 import { HistoryEditor } from "slate-history";
-import {
-  CustomElementType,
-  MarkdownElementType,
-  SlateElement,
-} from "./markdown/type";
+import { MarkdownElement } from "./markdown/type";
+import { CustomElement } from "./custom/type";
 
 // 字体行内元素
 export type CustomText = {
@@ -53,3 +50,10 @@ export const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"] as const;
 // 定义类型别名
 export type AlignType = (typeof TEXT_ALIGN_TYPES)[number];
 export type ListType = (typeof LIST_TYPES)[number];
+
+// 所有编辑器支持的组件
+export type SlateElement = MarkdownElement | CustomElement;
+// toolbar的块元素按钮
+export type MarkdownElementType = MarkdownElement["type"];
+// toolbar的插入自定义元素按钮
+export type CustomElementType = CustomElement["type"];

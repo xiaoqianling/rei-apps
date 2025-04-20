@@ -1,17 +1,44 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useCallback, useMemo, useState } from "react";
 import styles from "./index.module.scss";
-import { Highlight, themes } from "prism-react-renderer";
-import classNames from "classnames";
-import { CodeContent } from "./type";
+import ReactCodeMirror from "@uiw/react-codemirror";
+import { SlateAttributes } from "../editor/element";
+import { MultiCodeBlockElement } from "../editor/custom/type";
+import { Transforms, Node } from "slate";
+import {
+  useSlateStatic,
+  useSelected,
+  useFocused,
+  ReactEditor,
+} from "slate-react";
 interface BlogCodeProps {
-  code: CodeContent;
+  attributes?: SlateAttributes;
+  element: MultiCodeBlockElement;
 }
 
 // 多语言代码块
-const BlogCode: FunctionComponent<BlogCodeProps> = ({ code }) => {
+const BlogMultiCodeBlock: FunctionComponent<BlogCodeProps> = ({
+  element,
+  attributes,
+}) => {
+  const editor = useSlateStatic();
+  const selected = useSelected();
+  const focused = useFocused();
   const [activeLangIndex, setActiveLangIndex] = useState(0);
-  const activeCode = code.metadata[activeLangIndex].code;
-  const language = code.metadata[activeLangIndex].language;
+  const [languages, setLanguages] = useState<string[]>([]);
+
+  const path = ReactEditor.findPath(editor, element);
+  const codeText = useMemo(() => {
+    return Node.string(element);
+  }, [element]);
+
+  // 处理代码变更
+  const handleChange = useCallback(
+    (value: string) => {
+      Transforms.insertText(editor, value, { at: path });
+    },
+    [editor, path],
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.languageTabs}>
@@ -27,22 +54,9 @@ const BlogCode: FunctionComponent<BlogCodeProps> = ({ code }) => {
           </button>
         ))}
       </div>
-      {/* TODO: 优化几个语言的高亮效果 */}
-      <Highlight theme={themes.vsLight} code={activeCode} language={language}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre style={style} className={classNames(className, styles.pre)}>
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
+      <ReactCodeMirror />
     </div>
   );
 };
 
-export default BlogCode;
+export default BlogMultiCodeBlock;

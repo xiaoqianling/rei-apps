@@ -24,7 +24,7 @@ import {
   InlineMarkButton,
   Toolbar,
 } from "./component";
-import { InlineElementFormat } from "./custom-types";
+import { InlineElementFormat } from "./types";
 import {
   FaAlignCenter,
   FaAlignJustify,
@@ -32,12 +32,14 @@ import {
   FaAlignRight,
   FaCode,
   FaQuoteRight,
+  FaRegFileCode,
 } from "react-icons/fa";
 import styles from "./index.module.scss";
 import { Element, Leaf } from "./element";
 import { toggleInlineMark } from "./util";
 import { MdOutlineNoteAlt } from "react-icons/md";
-import { TipLevelsTypes } from "../tip/type";
+import { TipLevelsTypes } from "../tip";
+import { LiaFolderPlusSolid } from "react-icons/lia";
 
 // 定义快捷键映射
 const HOTKEYS: Record<string, InlineElementFormat> = {
@@ -65,7 +67,7 @@ const RichTextEditor = () => {
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
   const handleChange = (value: Descendant[]) => {
-    console.log(value);
+    // console.log(value);
   };
 
   // 处理快捷键
@@ -79,15 +81,21 @@ const RichTextEditor = () => {
       }
     }
 
-    // 处理引用块
+    // 处理一部分块 换行、新段落
     const [match] = Editor.nodes(editor, {
-      match: (n) => n.type === "md-quote",
+      match: (n) => {
+        return Editor.isBlock(editor, n);
+      },
+      mode: "lowest",
     });
     if (match && isHotkey("shift+enter", event)) {
       event.preventDefault();
       editor.insertText("\n");
       return;
     } else if (match && isHotkey("enter", event)) {
+      if (!editor.selection?.focus) {
+        return;
+      }
       // 行尾换行，新建段落
       if (Editor.isEnd(editor, editor.selection?.focus, match[1])) {
         event.preventDefault();
@@ -175,6 +183,16 @@ const RichTextEditor = () => {
           icon={<BsInfoSquareFill size={22} />}
           tip="提示块"
         />
+        <CustomButton
+          format="code-block"
+          icon={<FaRegFileCode size={22} />}
+          tip="代码块"
+        />
+        <CustomButton
+          format="fold"
+          icon={<LiaFolderPlusSolid size={22} />}
+          tip="折叠块"
+        />
       </Toolbar>
 
       {/* 可编辑区域 */}
@@ -230,20 +248,17 @@ const initialValue: Descendant[] = [
   {
     type: "note",
     level: TipLevelsTypes.TIP,
-    content: "This\n is\n a\n tip",
-    children: [{ text: "Tip" }],
+    children: [{ text: "提示块" }],
   },
   {
     type: "note",
     level: TipLevelsTypes.WARNING,
-    content: "This is a warn",
-    children: [{ text: "Tip" }],
+    children: [{ text: "警告块" }],
   },
   {
     type: "note",
     level: TipLevelsTypes.ERROR,
-    content: "This is a ERROR",
-    children: [{ text: "Tip" }],
+    children: [{ text: "错误块" }],
   },
   {
     type: "paragraph",

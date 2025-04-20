@@ -4,10 +4,10 @@ import MainPage from "../../pages/static/home";
 import NotFound from "../../pages/static/not-found";
 import HomeLayout from "../../components/layout/homeLayout";
 import AboutPage from "../../pages/static/about";
-import DocsPage from "@/src/pages/docs";
+import VisualPage from "@/src/pages/docs";
 import LearnPage from "@/src/pages/learn";
 import SlatePage from "@/src/pages/slate";
-import { docsRouter } from "@/src/pages/docs/route";
+import { docsRouter as visualRouter } from "@/src/pages/docs/route";
 import { communityRouter } from "@/src/pages/community/route";
 import { learnRouter } from "@/src/pages/learn/route";
 import DemoPage from "@/src/pages/demo";
@@ -32,9 +32,9 @@ export const reiRouter = createBrowserRouter([
         index: true,
       },
       {
-        path: "docs",
-        element: <DocsPage />,
-        children: docsRouter,
+        path: "visual",
+        element: <VisualPage />,
+        children: visualRouter,
       },
       {
         path: "learn",

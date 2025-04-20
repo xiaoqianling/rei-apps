@@ -2,6 +2,14 @@ import { Descendant } from "slate";
 
 export const SlateMock: Descendant[] = [
   {
+    type: "heading-one",
+    children: [
+      {
+        text: "Welcome to Slate",
+      },
+    ],
+  },
+  {
     type: "paragraph",
     children: [
       {
@@ -91,6 +99,12 @@ export const SlateMock: Descendant[] = [
         text: "Tip",
       },
     ],
+  },
+  {
+    type: "code-block",
+    language: "js",
+    code: "console.log('Hello, world!')",
+    children: [{ text: "" }],
   },
   {
     type: "paragraph",
