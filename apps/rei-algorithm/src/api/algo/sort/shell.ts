@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource from "../../../components/senki/lib/algo_desc/makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 const arr = [${arr.toString()}]
@@ -25,7 +25,7 @@ const desc = [
   "移动步长为 gap",
   "找到插入位置",
   "元素右移",
-  "执行插入"
+  "执行插入",
 ];
 
 const makeRealCode = (arr: number[]) => `

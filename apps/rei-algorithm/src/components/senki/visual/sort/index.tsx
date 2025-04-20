@@ -2,31 +2,16 @@ import styles from "./index.module.scss";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import CodeDesc from "../common/codeDesc/CodeDesc";
 import { Scene, SenkiArray } from "../../lib/senki";
-import {
-  CodeContext,
-  CodeControl,
-  makeBubbleAlgoSource,
-  makeMergeAlgoSource,
-  makeQuickSortAlgoSource,
-  makeSelectionAlgoSource,
-  makeShellAlgoSource,
-} from "../../lib/algo_desc";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import BreadcrumbNav from "../common/breadcrumb/BreadcrumbNav";
 import { AlgoSource } from "../../lib/algo_desc/makeAlgoSource";
+import { CodeControl } from "../../lib/algo_desc";
+import { getAlgo } from "@/src/api/algo/sort";
 
 const EMPTY_ALGO_SOURCE: AlgoSource = { shower: "", desc: [], realcode: "" };
 
 const SimulateSort = () => {
-  // ---普通变量---
-  // let scene: Scene;
-  // let codeControl: CodeControl;
-  let makeAlgoSource = makeBubbleAlgoSource;
-  // let fakeCode: string = "",
-  //   desc: string[] = [],
-  //   realCode: string = "";
-  // let tempTask: () => void | undefined; // 保存断点继续的执行函数
-
+  const { id } = useParams();
   // ---状态变量---
   // 用户输入的数组
   const [algoSource, setAlgoSource] = useState<AlgoSource>(EMPTY_ALGO_SOURCE);
@@ -53,8 +38,6 @@ const SimulateSort = () => {
   };
 
   const handleRestart = () => {
-    // [fakeCode, desc, realCode] = makeAlgoSource(reviseArray);
-    setAlgoSource(makeAlgoSource(reviseArray));
     codeControl?.destroy(); // 一定要记得销毁
     createNewCodeControl();
     setStatus("play");
@@ -81,20 +64,27 @@ const SimulateSort = () => {
     }
   };
 
+  // 初始化场景
   useLayoutEffect(() => {
     if (!canvas.current) {
       return;
     }
-    // scene = new Scene(canvas.current!);
     setScene(new Scene(canvas.current!));
-
-    let path = location.pathname;
-    setAlgoSource(makeAlgoSource(reviseArray));
     return () => {
       codeControl?.destroy();
     };
   }, [canvas, location.pathname]);
 
+  // API 获取算法
+  useEffect(() => {
+    if (id) {
+      getAlgo(id).then((res) => {
+        if (res) setAlgoSource(res);
+      });
+    }
+  }, [id]);
+
+  // 创建 codeControl
   useEffect(() => {
     if (algoSource !== EMPTY_ALGO_SOURCE && !codeControl) {
       createNewCodeControl();

@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource from "../../../components/senki/lib/algo_desc/makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 let btins = new RBT();

@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.49
+
+### Patch Changes
+
+- chore: 算法API
+
 ## 1.2.48
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource from "../../../components/senki/lib/algo_desc/makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 const heap = new MinHeap();
@@ -87,7 +87,7 @@ const desc = [
   "尝试上移节点",
   "尝试下移节点",
   "插入节点",
-  "删除堆顶"
+  "删除堆顶",
 ];
 
 const makeRealCode = (arr: number[]) => `
@@ -210,7 +210,7 @@ await heap.pop();
 `;
 
 const makeMinBinaryHeapAlgoSource = (arr: number[] = []) => {
-  arr = arr.slice(0, 5)
+  arr = arr.slice(0, 5);
 
   for (let i = arr.length; i < 5; i++) {
     arr.push(Math.ceil(Math.random() * 100));

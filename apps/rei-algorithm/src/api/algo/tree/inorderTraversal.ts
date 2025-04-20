@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource from "../../../components/senki/lib/algo_desc/makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 const root = [${arr.toString()}]; root.val = ${arr[0]}; root.left = [${arr[1]}, ${arr[2]}, ${arr[3]}]; root.right = [${arr[4]}, ${arr[5]}];
@@ -42,7 +42,7 @@ const desc = [
   "若其没有左儿子,即left属性为null",
   "弹出栈顶，将当前节点的值压入队列",
   "若其有右儿子，将其右儿子压入栈顶",
-  "返回中序遍历序列数组"
+  "返回中序遍历序列数组",
 ];
 
 const makeRealCode = (arr: number[]) => `
@@ -101,7 +101,7 @@ async function inorderTraversal(root) {
 `;
 
 const makeInorderTraversalAlgoSource = (arr: number[] = []) => {
-  arr = arr.slice(0, 6)
+  arr = arr.slice(0, 6);
 
   for (let i = arr.length; i < 6; i++) {
     arr.push(Math.ceil(Math.random() * 100));

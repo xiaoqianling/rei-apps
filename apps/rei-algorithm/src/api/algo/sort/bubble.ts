@@ -1,4 +1,6 @@
-import makeAlgoSource, { AlgoSource } from "../makeAlgoSource";
+import makeAlgoSource, {
+  AlgoSource,
+} from "../../../components/senki/lib/algo_desc/makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 const array = [${arr.toString()}];

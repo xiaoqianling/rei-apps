@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource from "../../../components/senki/lib/algo_desc/makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 const array = [${arr.toString()}];
@@ -19,11 +19,11 @@ const desc = [
   "外层循环，控制趟数，每一次找到一个最小值",
   "内层循环，控制比较的次数，并且判断于temp的大小",
   "如果比temp小，将索引存到minIndex中",
-  "将当前值与minIndex中的值交换"
+  "将当前值与minIndex中的值交换",
 ];
 
-const makeRealCode = (arr: number[]) =>`
-const array = new SenkiArray(${ arr.toString() });
+const makeRealCode = (arr: number[]) => `
+const array = new SenkiArray(${arr.toString()});
 var minIndex;
 await wait({ line: [1, 2], desc: 1 })
 for (var i = 0; i < array.length - 1; i++) {
@@ -41,8 +41,7 @@ for (var i = 0; i < array.length - 1; i++) {
   }
   array.swap(i, minIndex)
   await wait({ line: [10, 10], desc: 4 })
-}`
-
+}`;
 
 const makeSelectionAlgoSource = (arr?: number[]) => {
   if (!arr) {
