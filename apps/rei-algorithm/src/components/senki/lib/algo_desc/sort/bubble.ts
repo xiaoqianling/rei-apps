@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource, { AlgoSource } from "../makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 const array = [${arr.toString()}];
@@ -38,7 +38,8 @@ for (var i = 0; i < array.length - 1; i++) {
 }
 `;
 
-const makeBubbleAlgoSource = (arr?: number[]) => {
+// 生成随机数组
+const makeBubbleAlgoSource = (arr?: number[]): AlgoSource => {
   if (!arr) {
     arr = [];
     for (let i = 0; i < 10; i++) {

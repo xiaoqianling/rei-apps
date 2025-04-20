@@ -7,12 +7,8 @@ import { noctisLilac } from "@uiw/codemirror-theme-noctis-lilac";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import ReiSplit from "rei-design/split";
 import { makeCodeSource, createNewCodeControl } from "../util";
-import {
-  highlightEffect,
-  highlightField,
-} from "../../visual/codeEditor/extension";
+import { highlightField } from "../../visual/codeEditor/extension";
 import { LuClipboardCopy, LuPanelLeftOpen } from "react-icons/lu";
-import { MdCodeOff, MdCode } from "react-icons/md";
 import { TbFreezeRow } from "react-icons/tb";
 import { VscRunAll } from "react-icons/vsc";
 import ReiTooltip from "rei-design/tooltip";

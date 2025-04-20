@@ -1,5 +1,5 @@
 import styles from "./index.module.scss";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import CodeDesc from "../common/codeDesc/CodeDesc";
 import { Scene, SenkiArray } from "../../lib/senki";
 import {
@@ -13,68 +13,49 @@ import {
 } from "../../lib/algo_desc";
 import { Link, useLocation } from "react-router-dom";
 import BreadcrumbNav from "../common/breadcrumb/BreadcrumbNav";
+import { AlgoSource } from "../../lib/algo_desc/makeAlgoSource";
 
-let scene: Scene;
-let codeControl: CodeControl;
-let makeAlgoSource = makeBubbleAlgoSource;
-let fakeCode: string = "",
-  desc: string[] = [],
-  realCode: string = "";
-
-let tempTask: () => void | undefined; // 保存断点继续的执行函数
+const EMPTY_ALGO_SOURCE: AlgoSource = { shower: "", desc: [], realcode: "" };
 
 const SimulateSort = () => {
+  // ---普通变量---
+  // let scene: Scene;
+  // let codeControl: CodeControl;
+  let makeAlgoSource = makeBubbleAlgoSource;
+  // let fakeCode: string = "",
+  //   desc: string[] = [],
+  //   realCode: string = "";
+  // let tempTask: () => void | undefined; // 保存断点继续的执行函数
+
+  // ---状态变量---
   // 用户输入的数组
+  const [algoSource, setAlgoSource] = useState<AlgoSource>(EMPTY_ALGO_SOURCE);
+  const [codeControl, setCodeControl] = useState<CodeControl>();
+  const [tempTask, setTempTask] = useState<(() => void) | undefined>();
+  const [scene, setScene] = useState<Scene | undefined>();
   const [reviseArray, setReviseArray] = useState();
   const location = useLocation();
   const [status, setStatus] = useState<"stop" | "play" | "finish">("stop");
   const [codeInfo, setCodeInfo] = useState({ line: [-1, -1], desc: -1 });
-
   const statusRef = useRef(status);
   statusRef.current = status; // 没办法，为了在闭包函数里引用，只能干这种愚蠢操作。
   const canvas = useRef<HTMLCanvasElement>(null);
 
   const createNewCodeControl = () => {
-    codeControl = new CodeControl(realCode);
-
-    const handleWait = ({ info, resolve }: CodeContext) => {
-      setCodeInfo(info);
-
-      // 确定动画结束了再进行下一步
-      const tryToNext = () => {
-        if (statusRef.current === "play") {
-          if (scene.isAnimAllOver()) resolve();
-          else setTimeout(tryToNext, 100);
-        } else tempTask = resolve;
-      };
-
-      setTimeout(tryToNext, 500);
-    };
-
-    const handleEnd = () => {
-      setStatus("finish");
-      setCodeInfo({ line: [-1, -1], desc: -1 });
-    };
-
-    const handleDestroy = () => {
-      scene.removeAllChild();
-    };
-
-    codeControl.on("wait", handleWait);
-    codeControl.on("end", handleEnd);
-    codeControl.on("destroy", handleDestroy);
-
-    codeControl.start();
+    setCodeControl(new CodeControl(algoSource.realcode));
   };
 
   const handlePlay = () => {
-    if (tempTask) tempTask();
+    if (tempTask) {
+      tempTask();
+    }
     setStatus("play");
   };
 
   const handleRestart = () => {
-    [fakeCode, desc, realCode] = makeAlgoSource(reviseArray);
-    codeControl.destroy(); // 一定要记得销毁
+    // [fakeCode, desc, realCode] = makeAlgoSource(reviseArray);
+    setAlgoSource(makeAlgoSource(reviseArray));
+    codeControl?.destroy(); // 一定要记得销毁
     createNewCodeControl();
     setStatus("play");
   };
@@ -101,30 +82,83 @@ const SimulateSort = () => {
   };
 
   useLayoutEffect(() => {
-    scene = new Scene(canvas.current!);
+    if (!canvas.current) {
+      return;
+    }
+    // scene = new Scene(canvas.current!);
+    setScene(new Scene(canvas.current!));
+
+    let path = location.pathname;
+    setAlgoSource(makeAlgoSource(reviseArray));
+    return () => {
+      codeControl?.destroy();
+    };
+  }, [canvas, location.pathname]);
+
+  useEffect(() => {
+    if (algoSource !== EMPTY_ALGO_SOURCE && !codeControl) {
+      createNewCodeControl();
+    }
+  }, [algoSource]);
+
+  // 监听 codeControl 的状态变化
+  useEffect(() => {
+    if (!codeControl) return;
+    const handleWait = ({ info, resolve }: CodeContext) => {
+      setCodeInfo(info);
+
+      // 确定动画结束了再进行下一步
+      const tryToNext = () => {
+        if (statusRef.current === "play") {
+          if (scene && scene.isAnimAllOver()) {
+            resolve();
+          } else setTimeout(tryToNext, 100);
+        } else {
+          setTempTask(() => {
+            return resolve;
+          });
+        }
+      };
+
+      setTimeout(tryToNext, 500);
+    };
+
+    const handleEnd = () => {
+      setStatus("finish");
+      setCodeInfo({ line: [-1, -1], desc: -1 });
+    };
+
+    const handleDestroy = () => {
+      scene?.removeAllChild();
+    };
+
+    codeControl?.on("wait", handleWait);
+    codeControl?.on("end", handleEnd);
+    codeControl?.on("destroy", handleDestroy);
+
+    setTimeout(() => {
+      codeControl?.start();
+    }, 0);
+  }, [codeControl]);
+
+  // 初始化 senki
+  useEffect(() => {
+    if (!scene) return;
     SenkiArray.config.scene = scene;
     SenkiArray.config.width = scene.width;
     SenkiArray.config.height = scene.height;
-
-    let path = location.pathname;
-
-    if (/bubble/.test(path)) makeAlgoSource = makeBubbleAlgoSource;
-    if (/merge/.test(path)) makeAlgoSource = makeMergeAlgoSource;
-    if (/quick/.test(path)) makeAlgoSource = makeQuickSortAlgoSource;
-    if (/selection/.test(path)) makeAlgoSource = makeSelectionAlgoSource;
-    if (/shell/.test(path)) makeAlgoSource = makeShellAlgoSource;
-
-    [fakeCode, desc, realCode] = makeAlgoSource(reviseArray);
-
-    createNewCodeControl();
-  }, [canvas, location.pathname]);
+  }, [scene]);
 
   return (
     <div className={styles.sortContainer}>
       <BreadcrumbNav />
       <div className={styles.mainContent}>
         <div className={styles.codeArea}>
-          <CodeDesc code={fakeCode} desc={desc} info={codeInfo} />
+          <CodeDesc
+            code={algoSource.shower}
+            desc={algoSource.desc}
+            info={codeInfo}
+          />
         </div>
         <canvas ref={canvas} className={styles.canvasArea}></canvas>
       </div>
@@ -158,14 +192,28 @@ const SimulateSort = () => {
                   reviseArrayInputChange(event);
                 }}
               />
-              <button className={styles.confirmButton} onClick={handleRestart}>确认</button>
+              <button className={styles.confirmButton} onClick={handleRestart}>
+                确认
+              </button>
             </div>
           </div>
         </div>
         <div className={styles.actionButtons}>
-          <button onClick={handlePlay} disabled={status === 'play'}>play</button>
-          <button onClick={handleStop} disabled={status === 'stop' || status === 'finish'}>stop</button>
-          <button onClick={handleNext} disabled={status === 'play' || status === 'finish'}>next</button>
+          <button onClick={handlePlay} disabled={status === "play"}>
+            play
+          </button>
+          <button
+            onClick={handleStop}
+            disabled={status === "stop" || status === "finish"}
+          >
+            stop
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={status === "play" || status === "finish"}
+          >
+            next
+          </button>
           <button onClick={handleChangeSpeed}>speed</button>
           <button onClick={handleRestart}>restart</button>
         </div>

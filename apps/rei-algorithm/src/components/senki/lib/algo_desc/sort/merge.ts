@@ -1,4 +1,4 @@
-import makeAlgoSource from "../makeAlgoSource";
+import makeAlgoSource, { AlgoSource } from "../makeAlgoSource";
 
 const makeShower = (arr: number[]) => `
 let arr = [${arr.toString()}];
@@ -82,7 +82,7 @@ async function merge(arr, pos1, pos2) {
 }
 `;
 
-const makeMergeAlgoSource = (arr?: number[]) => {
+const makeMergeAlgoSource = (arr?: number[]): AlgoSource => {
   if (!arr) {
     arr = [];
     for (let i = 0; i < 10; i++) {

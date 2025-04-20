@@ -68,7 +68,6 @@ export default class CodeControl extends MicroEvent<CodeControlEvent> {
   _breakpointFunctionDeclaration = `
   function wait(info) {
     return new Promise((resolve, reject) => {
-      // console.log("count:", ${this.count})
       CodeControl.saveContext(${this.count}, { info, resolve, reject });
     });
   };
@@ -92,6 +91,7 @@ export default class CodeControl extends MicroEvent<CodeControlEvent> {
     this.executableFunction()
       .catch((err: any) => {
         this.status = "error";
+        console.error("CodeControl " + this.count + " error.");
         this.emit("error", err);
         throw err;
       })
