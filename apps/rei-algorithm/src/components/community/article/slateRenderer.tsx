@@ -7,7 +7,7 @@ import {
   Slate,
   withReact,
 } from "slate-react";
-import { SlateMock } from "../slateEditor/mock";
+import { SlateMock } from "../../slate/slateEditor/mock";
 import { withHistory } from "slate-history";
 import { Element, Leaf } from "@/src/components/slate/slateEditor/element";
 

@@ -1,5 +1,3 @@
-import BlogContent from "@/src/components/slate/blogContent";
-import { AlgorithmStationIntro } from "@/src/components/community/type/mock";
 import { RouteObject } from "react-router-dom";
 import { MenuItem } from "rei-design/menu/type";
 
@@ -7,7 +5,7 @@ import { MenuItem } from "rei-design/menu/type";
 export const learnRouter: RouteObject[] = [
   {
     path: "",
-    element: <BlogContent blog={AlgorithmStationIntro} showInfo={false} />,
+    element: <>learnRouter</>,
     index: true,
   },
   {

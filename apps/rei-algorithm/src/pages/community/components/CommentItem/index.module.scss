@@ -1,0 +1,75 @@
+/* Variables */
+$border-light: #e0f0e8;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$primary-accent: #457b9d;
+$transition-base: all 0.2s ease-out;
+
+.commentItem {
+  display: flex;
+  gap: 15px;
+  padding: 15px 0; // Padding top/bottom
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $border-light;
+  }
+}
+
+.avatarLink {
+  flex-shrink: 0;
+  margin-top: 3px; // Align avatar slightly with first line of text
+}
+
+.commentAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid $border-light;
+  transition: transform $transition-base;
+
+  .avatarLink:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.commentContent {
+  flex-grow: 1;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: baseline; // Align baseline of name and date
+  gap: 8px;
+  margin-bottom: 5px;
+  flex-wrap: wrap; // Allow wrapping if needed
+}
+
+.authorNameLink {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $text-dark;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-accent;
+    text-decoration: underline;
+  }
+}
+
+.commentDate {
+  font-size: 0.8rem;
+  color: $text-light;
+}
+
+.commentText {
+  font-size: 0.95rem;
+  color: $text-medium;
+  line-height: 1.6;
+  margin: 0;
+  // Styles for rendered Markdown (if applicable)
+  // p, blockquote, ul, ol { margin-bottom: 0.8em; }
+  // code { background-color: #eee; padding: 2px 4px; border-radius: 3px; font-size: 0.9em; }
+} 

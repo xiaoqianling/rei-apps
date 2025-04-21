@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.54
+
+### Patch Changes
+
+- feat: 文章页实现
+
 ## 1.2.53
 
 ### Patch Changes

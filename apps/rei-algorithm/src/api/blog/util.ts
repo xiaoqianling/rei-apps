@@ -1,7 +1,7 @@
-import { BlogCardInfo, BlogDetail } from "@/src/components/community/type";
+import { ArticleCardInfo, ArticleDetail } from "@/src/components/community/type";
 import { transformBlogContent } from "../contentBlock/util";
 
-export function transformBlogResponseDTO(data: any): BlogCardInfo[] {
+export function transformBlogResponseDTO(data: any): ArticleCardInfo[] {
   if (!data) {
     return [];
   }
@@ -16,8 +16,8 @@ export function transformBlogResponseDTO(data: any): BlogCardInfo[] {
   }));
 }
 
-export function transformBlogDetailResponseDTO(data: any): BlogDetail {
-  const ret: BlogDetail = {
+export function transformBlogDetailResponseDTO(data: any): ArticleDetail {
+  const ret: ArticleDetail = {
     pid: data.pid,
     title: data.title,
     createdAt: new Date(data.createTime),

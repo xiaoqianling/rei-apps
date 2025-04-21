@@ -1,0 +1,72 @@
+@use "sass:color";
+
+/* Variables */
+$bg-base: #f8fff3;
+$border-light: #e0f0e8;
+$border-medium: #cce0d5;
+$primary-accent: #457b9d;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$transition-base: all 0.3s ease;
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.commentTextarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border: 1px solid $border-medium;
+  border-radius: 8px;
+  background-color: #fff; // White background for textarea
+  color: $text-dark;
+  resize: vertical; // Allow vertical resize
+  min-height: 80px;
+  outline: none;
+  transition: $transition-base;
+
+  &::placeholder {
+    color: $text-light;
+    font-style: italic;
+  }
+
+  &:focus {
+    border-color: $primary-accent;
+    box-shadow: 0 0 0 3px rgba($primary-accent, 0.15);
+  }
+
+  &:disabled {
+    background-color: color.adjust($bg-base, $lightness: 1%);
+    cursor: not-allowed;
+  }
+}
+
+.submitButton {
+  align-self: flex-end; // Align button to the right
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  background-color: $primary-accent;
+  color: white;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($primary-accent, $lightness: -8%);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    background-color: color.adjust($primary-accent, $lightness: 15%);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

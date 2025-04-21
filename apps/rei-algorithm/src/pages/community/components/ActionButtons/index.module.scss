@@ -1,0 +1,60 @@
+@use "sass:color";
+
+/* Variables */
+$primary-accent: #457b9d;
+$text-medium: #5a6872;
+$border-light: #e0f0e8;
+$bg-hover: #e8f5e9;
+$transition-base: all 0.2s ease-out;
+
+.actionButtonsContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: 1px solid $border-light;
+  background-color: transparent;
+  color: $text-medium;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition-base;
+
+  svg {
+    font-size: 1.1em;
+    position: relative;
+    top: -1px; // Slight vertical alignment
+  }
+
+  &:hover {
+    background-color: $bg-hover;
+    color: $primary-accent;
+    border-color: color.adjust($border-light, $lightness: -5%);
+    transform: translateY(-1px);
+  }
+}
+
+// Specific button styles (optional)
+.editButton {
+  // Add specific styles if needed
+}
+
+.shareButton {
+  // Add specific styles if needed
+}
+
+.reportButton {
+  color: #dc3545; // Use a warning/danger color
+
+  &:hover {
+    background-color: color.adjust(#f8d7da, $alpha: -0.5); // Light red hover
+    border-color: color.adjust(#f5c6cb, $lightness: -5%);
+    color: color.adjust(#dc3545, $lightness: -10%);
+  }
+}

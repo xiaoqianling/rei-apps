@@ -1,9 +1,9 @@
 import { ContentTypes } from "../content";
-import { BlogDetail } from "..";
+import { ArticleDetail } from "..";
 import { TagTypes } from "../../../slate/tag/type";
 import { TipLevelsTypes } from "../../../slate/tip";
 
-export const post1: BlogDetail = {
+export const post1: ArticleDetail = {
   pid: "mock-id-2",
   title: "深入理解React Hooks：从基础到高级用法",
   username: "react-expert",
@@ -191,7 +191,7 @@ C -->|Two| E[Result 2]
   tags: [TagTypes.TECH],
 };
 
-export const AlgorithmStationIntro: BlogDetail = {
+export const AlgorithmStationIntro: ArticleDetail = {
   pid: "algorithm-station-intro",
   title: "欢迎来到算法站：你的算法学习与实践平台",
   username: "admin",

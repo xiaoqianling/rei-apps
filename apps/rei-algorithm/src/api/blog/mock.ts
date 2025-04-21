@@ -1,7 +1,7 @@
 import { TagTypes } from "@/src/components/slate/tag/type";
-import { BlogCardInfo, BlogDetail } from "@/src/components/community/type";
+import { ArticleCardInfo, ArticleDetail } from "@/src/components/community/type";
 
-export const mockAllBlogs: BlogCardInfo[] = [
+export const mockAllBlogs: ArticleCardInfo[] = [
   {
     pid: 777777777,
     title: "Dev Blog",
@@ -13,7 +13,7 @@ export const mockAllBlogs: BlogCardInfo[] = [
   },
 ];
 
-export const mockBlogDetail: BlogDetail = {
+export const mockBlogDetail: ArticleDetail = {
   pid: 0,
   title: "Dev Blog",
   createdAt: new Date(),

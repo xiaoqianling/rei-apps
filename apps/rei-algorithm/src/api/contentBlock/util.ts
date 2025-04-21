@@ -1,6 +1,6 @@
-import { BlogContent } from "@/src/components/community/type/content";
+import { Descendant } from "slate";
 
-export function transformBlogContent(data: any): BlogContent[] {
+export function transformBlogContent(data: any): Descendant[] {
   if (!data) {
     return [];
   }

@@ -1,5 +1,5 @@
 // 这里是和Slate编辑器、博客相关的组件
-export * from "./blog";
+export * from "../community/article";
 export * from "./blogContent";
 export * from "./foldBlock";
 export * from "./markdown";

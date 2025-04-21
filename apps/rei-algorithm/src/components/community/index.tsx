@@ -1,1 +1,1 @@
-export { default as Blog } from "../slate/blog";
+export { default as Article } from "./article";

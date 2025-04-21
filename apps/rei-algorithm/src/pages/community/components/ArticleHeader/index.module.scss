@@ -1,0 +1,116 @@
+@use "sass:color";
+
+/* Variables */
+$bg-base: #f8fff3;
+$border-light: #e0f0e8;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$primary-accent: #457b9d;
+$tag-bg: #e0f7fa;
+$tag-text: #0077b6;
+$transition-base: all 0.3s ease;
+
+.articleHeader {
+  padding: 30px 0 25px 0;
+  border-bottom: 1px solid $border-light;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem); // Responsive title size
+  font-weight: 700;
+  color: $text-dark;
+  line-height: 1.3;
+  margin: 0 0 15px 0;
+}
+
+.metaContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; // Allow wrapping
+  gap: 15px; // Gap between author/date and actions
+  margin-bottom: 20px;
+}
+
+.authorDate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap; // Allow wrapping author/date too
+}
+
+.authorLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: $text-medium;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $primary-accent;
+  }
+}
+
+.authorAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid $border-light;
+}
+
+.authorName {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.separator {
+  color: $text-light;
+  font-size: 1rem;
+  position: relative;
+  top: -1px;
+}
+
+.publishDate {
+  font-size: 0.9rem;
+  color: $text-light;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px; // Add margin if meta wraps below tags
+}
+
+.tagLink {
+  background-color: color.adjust(
+    $tag-bg,
+    $lightness: 3%
+  ); // Slightly lighter than card tags
+  color: $tag-text;
+  padding: 5px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: $transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: $tag-bg;
+    color: color.adjust($tag-text, $lightness: -10%);
+    box-shadow: 0 2px 5px rgba($tag-text, 0.1);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 576px) {
+  .metaContainer {
+    flex-direction: column; // Stack meta info and actions vertically
+    align-items: flex-start; // Align items to start
+  }
+}

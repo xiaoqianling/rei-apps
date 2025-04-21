@@ -1,0 +1,118 @@
+@use "sass:color";
+
+/* Variables */
+$bg-base: #f8fff3;
+$bg-anchor: #ffffff; // Slightly different bg for anchor
+$border-light: #e0f0e8;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$primary-accent: #457b9d;
+$accent-light: #a8dadc;
+$transition-base: all 0.25s ease-out;
+
+.anchorContainer {
+  position: sticky; // Make it sticky
+  top: 80px; // Adjust based on your header height + desired offset
+  max-height: calc(100vh - 100px); // Limit height and allow scrolling within
+  overflow-y: auto;
+  width: 240px; // Adjust width
+  padding: 15px 0 15px 15px;
+  background-color: $bg-anchor;
+  border: 1px solid $border-light;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+
+  // Add subtle gradient border effect (optional)
+  // border-image: linear-gradient(to bottom, $accent-light, $primary-accent) 1;
+
+  // Custom scrollbar (optional)
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $accent-light;
+    border-radius: 3px;
+  }
+}
+
+.anchorTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: $text-dark;
+  padding: 0 10px 10px 0; // Padding inside
+  margin-bottom: 10px;
+  border-bottom: 1px solid $border-light;
+}
+
+.anchorList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  padding-right: 10px; // Space for scrollbar
+}
+
+.subList {
+  padding-left: 15px; // Indentation for sub-levels
+  margin-top: 5px;
+  border-left: 1px dashed $border-light; // Dashed line for hierarchy
+}
+
+.anchorItem {
+  margin-bottom: 2px;
+  position: relative; // For active indicator
+}
+
+.anchorLink {
+  display: block;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  color: $text-medium;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: $transition-base;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+
+  &:hover {
+    color: $primary-accent;
+    background-color: color.adjust($bg-base, $lightness: 1%);
+  }
+}
+
+// Active state styling
+.anchorItem.active > .anchorLink {
+  color: $primary-accent;
+  font-weight: 600;
+  background-color: color.adjust($accent-light, $lightness: 15%);
+}
+
+// Active indicator (optional vertical bar)
+.anchorItem.active::before {
+  content: "";
+  position: absolute;
+  left: -15px; // Position relative to the parent li padding-left in .subList
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: $primary-accent;
+  border-radius: 2px;
+}
+
+// Adjust first level active indicator positioning if not in sublist
+.anchorList:not(.subList) > .anchorItem.active::before {
+  left: -15px; // Adjust based on .anchorContainer padding
+}
+
+// Responsive: Hide anchor on smaller screens if needed
+@media (max-width: 1024px) {
+  // Adjust breakpoint
+  .anchorContainer {
+    display: none;
+  }
+}

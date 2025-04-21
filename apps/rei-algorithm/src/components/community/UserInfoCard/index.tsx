@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
-import { UserProfileData } from "../../../pages/community/types";
+import { UserProfileData } from "@/src/pages/community/types";
+import defaultAvatar from "@/public/img/avatar.jpeg";
 
 interface UserInfoCardProps {
   user: UserProfileData;
@@ -21,7 +22,7 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ user }) => {
   return (
     <div className={styles.userInfoCard}>
       <img
-        src={user.avatarUrl || "/avatars/default.png"}
+        src={user.avatarUrl || defaultAvatar}
         alt={`${user.name} avatar`}
         className={styles.profileAvatar}
       />

@@ -1,0 +1,179 @@
+@use "sass:color";
+
+/* Variables */
+$overlay-bg: rgba(0, 0, 0, 0.6);
+$modal-bg: #ffffff;
+$border-light: #e0f0e8;
+$border-medium: #cce0d5;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$primary-accent: #457b9d;
+$danger-color: #dc3545;
+$transition-fast: all 0.2s ease-out;
+$transition-base: all 0.3s ease-out;
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $overlay-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; // Ensure modal is on top
+
+  // Styles when modal is open (add this class dynamically)
+  // For simplicity, we rely on the conditional rendering in React
+  // But for pure CSS animation, you'd toggle a class here.
+  // For now, we use conditional rendering which instantly shows/hides.
+  // To add animation, control parent visibility/opacity with state/CSS.
+  // Example (requires adding/removing .modalOpen on overlay from parent):
+  // &.modalOpen {
+  //   opacity: 1;
+  //   visibility: visible;
+  //   .modalContent {
+  //      transform: scale(1) translateY(0);
+  //      opacity: 1;
+  //   }
+  // }
+}
+
+.modalContent {
+  background-color: $modal-bg;
+  padding: 25px 35px;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  // Initial state for animation (if using CSS class toggling)
+  // transform: scale(0.95) translateY(-10px);
+  // opacity: 0;
+  // transition: transform $transition-base, opacity $transition-base;
+}
+
+.closeButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: $text-light;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $text-dark;
+  }
+}
+
+.modalTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: $text-dark;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: $text-medium;
+  margin-bottom: 10px;
+}
+
+.reasonsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reasonLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: $text-medium;
+
+  input[type="radio"] {
+    accent-color: $primary-accent; // Style radio button color
+    cursor: pointer;
+  }
+}
+
+.detailsTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  border: 1px solid $border-medium;
+  border-radius: 6px;
+  resize: vertical;
+  min-height: 60px;
+  outline: none;
+  transition: $transition-base;
+
+  &::placeholder {
+    color: $text-light;
+  }
+
+  &:focus {
+    border-color: $primary-accent;
+    box-shadow: 0 0 0 3px rgba($primary-accent, 0.1);
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid $border-light;
+}
+
+.cancelButton,
+.submitButton {
+  padding: 9px 18px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: $transition-base;
+}
+
+.cancelButton {
+  background-color: #f1f3f5; // Light grey
+  color: $text-medium;
+  border: 1px solid $border-medium;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+}
+
+.submitButton {
+  background-color: $danger-color; // Use danger color for reporting
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust($danger-color, $lightness: 10%);
+  }
+
+  &:disabled {
+    background-color: color.adjust($danger-color, $lightness: 15%);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

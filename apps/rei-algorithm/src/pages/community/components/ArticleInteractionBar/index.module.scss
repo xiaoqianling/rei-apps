@@ -1,0 +1,80 @@
+@use "sass:color";
+
+/* Variables */
+$primary-accent: #457b9d;
+$text-medium: #5a6872;
+$border-light: #e0f0e8;
+$bg-hover: #e8f5e9;
+$like-color: #28a745; // Green for like
+$dislike-color: #dc3545; // Red for dislike
+$transition-base: all 0.2s ease-out;
+
+.interactionBar {
+  display: flex;
+  justify-content: center; // Center the buttons
+  gap: 15px;
+  padding: 20px 0;
+  margin-top: 20px;
+  border-top: 1px solid $border-light;
+  border-bottom: 1px solid $border-light;
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 20px; // Pill shape
+  border: 1px solid $border-light;
+  background-color: transparent;
+  color: $text-medium;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: $transition-base;
+
+  svg {
+    font-size: 1.2em;
+    position: relative;
+    top: -1px;
+  }
+
+  span {
+    font-weight: 500;
+    min-width: 1.5ch; // Ensure some space for number
+    text-align: right;
+  }
+
+  &:hover:not(.active) {
+    background-color: $bg-hover;
+    color: $primary-accent;
+    border-color: color.adjust($border-light, $lightness: -5%);
+    transform: scale(1.03);
+  }
+
+  // Active state styling
+  &.active {
+    font-weight: 600;
+    border-color: transparent; // Remove border when active?
+    background-color: color.adjust(
+      $primary-accent,
+      $alpha: -0.85
+    ); // Light accent bg
+    color: $primary-accent;
+
+    // Specific color for like/dislike when active
+    &[title="赞同"] {
+      background-color: color.adjust($like-color, $alpha: -0.8);
+      color: $like-color;
+      border-color: transparent;
+    }
+    &[title="反对"] {
+      background-color: color.adjust($dislike-color, $alpha: -0.85);
+      color: $dislike-color;
+      border-color: transparent;
+    }
+
+    svg {
+      // Maintain icon color or make it stronger
+    }
+  }
+}

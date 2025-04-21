@@ -1,4 +1,4 @@
-import { PostPreview, CommunityUser, CommunityTag, UserProfileData } from "./types";
+import { PostPreview, CommunityUser, CommunityTag, UserProfileData, ArticleData, CommentData } from "./types";
 
 // --- Mock Users ---
 export const mockUsers: Record<string, CommunityUser> = {
@@ -61,6 +61,70 @@ export const mockPosts: PostPreview[] = [
     commentsCount: 2,
   },
 ];
+
+// --- Mock Full Article Data ---
+export const mockArticleData: Record<string, ArticleData> = {
+  post1: {
+    id: "post1",
+    title: "深入理解快速排序的可视化实现",
+    author: mockUsers.user1,
+    tags: [mockTags.tag1, mockTags.tag3, mockTags.tag5],
+    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+    likes: 25,
+    dislikes: 2,
+    views: 158,
+    commentsCount: 2,
+    content: `
+      <h1 id="intro">引言</h1>
+      <p>快速排序（Quicksort）是一种非常高效的排序算法，由Tony Hoare发明。它的基本思想是采用分治策略...</p>
+      <h2 id="partition">分区操作 (Partition)</h2>
+      <p>快速排序的核心在于分区操作。选取一个基准元素（pivot），将数组分为两部分：一部分小于基准，另一部分大于基准。</p>
+      <pre><code>// 伪代码
+function partition(arr, low, high) {
+  pivot = arr[high]
+  i = low - 1
+  for j = low to high - 1 {
+    if arr[j] < pivot {
+      i++
+      swap arr[i], arr[j]
+    }
+  }
+  swap arr[i+1], arr[high]
+  return i + 1
+}</code></pre>
+      <h3 id="pivot-choice">基准选择</h3>
+      <p>基准的选择会影响算法的性能。常见的选择有：第一个元素、最后一个元素、中间元素、随机元素。</p>
+      <h2 id="visualization">可视化展示</h2>
+      <p>下面是一个使用本平台API实现的交互式可视化组件：</p>
+      <div class="visualization-placeholder">[嵌入的可视化组件]</div>
+      <p>你可以点击"下一步"观察每次分区的过程，高亮显示了当前的基准和比较的元素。</p>
+      <h2 id="conclusion">总结</h2>
+      <p>通过可视化，我们可以更直观地理解快速排序的工作原理，特别是递归和分区的细节。</p>
+    ` // Placeholder for actual Slate-rendered HTML
+  },
+  // Add mock data for other posts if needed
+};
+
+// --- Mock Comments ---
+export const mockComments: Record<string, CommentData[]> = {
+  post1: [
+    {
+      id: "comment1",
+      author: mockUsers.user2,
+      content: "这个可视化做得真棒！分区过程一目了然。",
+      createdAt: new Date(Date.now() - 1000 * 60 * 90).toISOString(), // 90 mins ago
+    },
+    {
+      id: "comment2",
+      author: mockUsers.user3,
+      content: "感谢分享！请问基准选择策略对可视化的影响大吗？",
+      createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(), // 30 mins ago
+    },
+  ],
+  post2: [], // Example with no comments
+  post3: [],
+  post4: [],
+};
 
 // --- Mock User Profiles ---
 export const mockUserProfiles: Record<string, UserProfileData> = {

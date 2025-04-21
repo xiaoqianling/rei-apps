@@ -29,4 +29,19 @@ export interface UserProfileData extends CommunityUser {
    posts: PostPreview[];
    // Add other stats placeholders if needed
    postCount: number;
+}
+
+export interface ArticleData extends Omit<PostPreview, 'excerpt'> {
+  content: string; // Placeholder for Slate-rendered HTML or structured data
+  // Potentially add other fields like read time, detailed stats etc.
+  views?: number;     // 阅读量
+  dislikes?: number;  // 点踩数
+}
+
+export interface CommentData {
+  id: string;
+  author: CommunityUser;
+  content: string; // Simple text content for now
+  createdAt: string; // ISO string format
+  // replies?: CommentData[]; // Optional: for nested comments later
 } 
