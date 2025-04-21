@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import styles from './index.module.scss';
-import { FaTimes } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import styles from "./index.module.scss";
+import { FaTimes } from "react-icons/fa";
 
 interface ReportModalProps {
   isOpen: boolean;
@@ -9,23 +9,27 @@ interface ReportModalProps {
 }
 
 const reportReasons = [
-  '垃圾广告信息',
-  '不友善内容',
-  '内容涉及侵权',
-  '低质量或与主题无关',
-  '其他'
+  "垃圾广告信息",
+  "不友善内容",
+  "内容涉及侵权",
+  "低质量或与主题无关",
+  "其他",
 ];
 
-const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) => {
-  const [selectedReason, setSelectedReason] = useState<string>('');
-  const [details, setDetails] = useState('');
+const ReportModal: React.FC<ReportModalProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+}) => {
+  const [selectedReason, setSelectedReason] = useState<string>("");
+  const [details, setDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Reset state when modal opens/closes
   useEffect(() => {
     if (!isOpen) {
-      setSelectedReason('');
-      setDetails('');
+      setSelectedReason("");
+      setDetails("");
       setIsSubmitting(false);
     }
   }, [isOpen]);
@@ -36,8 +40,8 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
     setIsSubmitting(true);
     // Simulate submission delay
     setTimeout(() => {
-        onSubmit(selectedReason, details);
-        setIsSubmitting(false);
+      onSubmit(selectedReason, details);
+      setIsSubmitting(false);
     }, 500);
   };
 
@@ -46,9 +50,17 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
   }
 
   return (
-    <div className={styles.modalOverlay} onClick={onClose}> {/* Close on overlay click */}
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}> {/* Prevent closing on content click */}
-        <button className={styles.closeButton} onClick={onClose} aria-label="关闭">
+    <div className={styles.modalOverlay} onClick={onClose}>
+      {" "}
+      {/* Close on overlay click */}
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+        {" "}
+        {/* Prevent closing on content click */}
+        <button
+          className={styles.closeButton}
+          onClick={onClose}
+          aria-label="关闭"
+        >
           <FaTimes />
         </button>
         <h3 className={styles.modalTitle}>举报文章</h3>
@@ -56,7 +68,7 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
           <div className={styles.formGroup}>
             <label className={styles.label}>请选择举报原因：</label>
             <div className={styles.reasonsContainer}>
-              {reportReasons.map(reason => (
+              {reportReasons.map((reason) => (
                 <label key={reason} className={styles.reasonLabel}>
                   <input
                     type="radio"
@@ -72,9 +84,11 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
             </div>
           </div>
 
-          {selectedReason === '其他' && (
+          {selectedReason === "其他" && (
             <div className={styles.formGroup}>
-              <label htmlFor="reportDetails" className={styles.label}>请补充说明：</label>
+              <label htmlFor="reportDetails" className={styles.label}>
+                请补充说明：
+              </label>
               <textarea
                 id="reportDetails"
                 value={details}
@@ -87,7 +101,11 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
           )}
 
           <div className={styles.modalActions}>
-            <button type="button" className={styles.cancelButton} onClick={onClose}>
+            <button
+              type="button"
+              className={styles.cancelButton}
+              onClick={onClose}
+            >
               取消
             </button>
             <button
@@ -95,7 +113,7 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
               className={styles.submitButton}
               disabled={!selectedReason || isSubmitting}
             >
-              {isSubmitting ? '提交中...' : '确认举报'}
+              {isSubmitting ? "提交中..." : "确认举报"}
             </button>
           </div>
         </form>
@@ -104,4 +122,4 @@ const ReportModal: React.FC<ReportModalProps> = ({ isOpen, onClose, onSubmit }) 
   );
 };
 
-export default ReportModal; 
+export default ReportModal;

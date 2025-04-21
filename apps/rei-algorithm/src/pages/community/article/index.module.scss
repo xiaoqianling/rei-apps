@@ -25,6 +25,17 @@ $primary-accent: #457b9d;
   margin: 0 auto; // Center content if anchor is hidden
 }
 
+.slateContent {
+  background-color: $bg-content;
+  padding: 30px 40px;
+  border-radius: 10px;
+  border: 1px solid $border-light;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  line-height: 1.7;
+  color: $text-medium;
+}
+
+// deprecated 使用slate渲染
 .articleContent {
   background-color: $bg-content;
   padding: 30px 40px;
@@ -124,9 +135,11 @@ $primary-accent: #457b9d;
 }
 
 .anchorWrapper {
-  width: 240px; // Same width as Anchor component
-  flex-shrink: 0; // Prevent anchor from shrinking
-  // Position is handled by the sticky inside Anchor component
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 // --- Loading and Error States ---
@@ -136,7 +149,7 @@ $primary-accent: #457b9d;
   padding: 80px 20px;
   font-size: 1.2rem;
   color: $text-medium;
-  min-height: 50vh; // Ensure it takes some space
+  min-height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useMemo } from "react";
+import { forwardRef, FunctionComponent, useCallback, useMemo } from "react";
 import { createEditor, Descendant } from "slate";
 import {
   Editable,
@@ -15,28 +15,31 @@ interface SlateRendererProps {
   data?: Descendant[];
 }
 
-const SlateRenderer: FunctionComponent<SlateRendererProps> = () => {
-  const editorRef = useMemo(() => withHistory(withReact(createEditor())), []);
+const SlateRenderer = forwardRef<HTMLDivElement, SlateRendererProps>(
+  ({ data }, ref) => {
+    const editorRef = useMemo(() => withHistory(withReact(createEditor())), []);
 
-  const renderElement = useCallback(
-    (props: RenderElementProps) => <Element {...props} />,
-    [],
-  );
+    const renderElement = useCallback(
+      (props: RenderElementProps) => <Element {...props} />,
+      [],
+    );
 
-  const renderLeaf = useCallback(
-    (props: RenderLeafProps) => <Leaf {...props} />,
-    [],
-  );
+    const renderLeaf = useCallback(
+      (props: RenderLeafProps) => <Leaf {...props} />,
+      [],
+    );
 
-  return (
-    <Slate editor={editorRef} initialValue={SlateMock}>
-      <Editable
-        readOnly
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-      />
-    </Slate>
-  );
-};
+    return (
+      <Slate editor={editorRef} initialValue={SlateMock}>
+        <Editable
+          ref={ref}
+          readOnly
+          renderElement={renderElement}
+          renderLeaf={renderLeaf}
+        />
+      </Slate>
+    );
+  },
+);
 
 export default SlateRenderer;

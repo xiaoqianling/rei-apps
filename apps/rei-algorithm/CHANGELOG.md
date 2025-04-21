@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.55
+
+### Patch Changes
+
+- chore: 整理目录结构
+
 ## 1.2.54
 
 ### Patch Changes

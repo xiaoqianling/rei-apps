@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './index.module.scss';
-import { CommentData } from '../../types';
-import { formatDistanceToNow } from 'date-fns';
-import { zhCN } from 'date-fns/locale';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./index.module.scss";
+import { CommentData } from "../../../../pages/community/types";
+import { formatDistanceToNow } from "date-fns";
+import { zhCN } from "date-fns/locale";
 
 interface CommentItemProps {
   comment: CommentData;
@@ -25,16 +25,22 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
 
   return (
     <div className={styles.commentItem}>
-      <Link to={`/community/profile/${author.id}`} className={styles.avatarLink}>
+      <Link
+        to={`/community/profile/${author.id}`}
+        className={styles.avatarLink}
+      >
         <img
-          src={author.avatarUrl || '/avatars/default.png'}
+          src={author.avatarUrl || "/avatars/default.png"}
           alt={`${author.name} avatar`}
           className={styles.commentAvatar}
         />
       </Link>
       <div className={styles.commentContent}>
         <div className={styles.commentHeader}>
-          <Link to={`/community/profile/${author.id}`} className={styles.authorNameLink}>
+          <Link
+            to={`/community/profile/${author.id}`}
+            className={styles.authorNameLink}
+          >
             {author.name}
           </Link>
           <span className={styles.commentDate}>{formatDate(createdAt)}</span>
@@ -48,4 +54,4 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
   );
 };
 
-export default CommentItem; 
+export default CommentItem;

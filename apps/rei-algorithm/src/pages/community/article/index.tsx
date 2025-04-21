@@ -7,16 +7,15 @@ import React, {
 } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import styles from "./index.module.scss";
-import ArticleHeader from "../components/ArticleHeader";
-import Anchor from "../components/Anchor";
-import CommentSection from "../components/CommentSection";
-import ArticleInteractionBar from "../components/ArticleInteractionBar";
-import ReportModal from "../components/ReportModal";
 import { ArticleData, CommentData } from "../types";
 import { mockArticleData, mockComments } from "../mockData";
+import ArticleHeader from "@/src/components/community/article/ArticleHeader";
+import ArticleInteractionBar from "@/src/components/community/article/ArticleInteractionBar";
+import CommentSection from "@/src/components/community/article/CommentSection";
+import SlateRenderer from "@/src/components/community/article/slateRenderer";
 import { parseBlogAnchors } from "@/src/components/slate/markdown/util";
-import { AnchorItem as ReiAnchorItem } from "rei-design/anchor";
-// import LoadingSpinner from '@/components/common/LoadingSpinner';
+import Anchor, { AnchorItem } from "@/src/components/community/article/Anchor";
+import ReportModal from "@/src/components/community/article/ReportModal";
 
 const BlogArticlePage: React.FC = () => {
   const { articleId } = useParams<{ articleId: string }>();
@@ -24,7 +23,7 @@ const BlogArticlePage: React.FC = () => {
 
   const [article, setArticle] = useState<ArticleData | null>(null);
   const [comments, setComments] = useState<CommentData[]>([]);
-  const [anchorItems, setAnchorItems] = useState<ReiAnchorItem[]>([]);
+  const [anchorItems, setAnchorItems] = useState<AnchorItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -37,7 +36,7 @@ const BlogArticlePage: React.FC = () => {
 
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // --- Simulate Data Fetching & Initial State Setup ---
+  // --- 初始化&模拟API ---
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -68,7 +67,7 @@ const BlogArticlePage: React.FC = () => {
     }, 1000);
   }, [articleId]);
 
-  // --- Parse Anchors (keep existing logic) ---
+  // --- 解析锚点 ---
   useEffect(() => {
     if (!loading && article && contentRef.current) {
       const timer = setTimeout(() => {
@@ -81,7 +80,7 @@ const BlogArticlePage: React.FC = () => {
     }
   }, [loading, article, location.pathname]);
 
-  // --- Interaction Handlers (Mocked) ---
+  // --- 评价文章交互 ---
   const handleLike = useCallback(() => {
     setUserAction((prev) => {
       if (prev === "like") {
@@ -95,11 +94,10 @@ const BlogArticlePage: React.FC = () => {
     });
     // TODO: Send API request to backend
   }, []);
-
   const handleDislike = useCallback(() => {
     setUserAction((prev) => {
       if (prev === "dislike") {
-        setDislikes((d) => d - 1); // Undislike
+        setDislikes((d) => d - 1);
         return null;
       } else {
         if (prev === "like") setLikes((l) => l - 1); // Remove like if exists
@@ -110,14 +108,15 @@ const BlogArticlePage: React.FC = () => {
     // TODO: Send API request to backend
   }, []);
 
+  // 举报模态框状态
   const handleOpenReportModal = useCallback(() => {
     setIsReportModalOpen(true);
   }, []);
-
   const handleCloseReportModal = useCallback(() => {
     setIsReportModalOpen(false);
   }, []);
 
+  // 提交举报
   const handleReportSubmit = useCallback(
     (reason: string, details: string) => {
       console.log("Submitting Report:", { articleId, reason, details });
@@ -128,9 +127,14 @@ const BlogArticlePage: React.FC = () => {
     [articleId],
   );
 
-  // --- Edit Button Logic (keep existing) ---
+  // --- 展示编辑按钮 ---
   const showEditButton = useMemo(() => {
     return article?.author?.id === "user1"; // MOCK
+  }, [article]);
+
+  const content = useMemo(() => {
+    // data={article.content}
+    return <SlateRenderer ref={contentRef} />;
   }, [article]);
 
   // --- Render Logic --- //
@@ -162,11 +166,13 @@ const BlogArticlePage: React.FC = () => {
           onReport={handleOpenReportModal} // Pass handler to open modal
         />
 
-        <article
+        {/* Slate渲染 */}
+        <div className={styles.slateContent}>{content}</div>
+        {/* <article
           ref={contentRef}
           className={styles.articleContent}
           dangerouslySetInnerHTML={{ __html: article.content }}
-        />
+        /> */}
 
         {/* --- Interaction Bar --- */}
         <ArticleInteractionBar
