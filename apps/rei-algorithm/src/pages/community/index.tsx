@@ -1,73 +1,83 @@
-import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import styles from "./index.module.scss";
-import BlogCard from "@/src/components/community/components/blog/card";
-import { getAllBlogs } from "@/src/api/blog";
-import { BlogCardInfo } from "@/src/components/community/type";
-import UserCard from "@/src/components/community/components/userCard";
+import React, { useState, useMemo } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import styles from './index.module.scss';
+import SearchBar from './components/SearchBar';
+import TagFilter from './components/TagFilter';
+import PostPreviewCard from './components/PostPreviewCard';
+import { mockPosts } from './mockData';
+import { PostPreview } from './types';
+import { FaPlus } from 'react-icons/fa';
 
-function CommunityPage() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [blogs, setBlogs] = useState<BlogCardInfo[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+const CommunityHome: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selectedTag = searchParams.get('tag'); // Get selected tag from URL query param
 
-  // 获取推荐帖子
-  useEffect(() => {
-    getAllBlogs().then((data) => {
-      setBlogs(data);
+  // Filtering logic
+  const filteredPosts = useMemo(() => {
+    let posts = mockPosts;
+
+    // Filter by selected tag
+    if (selectedTag) {
+      posts = posts.filter(post => post.tags.some(tag => tag.name === selectedTag));
+    }
+
+    // Filter by search term (title, excerpt, author name, tag name)
+    if (searchTerm) {
+      const lowerSearchTerm = searchTerm.toLowerCase();
+      posts = posts.filter(post =>
+        post.title.toLowerCase().includes(lowerSearchTerm) ||
+        post.excerpt.toLowerCase().includes(lowerSearchTerm) ||
+        post.author.name.toLowerCase().includes(lowerSearchTerm) ||
+        post.tags.some(tag => tag.name.toLowerCase().includes(lowerSearchTerm))
+      );
+    }
+
+    return posts;
+  }, [searchTerm, selectedTag]);
+
+  // Handler for tag selection
+  const handleSelectTag = (tagName: string | null) => {
+    setSearchParams(params => {
+      if (tagName === null) {
+        params.delete('tag'); // Remove tag param if 'All' is selected
+      } else {
+        params.set('tag', tagName); // Set tag param
+      }
+      return params;
     });
-  }, []);
-
-  // 处理搜索
-  const handleSearch = () => {
-    // TODO: 实现搜索逻辑
-  };
-
-  // 跳转到发帖页面
-  const goToCreatePost = () => {
-    navigate(`${location.pathname}/create-post`);
   };
 
   return (
-    <div className={styles.container}>
-      {/* 分类导航 */}
-      <aside className={styles.sidebar}>
-        <h3>分类</h3>
-        <ul>
-          <li>技术讨论</li>
-          <li>项目分享</li>
-          <li>求职招聘</li>
-        </ul>
-      </aside>
-
-      {/* 主内容区域 */}
-      <div className={styles.mainContent}>
-        {/* 搜索栏 */}
-        <div className={styles.searchBar}>
-          <input
-            type="text"
-            placeholder="搜索帖子..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button onClick={handleSearch}>搜索</button>
+    <div className={styles.communityContainer}>
+      <header className={styles.header}>
+        <div className={styles.headerContent}>
+          <h1 className={styles.title}>社区交流</h1>
+          <p className={styles.subtitle}>分享知识、提出问题、共同进步</p>
+          <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
         </div>
-        {/* 帖子推荐 */}
-        <section className={styles.postSection}>
-          <h2>推荐帖子</h2>
-          <div className={styles.postList}>
-            {blogs.map((post) => (
-              <BlogCard key={post.pid} blog={post} />
-            ))}
-          </div>
-        </section>
-      </div>
+         <Link to="/community/create" className={styles.createPostButton}>
+           <FaPlus className={styles.createIcon} /> 发新帖
+         </Link>
+      </header>
 
-      {/* 用户卡片 */}
-      <UserCard onClickCreate={goToCreatePost} />
+      <main className={styles.mainContent}>
+        <TagFilter selectedTag={selectedTag} onSelectTag={handleSelectTag} />
+
+        <section className={styles.postListSection}>
+          {filteredPosts.length > 0 ? (
+            <div className={styles.postList}>
+              {filteredPosts.map(post => (
+                <PostPreviewCard key={post.id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.noResults}>找不到相关的帖子...</div>
+          )}
+        </section>
+      </main>
     </div>
   );
-}
+};
 
-export default CommunityPage;
+export default CommunityHome;

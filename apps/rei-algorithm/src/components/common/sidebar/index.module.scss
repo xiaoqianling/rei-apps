@@ -1,9 +1,230 @@
-.container {
-  padding: 10px 0;
-  width: 100%;
-  height: 100%;
-  size: 10px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  box-sizing: border-box;
+/* --- Color Variables (Define or Import) --- */
+$bg-base: #f8fff3;           // Base background
+$bg-hover: #e8f5e9;        // Slightly darker hover/subtle bg
+$bg-active: #d0e0d8;       // Active background - light green-grey
+$accent-color: #457b9d;    // Medium blue accent (for borders, active text)
+$accent-light: #a8dadc;   // Lighter accent
+$text-dark: #1d3557;      // Dark text
+$text-medium: #5a6872;     // Medium grey text (default link color)
+$text-active: #1d3557;     // Text color for active item
+$border-light: #e0f0e8;   // Subtle borders
+$transition-fast: all 0.2s ease-out;
+$transition-base: all 0.3s ease-out;
+$transition-slow: all 0.4s ease-out;
+
+/* --- Base Sidebar Layout --- */
+.sidebarContainer {
+  width: 260px; // Adjust width as needed
+  height: 100vh; // Full viewport height
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $bg-base;
+  border-right: 1px solid $border-light;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.05); // Soft shadow
+  transition: transform 0.4s ease-out; // Entrance animation (optional)
+  // transform: translateX(-100%); // Start hidden for animation
+  // &.visible { transform: translateX(0); } // Class to trigger animation
+  overflow: hidden; // Hide overflow initially
+  padding: 0 1rem
 }
+
+/* --- Sidebar Header --- */
+.sidebarHeader {
+  padding: 20px 25px;
+  border-bottom: 1px solid $border-light;
+  flex-shrink: 0; // Prevent header from shrinking
+}
+
+.sidebarTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: $text-dark;
+  margin: 0;
+}
+
+/* --- Navigation Area --- */
+.navigation {
+  flex-grow: 1; // Take remaining space
+  overflow-y: auto; // Enable scrolling for menu items
+  padding: 15px 0; // Padding top/bottom for the scrollable area
+
+  // Custom Scrollbar Styling (Webkit)
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent; // Or $bg-base
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $accent-light; // Accent color for scroll thumb
+    border-radius: 3px;
+    border: 1px solid $bg-base; // Creates padding around thumb
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: darken($accent-light, 10%);
+  }
+}
+
+/* --- Menu Lists --- */
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.submenu {
+  padding-left: 20px; // Indentation for submenus
+  border-left: 2px solid $border-light; // Subtle vertical line for hierarchy
+  margin-left: 12px; // Align with parent icon/text
+  // No top/bottom margin here, handled by container
+}
+
+/* --- Container for Submenu (for animation) --- */
+.submenuContainer {
+  overflow: hidden;
+  max-height: 0; // Start collapsed
+  opacity: 0; // Start hidden
+  transform: translateY(-10px); // Start slightly shifted up
+  transition: max-height $transition-slow ease-in-out, // Slower transition for height
+              opacity $transition-base ease-in-out,    // Faster opacity transition
+              transform $transition-base ease-in-out; // Faster transform transition
+
+  .menuItem.itemExpanded > & { // Target container only when parent is expanded
+    max-height: 1000px; // Set high enough max-height for expansion
+    opacity: 1; // Fade in
+    transform: translateY(0); // Move to original position
+  }
+}
+
+/* --- Menu Items & Links --- */
+.menuItem {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.navLink, .branchLabel {
+  display: flex;
+  align-items: center;
+  padding: 10px 25px;
+  margin: 2px 0;
+  font-size: 0.95rem;
+  color: $text-medium;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color $transition-fast, color $transition-fast;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none; // Prevent text selection on click
+
+  // Remove the ::before sliding background for simplicity with collapse
+  // If you want it back, ensure it doesn't interfere with click areas
+
+  // --- Animated Background Indicator --- //
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; // Start off-screen
+    width: 100%;
+    height: 100%;
+    background-color: $accent-light;
+    opacity: 0.2;
+    z-index: 0;
+    transition: left 0.3s ease-out;
+    border-radius: 6px;
+  }
+
+  &:hover::before {
+    left: 0; // Slide in on hover
+  }
+
+
+  &:hover {
+    color: $text-dark;
+    // background-color: $bg-hover; // Simple hover background
+  }
+}
+
+.branchLabel {
+  font-weight: 500;
+  color: $text-dark;
+  // Ensure padding aligns if necessary
+}
+
+.branchText {
+  flex-grow: 1; // Allow text to take space before icon
+  margin-right: 5px; // Space before collapse icon
+}
+
+// Active Link Styling
+.navLink.active {
+  color: $text-active;
+  font-weight: 600;
+  background-color: $bg-active;
+
+  // Optional: Add a distinct left border for active state
+  // border-left: 3px solid $accent-color;
+  // padding-left: calc(25px - 3px); // Adjust padding if using border
+}
+
+/* --- Icons & Labels --- */
+.iconPlaceholder {
+  margin-right: 12px;
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.linkLabel {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Collapse/Expand Icon --- */
+.collapseIcon {
+  margin-left: auto; // Push icon to the right
+  // font-size: 0.8rem; // React-icons might have its own size
+  transition: transform 0.3s ease-out; // Explicitly transition transform
+  transform-origin: center;
+  padding: 0 5px;
+  display: inline-flex; // Helps center icon vertically if needed
+  align-items: center;
+  color: $text-medium; // Match text color
+}
+
+.iconExpanded {
+  transform: rotate(90deg); // Rotate icon when expanded
+}
+
+/* --- Optional Footer --- */
+/*
+.sidebarFooter {
+  padding: 15px 25px;
+  border-top: 1px solid $border-light;
+  font-size: 0.85rem;
+  color: $text-light;
+  flex-shrink: 0;
+}
+*/
+
+/* --- Responsive (Optional - if sidebar needs to hide/toggle) --- */
+/*
+@media (max-width: 768px) {
+  .sidebarContainer {
+    transform: translateX(-100%); // Hide on smaller screens by default
+    // Add styles for a toggle button to make it visible
+  }
+}
+*/

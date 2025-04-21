@@ -1,0 +1,60 @@
+/* Define variables locally or import */
+$bg-base: #f8fff3;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$primary-accent: #457b9d;
+$border-light: #e0f0e8;
+
+.profileContainer {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px; // Add horizontal padding
+  background-color: transparent; // Profile page background matches base
+}
+
+.userPostsSection {
+  margin-top: 40px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $text-dark;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid $primary-accent;
+  display: inline-block;
+}
+
+.postList {
+  // Potentially use grid layout like in community home
+  // display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  // gap: 25px;
+}
+
+.noPosts, .loading, .notFound {
+  text-align: center;
+  font-size: 1.1rem;
+  color: $text-medium;
+  padding: 50px 0;
+  font-style: italic;
+}
+
+.loading {
+  // Add spinner styles if desired
+}
+
+.notFound {
+  color: #dc3545; // Error color
+  font-weight: 500;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+} 

@@ -1,6 +1,7 @@
 .container {
   display: flex;
   height: 100%;
+  width: 100%;
   flex-direction: row;
   flex: 1;
   overflow: hidden;
@@ -8,7 +9,7 @@
 
 // TODO: 响应式
 .left {
-  width: 300px;
+  width: 260px;
   background-color: #f2f2f2;
   position: relative;
 }

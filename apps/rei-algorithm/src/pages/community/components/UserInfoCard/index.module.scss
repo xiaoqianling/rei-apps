@@ -1,0 +1,60 @@
+/* Define variables locally or import */
+$bg-card: #ffffff;
+$border-light: #e0f0e8;
+$border-medium: #cce0d5;
+$primary-accent: #457b9d;
+$text-dark: #1d3557;
+$text-medium: #5a6872;
+$text-light: #8fa4af;
+$transition-base: all 0.3s ease;
+
+.userInfoCard {
+  background-color: $bg-card;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px solid $border-light;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  margin-bottom: 30px; // Space below the card
+}
+
+.profileAvatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 15px auto; // Center avatar
+  border: 3px solid white;
+  box-shadow: 0 4px 15px rgba($primary-accent, 0.2);
+  display: block;
+}
+
+.userName {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: $text-dark;
+  margin: 0 0 8px 0;
+}
+
+.userBio {
+  font-size: 0.95rem;
+  color: $text-medium;
+  margin: 0 auto 20px auto;
+  max-width: 400px; // Limit bio width
+  line-height: 1.6;
+}
+
+.userDetails {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px 20px; // Row and column gap
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid $border-light;
+}
+
+.detailItem {
+  font-size: 0.9rem;
+  color: $text-light;
+} 

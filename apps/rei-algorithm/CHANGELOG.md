@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.52
+
+### Patch Changes
+
+- feat: 社区模块样式
+
 ## 1.2.51
 
 ### Patch Changes
