@@ -10,6 +10,22 @@ export const SlateMock: Descendant[] = [
     ],
   },
   {
+    type: "heading-two",
+    children: [
+      {
+        text: "A completely customizable framework for building rich text editors",
+      },
+    ],
+  },
+  {
+    type: "heading-three",
+    children: [
+      {
+        text: "A completely customizable framework for building rich text editors",
+      },
+    ],
+  },
+  {
     type: "paragraph",
     children: [
       {

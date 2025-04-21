@@ -1,16 +1,5 @@
 @use "sass:color";
 
-/* Variables */
-$bg-base: #f8fff3;
-$bg-anchor: #ffffff; // Slightly different bg for anchor
-$border-light: #e0f0e8;
-$text-dark: #1d3557;
-$text-medium: #5a6872;
-$text-light: #8fa4af;
-$primary-accent: #457b9d;
-$accent-light: #a8dadc;
-$transition-base: all 0.25s ease-out;
-
 .anchorContainer {
   position: sticky; // Make it sticky
   top: 80px; // Adjust based on your header height + desired offset

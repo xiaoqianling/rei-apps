@@ -1,15 +1,5 @@
 @use "sass:color";
 
-/* Variables */
-$bg-base: #f8fff3;
-$border-light: #e0f0e8;
-$border-medium: #cce0d5;
-$primary-accent: #457b9d;
-$text-dark: #1d3557;
-$text-medium: #5a6872;
-$text-light: #8fa4af;
-$transition-base: all 0.3s ease;
-
 .commentForm {
   display: flex;
   flex-direction: column;

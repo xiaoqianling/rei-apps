@@ -2,7 +2,12 @@ import React from "react";
 import { RenderElementProps, RenderLeafProps } from "slate-react";
 import { AlignType } from "./types";
 import { isAlignElement } from "./util";
-import { MarkdownH1, MarkdownH2, MarkdownP } from "../markdown/common";
+import {
+  MarkdownH1,
+  MarkdownH2,
+  MarkdownH3,
+  MarkdownP,
+} from "../markdown/common";
 import MarkdownCode from "../markdown/code";
 import BlogTip from "../tip";
 import BlogMultiCodeBlock from "../multiCodeBlock";
@@ -15,6 +20,18 @@ export type SlateAttributes = {
   dir?: "rtl";
   ref: any;
 };
+
+// 在组件外部维护ID计数器
+const idCounter = new Map<string, number>();
+
+// 修改后的generateId函数
+const generateId = (text: string) => {
+  const baseId = text.replace(" ", "_").substring(0, 20);
+  const count = (idCounter.get(baseId) || 0) + 1;
+  idCounter.set(baseId, count);
+  return count > 1 ? `${baseId}-${count}` : baseId;
+};
+
 // 块元素
 export const Element = ({
   attributes,
@@ -40,9 +57,23 @@ export const Element = ({
         </ul>
       );
     case "heading-one":
-      return <MarkdownH1>{children}</MarkdownH1>;
+      return (
+        <MarkdownH1 id={generateId(children[0].props.text.text)}>
+          {children}
+        </MarkdownH1>
+      );
     case "heading-two":
-      return <MarkdownH2>{children}</MarkdownH2>;
+      return (
+        <MarkdownH2 id={generateId(children[0].props.text.text)}>
+          {children}
+        </MarkdownH2>
+      );
+    case "heading-three":
+      return (
+        <MarkdownH3 id={generateId(children[0].props.text.text)}>
+          {children}
+        </MarkdownH3>
+      );
     case "numbered-list":
       return (
         <ol style={style} {...attributes}>

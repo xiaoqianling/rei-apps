@@ -1,16 +1,5 @@
 @use "sass:color";
 
-/* Variables */
-$bg-base: #f8fff3;
-$border-light: #e0f0e8;
-$text-dark: #1d3557;
-$text-medium: #5a6872;
-$text-light: #8fa4af;
-$primary-accent: #457b9d;
-$tag-bg: #e0f7fa;
-$tag-text: #0077b6;
-$transition-base: all 0.3s ease;
-
 .articleHeader {
   padding: 30px 0 25px 0;
   border-bottom: 1px solid $border-light;

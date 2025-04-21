@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.56
+
+### Patch Changes
+
+- chore: 标题支持片段标识符
+
 ## 1.2.55
 
 ### Patch Changes
