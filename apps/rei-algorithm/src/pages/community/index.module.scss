@@ -1,11 +1,4 @@
-/* Define variables locally or import */
-$bg-base: #f8fff3;
-$bg-header: linear-gradient(135deg, #e0f7fa, #f0fff0);
-$border-light: #e0f0e8;
-$text-dark: #1d3557;
-$text-medium: #5a6872;
-$primary-accent: #457b9d;
-$transition-base: all 0.3s ease;
+@use "sass:color";
 
 .communityContainer {
   background-color: $bg-base;
@@ -58,7 +51,7 @@ $transition-base: all 0.3s ease;
   box-shadow: 0 3px 10px rgba($primary-accent, 0.2);
 
   &:hover {
-    background-color: darken($primary-accent, 8%);
+    background-color: color.adjust($primary-accent, $lightness: -8%);
     box-shadow: 0 5px 15px rgba($primary-accent, 0.3);
     transform: translateY(-1px);
   }
@@ -107,6 +100,6 @@ $transition-base: all 0.3s ease;
     align-self: flex-end; // Move button to the right end
   }
   .mainContent {
-     padding: 20px 4%;
+    padding: 20px 4%;
   }
 }

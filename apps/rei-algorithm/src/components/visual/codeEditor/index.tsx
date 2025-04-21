@@ -1,4 +1,4 @@
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { EditorView } from "@uiw/react-codemirror";
 import { useToast } from "rei-design/toast";
 import { VscRunAll } from "react-icons/vsc";
 import { TbFreezeRow } from "react-icons/tb";
@@ -6,14 +6,7 @@ import { LuClipboardCopy, LuPanelLeftOpen } from "react-icons/lu";
 import { MdCode, MdCodeOff } from "react-icons/md";
 import ReiTooltip from "rei-design/tooltip";
 import styles from "./index.module.scss";
-import {
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
-import { EditorView } from "codemirror";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { transform } from "@babel/standalone";
 import { CodeEditorProps } from "./type";
 import FlexBlock from "./flexBlock";
@@ -24,7 +17,6 @@ import { useOpenState } from "@/src/hooks";
 import ReiSplit from "rei-design/split";
 import { parse } from "@babel/parser";
 import { transformAST } from "@/src/core/parse/ast";
-import { highlightEffect } from "./extension";
 import { ReactCodeMirrorRef } from "@uiw/react-codemirror";
 import { noctisLilac } from "@uiw/codemirror-theme-noctis-lilac";
 import { langs } from "@uiw/codemirror-extensions-langs";

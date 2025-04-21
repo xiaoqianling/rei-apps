@@ -1,5 +1,5 @@
 import { BlogContent } from "./content";
-import { TagTypes } from "../components/blog/tag/type";
+import { TagTypes } from "../../slate/tag/type";
 
 // 一篇文章的全部信息
 export interface BlogDetail {

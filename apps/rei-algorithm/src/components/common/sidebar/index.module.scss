@@ -1,13 +1,6 @@
+@use "sass:color";
+
 /* --- Color Variables (Define or Import) --- */
-$bg-base: #f8fff3;           // Base background
-$bg-hover: #e8f5e9;        // Slightly darker hover/subtle bg
-$bg-active: #d0e0d8;       // Active background - light green-grey
-$accent-color: #457b9d;    // Medium blue accent (for borders, active text)
-$accent-light: #a8dadc;   // Lighter accent
-$text-dark: #1d3557;      // Dark text
-$text-medium: #5a6872;     // Medium grey text (default link color)
-$text-active: #1d3557;     // Text color for active item
-$border-light: #e0f0e8;   // Subtle borders
 $transition-fast: all 0.2s ease-out;
 $transition-base: all 0.3s ease-out;
 $transition-slow: all 0.4s ease-out;
@@ -28,7 +21,7 @@ $transition-slow: all 0.4s ease-out;
   // transform: translateX(-100%); // Start hidden for animation
   // &.visible { transform: translateX(0); } // Class to trigger animation
   overflow: hidden; // Hide overflow initially
-  padding: 0 1rem
+  padding: 0 1rem;
 }
 
 /* --- Sidebar Header --- */
@@ -64,7 +57,7 @@ $transition-slow: all 0.4s ease-out;
     border: 1px solid $bg-base; // Creates padding around thumb
   }
   &::-webkit-scrollbar-thumb:hover {
-    background-color: darken($accent-light, 10%);
+    background-color: color.adjust($accent-light, $lightness: -10%);
   }
 }
 
@@ -88,11 +81,15 @@ $transition-slow: all 0.4s ease-out;
   max-height: 0; // Start collapsed
   opacity: 0; // Start hidden
   transform: translateY(-10px); // Start slightly shifted up
-  transition: max-height $transition-slow ease-in-out, // Slower transition for height
-              opacity $transition-base ease-in-out,    // Faster opacity transition
-              transform $transition-base ease-in-out; // Faster transform transition
+  transition:
+    max-height $transition-slow ease-in-out,
+    // Slower transition for height
+    opacity $transition-base ease-in-out,
+    // Faster opacity transition
+    transform $transition-base ease-in-out; // Faster transform transition
 
-  .menuItem.itemExpanded > & { // Target container only when parent is expanded
+  .menuItem.itemExpanded > & {
+    // Target container only when parent is expanded
     max-height: 1000px; // Set high enough max-height for expansion
     opacity: 1; // Fade in
     transform: translateY(0); // Move to original position
@@ -106,7 +103,8 @@ $transition-slow: all 0.4s ease-out;
   position: relative;
 }
 
-.navLink, .branchLabel {
+.navLink,
+.branchLabel {
   display: flex;
   align-items: center;
   padding: 10px 25px;
@@ -115,10 +113,13 @@ $transition-slow: all 0.4s ease-out;
   color: $text-medium;
   text-decoration: none;
   border-radius: 6px;
-  transition: background-color $transition-fast, color $transition-fast;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast;
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none; // Prevent text selection on click
 
   // Remove the ::before sliding background for simplicity with collapse
@@ -126,7 +127,7 @@ $transition-slow: all 0.4s ease-out;
 
   // --- Animated Background Indicator --- //
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: -100%; // Start off-screen
@@ -142,7 +143,6 @@ $transition-slow: all 0.4s ease-out;
   &:hover::before {
     left: 0; // Slide in on hover
   }
-
 
   &:hover {
     color: $text-dark;

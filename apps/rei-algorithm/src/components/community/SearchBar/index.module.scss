@@ -1,0 +1,39 @@
+.searchBarContainer {
+  position: relative;
+  width: 100%;
+  max-width: 500px; // Adjust as needed
+}
+
+.searchIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $text-light;
+  font-size: 0.9rem;
+  pointer-events: none; // Icon doesn't block input interaction
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 15px 10px 40px; // Left padding for icon
+  border: 1px solid $border-medium;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: $bg-card;
+  color: $text-dark;
+  outline: none;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &::placeholder {
+    color: $text-light;
+    font-style: italic;
+  }
+
+  &:focus {
+    border-color: $primary-accent;
+    box-shadow: 0 0 0 3px rgba($primary-accent, 0.15);
+  }
+}

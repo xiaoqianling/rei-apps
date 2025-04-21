@@ -1,6 +1,5 @@
-import BlogContent from "@/src/components/community/components/blog/blogContent";
+import BlogContent from "@/src/components/slate/blogContent";
 import { AlgorithmStationIntro } from "@/src/components/community/type/mock";
-import { AllInOnePage } from "@/src/docs";
 import { RouteObject } from "react-router-dom";
 import { MenuItem } from "rei-design/menu/type";
 
@@ -10,25 +9,6 @@ export const learnRouter: RouteObject[] = [
     path: "",
     element: <BlogContent blog={AlgorithmStationIntro} showInfo={false} />,
     index: true,
-  },
-  {
-    path: "dataStructure",
-    children: [
-      {
-        path: "linear",
-        element: <AllInOnePage />,
-        children: [
-          {
-            path: "array",
-            element: <AllInOnePage />,
-          },
-          {
-            path: "linked-list",
-            element: <AllInOnePage />,
-          },
-        ],
-      },
-    ],
   },
   {
     path: "*",

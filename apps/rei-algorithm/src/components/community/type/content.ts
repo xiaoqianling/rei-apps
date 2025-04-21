@@ -1,8 +1,6 @@
-import { FoldBlockContent } from "../components/foldBlock/type";
-import { MermaidContent } from "../components/mermaid/type";
-
 // 一个内容片段
-export type BlogContent = FoldBlockContent | MermaidContent;
+// REI: 急需调整文档存储格式
+export type BlogContent = null;
 
 export enum ContentTypes {
   // 已实现

@@ -1,1 +1,1 @@
-export { default as Blog } from "./components/blog";
+export { default as Blog } from "../slate/blog";

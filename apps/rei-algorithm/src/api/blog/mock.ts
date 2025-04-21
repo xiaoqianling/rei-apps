@@ -1,4 +1,4 @@
-import { TagTypes } from "@/src/components/community/components/blog/tag/type";
+import { TagTypes } from "@/src/components/slate/tag/type";
 import { BlogCardInfo, BlogDetail } from "@/src/components/community/type";
 
 export const mockAllBlogs: BlogCardInfo[] = [

@@ -1,0 +1,41 @@
+@use "sass:color";
+
+.tagFilterContainer {
+  display: flex;
+  flex-wrap: wrap; // Allow tags to wrap on smaller screens
+  gap: 10px;
+  margin-bottom: 20px; // Space below the filter
+}
+
+.tagButton {
+  padding: 6px 15px;
+  border: 1px solid transparent; // Start with transparent border
+  border-radius: 20px; // Pill shape
+  background-color: $tag-bg; // Default background
+  color: $tag-text;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: color.adjust($tag-bg, $lightness: -5%);
+    color: color.adjust($tag-text, $lightness: -10%);
+    box-shadow: 0 2px 8px rgba($tag-text, 0.15);
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    background-color: $primary-accent; // Use accent color for active
+    color: white;
+    border-color: color.adjust($primary-accent, $lightness: -10%);
+    font-weight: 600;
+    box-shadow: 0 3px 10px rgba($primary-accent, 0.3);
+
+    &:hover {
+      background-color: color.adjust($primary-accent, $lightness: -5%);
+      box-shadow: 0 4px 12px rgba($primary-accent, 0.35);
+    }
+  }
+}
