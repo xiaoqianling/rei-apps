@@ -1,6 +1,6 @@
-import SimulateSort from "@/src/components/senki/visual";
 import { RouteObject } from "react-router-dom";
 import VisualHome from "./home";
+import VisualSimulator from "@/src/components/senki/visual/simulator";
 
 // 附加到/docs/下的所有路由
 export const docsRouter: RouteObject[] = [
@@ -11,14 +11,6 @@ export const docsRouter: RouteObject[] = [
   },
   {
     path: "detail/:id",
-    element: <SimulateSort />,
-  },
-  {
-    path: "tree/:id",
-    element: <SimulateSort algoType="tree" />,
-  },
-  {
-    path: "linear/:id",
-    element: <SimulateSort algoType="linear" />,
+    element: <VisualSimulator />,
   },
 ];

@@ -16,7 +16,7 @@ import { getAlgo } from "@/src/api/algo/sort";
 
 const EMPTY_ALGO_SOURCE: AlgoSource = { rawCode: "", desc: [], asyncCode: "" };
 
-const SimulateSort = () => {
+const VisualSimulator = () => {
   const { id } = useParams();
   // ---状态变量---
   // 用户输入的数组
@@ -284,4 +284,4 @@ const SimulateSort = () => {
   );
 };
 
-export default SimulateSort;
+export default VisualSimulator;

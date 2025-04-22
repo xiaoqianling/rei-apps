@@ -1,5 +1,5 @@
 import plugin from "../lib/babel/plugin-senki-wait";
-import styles from "../visual/sort/index.module.scss";
+import styles from "./index.module.scss";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AlgoSource, CodeControl, CodeContext } from "../lib/algo_desc";
