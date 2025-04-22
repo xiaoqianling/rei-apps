@@ -1,11 +1,12 @@
 import { RouteObject } from "react-router-dom";
 import { MenuItem } from "rei-design/menu/type";
+import LearnPage from ".";
 
 // 附加到/docs/下的所有路由
 export const learnRouter: RouteObject[] = [
   {
     path: "",
-    element: <>learnRouter</>,
+    element: <LearnPage />,
     index: true,
   },
   {

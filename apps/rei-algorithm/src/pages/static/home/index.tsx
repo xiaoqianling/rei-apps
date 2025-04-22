@@ -1,17 +1,39 @@
-import React from 'react';
-import styles from './index.module.scss';
-import HeroSection from './components/HeroSection';
-import FeatureCard from './components/FeatureCard';
-import HighlightSection from './components/HighlightSection';
+import React from "react";
+import styles from "./index.module.scss";
+import HeroSection from "./components/HeroSection";
+import FeatureCard from "./components/FeatureCard";
+import HighlightSection from "./components/HighlightSection";
+import { Link } from "react-router";
+import { LuGithub } from "react-icons/lu";
 // import { Link } from 'react-router-dom'; // 如果需要链接到其他页面
 
 // 模拟的特性数据
 const features = [
-  { icon: '💡', title: '交互式学习', description: '结合代码与可视化，深入理解数据结构与算法原理。' },
-  { icon: '🖼️', title: '算法可视化库', description: '探索丰富的官方与用户分享的可视化实例。' },
-  { icon: '✏️', title: '可视化编辑器', description: '使用我们的API，轻松创建并分享你自己的算法可视化。' },
-  { icon: '💬', title: '开发者社区', description: '讨论、提问、分享见解，与他人共同进步。' },
-  { icon: '💖', title: '免费开源', description: '我们相信知识共享的力量，完全免费且代码开源。' },
+  {
+    icon: "💡",
+    title: "交互式学习",
+    description: "结合代码与可视化，深入理解数据结构与算法原理。",
+  },
+  {
+    icon: "🖼️",
+    title: "算法可视化库",
+    description: "探索丰富的官方与用户分享的可视化实例。",
+  },
+  {
+    icon: "✏️",
+    title: "可视化编辑器",
+    description: "使用我们的API，轻松创建并分享你自己的算法可视化。",
+  },
+  {
+    icon: "💬",
+    title: "开发者社区",
+    description: "讨论、提问、分享见解，与他人共同进步。",
+  },
+  {
+    icon: "💖",
+    title: "免费开源",
+    description: "我们相信知识共享的力量，完全免费且代码开源。",
+  },
 ];
 
 const StaticHomePage: React.FC = () => {
@@ -52,33 +74,43 @@ const StaticHomePage: React.FC = () => {
 
       {/* 社区预告 */}
       <section className={styles.communitySection}>
-         <h2 className={styles.sectionHeading}>加入我们的社区</h2>
-         <p className={styles.communityText}>
-           在这里，你可以提问、解答、分享你的学习心得和可视化作品。
-           与其他学习者和开发者交流，共同构建一个活跃的算法爱好者社区。
-         </p>
-         {/* <Link to="/community" className={styles.communityButton}>前往社区</Link> */}
-         <button className={styles.communityButton}>(社区链接占位)</button>
-         {/* 可以在此添加一些社区相关的视觉元素占位符 */}
+        <h2 className={styles.sectionHeading}>加入我们的社区</h2>
+        <p className={styles.communityText}>
+          在这里，你可以提问、解答、分享你的学习心得和可视化作品。
+          与其他学习者和开发者交流，共同构建一个活跃的算法爱好者社区。
+        </p>
+        {/* <Link to="/community" className={styles.communityButton}>前往社区</Link> */}
+        <Link to="community" className={styles.communityButton}>
+          前往社区
+        </Link>
+        {/* 可以在此添加一些社区相关的视觉元素占位符 */}
       </section>
 
       {/* 开源宣告 */}
-       <section className={styles.openSourceSection}>
-         <h2 className={styles.sectionHeading}>拥抱开源</h2>
-         <p className={styles.openSourceText}>
-           本项目完全免费且开源，我们欢迎任何形式的贡献。
-           访问我们的 GitHub 仓库，一同参与改进！
-         </p>
-         <a href="#" /* Replace with actual GitHub link */ className={styles.githubLink}>
-           {/* Placeholder for GitHub Icon */}
-           <span className={styles.githubIcon}> G </span>
-           访问 GitHub
-         </a>
+      <section className={styles.openSourceSection}>
+        <h2 className={styles.sectionHeading}>拥抱开源</h2>
+        <p className={styles.openSourceText}>
+          本项目完全免费且开源，我们欢迎任何形式的贡献。 访问我们的 GitHub
+          仓库，一同参与改进！
+        </p>
+        <Link
+          to="https://github.com/xiaoqianling/rei-apps"
+          className={styles.githubLink}
+          target="_blank"
+        >
+          <span className={styles.githubIcon}>
+            {" "}
+            <LuGithub />{" "}
+          </span>
+          访问 GitHub
+        </Link>
       </section>
 
       {/* 页脚 */}
       <footer className={styles.footer}>
-        <p>© {new Date().getFullYear()} Rei-Apps Algo Platform. 保留所有权利。</p>
+        <p>
+          © {new Date().getFullYear()} Rei-Apps Algo Platform. 保留所有权利。
+        </p>
         {/* Add other footer links if needed */}
       </footer>
     </div>

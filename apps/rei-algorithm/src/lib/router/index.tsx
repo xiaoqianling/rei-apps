@@ -5,7 +5,7 @@ import NotFound from "../../pages/static/not-found";
 import HomeLayout from "../../components/layout/homeLayout";
 import AboutPage from "../../pages/static/about";
 import VisualPage from "@/src/pages/visual";
-import LearnPage from "@/src/pages/learn";
+import LearnPageLayout from "@/src/pages/learn/layout";
 import SlatePage from "@/src/pages/playground";
 import { docsRouter as visualRouter } from "@/src/pages/visual/route";
 import { communityRouter } from "@/src/pages/community/route";
@@ -38,7 +38,7 @@ export const reiRouter = createBrowserRouter([
       },
       {
         path: "learn",
-        element: <LearnPage />,
+        element: <LearnPageLayout />,
         children: learnRouter,
       },
       {

@@ -1,17 +1,16 @@
 import styles from "./index.module.scss";
-import DocsSidebar from "@/src/components/common/sidebar";
-import { Outlet } from "react-router-dom";
-import { learnMenuData } from "./route";
+import SlateRenderer from "@/src/components/community/article/slateRenderer";
+import { useState } from "react";
+import { Descendant } from "slate";
 
 function LearnPage() {
+  //
+  const [content, useContent] = useState<Descendant[]>([]);
   return (
-    <div className={styles.container}>
-      <div className={styles.left}>
-        <DocsSidebar menuData={learnMenuData} prefix="/learn" />
-      </div>
-      <div className={styles.right}>
-        <Outlet />
-      </div>
+    <div className={styles.main}>
+      <SlateRenderer />
+      <SlateRenderer />
+      <SlateRenderer />
     </div>
   );
 }

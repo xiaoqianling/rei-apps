@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.60
+
+### Patch Changes
+
+- feat: MIKU theme
+
 ## 1.2.59
 
 ### Patch Changes

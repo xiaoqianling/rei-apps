@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import HeaderLink from "./header-link";
 import Github from "@icon-park/react/lib/icons/Github";
 import ReiLOGO from "@/src/components/common/logo";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 interface Props {
   children: ReactElement<typeof HeaderLink> | ReactElement<typeof HeaderLink>[];

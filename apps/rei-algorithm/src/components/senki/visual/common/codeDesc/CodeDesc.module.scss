@@ -2,14 +2,14 @@
   height: 100%; // Ensure it fills the parent (.codeArea)
   display: flex;
   flex-direction: column;
-  background-color: #24243e; // Match pre background from index.module.scss
+  background-color: $bg-active; // Match pre background from index.module.scss
   border-radius: 8px; // Match parent rounding
   overflow: hidden; // Clip child corners
 }
 
 .descriptionArea {
-  background-color: #3a3a5a;
-  color: #c0c0e0;
+  background-color: $bg-active;
+  color: #000;
   padding: 10px 15px;
   font-size: 0.85em;
   border-bottom: 1px solid #4a4a6a;

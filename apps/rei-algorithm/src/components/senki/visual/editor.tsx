@@ -1,15 +1,32 @@
 import plugin from "../lib/babel/plugin-senki-wait";
 import styles from "./index.module.scss";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AlgoSource, CodeControl, CodeContext } from "../lib/algo_desc";
 import { Scene, SenkiArray, SenkiLinkedNode } from "../lib/senki";
 import CodeDesc from "./common/codeDesc/CodeDesc";
 import { transform } from "@babel/standalone";
+import { FaUpload, FaSave, FaEdit, FaSquare } from "react-icons/fa";
 
 const EMPTY_ALGO_SOURCE: AlgoSource = { rawCode: "", desc: [], asyncCode: "" };
 
-const VisualEditor = () => {
+interface VisualEditorProps {
+  initialTitle?: string;
+}
+
+const initCode = `const A = new SenkiArray(1, 3, 4, 2, 5);
+A.push(50);`;
+
+const VisualEditor: React.FC<VisualEditorProps> = ({
+  initialTitle = "未命名算法",
+}) => {
+  const navigate = useNavigate();
   // ---状态变量---
   // 用户输入的数组
   const [algoSource, setAlgoSource] = useState<AlgoSource>(EMPTY_ALGO_SOURCE);
@@ -21,9 +38,12 @@ const VisualEditor = () => {
   const [codeInfo, setCodeInfo] = useState({ line: [-1, -1], desc: -1 });
   // const [error, setError] = useState<string | null>(null);
   const statusRef = useRef(status);
-  const [rawCode, setRawCode] = useState("");
+  const [rawCode, setRawCode] = useState<string>(initCode);
   statusRef.current = status; // 没办法，为了在闭包函数里引用，只能干这种愚蠢操作。
   const canvas = useRef<HTMLCanvasElement>(null);
+  const [title, setTitle] = useState<string>(initialTitle);
+  const [isEditingTitle, setIsEditingTitle] = useState<boolean>(false);
+  const titleInputRef = useRef<HTMLInputElement>(null);
 
   // --- 事件处理函数 ---
   const createNewCodeControl = () => {
@@ -136,23 +156,120 @@ const VisualEditor = () => {
     scene.add(SenkiLinkedNode.senkiForest);
   }, [scene]);
 
+  const handleCodeChange = useCallback((newCode: string) => {
+    setRawCode(newCode);
+  }, []);
+
+  // --- Title Editing --- //
+  const handleTitleClick = () => {
+    setIsEditingTitle(true);
+  };
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length <= 30) {
+      setTitle(event.target.value);
+    }
+  };
+
+  const handleTitleBlur = () => {
+    setIsEditingTitle(false);
+    if (!title.trim()) {
+      setTitle("未命名算法"); // Reset if empty
+    }
+    console.log("Title updated (placeholder):", title);
+  };
+
+  const handleTitleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" || event.key === "Escape") {
+      titleInputRef.current?.blur();
+    }
+  };
+
+  // Focus input when editing starts
+  useEffect(() => {
+    if (isEditingTitle) {
+      titleInputRef.current?.focus();
+      titleInputRef.current?.select();
+    }
+  }, [isEditingTitle]);
+
+  // --- Header Button Actions (Placeholders) --- //
+  const handleUpload = () => {
+    alert("上传算法功能待实现");
+  };
+
+  const handleSave = () => {
+    alert("保存算法功能待实现");
+  };
+
   return (
     <div className={styles.sortContainer}>
-      <header>顶部栏 上传</header>
+      {/* --- Editor Header --- */}
+      <div className={styles.editorHeader}>
+        <div className={styles.titleContainer}>
+          {isEditingTitle ? (
+            <input
+              ref={titleInputRef}
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              onBlur={handleTitleBlur}
+              onKeyDown={handleTitleKeyDown}
+              className={styles.titleInput}
+              maxLength={30}
+            />
+          ) : (
+            <span
+              onClick={handleTitleClick}
+              className={styles.titleDisplay}
+              title="点击编辑标题"
+            >
+              {title || "未命名算法"}{" "}
+              <FaEdit
+                style={{ fontSize: "0.8em", marginLeft: "5px", opacity: 0.6 }}
+              />
+            </span>
+          )}
+        </div>
+        <div className={styles.headerActions}>
+          <button
+            onClick={handleUpload}
+            className={styles.headerButton}
+            title="上传新算法"
+          >
+            <FaUpload /> 上传
+          </button>
+          <button
+            onClick={handleSave}
+            className={`${styles.headerButton} ${styles.saveButton}`}
+            title="保存当前算法"
+          >
+            <FaSave /> 保存
+          </button>
+          <Link
+            to={"/community"}
+            className={styles.algoSquareButton}
+            title="前往算法广场"
+          >
+            <FaSquare /> 算法广场
+          </Link>
+        </div>
+      </div>
+
+      {/* --- Main Content --- */}
       <div className={styles.mainContent}>
         <div className={styles.codeArea}>
           <CodeDesc
-            code={rawCode}
-            onChange={(value) => {
-              setRawCode(value);
-            }}
-            // desc={algoSource.desc}
             info={codeInfo}
+            code={rawCode}
+            onChange={handleCodeChange}
             readonly={false}
           />
         </div>
         <canvas ref={canvas} className={styles.canvasArea}></canvas>
       </div>
+
+      {/* --- Controls --- */}
       <div className={styles.controlsArea}>
         <div className={styles.controlTop}></div>
         <div className={styles.actionButtons}>

@@ -1,12 +1,14 @@
+@use "sass:color";
+
 .sortContainer {
   display: flex;
   flex-direction: column;
   width: 100%; // Ensure it takes full width of its container
   height: 100%;
   min-height: 80vh; // Example minimum height
-  background-color: #1a1a2e; // Dark background
-  color: #e0e0e0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $bg-base; // Use new base background
+  color: $text-medium; // Use new medium text color
+  font-family: $font-primary;
   position: relative; // 确保父容器有相对定位
 }
 
@@ -18,14 +20,105 @@
   overflow: hidden; // Prevent scrollbars on this container
 }
 
+// --- Editor Header --- //
+.editorHeader {
+  background-color: color.adjust(
+    $bg-base,
+    $lightness: -2%
+  ); // Slightly darker than base
+  padding: 10px 20px;
+  border-bottom: 1px solid $border-light;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+  .titleContainer {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .titleDisplay {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $text-dark;
+      cursor: pointer;
+      padding: 5px 0;
+      border-bottom: 2px solid transparent; // For hover effect
+      transition: border-color 0.2s ease;
+
+      &:hover {
+        border-color: $primary-accent;
+      }
+    }
+
+    .titleInput {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $text-dark;
+      border: none;
+      outline: none;
+      padding: 5px 8px;
+      border-radius: 4px;
+      background-color: #fff; // White background for editing
+      border: 1px solid $border-color;
+      width: auto; // Adjust width as needed
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .headerActions {
+    display: flex;
+    gap: 10px;
+  }
+
+  // Shared button style for header
+  .headerButton {
+    background-color: transparent;
+    border: 1px solid $border-color;
+    color: $text-medium;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background-color: $miku;
+      color: #fff;
+      border-color: $miku;
+      transform: translateY(-1px);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+  .saveButton {
+    background-color: $miku;
+    color: #fff;
+    border-color: $miku;
+    &:hover:not(:disabled) {
+      background-color: $primary-dark;
+      border-color: $primary-dark;
+    }
+  }
+}
+
+// --- Shared Styles --- //
 .codeArea {
   flex: 1 1 45%; // Flex basis 45%
-  background-color: #2a2a40; // Slightly lighter background for code
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background-color: color.adjust(
+    $bg-base,
+    $lightness: -1%
+  ); // Slightly darker background
+  border-radius: $border-radius;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   overflow: hidden; // Changed from auto to hidden, handle scrolling inside pre
   padding: 0; // Remove padding, apply to inner elements
-  border: 1px solid #4a4a6a;
+  border: 1px solid $border-light;
   display: flex;
   flex-direction: column; // Stack code and description
 
@@ -35,42 +128,44 @@
     font-family: "Fira Code", "Consolas", monospace; // Use a monospace font
     font-size: 0.9em;
     line-height: 1.6;
-    background-color: #24243e; // Slightly different bg for pre
-    color: #d0d0ff; // Code text color
+    background-color: #fff; // White background for code
+    color: $text-dark;
     padding: 15px;
     margin: 0; // Remove default margin
     overflow-y: auto; // Allow scrolling specifically on the code block
-    border-radius: 8px 8px 0 0; // Round top corners
+    border-radius: $border-radius $border-radius 0 0; // Round top corners
+    border-bottom: 1px solid $border-light; // Use new border color
 
-    // Example: Style for highlighted line (assuming CodeDesc adds this class)
     .highlighted-line {
-      background-color: rgba(74, 74, 122, 0.5); // Semi-transparent highlight
+      background-color: rgba($miku, 0.1); // Use miku color for highlight bg
       display: block;
-      margin: 0 -15px; // Extend highlight to padding edges
+      margin: 0 -15px;
       padding: 0 15px;
-      box-shadow: inset 3px 0 0 0 #a0a0e0; // Left border highlight
+      box-shadow: inset 3px 0 0 0 $miku; // Use miku for left border
     }
-    // Add more syntax highlighting styles here if needed
   }
 
   // Example: Styles for a description area (assuming CodeDesc has this class)
   .description {
-    background-color: #3a3a5a;
-    color: #c0c0e0;
+    background-color: color.adjust(
+      $bg-base,
+      $lightness: 1%
+    ); // Lighter than code area bg
+    color: $text-medium; // Use new text color
     padding: 10px 15px;
     font-size: 0.85em;
-    border-top: 1px solid #4a4a6a;
-    min-height: 50px; // Ensure some minimum height
-    border-radius: 0 0 8px 8px; // Round bottom corners
+    border-top: none;
+    min-height: 50px;
+    border-radius: 0 0 $border-radius $border-radius;
   }
 }
 
 .canvasArea {
   flex: 1 1 55%; // Flex basis 55%
-  background-color: #2f2f4f; // Background for canvas container
-  border-radius: 8px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  border: 1px solid #4a4a6a;
+  background-color: #fff; // Keep canvas container white for now, or use lighten($bg-base, 2%)
+  border-radius: $border-radius;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid $border-light; // Use new border color
   display: flex; // To center canvas if needed
   justify-content: center;
   align-items: center;
@@ -86,10 +181,13 @@
 }
 
 .controlsArea {
-  background-color: #24243e; // Darker background for controls
+  background-color: color.adjust(
+    $bg-base,
+    $lightness: -2%
+  ); // Slightly darker than base bg
   padding: 15px 20px;
-  border-top: 1px solid #4a4a6a;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid $border-light; // Use new border color
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -105,26 +203,24 @@
 .navLinks {
   flex-shrink: 0; // Prevent shrinking
   a {
-    color: #a0a0e0; // Light purple/blue
+    color: $text-medium; // Use new text color
     text-decoration: none;
     margin-right: 15px;
     padding: 5px 10px;
     border-radius: 4px;
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
+    transition: all 0.2s ease;
+    font-weight: 500;
 
     &:hover {
-      background-color: #4a4a6a;
+      background-color: $miku; // Use miku for hover bg
       color: #fff;
     }
-
-    span {
-      // Keep spans for potential future styling
-      display: inline-block;
+    &.activeLink {
+      // Example active class if using NavLink
+      color: $miku; // Use miku for active text
+      font-weight: 600;
+      background-color: rgba($miku, 0.1); // Light miku bg for active
     }
-
-    // Consider adding active styling if needed via react-router NavLink
   }
 }
 
@@ -138,49 +234,50 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #2f2f4f;
+  background-color: #fff; // Keep input group white
   padding: 5px 10px;
-  border-radius: 6px;
-  border: 1px solid #4a4a6a;
+  border-radius: $border-radius;
+  border: 1px solid $border-light; // Use new border color
 
   .arrayInput {
     background-color: transparent;
     border: none;
-    color: #e0e0e0;
+    color: $text-dark; // Use new text color
     padding: 8px;
     outline: none;
     font-size: 0.9em;
     min-width: 200px; // Ensure it's not too small
 
     &::placeholder {
-      color: #888;
+      color: $text-light; // Use new text color
+    }
+    &:focus {
+      box-shadow: 0 0 0 2px rgba($miku, 0.2); // Add miku focus ring
     }
   }
 
   .confirmButton {
     // Apply shared button styles
-    background-color: #4a4a7a; // Button background
-    color: #e0e0e0;
+    background-color: $miku; // Use miku for button bg
+    color: #fff;
     border: none;
-    padding: 8px 15px; // Slightly smaller padding to fit input group
+    padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9em; // Slightly smaller font size
-    transition:
-      background-color 0.3s ease,
-      transform 0.1s ease;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background-color: #6a6aaf; // Lighter on hover
+      background-color: $primary-dark; // Use derived dark color
     }
 
     &:active:not(:disabled) {
-      transform: scale(0.98); // Slight press effect
+      transform: scale(0.98);
     }
 
     &:disabled {
-      background-color: #3a3a5a; // Darker when disabled
-      color: #888;
+      background-color: $primary-light; // Use derived light color
+      color: $text-medium; // Use new text color
       cursor: not-allowed;
     }
   }
@@ -192,28 +289,29 @@
   gap: 15px;
 
   button {
-    background-color: #4a4a7a; // Button background
-    color: #e0e0e0;
+    background-color: $miku; // Use miku for main action buttons
+    color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
-    transition:
-      background-color 0.3s ease,
-      transform 0.1s ease;
+    font-weight: 500;
+    transition: all 0.2s ease;
 
     &:hover:not(:disabled) {
-      background-color: #6a6aaf; // Lighter on hover
+      background-color: $primary-dark; // Use derived dark color
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     &:active:not(:disabled) {
-      transform: scale(0.98); // Slight press effect
+      transform: scale(0.98) translateY(0);
     }
 
     &:disabled {
-      background-color: #3a3a5a; // Darker when disabled
-      color: #888;
+      background-color: $primary-light; // Use derived light color
+      color: $text-medium; // Use new text color
       cursor: not-allowed;
     }
   }
@@ -365,5 +463,35 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+// --- Algorithm Square Button --- //
+.algoSquareButton {
+  // Applied to a <Link> element
+  display: inline-flex; // Crucial for aligning icon and text in a link
+  align-items: center;
+  gap: 5px; // Space between icon and text
+  background-color: transparent;
+  border: 1px solid $miku;
+  color: $miku;
+  padding: 6px 12px; // Match header button padding
+  border-radius: 5px; // Match header button radius
+  cursor: pointer;
+  font-size: 0.85rem; // Match header button font-size
+  font-weight: 500;
+  text-decoration: none !important; // Ensure no underline from Link
+  transition: all 0.2s ease;
+  margin-left: 10px; // Keep margin
+
+  svg {
+    // Optional: Style icon if needed
+  }
+
+  &:hover {
+    background-color: rgba($miku, 0.1);
+    color: $primary-dark;
+    border-color: $primary-dark;
+    text-decoration: none; // Ensure no underline on hover either
   }
 }

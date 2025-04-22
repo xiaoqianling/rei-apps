@@ -2,44 +2,47 @@ $header-link-active: #ffa4ff;
 $mobile-size: 600px;
 
 // 主题颜色配置
-$theme-primary-color: #f8fff3;
-$header-background-color: #f8fff3;
 $miku: #39c5bb;
+$theme-primary-color: $miku;
+$header-background-color: #f0fdfa;
 
 // --- 颜色调色板 ---
-$bg-base: #f8fff3; // 基础背景色
-$bg-color-light: #e0f7fa; // 浅青色/蓝色强调背景
-$primary-light: #cce0d5; // 浅绿灰色
-$primary-accent: #457b9d; // 中等蓝色强调色
-$primary-dark: #1d3557; // 深蓝色（用于文字或强烈强调）
-$secondary-accent: #a8dadc; // 浅绿松石色
+$bg-base: #f0fdfa;
+$bg-color-light: #cff9f7;
+$primary-light: #a6f0ec;
+$primary-accent: $miku;
+$primary-dark: #2b8a83;
+$secondary-accent: #7be3dd;
 
 // 文字颜色
-$text-dark: #1d3557; // 深色文字
-$text-medium: #5a6872; // 中等灰色文字
-$text-light: #8fa4af; // 浅灰色文字
+$text-dark: #0f4c5c;
+$text-medium: #4a6e7a;
+$text-light: #8ab0ab;
 
 // 边框颜色
-$border-color: #d0e0d8; // 浅边框颜色
-$border-light: #e0f0e8; // 非常浅的边框
+$border-color: #a6f0ec;
+$border-light: #d9fbf9;
 
 // 侧边栏样式
-$bg-active: #d0e0d8; // 激活状态背景 - 浅绿灰色
-$accent-color: #457b9d; // 中等蓝色强调色（用于边框、激活文字）
-$accent-light: #a8dadc; // 浅色强调色
-$text-active: #1d3557; // 激活项的文字颜色
+$bg-active: #cff9f7;
+$accent-color: $miku;
+$accent-light: #7be3dd;
+$text-active: #0f4c5c;
 
 // 社区样式
-$bg-header: linear-gradient(135deg, #e0f7fa, #f0fff0);
+$bg-header: linear-gradient(135deg, #cff9f7, #f0fdfa);
 $bg-card: #ffffff;
-$border-medium: #cce0d5;
-$tag-bg: #e0f7fa;
-$tag-text: #0077b6;
-$bg-hover: #e8f5e9;
-$text-link: #3a86ff; // Standard link color
-$icon-color: #6c757d; // Default icon color
+$border-medium: #a6f0ec;
+$tag-bg: #cff9f7;
+$tag-text: #2b8a83;
+$bg-hover: #e6fcfb;
+$text-link: #398bfb;
+$icon-color: #6c757d;
 $bg-content: #ffffff;
-$bg-anchor: #ffffff; // Slightly different bg for anchor
+$bg-anchor: #ffffff;
+
+$border-radius: 12px;
+
 // --- 字体 ---
 $font-primary: "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
 

@@ -1,6 +1,6 @@
 .breadcrumbNav {
   padding: 10px 20px;
-  background-color: #24243e; // Match controls area background
+  background-color: $bg-base; // Match controls area background
   border-bottom: 1px solid #4a4a6a; // Separator line
   font-size: 0.9em;
 
@@ -18,7 +18,7 @@
     color: #a0a0e0; // Default color for separators and inactive items
 
     &:not(:last-child)::after {
-      content: '>'; // Separator character
+      content: ">"; // Separator character
       margin: 0 8px;
       font-weight: bold;
       color: #7a7a9a; // Dimmer color for separator
@@ -26,21 +26,23 @@
   }
 
   a {
-    color: #c0c0ff; // Slightly brighter link color
+    color: #000; // Slightly brighter link color
     text-decoration: none;
     padding: 3px 5px;
     border-radius: 3px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
 
     &:hover {
       color: #fff;
-      background-color: #4a4a6a;
+      background-color: $miku;
     }
   }
 
   // Style for the current/last item (if it's not a link)
   li:last-child {
-    color: #e0e0e0; // Brighter color for the current page
+    color: $miku; // Brighter color for the current page
     font-weight: 500;
   }
-} 
+}

@@ -105,19 +105,19 @@ function CodeDesc({ code, desc, info, readonly = true, onChange }: Props) {
         console.error("Error scrolling into view:", e);
       }
     }
-  }, [info.line]);
+  }, [info]);
 
   return (
     <div className={styles.codeDescContainer}>
-      <div className={styles.descriptionArea}>
-        <p>
-          {desc
-            ? info.desc > 0 && info.desc <= desc.length
+      {desc && (
+        <div className={styles.descriptionArea}>
+          <p>
+            {info.desc > 0 && info.desc <= desc.length
               ? desc[info.desc - 1]
-              : "点击控制区播放按钮，开始执行"
-            : "标题"}
-        </p>
-      </div>
+              : "点击控制区播放按钮，开始执行"}
+          </p>
+        </div>
+      )}
       <div className={styles.codeMirrorWrapper}>
         <ReactCodeMirror
           ref={editorRef}

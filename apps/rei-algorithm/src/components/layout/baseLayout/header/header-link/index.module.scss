@@ -1,0 +1,47 @@
+// Base style for the link (applied by both .link and .active_link)
+.linkBase {
+  display: inline-flex; // Use flex for potential icon alignment later
+  align-items: center;
+  padding: 0.5rem 1rem; // Adjusted padding for better spacing
+  font-size: 1rem;
+  font-weight: 500; // Slightly less bold than original
+  text-decoration: none;
+  border-radius: 6px; // Standard border radius
+  transition: all 0.2s ease-out;
+  position: relative; // For potential pseudo-elements (like active indicator)
+  border: 2px solid transparent; // Reserve space for border on hover/active
+}
+
+// Default link style
+.link {
+  @extend .linkBase;
+  color: $text-medium; // Default text color
+
+  &:hover {
+    color: $miku; // Theme color on hover
+    background-color: rgba($miku, 0.08); // Very subtle theme background hover
+    border-color: rgba($miku, 0.2); // Subtle border on hover
+    text-decoration: none;
+  }
+}
+
+// Active link style
+.active_link {
+  @extend .linkBase;
+  color: $miku; // Active color is the theme color
+  font-weight: 600; // Slightly bolder when active
+  background-color: rgba($miku, 0.1); // Light theme background when active
+  border-color: transparent; // No border needed when bg color is present
+
+  // Optional: Add a bottom border indicator
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: -2px; // Position below the padding
+  //   left: 1rem;
+  //   right: 1rem;
+  //   height: 3px;
+  //   background-color: $miku;
+  //   border-radius: 1px;
+  // }
+}

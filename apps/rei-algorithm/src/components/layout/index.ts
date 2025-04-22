@@ -1,3 +1,3 @@
 export * from "./communityLayout";
 export * from "./homeLayout";
-export * from "./layout";
+export * from "./baseLayout";

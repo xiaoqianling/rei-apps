@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from "react";
-import Layout from "../layout";
-import HeaderLink from "../layout/header/header-link";
+import Layout from "../baseLayout";
+import HeaderLink from "../baseLayout/header/header-link";
 
 interface LayoutProps {
   children?: React.ReactNode;
