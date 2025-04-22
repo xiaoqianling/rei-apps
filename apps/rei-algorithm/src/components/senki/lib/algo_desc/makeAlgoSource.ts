@@ -1,11 +1,11 @@
-export type AlgoSource = { shower: string; desc: string[]; realcode: string };
+export type AlgoSource = { rawCode: string; desc: string[]; asyncCode: string };
 
 export function makeAlgoSource(
-  shower: string,
+  rawCode: string,
   desc: string[],
-  realcode: string,
+  asyncCode: string,
 ): AlgoSource {
-  return { shower: shower.trim(), desc, realcode: realcode.trim() };
+  return { rawCode: rawCode.trim(), desc, asyncCode: asyncCode.trim() };
 }
 
 export default makeAlgoSource;

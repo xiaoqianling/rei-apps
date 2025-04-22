@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.58
+
+### Patch Changes
+
+- feat: 实时编辑代码&可视化
+
 ## 1.2.57
 
 ### Patch Changes

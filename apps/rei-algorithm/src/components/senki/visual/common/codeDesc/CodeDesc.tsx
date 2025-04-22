@@ -6,20 +6,12 @@ import {
   ReactCodeMirrorRef,
   StateEffect,
   StateField,
+  ViewUpdate,
 } from "@uiw/react-codemirror";
 import styles from "./CodeDesc.module.scss"; // Import the styles
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { langs } from "@uiw/codemirror-extensions-langs";
 import { githubDark } from "@uiw/codemirror-theme-github";
-
-type Props = {
-  code: string;
-  desc: string[];
-  info: {
-    line: number[]; // [startLine, endLine] - 1-indexed
-    desc: number; // 1-indexed
-  };
-};
 
 // --- CodeMirror Highlight Extension ---
 
@@ -73,29 +65,35 @@ const highlightField = StateField.define<DecorationSet>({
 const lineHighlightExtension = () => [highlightField];
 
 // --- Component ---
+type Props = {
+  code: string;
+  desc?: string[];
+  info: {
+    line: number[]; // [startLine, endLine] - 1-indexed
+    desc: number; // 1-indexed
+  };
+  // default true
+  readonly?: boolean;
+  onChange?: (value: string, viewUpdate: ViewUpdate) => void;
+};
 
-function CodeDesc({ code, desc, info }: Props) {
+function CodeDesc({ code, desc, info, readonly = true, onChange }: Props) {
   const editorRef = useRef<ReactCodeMirrorRef>(null);
 
   useEffect(() => {
     const view = editorRef.current?.view;
     if (view) {
-      // Dispatch the effect to update highlights when info.line changes
-      // Make sure line numbers are valid before dispatching
       const [start, end] = info.line;
       if (start !== -1 && end !== -1) {
-        // Use -1 check from original code
         view.dispatch({
           effects: highlightEffect.of([start, end]),
         });
       } else {
-        // Clear highlights if line numbers are invalid (-1)
         view.dispatch({
-          effects: highlightEffect.of([0, 0]), // Dispatch with invalid range to clear
+          effects: highlightEffect.of([0, 0]),
         });
       }
 
-      // Optionally scroll the highlighted area into view
       try {
         if (start > 0 && start <= view.state.doc.lines) {
           const line = view.state.doc.line(start);
@@ -107,34 +105,32 @@ function CodeDesc({ code, desc, info }: Props) {
         console.error("Error scrolling into view:", e);
       }
     }
-  }, [info.line]); // Depend on info.line
+  }, [info.line]);
 
   return (
-    // Apply the styles from CodeDesc.module.scss
     <div className={styles.codeDescContainer}>
       <div className={styles.descriptionArea}>
         <p>
-          {/* Adjust index access: desc is 0-indexed, info.desc is 1-indexed */}
-          {info.desc > 0 && info.desc <= desc.length
-            ? desc[info.desc - 1]
-            : "点击控制区播放按钮，开始执行"}
+          {desc
+            ? info.desc > 0 && info.desc <= desc.length
+              ? desc[info.desc - 1]
+              : "点击控制区播放按钮，开始执行"
+            : "标题"}
         </p>
       </div>
       <div className={styles.codeMirrorWrapper}>
         <ReactCodeMirror
           ref={editorRef}
           value={code}
-          // theme="dark" // Example: Use a predefined dark theme or customize fully
-          height="100%" // Make CodeMirror fill the wrapper
-          style={{ height: "100%" }} // Ensure wrapper and CM have height
-          readOnly={true} // Make editor non-editable
+          height="100%"
+          style={{ height: "100%" }}
+          readOnly={readonly}
+          onChange={onChange}
           basicSetup={{
-            // Customize basic setup if needed
             lineNumbers: true,
             foldGutter: true,
             highlightActiveLine: true,
             highlightActiveLineGutter: true,
-            // remove other defaults if not needed
             autocompletion: false,
             lintKeymap: false,
           }}

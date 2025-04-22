@@ -6,19 +6,17 @@ import React, {
   useRef,
   useState,
 } from "react";
-import CodeDesc from "../common/codeDesc/CodeDesc";
-import { Scene, SenkiArray, SenkiLinkedNode } from "../../lib/senki";
+import CodeDesc from "./common/codeDesc/CodeDesc";
+import { Scene, SenkiArray, SenkiLinkedNode } from "../lib/senki";
 import { Link, useLocation, useParams } from "react-router-dom";
-import BreadcrumbNav from "../common/breadcrumb/BreadcrumbNav";
-import { AlgoSource } from "../../lib/algo_desc/makeAlgoSource";
-import { CodeContext, CodeControl } from "../../lib/algo_desc";
+import BreadcrumbNav from "./common/breadcrumb/BreadcrumbNav";
+import { AlgoSource } from "../lib/algo_desc/makeAlgoSource";
+import { CodeContext, CodeControl } from "../lib/algo_desc";
 import { getAlgo } from "@/src/api/algo/sort";
 
-const EMPTY_ALGO_SOURCE: AlgoSource = { shower: "", desc: [], realcode: "" };
+const EMPTY_ALGO_SOURCE: AlgoSource = { rawCode: "", desc: [], asyncCode: "" };
 
-type AlgoType = "tree" | "linear";
-
-const SimulateSort = ({ algoType = "linear" }: { algoType?: AlgoType }) => {
+const SimulateSort = () => {
   const { id } = useParams();
   // ---状态变量---
   // 用户输入的数组
@@ -74,7 +72,7 @@ const SimulateSort = ({ algoType = "linear" }: { algoType?: AlgoType }) => {
 
   // --- 事件处理函数 ---
   const createNewCodeControl = () => {
-    setCodeControl(new CodeControl(algoSource.realcode));
+    setCodeControl(new CodeControl(algoSource.asyncCode));
   };
 
   const handlePlay = () => {
@@ -177,19 +175,14 @@ const SimulateSort = ({ algoType = "linear" }: { algoType?: AlgoType }) => {
   // 初始化 senki
   useEffect(() => {
     if (!scene) return;
-    switch (algoType) {
-      case "linear":
-        SenkiArray.config.scene = scene;
-        SenkiArray.config.width = scene.width;
-        SenkiArray.config.height = scene.height;
-        break;
-      case "tree":
-        scene.add(SenkiLinkedNode.senkiForest);
-        SenkiLinkedNode.setCanvasDimensions({
-          width: scene.width,
-          height: scene.height,
-        });
-    }
+    SenkiArray.config.scene = scene;
+    SenkiArray.config.width = scene.width;
+    SenkiArray.config.height = scene.height;
+    SenkiLinkedNode.setCanvasDimensions({
+      width: scene.width,
+      height: scene.height,
+    });
+    scene.add(SenkiLinkedNode.senkiForest);
   }, [scene]);
 
   return (
@@ -198,7 +191,7 @@ const SimulateSort = ({ algoType = "linear" }: { algoType?: AlgoType }) => {
       <div className={styles.mainContent}>
         <div className={styles.codeArea}>
           <CodeDesc
-            code={algoSource.shower}
+            code={algoSource.rawCode}
             desc={algoSource.desc}
             info={codeInfo}
           />

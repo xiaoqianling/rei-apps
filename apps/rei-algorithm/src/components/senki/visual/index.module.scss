@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   width: 100%; // Ensure it takes full width of its container
+  height: 100%;
   min-height: 80vh; // Example minimum height
   background-color: #1a1a2e; // Dark background
   color: #e0e0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   position: relative; // 确保父容器有相对定位
 }
 
@@ -31,7 +32,7 @@
   // Styles for the code block itself (assuming pre > code structure)
   :global(pre) {
     flex-grow: 1; // Allow code block to take available space
-    font-family: 'Fira Code', 'Consolas', monospace; // Use a monospace font
+    font-family: "Fira Code", "Consolas", monospace; // Use a monospace font
     font-size: 0.9em;
     line-height: 1.6;
     background-color: #24243e; // Slightly different bg for pre
@@ -54,13 +55,13 @@
 
   // Example: Styles for a description area (assuming CodeDesc has this class)
   .description {
-      background-color: #3a3a5a;
-      color: #c0c0e0;
-      padding: 10px 15px;
-      font-size: 0.85em;
-      border-top: 1px solid #4a4a6a;
-      min-height: 50px; // Ensure some minimum height
-      border-radius: 0 0 8px 8px; // Round bottom corners
+    background-color: #3a3a5a;
+    color: #c0c0e0;
+    padding: 10px 15px;
+    font-size: 0.85em;
+    border-top: 1px solid #4a4a6a;
+    min-height: 50px; // Ensure some minimum height
+    border-radius: 0 0 8px 8px; // Round bottom corners
   }
 }
 
@@ -75,7 +76,8 @@
   align-items: center;
   overflow: hidden; // Clip content if canvas is larger
 
-  :global(canvas) { // Style the canvas element itself
+  :global(canvas) {
+    // Style the canvas element itself
     max-width: 100%;
     max-height: 100%;
     // background-color: #fff; // Example: Make canvas background white for contrast
@@ -94,10 +96,10 @@
 }
 
 .controlTop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .navLinks {
@@ -108,15 +110,18 @@
     margin-right: 15px;
     padding: 5px 10px;
     border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
 
     &:hover {
       background-color: #4a4a6a;
       color: #fff;
     }
 
-    span { // Keep spans for potential future styling
-        display: inline-block;
+    span {
+      // Keep spans for potential future styling
+      display: inline-block;
     }
 
     // Consider adding active styling if needed via react-router NavLink
@@ -124,9 +129,9 @@
 }
 
 .inputSection {
-    flex-grow: 1; // Take available space
-    display: flex;
-    justify-content: flex-end; // Align input to the right
+  flex-grow: 1; // Take available space
+  display: flex;
+  justify-content: flex-end; // Align input to the right
 }
 
 .inputGroup {
@@ -153,29 +158,31 @@
   }
 
   .confirmButton {
-      // Apply shared button styles
-      background-color: #4a4a7a; // Button background
-      color: #e0e0e0;
-      border: none;
-      padding: 8px 15px; // Slightly smaller padding to fit input group
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 0.9em; // Slightly smaller font size
-      transition: background-color 0.3s ease, transform 0.1s ease;
+    // Apply shared button styles
+    background-color: #4a4a7a; // Button background
+    color: #e0e0e0;
+    border: none;
+    padding: 8px 15px; // Slightly smaller padding to fit input group
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em; // Slightly smaller font size
+    transition:
+      background-color 0.3s ease,
+      transform 0.1s ease;
 
-      &:hover:not(:disabled) {
-        background-color: #6a6aaf; // Lighter on hover
-      }
+    &:hover:not(:disabled) {
+      background-color: #6a6aaf; // Lighter on hover
+    }
 
-      &:active:not(:disabled) {
-        transform: scale(0.98); // Slight press effect
-      }
+    &:active:not(:disabled) {
+      transform: scale(0.98); // Slight press effect
+    }
 
-      &:disabled {
-        background-color: #3a3a5a; // Darker when disabled
-        color: #888;
-        cursor: not-allowed;
-      }
+    &:disabled {
+      background-color: #3a3a5a; // Darker when disabled
+      color: #888;
+      cursor: not-allowed;
+    }
   }
 }
 
@@ -192,7 +199,9 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    transition:
+      background-color 0.3s ease,
+      transform 0.1s ease;
 
     &:hover:not(:disabled) {
       background-color: #6a6aaf; // Lighter on hover
@@ -217,28 +226,29 @@
     height: auto; // Adjust height for stacked layout
   }
 
-  .codeArea, .canvasArea {
+  .codeArea,
+  .canvasArea {
     flex: 1 1 auto; // Reset flex basis
     min-height: 300px; // Ensure minimum height when stacked
   }
 
   .controlTop {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
   }
 
   .navLinks {
-      text-align: center;
-      a {
-          margin: 5px;
-      }
+    text-align: center;
+    a {
+      margin: 5px;
+    }
   }
   .inputSection {
-      justify-content: center;
+    justify-content: center;
   }
   .actionButtons {
-      flex-wrap: wrap; // Allow buttons to wrap on small screens
+    flex-wrap: wrap; // Allow buttons to wrap on small screens
   }
 }
 
@@ -312,7 +322,8 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   }
 
-  .retryButton { // 重命名此类
+  .retryButton {
+    // 重命名此类
     padding: 8px 15px;
     background-color: white;
     color: red;
@@ -320,7 +331,10 @@
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s, color 0.3s, transform 0.1s ease;
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      transform 0.1s ease;
 
     &:hover {
       background-color: #eee;
@@ -335,8 +349,12 @@
 
 // Keyframes for animations
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {

@@ -6,7 +6,7 @@ import HomeLayout from "../../components/layout/homeLayout";
 import AboutPage from "../../pages/static/about";
 import VisualPage from "@/src/pages/visual";
 import LearnPage from "@/src/pages/learn";
-import SlatePage from "@/src/pages/slate";
+import SlatePage from "@/src/pages/playground";
 import { docsRouter as visualRouter } from "@/src/pages/visual/route";
 import { communityRouter } from "@/src/pages/community/route";
 import { learnRouter } from "@/src/pages/learn/route";

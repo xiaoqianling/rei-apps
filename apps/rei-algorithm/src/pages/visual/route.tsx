@@ -1,4 +1,4 @@
-import SimulateSort from "@/src/components/senki/visual/sort";
+import SimulateSort from "@/src/components/senki/visual";
 import { RouteObject } from "react-router-dom";
 import VisualHome from "./home";
 
