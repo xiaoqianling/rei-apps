@@ -3,22 +3,37 @@
   font-weight: 600;
   color: #000;
   position: relative;
-  -webkit-user-select: none;
-  user-select: none;
 
-  &:hover {
+  .hashLink {
+    position: absolute;
+    left: -0.75em;
+    color: $miku;
     cursor: pointer;
-    &::before {
+    opacity: 0;
+    transition: opacity 0.2s;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &:hover {
       opacity: 1;
-      transition: opacity 0.2s ease-in-out;
-      content: "#";
-      font-size: inherit;
-      position: absolute;
-      top: 0;
-      left: -2rem;
-      color: #7ccbec;
-      text-decoration: underline;
+      color: $primary-accent;
     }
+  }
+
+  &:hover .hashLink {
+    opacity: 1;
+    // cursor: pointer;
+    // &::before {
+    //   opacity: 1;
+    //   transition: opacity 0.2s ease-in-out;
+    //   content: "#";
+    //   font-size: inherit;
+    //   position: absolute;
+    //   top: 0;
+    //   left: -2rem;
+    //   color: #7ccbec;
+    //   text-decoration: underline;
+    // }
   }
 }
 

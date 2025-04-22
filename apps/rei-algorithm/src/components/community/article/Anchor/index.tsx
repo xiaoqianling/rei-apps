@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./index.module.scss";
 import { NavLink, useNavigate } from "react-router";
+import { scrollToElementByID } from "@/src/util/dom";
 
 export interface AnchorItem {
   id: string;
@@ -33,6 +34,9 @@ const renderAnchorLinks = (
             to={`#${item.id}`}
             className={styles.anchorLink}
             title={item.title} // Add title attribute for full text on hover
+            onClick={() => {
+              scrollToElementByID(item.id); // Scroll to the element when clicked
+            }}
           >
             {item.title}
           </NavLink>
@@ -49,7 +53,6 @@ const renderAnchorLinks = (
 // --- Main Anchor Component ---
 const Anchor: React.FC<AnchorProps> = ({ items, offsetTop = 0 }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const navigate = useNavigate();
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   // 使用Intersection Observer替代滚动事件监听
@@ -63,19 +66,22 @@ const Anchor: React.FC<AnchorProps> = ({ items, offsetTop = 0 }) => {
 
         if (intersectingEntries.length === 0) return;
 
-        // 找出最接近视口顶部的元素
+        // 修改比较逻辑，优先选择最靠近视口顶部的元素
         const closestEntry = intersectingEntries.reduce((prev, current) => {
-          return current.boundingClientRect.top < prev.boundingClientRect.top
-            ? current
-            : prev;
+          const prevTop = Math.abs(prev.boundingClientRect.top - offsetTop);
+          const currentTop = Math.abs(
+            current.boundingClientRect.top - offsetTop,
+          );
+          return currentTop < prevTop ? current : prev;
         });
 
         setActiveId(closestEntry.target.id);
       },
       {
         root: null,
-        rootMargin: `-${offsetTop}px 0px -${window.innerHeight - offsetTop - 100}px 0px`,
-        threshold: 0.1, // 降低阈值提高性能
+        // 调整rootMargin，确保顶部元素能被正确检测
+        rootMargin: `-${offsetTop}px 0px -${Math.floor(window.innerHeight * 0.3)}px 0px`,
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
       },
     );
 
@@ -106,41 +112,6 @@ const Anchor: React.FC<AnchorProps> = ({ items, offsetTop = 0 }) => {
       }
     };
   }, [items, offsetTop]);
-
-  // --- 可选: 滚动时的激活状态检测 ---
-  // 这个实现较为复杂且可能影响性能
-  // 如果需要更好的性能，建议考虑使用 Intersection Observer API
-  useEffect(() => {
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              Math.abs(a.boundingClientRect.top) -
-              Math.abs(b.boundingClientRect.top),
-          );
-
-        if (visibleEntries.length > 0) {
-          // 取距离视口顶部最近的元素
-          const closestEntry = visibleEntries[0];
-          // 添加边界检查，避免误触发
-          if (
-            Math.abs(closestEntry.boundingClientRect.top) <=
-            offsetTop + 150
-          ) {
-            setActiveId(closestEntry.target.id);
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: `-${offsetTop}px 0px -${Math.floor(window.innerHeight * 0.4)}px 0px`,
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
-    );
-  }, [items, offsetTop]);
-  // --- End Optional Scroll Spy ---
 
   if (!items || items.length === 0) {
     return null; // Don't render if no items

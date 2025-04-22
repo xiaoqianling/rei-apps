@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useMemo, useState } from "react";
+import { FunctionComponent, useMemo } from "react";
 import Layout from "../layout";
 import HeaderLink from "../layout/header/header-link";
 

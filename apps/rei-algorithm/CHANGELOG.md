@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.57
+
+### Patch Changes
+
+- chore: 优化锚点
+
 ## 1.2.56
 
 ### Patch Changes
