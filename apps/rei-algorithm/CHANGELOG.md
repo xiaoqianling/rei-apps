@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.62
+
+### Patch Changes
+
+- BUGFIX: 修复了导航栏缺失key的问题
+
 ## 1.2.61
 
 ### Patch Changes
