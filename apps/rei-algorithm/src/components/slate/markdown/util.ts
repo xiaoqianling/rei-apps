@@ -1,16 +1,16 @@
 import { AnchorItem } from "rei-design/anchor";
+import { Descendant, Element } from "slate";
+
+export function parseBlogAnchors(dom: HTMLDivElement | null): AnchorItem[];
 
 // 按层级解析h1-h3
-export const parseBlogAnchors = (dom: HTMLDivElement | null): AnchorItem[] => {
+export function parseBlogAnchors(dom: HTMLDivElement | null): AnchorItem[] {
   if (!dom) {
     return [];
   }
-
   const anchors: AnchorItem[] = [];
   // 获取所有h1-h3标题元素，保持DOM顺序
-  const headings = dom.querySelectorAll("h1, h2, h3");
-
-  // 使用栈结构维护层级关系
+  const headings = dom.querySelectorAll("h1, h2, h3"); // 使用栈结构维护层级关系
   const stack: { level: number; children?: AnchorItem[] }[] = [
     { level: 0, children: anchors }, // 根节点
   ];
@@ -19,7 +19,7 @@ export const parseBlogAnchors = (dom: HTMLDivElement | null): AnchorItem[] => {
     const level = parseInt(heading.tagName[1], 10);
     const item: AnchorItem = {
       id: heading.id,
-      title: heading.textContent || "",
+      title: heading.textContent?.substring(1) || "",
       children: [],
     };
 
@@ -43,4 +43,4 @@ export const parseBlogAnchors = (dom: HTMLDivElement | null): AnchorItem[] => {
     ...anchor,
     children: anchor.children?.length ? anchor.children : undefined,
   }));
-};
+}

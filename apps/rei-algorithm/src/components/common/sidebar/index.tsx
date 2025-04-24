@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './index.module.scss';
-import { MenuItem } from 'rei-design/menu/type';
-import { FaAngleRight } from 'react-icons/fa';
+import React, { useState, useCallback } from "react";
+import { NavLink } from "react-router-dom";
+import styles from "./index.module.scss";
+import { MenuItem } from "rei-design/menu/type";
+import { FaAngleRight } from "react-icons/fa";
 
 /**
  * export interface MenuItem {
@@ -31,47 +31,61 @@ const renderMenuItems = (
   prefix: string,
   level = 0,
   expandedItems: Set<string>,
-  toggleExpand: (path: string) => void
+  toggleExpand: (path: string) => void,
+  parentPath = "", // 新增参数，记录父级路径
 ): React.ReactNode => {
   return (
-    <ul className={`${styles.menuList} ${level > 0 ? styles.submenu : ''}`}>
+    <ul className={`${styles.menuList} ${level > 0 ? styles.submenu : ""}`}>
       {items.map((item) => {
-        const fullPath = `${prefix}/${item.path}`.replace(/\/+/g, '/');
+        const currentPath = parentPath
+          ? `${parentPath}/${item.path}`
+          : item.path;
+        const fullPath = `${prefix}/${currentPath}`.replace(/\/+/g, "/");
         const isBranch = item.subItems && item.subItems.length > 0;
         const isExpanded = isBranch && expandedItems.has(item.path);
 
         return (
-          <li key={item.path} className={`${styles.menuItem} ${isExpanded ? styles.itemExpanded : ''}`}>
+          <li
+            key={item.path}
+            className={`${styles.menuItem} ${isExpanded ? styles.itemExpanded : ""}`}
+          >
             {!isBranch ? (
-              // Leaf node - Render NavLink
               <NavLink
                 to={fullPath}
                 className={({ isActive }) =>
-                  `${styles.navLink} ${isActive ? styles.active : ''}`
+                  `${styles.navLink} ${isActive ? styles.active : ""}`
                 }
                 end
               >
                 <span className={styles.iconPlaceholder}>
-                  {level === 0 ? '📄' : '•'}
+                  {level === 0 ? "📄" : "•"}
                 </span>
                 <span className={styles.linkLabel}>{item.label}</span>
               </NavLink>
             ) : (
-              // Branch node - Render clickable label and recurse
               <div
                 className={styles.branchLabel}
                 onClick={() => toggleExpand(item.path)}
               >
                 <span className={styles.iconPlaceholder}>📁</span>
                 <span className={styles.branchText}>{item.label}</span>
-                <span className={`${styles.collapseIcon} ${isExpanded ? styles.iconExpanded : ''}`}>
-                <FaAngleRight />
+                <span
+                  className={`${styles.collapseIcon} ${isExpanded ? styles.iconExpanded : ""}`}
+                >
+                  <FaAngleRight />
                 </span>
               </div>
             )}
-            {isBranch &&  (
+            {isBranch && (
               <div className={styles.submenuContainer}>
-                {renderMenuItems(item.subItems!, prefix, level + 1, expandedItems, toggleExpand)}
+                {renderMenuItems(
+                  item.subItems!,
+                  prefix,
+                  level + 1,
+                  expandedItems,
+                  toggleExpand,
+                  currentPath, // 传递当前路径作为下一级的父级路径
+                )}
               </div>
             )}
           </li>
@@ -81,11 +95,11 @@ const renderMenuItems = (
   );
 };
 
-function DocsSidebar({ menuData, prefix, title = "文档导航" }: SidebarProps) {
+function Sidebar({ menuData, prefix, title = "文档导航" }: SidebarProps) {
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
 
   const toggleExpand = useCallback((path: string) => {
-    setExpandedItems(prevExpanded => {
+    setExpandedItems((prevExpanded) => {
       const newExpanded = new Set(prevExpanded);
       if (newExpanded.has(path)) {
         newExpanded.delete(path);
@@ -98,12 +112,6 @@ function DocsSidebar({ menuData, prefix, title = "文档导航" }: SidebarProps)
 
   return (
     <aside className={styles.sidebarContainer}>
-      {/* --- Sidebar Header --- */}
-      <div className={styles.sidebarHeader}>
-        {/* You can replace this with a logo */}
-        <h2 className={styles.sidebarTitle}>{title}</h2>
-      </div>
-
       {/* --- Navigation Menu --- */}
       <nav className={styles.navigation}>
         {renderMenuItems(menuData, prefix, 0, expandedItems, toggleExpand)}
@@ -115,6 +123,6 @@ function DocsSidebar({ menuData, prefix, title = "文档导航" }: SidebarProps)
   );
 }
 
-export default DocsSidebar;
+export default Sidebar;
 
 //-----

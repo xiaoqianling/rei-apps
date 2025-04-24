@@ -2,7 +2,7 @@ import { Descendant } from "slate";
 
 export const SlateMock: Descendant[] = [
   {
-    type: "heading-one",
+    type: "h1",
     children: [
       {
         text: "Welcome to Slate",
@@ -10,7 +10,7 @@ export const SlateMock: Descendant[] = [
     ],
   },
   {
-    type: "heading-two",
+    type: "h2",
     children: [
       {
         text: "A completely customizable framework for building rich text editors",
@@ -18,7 +18,7 @@ export const SlateMock: Descendant[] = [
     ],
   },
   {
-    type: "heading-three",
+    type: "h3",
     children: [
       {
         text: "A completely customizable framework for building rich text editors",
@@ -87,7 +87,7 @@ export const SlateMock: Descendant[] = [
     content: "",
   },
   {
-    type: "note",
+    type: "tip",
     level: "tip",
     content: "This\n is\n a\n tip",
     children: [
@@ -97,7 +97,7 @@ export const SlateMock: Descendant[] = [
     ],
   },
   {
-    type: "note",
+    type: "tip",
     level: "warning",
     content: "This is a warn",
     children: [
@@ -107,7 +107,7 @@ export const SlateMock: Descendant[] = [
     ],
   },
   {
-    type: "note",
+    type: "tip",
     level: "error",
     content: "This is a ERROR",
     children: [

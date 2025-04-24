@@ -1,6 +1,5 @@
 import { FunctionComponent, useCallback, useMemo, useState } from "react";
 import styles from "./index.module.scss";
-import ReactCodeMirror from "@uiw/react-codemirror";
 import { SlateAttributes } from "../slateEditor/element";
 import { MultiCodeBlockElement } from "../slateEditor/custom/type";
 import { Transforms, Node } from "slate";
@@ -10,6 +9,7 @@ import {
   useFocused,
   ReactEditor,
 } from "slate-react";
+import MarkdownCode, { SupportedLanguage } from "../markdown/code";
 interface BlogCodeProps {
   attributes?: SlateAttributes;
   element: MultiCodeBlockElement;
@@ -24,7 +24,10 @@ const BlogMultiCodeBlock: FunctionComponent<BlogCodeProps> = ({
   const selected = useSelected();
   const focused = useFocused();
   const [activeLangIndex, setActiveLangIndex] = useState(0);
-  const [languages, setLanguages] = useState<string[]>([]);
+  const [languages, setLanguages] = useState<SupportedLanguage[]>(
+    element.content.map((item) => item.language),
+  );
+  const [code, setCode] = useState(element.content.map((item) => item.code)); // 初始代码块为第一个
 
   const path = ReactEditor.findPath(editor, element);
   const codeText = useMemo(() => {
@@ -40,21 +43,27 @@ const BlogMultiCodeBlock: FunctionComponent<BlogCodeProps> = ({
   );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} {...attributes}>
       <div className={styles.languageTabs}>
-        {code.metadata.map(({ language }, index) => (
+        {code.map((_, index) => (
           <button
-            key={language}
+            key={languages[index]}
             className={`${styles.tab} ${
               index === activeLangIndex ? styles.active : ""
             }`}
             onClick={() => setActiveLangIndex(index)}
           >
-            {language}
+            {languages[index]}
           </button>
         ))}
       </div>
-      <ReactCodeMirror />
+      <MarkdownCode
+        element={{
+          type: "code-block",
+          language: languages[activeLangIndex],
+          code: code[activeLangIndex],
+        }}
+      />
     </div>
   );
 };

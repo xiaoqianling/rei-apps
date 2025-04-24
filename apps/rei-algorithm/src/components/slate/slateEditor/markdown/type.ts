@@ -7,45 +7,38 @@ export type BlockQuoteElement = {
   children: Descendant[];
 };
 
-// 列表
-export type BulletedListElement = {
-  type: "bulleted-list";
-  align?: string;
-  children: Descendant[];
-};
-
 export type H1Element = {
-  type: "heading-one";
+  type: "h1";
   align?: string;
   children: Descendant[];
 };
 
 export type H2Element = {
-  type: "heading-two";
+  type: "h2";
   align?: string;
   children: Descendant[];
 };
 
 export type H3Element = {
-  type: "heading-three";
+  type: "h3";
   align?: string;
   children: Descendant[];
 };
 
 export type H4Element = {
-  type: "heading-four";
+  type: "h4";
   align?: string;
   children: Descendant[];
 };
 
 export type H5Element = {
-  type: "heading-five";
+  type: "h5";
   align?: string;
   children: Descendant[];
 };
 
 export type H6Element = {
-  type: "heading-six";
+  type: "h6";
   align?: string;
   children: Descendant[];
 };
@@ -61,9 +54,21 @@ export type LinkElement = { type: "link"; url: string; children: Descendant[] };
 
 export type ButtonElement = { type: "button"; children: Descendant[] };
 
+// 列表
+export type BulletedListElement = {
+  type: "bulleted-list";
+  align?: string;
+  children: Descendant[];
+};
+
 // 有序列表
 export type NumberedListItemElement = {
   type: "numbered-list";
+  children: Descendant[];
+};
+
+export type ListItemElement = {
+  type: "list-item";
   children: Descendant[];
 };
 
@@ -85,6 +90,11 @@ export type EmptyText = {
 
 export type CodeLineElement = {
   type: "code-line";
+  children: Descendant[];
+};
+
+export type MermaidElement = {
+  type: "mermaid";
   children: Descendant[];
 };
 
@@ -114,6 +124,8 @@ export type MarkdownElement =
   | LinkElement
   | ButtonElement
   | NumberedListItemElement
+  | ListItemElement
   | ParagraphElement
   | VideoElement
-  | CodeLineElement;
+  | CodeLineElement
+  | MermaidElement;

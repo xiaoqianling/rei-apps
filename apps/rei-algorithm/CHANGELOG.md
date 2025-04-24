@@ -1,5 +1,11 @@
 # rei-algorithm
 
+## 1.2.61
+
+### Patch Changes
+
+- chore: 补充一些文档页&优化文档样式
+
 ## 1.2.60
 
 ### Patch Changes

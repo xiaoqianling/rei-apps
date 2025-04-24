@@ -24,20 +24,6 @@ $transition-slow: all 0.4s ease-out;
   padding: 0 1rem;
 }
 
-/* --- Sidebar Header --- */
-.sidebarHeader {
-  padding: 20px 25px;
-  border-bottom: 1px solid $border-light;
-  flex-shrink: 0; // Prevent header from shrinking
-}
-
-.sidebarTitle {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: $text-dark;
-  margin: 0;
-}
-
 /* --- Navigation Area --- */
 .navigation {
   flex-grow: 1; // Take remaining space

@@ -137,12 +137,12 @@ const RichTextEditor = () => {
           tip="代码"
         />
         <BlockButton
-          format="heading-one"
+          format="h1"
           icon={<BsTypeH1 size={ICON_SIZE} />}
           tip="一级标题"
         />
         <BlockButton
-          format="heading-two"
+          format="h2"
           icon={<BsTypeH2 size={ICON_SIZE} />}
           tip="二级标题"
         />

@@ -1,5 +1,5 @@
-import { userSlice } from "./user";
+import { anchorSlice } from "./anchor";
 
 export const reducer = {
-    user: userSlice.reducer,
-}
+  anchor: anchorSlice.reducer,
+};

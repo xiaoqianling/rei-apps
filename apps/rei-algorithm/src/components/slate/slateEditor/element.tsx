@@ -12,6 +12,7 @@ import MarkdownCode from "../markdown/code";
 import BlogTip from "../tip";
 import BlogMultiCodeBlock from "../multiCodeBlock";
 import BlogFoldBlock from "../foldBlock";
+import BlogMermaid from "../mermaid";
 
 export type SlateAttributes = {
   "data-slate-node": "element";
@@ -56,19 +57,19 @@ export const Element = ({
           {children}
         </ul>
       );
-    case "heading-one":
+    case "h1":
       return (
         <MarkdownH1 id={generateId(children[0].props.text.text)}>
           {children}
         </MarkdownH1>
       );
-    case "heading-two":
+    case "h2":
       return (
         <MarkdownH2 id={generateId(children[0].props.text.text)}>
           {children}
         </MarkdownH2>
       );
-    case "heading-three":
+    case "h3":
       return (
         <MarkdownH3 id={generateId(children[0].props.text.text)}>
           {children}
@@ -80,18 +81,21 @@ export const Element = ({
           {children}
         </ol>
       );
+    case "list-item":
+      return (
+        <li style={style} {...attributes}>
+          {children}
+        </li>
+      );
     case "code-block":
       return (
-        <MarkdownCode
-          attributes={attributes}
-          language="js"
-          element={element}
-          code={element.code}
-        ></MarkdownCode>
+        <MarkdownCode attributes={attributes} element={element}></MarkdownCode>
       );
     case "multi-code-block":
       return <BlogMultiCodeBlock element={element} attributes={attributes} />;
-    case "note":
+    case "mermaid":
+      return <BlogMermaid element={element} attributes={attributes} />;
+    case "tip":
       return (
         <BlogTip
           initLevel={element.level}

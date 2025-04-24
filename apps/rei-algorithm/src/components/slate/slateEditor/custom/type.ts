@@ -1,5 +1,6 @@
 import { Descendant } from "slate";
 import { TipLevelsTypes } from "../../tip";
+import { SupportedLanguage } from "@/src/components";
 
 // 模拟的自定义特色组件
 export type CustomElement =
@@ -15,21 +16,28 @@ type InsertElement = {
 };
 
 type NoteElement = {
-  type: "note";
+  type: "tip";
   level: TipLevelsTypes;
   children?: Descendant[];
 };
 
 export type CodeBlockElement = {
   type: "code-block";
-  language: string;
+  language: SupportedLanguage;
   code: string;
   children?: Descendant[];
 };
 
+type MultiCode = {
+  language: SupportedLanguage;
+  // 外显语言标签
+  label: string;
+  code: string;
+};
+
 export type MultiCodeBlockElement = {
   type: "multi-code-block";
-  language: string[];
+  content: MultiCode[];
   children?: Descendant[];
 };
 
