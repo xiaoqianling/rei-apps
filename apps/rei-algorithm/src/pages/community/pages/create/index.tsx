@@ -3,6 +3,7 @@ import styles from "./index.module.scss";
 // import SlateEditorComponent from '@/path/to/your/SlateEditorComponent'; // 导入你已实现的 Slate 编辑器组件
 import { CommunityTag } from "../../types";
 import { mockTags } from "../../mockData";
+import RichTextEditor from "@/src/components/slate/slateEditor/RichTextEditor";
 
 const CreatePostPage: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -69,7 +70,8 @@ const CreatePostPage: React.FC = () => {
         <div className={styles.editorContainer}>
           {/* --- Slate Editor Placeholder --- */}
           {/* <SlateEditorComponent value={editorState} onChange={setEditorState} /> */}
-          <div className={styles.slatePlaceholder}>此处集成 Slate 编辑器</div>
+          {/* <div className={styles.slatePlaceholder}>此处集成 Slate 编辑器</div> */}
+          <RichTextEditor />
         </div>
       </div>
 

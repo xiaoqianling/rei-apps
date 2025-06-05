@@ -19,9 +19,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 }) => {
   const [comments, setComments] = useState<CommentData[]>(initialComments);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [replyingTo, setReplyingTo] = useState<string | null>(null);
 
   const handleAddComment = useCallback(
-    (content: string) => {
+    (content: string, parentId?: string) => {
       if (!currentUser) {
         alert("请先登录后再评论！"); // Placeholder for login check
         return;
@@ -38,14 +39,46 @@ const CommentSection: React.FC<CommentSectionProps> = ({
           author: currentUser,
           content: content,
           createdAt: new Date().toISOString(),
+          parentId: parentId,
         };
         setComments((prevComments) => [newComment, ...prevComments]);
         setIsSubmitting(false);
+        setReplyingTo(null);
       }, 800);
       // --- End Mock Submission --- //
     },
     [articleId, currentUser],
   );
+
+  const renderComments = (commentList: CommentData[], parentId?: string) => {
+    return commentList
+      .filter((comment) => comment.parentId === parentId)
+      .map((comment) => {
+        const replies = comments.filter((c) => c.parentId === comment.id);
+        return (
+          <div key={comment.id} className={styles.commentThread}>
+            <CommentItem
+              comment={comment}
+              onReply={() => setReplyingTo(comment.id)}
+            />
+            {replies.length > 0 && (
+              <div className={styles.replies}>
+                {renderComments(comments, comment.id)}
+              </div>
+            )}
+            {replyingTo === comment.id && (
+              <div className={styles.replyForm}>
+                <CommentForm
+                  onSubmit={(content) => handleAddComment(content, comment.id)}
+                  isSubmitting={isSubmitting}
+                  onCancel={() => setReplyingTo(null)}
+                />
+              </div>
+            )}
+          </div>
+        );
+      });
+  };
 
   return (
     <section className={styles.commentSection}>
@@ -53,7 +86,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
       {/* Conditionally render form based on login status (placeholder) */}
       {currentUser ? (
-        <CommentForm onSubmit={handleAddComment} isSubmitting={isSubmitting} />
+        <CommentForm onSubmit={(content) => handleAddComment(content)} isSubmitting={isSubmitting} />
       ) : (
         <p className={styles.loginPrompt}>
           请 <a href="/login">登录</a>后发表评论。
@@ -62,9 +95,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({
 
       <div className={styles.commentList}>
         {comments.length > 0 ? (
-          comments.map((comment) => (
-            <CommentItem key={comment.id} comment={comment} />
-          ))
+          renderComments(comments)
         ) : (
           <p className={styles.noComments}>还没有评论，快来抢沙发吧！</p>
         )}

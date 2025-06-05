@@ -17,3 +17,84 @@
 
 我们一点点来，首先我们实现一个动画引擎，用于绘制一些数据结构，应该可以：高效绘制一系列数据结构、数据结构变化时可以高效重绘(同时要有流畅的重绘动画)、以块为单位，一个画布上可以有多个块，每个块表示一个数据结构变量、块可以在画布上任意拖动位置、缩放、画布可以有一个比较大的边界。你觉得用什么技术方案比较好？SVG CANVAS 还是其他优秀的库，我希望可视化面板可以有一些自定义特色内容，能尽量保持可自定义程度。
 然后你觉得我们需要什么模块控制吗，针对绘制、更新这些，讲讲技术方案和设计
+
+SenkiArray
+基于普通的数组对象，与视图绑定了如下API:
+
+移除尾部元素并返回
+pop: ( ) => number;
+
+添加一个元素到尾部
+push: (value: number) => number;
+
+删除头部元素并返回
+shift: ( ) => number;
+
+往数组头部添加一个元素
+unshift: (value: number) => number;
+
+添加一个元素，返回数组长度
+add: (idx: number, value: number) => number;
+
+移除一个元素，返回被移除的值
+remove: (idx: number) => number;
+
+设置元素值
+set: (idx: number, value: number) => void;
+
+交换数组元素
+swap: (idx1: number, idx2: number) => void;
+
+标记元素颜色, 返回取消标记的函数
+因为动画队列的关系，标记动作本身不一定立刻执行，因此取消函数的返回值是一个Promise
+
+flag: (idx: number, color: string): => () => Promise<void>
+
+刷新画布
+因为对画布上节点的属性设置并不一定立刻生效
+
+refresh: ( ) => void;
+
+SenkiLinkedNode
+定位基于 Reingold-Tilford 算法
+
+可使用left、right 模拟二叉树，或直接增删child节点。
+
+标记颜色（格式必须为 #aabbcc），返回取消标记的函数
+flag：(color: string) => ( ) => Promise<void>;
+
+获取子节点
+getChild：(idx: number) => SenkiLinkedNode;
+
+添加子节点
+addChild：(n: SenkiLinkedNode, idx = 0) => number;
+
+移除子节点，成为一颗独立树
+removeChild: (v: SenkiLinkedNode | number) => SenkiLinkedNode | null;
+
+销毁该节点对应子树
+destroy: ( ) => void;
+
+从原本的父节点移动到新的父节点下
+除了构造函数外，
+
+修改对应图形节点、真正会触发动画的唯一函数的唯一函数。
+
+原则上一次动作，只设置一次parent。
+
+private set parent(args: [idx: number, newP: SenkiLinkedNode?, destroy: boolean])
+
+获取父节点
+get parent：( ) => SenkiLinkedNode | null;
+
+加入到第一个节点
+set left(n: SenkiLinkedNode)
+
+返回上次设置为 left 的节点
+get left() : SenkiLinkedNode | null
+
+加入到最后一个节点
+set right(n: SenkiLinkedNode)
+
+返回上一次设置为 right 的节点
+get right() : SenkiLinkedNode | null

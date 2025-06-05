@@ -1,51 +1,105 @@
 @use "sass:color";
 
 .commentSection {
-  margin-top: 40px;
-  padding: 30px;
-  background-color: color.adjust(
-    $bg-base,
-    $lightness: 1.5%
-  ); // Slightly different background
-  border-radius: 10px;
-  border: 1px solid $border-light;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .sectionTitle {
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: $text-dark;
-  margin: 0 0 20px 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid $border-light;
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
 }
 
 .commentList {
-  margin-top: 20px;
+  margin-top: 1.5rem;
 }
 
 .noComments {
   text-align: center;
-  color: $text-medium;
-  font-style: italic;
-  padding: 30px 0;
+  color: #6b7280;
+  padding: 2.5rem 0;
+  font-size: 0.95rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
 }
 
 .loginPrompt {
   text-align: center;
-  color: $text-medium;
-  padding: 20px;
-  background-color: color.adjust($bg-base, $lightness: 2%);
-  border: 1px dashed $border-light;
-  border-radius: 6px;
+  padding: 1.25rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  color: #4b5563;
 
   a {
-    color: $primary-accent;
-    font-weight: 500;
+    color: #2563eb;
     text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
 
     &:hover {
+      color: #1d4ed8;
       text-decoration: underline;
     }
+  }
+}
+
+.commentThread {
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  &:not(:last-child) {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f3f4f6;
+  }
+}
+
+.replies {
+  margin-top: 1rem;
+  margin-left: 2.5rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1.25rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #e5e7eb, transparent);
+  }
+
+  .commentThread {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.replyForm {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -1.25rem;
+    top: 1.5rem;
+    width: 1.25rem;
+    height: 2px;
+    background-color: #e5e7eb;
   }
 }

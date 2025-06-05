@@ -246,17 +246,17 @@ const initialValue: Descendant[] = [
     children: [{ text: "A wise quote." }],
   },
   {
-    type: "note",
+    type: "tip",
     level: TipLevelsTypes.TIP,
     children: [{ text: "提示块" }],
   },
   {
-    type: "note",
+    type: "tip",
     level: TipLevelsTypes.WARNING,
     children: [{ text: "警告块" }],
   },
   {
-    type: "note",
+    type: "tip",
     level: TipLevelsTypes.ERROR,
     children: [{ text: "错误块" }],
   },

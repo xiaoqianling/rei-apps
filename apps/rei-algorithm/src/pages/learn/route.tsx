@@ -1,23 +1,14 @@
-import React, { lazy } from "react"; // Add React import if needed
-import { Outlet, RouteObject } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import { MenuItem } from "rei-design/menu/type";
 import SlateRenderer from "@/src/components/community/article/slateRenderer";
-// Import the constants using the index file for cleaner imports
 import {
   LearnEditor,
   ArrayContent,
-  LinkedListContent,
   AVLTreeContent,
   BinaryTreeContent,
   BSTContent,
-  // BinaryTreeContent,
-  // BSTContent,
-  // AVLTreeContent,
 } from "./constant";
 import ReiNotFound from "../static/not-found";
-
-// Define the LearnLayout component (assuming path correction or manual fix later)
-// const LearnLayout = lazy(() => import('../../components/layout/learnLayout'));
 
 // 附加到/learn/下的所有路由
 export const learnRouter: RouteObject[] = [
@@ -37,7 +28,8 @@ export const learnRouter: RouteObject[] = [
           },
           {
             path: "linked-list",
-            element: <SlateRenderer key="linked-list" data={LinkedListContent} />,
+            // URL请求获取data
+            element: <SlateRenderer key="linked-list" id="array" />,
           },
         ],
       },
@@ -46,11 +38,15 @@ export const learnRouter: RouteObject[] = [
         children: [
           {
             path: "binary-tree",
-            element: <SlateRenderer key="binary-tree" data={BinaryTreeContent} />,
+            element: (
+              <SlateRenderer key="binary-tree" data={BinaryTreeContent} />
+            ),
           },
           {
             path: "binary-search-tree",
-            element: <SlateRenderer key="binary-search-tree" data={BSTContent} />,
+            element: (
+              <SlateRenderer key="binary-search-tree" data={BSTContent} />
+            ),
           },
           {
             path: "avl-tree",
@@ -59,6 +55,10 @@ export const learnRouter: RouteObject[] = [
         ],
       },
     ],
+  },
+  {
+    path: "API",
+    element: <SlateRenderer key="API" id={"visual-API"} />, // Placeholder
   },
 
   // Add placeholders for Algorithm routes if you want them navigable
@@ -155,5 +155,9 @@ export const learnMenuData: MenuItem[] = [
   {
     path: "editor",
     label: "了解编辑器",
+  },
+  {
+    path: "API",
+    label: "可视化API",
   },
 ];

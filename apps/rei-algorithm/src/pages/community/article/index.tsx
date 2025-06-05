@@ -43,18 +43,15 @@ const BlogArticlePage: React.FC = () => {
     setAnchorItems([]);
     setUserAction(null); // Reset user action on new article
     setIsReportModalOpen(false); // Close modal on navigation
-    console.log("Fetching article for:", articleId);
 
     setTimeout(() => {
       if (articleId && mockArticleData[articleId]) {
         const fetchedArticle = mockArticleData[articleId];
         setArticle(fetchedArticle);
         setComments(mockComments[articleId] || []);
-        // Initialize state from fetched data
         setLikes(fetchedArticle.likes || 0);
         setDislikes(fetchedArticle.dislikes || 0);
         setViews(fetchedArticle.views || 0);
-        // Simulate incrementing views (in real app, backend handles this)
         setViews((v) => (fetchedArticle.views || 0) + 1);
 
         setLoading(false);

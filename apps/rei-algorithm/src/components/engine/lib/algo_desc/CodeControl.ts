@@ -1,4 +1,4 @@
-import "../senki/index.js";
+import "../engine/index.js";
 
 class MicroEvent<EventType extends string> {
   _events!: {

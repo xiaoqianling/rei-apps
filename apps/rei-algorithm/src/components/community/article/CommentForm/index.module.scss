@@ -1,62 +1,87 @@
 @use "sass:color";
 
 .commentForm {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .commentTextarea {
   width: 100%;
-  padding: 12px 15px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  border: 1px solid $border-medium;
+  box-sizing: border-box;
+  padding: 0.875rem;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
-  background-color: #fff; // White background for textarea
-  color: $text-dark;
-  resize: vertical; // Allow vertical resize
-  min-height: 80px;
-  outline: none;
-  transition: $transition-base;
-
-  &::placeholder {
-    color: $text-light;
-    font-style: italic;
-  }
+  background-color: #fff;
+  color: #1f2937;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  resize: vertical;
+  transition: all 0.2s;
+  min-height: 100px;
 
   &:focus {
-    border-color: $primary-accent;
-    box-shadow: 0 0 0 3px rgba($primary-accent, 0.15);
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  &::placeholder {
+    color: #9ca3af;
   }
 
   &:disabled {
-    background-color: color.adjust($bg-base, $lightness: 1%);
+    background-color: #f9fafb;
     cursor: not-allowed;
   }
 }
 
-.submitButton {
-  align-self: flex-end; // Align button to the right
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border-radius: 6px;
-  border: none;
-  background-color: $primary-accent;
-  color: white;
-  cursor: pointer;
-  transition: $transition-base;
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  justify-content: flex-end;
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  &:hover:not(:disabled) {
-    background-color: color.adjust($primary-accent, $lightness: -8%);
-    transform: translateY(-1px);
-  }
+.submitButton,
+.cancelButton {
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-sizing: border-box;
 
   &:disabled {
-    background-color: color.adjust($primary-accent, $lightness: 15%);
     cursor: not-allowed;
     opacity: 0.7;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.submitButton {
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+
+  &:hover:not(:disabled) {
+    background-color: #1d4ed8;
+  }
+}
+
+.cancelButton {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: none;
+
+  &:hover:not(:disabled) {
+    background-color: #e5e7eb;
+    color: #1f2937;
   }
 }

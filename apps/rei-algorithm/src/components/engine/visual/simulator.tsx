@@ -7,7 +7,7 @@ import React, {
   useState,
 } from "react";
 import CodeDesc from "./common/codeDesc/CodeDesc";
-import { Scene, SenkiArray, SenkiLinkedNode } from "../lib/senki";
+import { Scene, ReiArray, ReiLinkedNode } from "../lib/engine";
 import { Link, useLocation, useParams } from "react-router-dom";
 import BreadcrumbNav from "./common/breadcrumb/BreadcrumbNav";
 import { AlgoSource } from "../lib/algo_desc/makeAlgoSource";
@@ -175,14 +175,14 @@ const VisualSimulator = () => {
   // 初始化 senki
   useEffect(() => {
     if (!scene) return;
-    SenkiArray.config.scene = scene;
-    SenkiArray.config.width = scene.width;
-    SenkiArray.config.height = scene.height;
-    SenkiLinkedNode.setCanvasDimensions({
+    ReiArray.config.scene = scene;
+    ReiArray.config.width = scene.width;
+    ReiArray.config.height = scene.height;
+    ReiLinkedNode.setCanvasDimensions({
       width: scene.width,
       height: scene.height,
     });
-    scene.add(SenkiLinkedNode.senkiForest);
+    scene.add(ReiLinkedNode.senkiForest);
   }, [scene]);
 
   return (

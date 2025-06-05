@@ -1,4 +1,4 @@
-import { SenkiNode } from "./object";
+import { ReiNode } from "./object";
 import { Vector2, opacityToHex } from "./util";
 
 interface RectConfig {
@@ -10,7 +10,7 @@ interface RectConfig {
   opacity: number;
 }
 
-export class Rect extends SenkiNode {
+export class Rect extends ReiNode {
   width: number;
   height: number;
   borderWidth: number;
@@ -23,13 +23,13 @@ export class Rect extends SenkiNode {
   private changeH(
     timestamp: number,
     provider: { key: string; anmi: AnimProvider },
-    rm
+    rm,
   ): void;
 
   private changeO(
     timestamp: number,
     provider: { key: string; anmi: AnimProvider },
-    rm
+    rm,
   ): void;
 }
 
@@ -40,7 +40,7 @@ type CircleConfig = {
   fillColor: string;
 };
 
-export class Circle extends SenkiNode {
+export class Circle extends ReiNode {
   radius: number;
   borderWidth: number;
   borderColor: string;
@@ -63,11 +63,11 @@ type ArrowConfig = {
   from: Vector2;
   to: Vector2;
 
-  fromPoint: SenkiNode;
-  toPoint: SenkiNode;
+  fromPoint: ReiNode;
+  toPoint: ReiNode;
 };
 
-export class Arrow extends SenkiNode {
+export class Arrow extends ReiNode {
   width: number;
   length: number;
   fillColor: string;
@@ -76,8 +76,8 @@ export class Arrow extends SenkiNode {
   from: Vector2;
   to: Vector2;
 
-  fromPoint: SenkiNode;
-  toPoint: SenkiNode;
+  fromPoint: ReiNode;
+  toPoint: ReiNode;
 
   constructor(args: ArrowConfig, x: number, y: number);
 
@@ -94,7 +94,7 @@ type SenkiTextConfig = {
   opacity: number;
 };
 
-export class SenkiText extends SenkiNode {
+export class SenkiText extends ReiNode {
   content: string;
   color: string;
   size: number;
@@ -106,6 +106,6 @@ export class SenkiText extends SenkiNode {
   changeO(
     timestamp: number,
     provider: { key: string; anmi: AnimProvider },
-    rm
+    rm,
   ): void;
 }

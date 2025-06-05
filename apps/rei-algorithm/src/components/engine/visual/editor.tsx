@@ -9,7 +9,7 @@ import {
 } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AlgoSource, CodeControl, CodeContext } from "../lib/algo_desc";
-import { Scene, SenkiArray, SenkiLinkedNode } from "../lib/senki";
+import { Scene, ReiArray, ReiLinkedNode } from "../lib/engine";
 import CodeDesc from "./common/codeDesc/CodeDesc";
 import { transform } from "@babel/standalone";
 import { FaUpload, FaSave, FaEdit, FaSquare } from "react-icons/fa";
@@ -143,17 +143,17 @@ const VisualEditor: React.FC<VisualEditorProps> = ({
     }, 0);
   }, [codeControl]);
 
-  // 初始化 senki
+  // 初始化 引擎
   useEffect(() => {
     if (!scene) return;
-    SenkiArray.config.scene = scene;
-    SenkiArray.config.width = scene.width;
-    SenkiArray.config.height = scene.height;
-    SenkiLinkedNode.setCanvasDimensions({
+    ReiArray.config.scene = scene;
+    ReiArray.config.width = scene.width;
+    ReiArray.config.height = scene.height;
+    ReiLinkedNode.setCanvasDimensions({
       width: scene.width,
       height: scene.height,
     });
-    scene.add(SenkiLinkedNode.senkiForest);
+    scene.add(ReiLinkedNode.senkiForest);
   }, [scene]);
 
   const handleCodeChange = useCallback((newCode: string) => {

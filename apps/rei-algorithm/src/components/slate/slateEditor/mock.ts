@@ -102,7 +102,7 @@ export const SlateMock: Descendant[] = [
     content: "This is a warn",
     children: [
       {
-        text: "Tip",
+        text: "Warn",
       },
     ],
   },
@@ -112,7 +112,7 @@ export const SlateMock: Descendant[] = [
     content: "This is a ERROR",
     children: [
       {
-        text: "Tip",
+        text: "Error",
       },
     ],
   },

@@ -1,7 +1,7 @@
 import Scheduler from "../base/scheduler";
 import Histogram, { HistogramConfig } from "../components/Histogram";
 
-export default class SenkiArray {
+export default class ReiArray {
   /** 默认使用此设置初始化直方图 */
   static config: HistogramConfig;
 

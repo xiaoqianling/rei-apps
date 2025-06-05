@@ -1,4 +1,4 @@
-import { AlgoSource } from "@/src/components/senki/lib/algo_desc";
+import { AlgoSource } from "@/src/components/engine/lib/algo_desc";
 import makeBubbleAlgoSource from "./bubble";
 import makeMergeAlgoSource from "./merge";
 import makeRedBlackTreeAlgoSource from "../tree/redBlackTree";

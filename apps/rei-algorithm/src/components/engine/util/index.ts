@@ -1,7 +1,7 @@
 import plugin from "../lib/babel/plugin-senki-wait";
 import { transform } from "@babel/standalone";
 import { CodeControl, CodeContext } from "../lib/algo_desc";
-import { Scene, SenkiLinkedNode } from "../lib/senki";
+import { Scene, ReiLinkedNode } from "../lib/engine";
 
 export function makeCodeSource(code: string, format: boolean) {
   code = code.split("\n").slice(2).join("\n").trim();
@@ -56,9 +56,9 @@ export const createNewCodeControl = (
 
   const handleDestroy = () => {
     scene.removeAllChild();
-    SenkiLinkedNode.senkiForest.destroyTree();
-    SenkiLinkedNode.resetSenkiForest();
-    scene.add(SenkiLinkedNode.senkiForest);
+    ReiLinkedNode.senkiForest.destroyTree();
+    ReiLinkedNode.resetSenkiForest();
+    scene.add(ReiLinkedNode.senkiForest);
   };
 
   const handleError = (err: string) => {

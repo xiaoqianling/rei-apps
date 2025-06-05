@@ -5,8 +5,9 @@ import { CommentData } from "../../../../pages/community/types";
 import { formatDistanceToNow } from "date-fns";
 import { zhCN } from "date-fns/locale";
 
-interface CommentItemProps {
+export interface CommentItemProps {
   comment: CommentData;
+  onReply?: () => void;
 }
 
 // 使用 date-fns 格式化日期
@@ -20,7 +21,7 @@ const formatDate = (dateString: string) => {
   }
 };
 
-const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
+const CommentItem: React.FC<CommentItemProps> = ({ comment, onReply }) => {
   const { author, content, createdAt } = comment;
 
   return (
@@ -48,7 +49,11 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
         {/* TODO: Render comment content - assuming plain text for now */}
         {/* If supporting Markdown, use a Markdown renderer here */}
         <p className={styles.commentText}>{content}</p>
-        {/* Optional: Add Reply/Like buttons here */}
+        <div className={styles.commentActions}>
+          <button onClick={onReply} className={styles.replyButton}>
+            回复
+          </button>
+        </div>
       </div>
     </div>
   );

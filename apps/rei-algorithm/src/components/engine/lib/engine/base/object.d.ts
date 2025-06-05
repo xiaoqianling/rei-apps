@@ -1,6 +1,6 @@
 import { AnimPlayer, AnimProvider } from "./anim";
 
-export class SenkiNode extends AnimPlayer {
+export class ReiNode extends AnimPlayer {
   readonly pivot: { readonly x: number; readonly y: number };
   readonly position: { readonly x: number; readonly y: number };
   readonly abs: { readonly x: number; readonly y: number };
@@ -20,22 +20,22 @@ export class SenkiNode extends AnimPlayer {
   moveX(
     timestamp: number,
     provider: { key: string; anmi: AnimProvider },
-    rm
+    rm,
   ): void;
 
   moveY(
     timestamp: number,
     provider: { key: string; anmi: AnimProvider },
-    rm
+    rm,
   ): void;
 }
 
-export class Group extends SenkiNode {
-  children: SenkiNode[];
+export class Group extends ReiNode {
+  children: ReiNode[];
 
-  add(n: SenkiNode): void;
+  add(n: ReiNode): void;
 
-  removeChild(n: SenkiNode): void;
+  removeChild(n: ReiNode): void;
 
   removeAllChild: () => void;
 
@@ -45,7 +45,7 @@ export class Group extends SenkiNode {
 
   setPivot: (x: number, y: number) => void;
 
-  findChildByName(name: string): SenkiNode;
+  findChildByName(name: string): ReiNode;
 
   /** 代价不小，少调用 */
   isAnimAllOver(): boolean;

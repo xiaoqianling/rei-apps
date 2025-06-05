@@ -1,6 +1,6 @@
 import { AnimPlayer } from "./anim.js";
 
-export class SenkiNode extends AnimPlayer {
+export class ReiNode extends AnimPlayer {
   pivot = { x: 0, y: 0 };
   position = { x: 0, y: 0 };
   abs = { x: 0, y: 0 };
@@ -15,7 +15,7 @@ export class SenkiNode extends AnimPlayer {
     this.registerAnimResponder("y", this.moveY);
   }
 
-  render() { }
+  render() {}
 
   setPositon(x, y) {
     this.position.x = x;
@@ -45,17 +45,17 @@ export class SenkiNode extends AnimPlayer {
   }
 }
 
-export class Group extends SenkiNode {
+export class Group extends ReiNode {
   children = [];
 
   add(n) {
-    if (!n instanceof SenkiNode) return;
+    if ((!n) instanceof ReiNode) return;
     this.children.push(n);
     n.setPivot(this.abs.x, this.abs.y);
   }
 
   removeChild(n) {
-    if (!n instanceof SenkiNode) return;
+    if ((!n) instanceof ReiNode) return;
     const idx = this.children.indexOf(n);
     if (idx !== -1) this.children.splice(idx, 1);
   }
@@ -97,7 +97,8 @@ export class Group extends SenkiNode {
     while (q.length !== 0) {
       let n = q.shift();
       if (n.anmiStatus === "busy") return false;
-      if (n.children) for (let i = 0; i < n.children.length; i++) q.push(n.children[i]);
+      if (n.children)
+        for (let i = 0; i < n.children.length; i++) q.push(n.children[i]);
     }
     return true;
   }

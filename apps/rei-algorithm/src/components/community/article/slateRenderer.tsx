@@ -20,15 +20,21 @@ import { Element, Leaf } from "@/src/components/slate/slateEditor/element";
 import { useDispatch } from "@/src/lib/redux";
 import { clearAnchorItems, setAnchorItems } from "@/src/lib/redux/anchor";
 import { parseBlogAnchors } from "../../slate/markdown/util";
+import { getDocsByID } from "@/src/api/docs";
 
 interface SlateRendererProps {
   data?: Descendant[];
+  // [仅文档] 从目标接口获取数组
+  id?: string;
 }
 
+// 用于渲染文档页和文章。文档页通过URL获取数据，因为文档页直接对应了路由。文章则外部请求数据交给组件渲染。
 const SlateRenderer = forwardRef<HTMLDivElement, SlateRendererProps>(
-  ({ data }, ref) => {
+  ({ data, id }, ref) => {
     const editorRef = useMemo(() => withHistory(withReact(createEditor())), []);
-    const [slateData, setSlateData] = useState<Descendant[]>(data ?? SlateMock);
+    const [slateData, setSlateData] = useState<Descendant[] | null>(
+      data ?? (id ? null : SlateMock),
+    );
     const dispatch = useDispatch();
     const internalRef = useRef<HTMLDivElement | null>(null); // 内部 ref，用于保存 div 元素
 
@@ -50,13 +56,20 @@ const SlateRenderer = forwardRef<HTMLDivElement, SlateRendererProps>(
 
     useEffect(() => {
       const items = parseBlogAnchors(internalRef.current);
-      console.log("items", items);
       dispatch(setAnchorItems({ anchorItems: items }));
 
       return () => {
         dispatch(clearAnchorItems());
       };
     }, [data]);
+
+    useEffect(() => {
+      if (id) {
+        getDocsByID(id).then((res) => {
+          setSlateData(res);
+        });
+      }
+    }, [id]);
 
     const renderElement = useCallback(
       (props: RenderElementProps) => <Element {...props} />,
@@ -68,6 +81,9 @@ const SlateRenderer = forwardRef<HTMLDivElement, SlateRendererProps>(
       [],
     );
 
+    if (!slateData) {
+      return <div>Loading...</div>; // 或者其他加载状态的 UI
+    }
     return (
       <Slate editor={editorRef} initialValue={slateData}>
         <Editable

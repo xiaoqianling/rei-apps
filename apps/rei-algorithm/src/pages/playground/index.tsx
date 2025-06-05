@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import VisualEditor from "@/src/components/senki/visual/editor";
+import VisualEditor from "@/src/components/engine/visual/editor";
 
 interface SlatePageProps {}
 
